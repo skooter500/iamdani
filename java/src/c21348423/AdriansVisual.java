@@ -66,20 +66,22 @@ public class AdriansVisual extends VScene {
         setSceneAnimation();
     }
 
+    int length = 500000;
+
     /**
      * Set up scene animation
      */
     public void setSceneAnimation() {
         // Scene visibility
-        sceneVisibility = new VAnimation(v.audioPlayer().length());
+        sceneVisibility = new VAnimation(length);
         sceneVisibility.addTransition(v.toMs(1, 48, 0), 0, 0, 100, EaseFunction.easeLinear);
         sceneVisibility.addTransition(v.toMs(2, 31, 0), 0, 100, 0, EaseFunction.easeLinear);
-        sceneVisibility.addTransition(v.audioPlayer().length(), 0, 0, 0, EaseFunction.easeLinear);
+        sceneVisibility.addTransition(length, 0, 0, 0, EaseFunction.easeLinear);
 
         // Horse bounce animation
-        horseBounceAnimation = new VAnimation(v.audioPlayer().length());
+        horseBounceAnimation = new VAnimation(length);
         horseBounceAnimation.addTransition(v.toMs(1, 48, 0), 1000, -500, 0, EaseFunction.easeOutBounce);
-        horseBounceAnimation.addTransition(v.audioPlayer().length(), 0, 0, 0, EaseFunction.easeLinear);
+        horseBounceAnimation.addTransition(length, 0, 0, 0, EaseFunction.easeLinear);
     }
 
     public void render(int elapsed) {

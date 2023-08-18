@@ -13,7 +13,7 @@ public class SinWaves extends Poly{
 
 
     @Override
-    public void render() {
+    public void render(int ellapsed) {
         
 
         // v.background(0); 

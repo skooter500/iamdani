@@ -14,7 +14,7 @@ public class Cubesquared2 extends Poly{
     //Minim minim;
     int beatcount =0;
     @Override
-    public void render() {
+    public void render(int ellapsed) {
         
         
       

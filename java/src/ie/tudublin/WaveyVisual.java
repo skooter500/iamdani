@@ -12,7 +12,7 @@ public class WaveyVisual extends Poly{
     float boxspeed=2;
     float scaleFactor;
     @Override
-    public void render() {
+    public void render(int ellapsed) {
         v.background(0);
         v.lights();
 

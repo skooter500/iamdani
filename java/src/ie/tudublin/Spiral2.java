@@ -12,7 +12,7 @@ public class Spiral2 extends Poly{
         super(v);
     }
 
-    public void render(){
+    public void render(int ellapsed){
         for(int i = 0; i < v.getAudioBuffer().size();i++){
 
             v.pushMatrix();

@@ -17,11 +17,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     MidiBus myBus; // The MidiBus
 
-    int trails = 20;
+    float trails = 20;
 
     public AudioGarden()
     {
         super(1024, 44100, 0.5f);
+
+        trails = 20;
+        sensitivity = 1.0f;
+        base = 0.1f;
+
     }
 
     public void settings(){
@@ -63,20 +68,23 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         
         println(value);
 
-        boolean clockWise = (value < 127);
-        if (number == 7)
-        {
-            sensitivity = clockWise ? sensitivity + 0.1f : sensitivity - 0.1f; 
-            println("sensitivity : " + sensitivity);
-        }
+        boolean clockWise = (value < 100);
+        
         if (number == 10)
         {
-            base = clockWise ? base + 0.1f : base - 0.1f;
+            base = max(clockWise ? base + 0.01f : base - 0.1f, 0.01f);
             println("base : " + base);
+        }
+        
+        
+        if (number == 114)
+        {
+            sensitivity = max(clockWise ? sensitivity + 0.01f : sensitivity - 0.01f, 0); 
+            println("sensitivity : " + sensitivity);
         }
         if (number == 74)
         {
-            trails = clockWise ? trails + 1 : trails -1; 
+            trails = max(clockWise ? trails + 0.1f : trails -0.1f, 0); 
             println("trails : " + trails);
         }
     }
@@ -101,11 +109,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         //bl = new BeatListener(beat, getAudioPlayer());
         		
         colorMode(HSB, 360, 100, 100);
-        visuals.add(new AdriansVisual(null));
+        visuals.add(new Bloom(this));
         visuals.add(new kalidascope(this));
         visuals.add(new Cubes(this));
-        visuals.add(new Bloom(this));
-        
+        visuals.add(new AdriansVisual(this));
         visuals.add(new Spiral(this));
         visuals.add(new Cubesquared2(this));
         visuals.add(new SinWaves(this));
@@ -141,7 +148,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         // will pulse an object with music volume
         calculateAverageAmplitude();    
 
-        visuals.get(whichVisual).render(); //renders the currently loaded visual
+        visuals.get(whichVisual).render(frameCount); //renders the currently loaded visual
         
     }   
     

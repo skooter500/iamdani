@@ -11,7 +11,7 @@ public class Bloom extends Poly{
     }
 
     @Override
-    public void render() {
+    public void render(int frameCount) {
         //v.background(0);
         //v.strokeWeight(15); //different thicknesses of rect produce different resulting flower-esque patterns
         float cRange;//colour range

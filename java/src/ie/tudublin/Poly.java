@@ -7,5 +7,5 @@ public abstract class Poly {
         this.v = v;
     }
 
-    public abstract void render();
+    public abstract void render(int ellapsed);
 }

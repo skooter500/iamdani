@@ -100,7 +100,7 @@ public abstract class Visual extends PApplet
 		}
 	}
 
-	public float base = 0.0f;
+	public float base = 0.1f;
 	public float sensitivity = 1.0f;
 
 

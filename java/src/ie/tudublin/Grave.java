@@ -6,7 +6,7 @@ public class Grave extends Poly {
         super(v);
     }
 
-    public void render(){
+    public void render(int ellapsed){
         v.lights();
         //v.translate((v.width/2)-50,(v.height/2)-150);
         v.stroke(255);
