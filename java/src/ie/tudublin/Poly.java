@@ -1,9 +1,9 @@
 package ie.tudublin;
 
 public abstract class Poly {
-    AudioGarden v;
+    Visual v;
 
-    public Poly(AudioGarden v){
+    public Poly(Visual v){
         this.v = v;
     }
 

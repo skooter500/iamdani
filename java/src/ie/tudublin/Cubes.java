@@ -16,7 +16,7 @@ public class Cubes extends Poly
     @Override
     public void render()
     {
-        v.background(0);
+        // v.background(0);
         v.noStroke();
         v.lights();
         v.smooth();

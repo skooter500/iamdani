@@ -16,7 +16,7 @@ public class SinWaves extends Poly{
     public void render() {
         
 
-        v.background(0); 
+        // v.background(0); 
         float boxSize;
 
     

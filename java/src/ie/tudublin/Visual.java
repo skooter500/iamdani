@@ -3,27 +3,28 @@ package ie.tudublin;
 import processing.core.PApplet;
 import ddf.minim.*;
 import ddf.minim.analysis.*;
-import ddf.minim.analysis.FFT;
+import ie.tudublin.visual.AudioAnalysis;
 
 public abstract class Visual extends PApplet
 {
-	private int frameSize = 512;
-	private int sampleRate = 44100;
+	public int frameSize = 512;
+	public int sampleRate = 44100;
 
 	private float[] bands;
 	private float[] smoothedBands;
 
-	private Minim minim;
-	private AudioInput ai;
-	AudioPlayer ap;
-	private AudioBuffer ab;
-	private FFT fft;
-	BeatDetect beat;
+	public Minim minim;
+	public AudioInput ai;
+	public AudioPlayer ap;
+	public AudioBuffer ab;
+	public FFT fft;
+	public BeatDetect beat;
 	BeatListener bl;
 
 	private float amplitude  = 0;
 	private float smothedAmplitude = 0;
 
+	
 	//AudioPlayer player;
     public BeatDetect getBeat() {
 		return beat;
@@ -43,7 +44,44 @@ public abstract class Visual extends PApplet
 		bands = new float[(int) log2(frameSize)];
   		smoothedBands = new float[bands.length];
 
+		
+        // Audio analysis
+        fft.logAverages(60, 3);
+
+        // Making an annonymous inner class to override the default BeatDetect
+        // to use our own thresholds
+        beat = new BeatDetect(frameSize, sampleRate) {
+            // We can assume that BeatDetect is in FREQ_ENERGY mode
+            @Override
+            public boolean isHat() {
+                int lower = super.detectSize() - 7 < 0 ? 0 : super.detectSize() - 7;
+                int upper = super.detectSize() - 1;
+                return isRange(lower, upper, 1);
+            }
+
+            @Override
+            public boolean isKick() {
+                int upper = 6 >= super.detectSize() ? super.detectSize() : 6;
+                return isRange(1, upper, 2);
+            }
+
+            @Override
+            public boolean isSnare() {
+                int lower = 8 >= super.detectSize() ? super.detectSize() : 8;
+                int upper = super.detectSize() - 1;
+                int thresh = (upper - lower) / 3 + 1;
+                return isRange(lower, upper, thresh);
+            }
+        };
+        beat.setSensitivity(50);
+
+        // Could potentially encapsulate all of the above into AudioAnalysis class
+        // Not going to do it as it's not necessary, it works fine as is
+        this.aAnalysis = new AudioAnalysis(fft, beat, 0.5f);
+
 	}
+
+	public AudioAnalysis aAnalysis;
 
 	float log2(float f) {
 		return log(f) / log(2.0f);
@@ -62,7 +100,10 @@ public abstract class Visual extends PApplet
 		}
 	}
 
-	
+	public float base = 0.0f;
+	public float sensitivity = 1.0f;
+
+
 	public void calculateAverageAmplitude()
 	{
 		float total = 0;
@@ -71,6 +112,9 @@ public abstract class Visual extends PApplet
 			total += abs(ab.get(i));
 		}
 		amplitude = total / ab.size();
+
+		amplitude = base + (amplitude * sensitivity);
+
 		smothedAmplitude = PApplet.lerp(smothedAmplitude, amplitude, 0.1f);
 	}
 
@@ -92,10 +136,8 @@ public abstract class Visual extends PApplet
 
 	public void startListening()
 	{
-		//ai = minim.getLineIn(Minim.MONO, frameSize, 44100, 16);
-		//ab = ai.left;
-		//ap.loop();
-		ap.play();
+		ai = minim.getLineIn(Minim.MONO, frameSize, 44100, 16);
+		ab = ai.left;
 	}
 
 	public void loadAudio(String filename)

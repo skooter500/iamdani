@@ -15,7 +15,7 @@ public class Spiral extends Poly{
   
   @Override
   public void render(){
-    v.background(0);
+    // v.background(0);
 
     float x = v.width;
     float diameter = 150;
