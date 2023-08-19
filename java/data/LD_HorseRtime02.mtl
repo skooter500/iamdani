@@ -8,7 +8,7 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 1
-map_Kd LD_HorseRtime02.blend/eye_texture.png
+map_Kd eye_texture.jpg
 
 
 newmtl Material.003_Hair12Main2k.png
@@ -19,8 +19,8 @@ Ks 0.040000 0.040000 0.040000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd LD_HorseRtime02.blend/Hair12Main2k.png
-map_Bump LD_HorseRtime02.blend/Hair12Main2k.png
+map_Kd Hair12Main2k.png
+map_Bump Hair12Main2k.png
 
 
 newmtl Material_HorseMain4k00.png
@@ -31,7 +31,7 @@ Ks 0.060000 0.060000 0.060000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd LD_HorseRtime02.blend/HorseMain2k00.png
-map_Bump LD_HorseRtime02.blend/HorseMain2k00.png
+map_Kd HorseMain2k00.png
+map_Bump HorseMain2k00.png
 
 

@@ -13,6 +13,8 @@ public class GlobalVisual extends VScene {
 
     WaveformFrame waveformFrame;
 
+    int length = 50000;
+
     public GlobalVisual(Visual v) {
         super(v);
         waveformFrame = new WaveformFrame(v);
@@ -28,7 +30,7 @@ public class GlobalVisual extends VScene {
         VAnimation effect;
         public WaveformFrame(Visual v) {
             super(v);
-            effect = new VAnimation(v.audioPlayer().length());
+            effect = new VAnimation(length);
             // Start
             // effect.addTransition(0, 500, 0, 255, EaseFunction.easeLinear);
             // Transition to solo at 1:48
@@ -85,13 +87,12 @@ public class GlobalVisual extends VScene {
 
         private void waveformLine(PVector p1, PVector p2, AudioAnalysis aa) {
             v.beginShape();
-            float[] waveform = aa.mix().waveform;
-            for (int i = 0; i < waveform.length; i++) {
-                float x = Visual.lerp(p1.x, p2.x, i / (float) waveform.length);
-                float y = Visual.lerp(p1.y, p2.y, i / (float) waveform.length);
-                float z = Visual.lerp(p1.z, p2.z, i / (float) waveform.length);
+            for (int i = 0; i < v.ab.size(); i++) {
+                float x = Visual.lerp(p1.x, p2.x, i / (float) v.ab.size());
+                float y = Visual.lerp(p1.y, p2.y, i / (float) v.ab.size());
+                float z = Visual.lerp(p1.z, p2.z, i / (float) v.ab.size());
 
-                y += waveform[i] * 1000;
+                y += v.ab.get(i) * 1000;
 
                 v.vertex(x, y, z);
             }

@@ -1,11 +1,19 @@
 package ie.tudublin;
 
 public abstract class Poly {
-    Visual v;
+    public Visual v;
 
     public Poly(Visual v){
         this.v = v;
     }
 
-    public abstract void render(int ellapsed);
+    public void render(int ellapsed)
+    {
+        render();
+    }
+
+    public void render()
+    {
+    }
+
 }

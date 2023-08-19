@@ -21,11 +21,7 @@ public class JenniferVisuals extends VScene {
     VObject wf;
     VObject hex;
     GlobalVisual gv;
-
-    Minim minim;
-    AudioBuffer ab;
-    AudioAnalysis aa;
-
+    
     public JenniferVisuals(Visual v) {
         super(v);
         this.v = v;
@@ -37,19 +33,22 @@ public class JenniferVisuals extends VScene {
         hex = new Hex(v, new PVector(v.width / 4, v.height / 4));
         gv = new GlobalVisual(v);
 
-        minim = new Minim(this);
-        ab = v.audioPlayer().mix;
-        aa = v.audioAnalysis();
-
     }
 
     public void render(int elapsed) {
 
+        // v.background(0);
+        //wf.render();
+        speaker.render();
+        //hex.render();
+        
+        //dots.render(elapsed);
+        //clock.render(elapsed);
+
+        /*
         // 1:03 - 1:48 - Second verse & chorus
         if (elapsed > v.toMs(1, 3, 0) && elapsed < v.toMs(1, 14, 0)) {
-            v.background(0);
-            wf.render();
-            speaker.render();
+            
 
         } else if (elapsed > v.toMs(1, 14, 0) && elapsed < v.toMs(1, 25, 0)) {
             v.background(0);
@@ -65,8 +64,8 @@ public class JenniferVisuals extends VScene {
             v.background(0);
             gv.render(elapsed);
             stars.render(elapsed);
-
         }
+        */
     }
 
     class Stars extends VObject {
@@ -85,7 +84,7 @@ public class JenniferVisuals extends VScene {
         @Override
         public void render(int elapsed) {
             v.lights(); // set the default light
-            float avg = aa.mix().lerpedAmplitude; // average lerped amplitude
+            float avg = v.getSmoothedAmplitude(); // average lerped amplitude
             v.translate(v.width / 2, v.height / 2, 0); // translate to centre
             // rotate big cube
             v.rotateX(rot * .01f);
@@ -125,13 +124,12 @@ public class JenniferVisuals extends VScene {
         public void render() {
 
             float max_distance;
-            v.background(0);
             v.noStroke();
             max_distance = PApplet.dist(0, 0, v.width, v.height);
 
             for (int i = 0; i <= v.width; i += 20) {
                 for (int j = 0; j <= v.height; j += 20) {
-                    float c = PApplet.map(i, 0, ab.size(), 0, 360); // rainbow coloured
+                    float c = PApplet.map(i, 0, v.ab.size(), 0, 360); // rainbow coloured
                     v.fill(c, 100, 100);
                     float size = PApplet.dist(v.random(0, v.width), v.random(0, v.height), i, j); // random sized
                     size = size / max_distance * 66;
@@ -249,10 +247,10 @@ public class JenniferVisuals extends VScene {
             v.translate(-x3, -v.height / 2, width);
             v.rotateX((float) .02 * 0.2f);
 
-            for (int i = 0; i < ab.size(); i++) {
-                float c = PApplet.map(ab.get(i), -1, 1, 0, 360);
+            for (int i = 0; i < v.ab.size(); i++) {
+                float c = PApplet.map(v.ab.get(i), -1, 1, 0, 360);
                 v.stroke(c, 100, 100);
-                float radius = ab.get(i) * 1000 + 50; // radius size determined by the music
+                float radius = v.ab.get(i) * 1000 + 50; // radius size determined by the music
                 v.circle(x1 + 30, y1 + 60, radius - 1);
                 v.circle(x2 + 30, y2, radius - 1);
                 v.circle(x3 - 30, y3 + 60, radius - 1);
@@ -271,11 +269,11 @@ public class JenniferVisuals extends VScene {
         @Override
         public void render() {
             // top and bottom of screen wave form
-            for (int i = 0; i < ab.size(); i++) {
-                float c = PApplet.map(i, 0, ab.size(), 0, 360); // rainbow coloured
+            for (int i = 0; i < v.ab.size(); i++) {
+                float c = PApplet.map(i, 0, v.ab.size(), 0, 360); // rainbow coloured
                 v.stroke(c, 100, 100);
-                float f = ab.get(i) * v.height / 2;
-                float x = PApplet.map(i, 0, ab.size(), 0, v.width); // x value determined by music
+                float f = v.ab.get(i) * v.height / 2;
+                float x = PApplet.map(i, 0, v.ab.size(), 0, v.width); // x value determined by music
                 v.line(x, y + f, x, y - f);
                 v.line(x, f, x, -f);
 
@@ -293,9 +291,9 @@ public class JenniferVisuals extends VScene {
             v.noFill();
             v.translateCenter();
             v.beginShape();
-            for (int i = 0; i < ab.size(); i++) {
+            for (int i = 0; i < v.ab.size(); i++) {
                 v.stroke(v.random(0, 360), 100, 100); // random coloured
-                float radius = ab.get(i) * 300 + 50; // radius determined by music
+                float radius = v.ab.get(i) * 300 + 50; // radius determined by music
                 double x1 = (PApplet.cos(i) * (PApplet.PI / 180) * 100 * radius);
                 double y1 = (PApplet.sin(i) * (PApplet.PI / 180) * 100 * radius);
                 v.vertex((float) x1, (float) y1);

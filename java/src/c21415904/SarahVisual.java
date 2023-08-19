@@ -20,15 +20,10 @@ public class SarahVisual extends VScene {
     VObject mb;
 
     GlobalVisual gv;
-    AudioBuffer ab;
-    AudioAnalysis aa;
 
     public SarahVisual(Visual v) {
         super(v);
         this.v = v;
-
-        ab = v.audioPlayer().mix;
-        aa = v.audioAnalysis();
 
         sp1 = new Spiral1(v, new PVector(0, 0, 0));
         sp2 = new Spiral2(v, new PVector(0, 0, 0));
@@ -43,32 +38,16 @@ public class SarahVisual extends VScene {
         // 0:00 - 1:02 - Intro, V1, C1
 
         //intro
-        if (elapsed > v.toMs(0, 0, 0) && elapsed < v.toMs(0, 10, 800)) {
-            v.background(0);
-            sp1.render();
-        }
-        if (elapsed > v.toMs(0, 10, 800) && elapsed < v.toMs(0, 21, 0)) {
-            v.background(0);
-            gv.render(elapsed);
-            sp2.render();
-        }
-        if (elapsed > v.toMs(0, 21, 0) && elapsed < v.toMs(0, 40, 0)) {
-            v.background(0);
-            sw.render();
-        }
-        if (elapsed > v.toMs(0, 40, 0) && elapsed < v.toMs(0, 50, 0)) {
-            v.background(0);
-            v.strokeWeight(2);
-            gv.render(elapsed);
-            cs.render();
-        }
-        if (elapsed > v.toMs(0, 50, 0) && elapsed < v.toMs(1, 3, 0)) {
-            v.background(0);
-            mb.render();
-            wf.render();
-        }
+        //sp1.render();
+        // gv.render(elapsed);
+        // sp2.render();
 
-        System.out.println(elapsed);
+        // sw.render();
+        // v.strokeWeight(2);
+        // gv.render(elapsed);
+        // cs.render();
+        mb.render();
+        // wf.render();        
     }
 
     class Spiral1 extends VObject {
@@ -87,12 +66,12 @@ public class SarahVisual extends VScene {
             v.noStroke();
             v.translate(cx, cy);
 
-            for (int i = 0; i < ab.size(); i++) {
-                float c = PApplet.map(i, 0, ab.size(), 0, 360);
+            for (int i = 0; i < v.ab.size(); i++) {
+                float c = PApplet.map(i, 0, v.ab.size(), 0, 360);
                 v.fill(c, 100, 100);
                 v.scale((float) 0.99);
                 v.rotate(PApplet.radians(theta));
-                v.ellipse(cx, cy, 50 + (aa.mix().lerpedAmplitude * 750), 50 + (aa.mix().lerpedAmplitude * 750));
+                v.ellipse(cx, cy, 50 + (v.getSmoothedAmplitude() * 750), 50 + (v.getSmoothedAmplitude() * 750));
 
             }
             theta += 0.08;
@@ -104,7 +83,6 @@ public class SarahVisual extends VScene {
 
         Spiral2(Visual v, PVector pos) {
             super(v, pos);
-            v.background(0);
         }
 
         float cx, cy;
@@ -120,16 +98,16 @@ public class SarahVisual extends VScene {
             v.pushMatrix();
             cx = 0;
             cy = 0;
-            for (int i = 0; i < ab.size(); i++) {
+            for (int i = 0; i < v.ab.size(); i++) {
 
                 // colour calculation
-                float c = PApplet.map(i, 0, ab.size(), 0, 240);
+                float c = PApplet.map(i, 0, v.ab.size(), 0, 240);
                 v.strokeWeight(2);
                 v.stroke(c, c, c);
 
                 // calculate angle, TWO_PI/3 -> each segment has three points, shape moves up
                 // and down with amplitude
-                float theta = i * (PApplet.TWO_PI / 3 + aa.mix().lerpedAmplitude * 5);
+                float theta = i * (PApplet.TWO_PI / 3 + v.getSmoothedAmplitude() * 5);
 
                 // find points on
                 v.pushMatrix();
@@ -138,7 +116,7 @@ public class SarahVisual extends VScene {
 
                 // increase radius to create spiral effect, add lerped amplitude so shape
                 // expands and contracts with music
-                radius += 0.2f + aa.mix().lerpedAmplitude;
+                radius += 0.2f + v.getSmoothedAmplitude();
 
                 v.line(cx, cy, x, y);
 
@@ -175,9 +153,9 @@ public class SarahVisual extends VScene {
             v.strokeWeight(2);
 
             v.pushMatrix();
-            for (int i = 0; i < ab.size(); i++) {
+            for (int i = 0; i <  v.ab.size(); i++) {
 
-                float c = PApplet.map(i, 0, ab.size(), 0, 360);
+                float c = PApplet.map(i, 0,  v.ab.size(), 0, 360);
                 v.stroke(c, 100, 100);
 
                 // calculate starting points on circle which each line will be drawn out of
@@ -185,7 +163,7 @@ public class SarahVisual extends VScene {
                 float y1 = -PApplet.cos(theta) * radius;
 
                 // get frequency at current position in Audio Buffer and make it visible
-                float f = ab.get(i) * 200 + 20;
+                float f =  v.ab.get(i) * 200 + 20;
 
                 // calculate endpoint of each line, line will expand and contract with frequency
                 float x2 = (x1 + (PApplet.sin(i) * (PApplet.PI / 180) * radius * f));
@@ -200,13 +178,13 @@ public class SarahVisual extends VScene {
 
             // outer waveform
             v.beginShape();
-            for (int i = 0; i < ab.size(); i++) {
-                float c = PApplet.map(i, 0, ab.size(), 0, 360);
+            for (int i = 0; i <  v.ab.size(); i++) {
+                float c = PApplet.map(i, 0,  v.ab.size(), 0, 360);
                 v.stroke(c, 100, 100);
 
                 // map the position in the audio buffer on TWO_PI
-                float angle = PApplet.map(i, 0, ab.size(), 0, PApplet.TWO_PI);
-                float radius = ab.get(i) * 200 + 300;
+                float angle = PApplet.map(i, 0,  v.ab.size(), 0, PApplet.TWO_PI);
+                float radius =  v.ab.get(i) * 200 + 300;
 
                 // get point on circle
                 float x = PApplet.sin(angle) * radius;
@@ -217,13 +195,13 @@ public class SarahVisual extends VScene {
 
             // Waveforms on edge of screen
             v.beginShape();
-            for (int i = 0; i < ab.size(); i++) {
-                float c = PApplet.map(i, 0, ab.size(), 0, 360);
+            for (int i = 0; i <  v.ab.size(); i++) {
+                float c = PApplet.map(i, 0,  v.ab.size(), 0, 360);
                 v.stroke(c, 100, 100);
                 v.strokeWeight(4);
 
-                float f = ab.get(i) * v.height / 2;
-                float x = PApplet.map(i, 0, aa.mix().lerpedAmplitude * 10000, -v.width, v.width);
+                float f =  v.ab.get(i) * v.height / 2;
+                float x = PApplet.map(i, 0, v.getSmoothedAmplitude() * 10000, -v.width, v.width);
 
                 v.line(x, v.height / 2 + f, x, v.height / 2 - f); // bottom
                 v.line(x, -v.height / 2 + f, x, -v.height / 2 - f); // top
@@ -253,7 +231,7 @@ public class SarahVisual extends VScene {
             v.rotate(PApplet.radians(rot));
 
             // store array of smoothed frequency bands
-            float bands[] = aa.mix().lerpedBands;
+            float bands[] = v.getSmoothedBands();
             v.strokeWeight(2);
 
             for (int i = 0; i < bands.length; i++) {
@@ -286,7 +264,7 @@ public class SarahVisual extends VScene {
                 v.rotateX(PApplet.radians(rot));
                 v.rotateY(PApplet.radians(rot));
                 v.rotateZ(PApplet.radians(rot));
-                v.sphere(2000 * aa.mix().lerpedAmplitude + 200);
+                v.sphere(2000 * v.getSmoothedAmplitude() + 200);
                 v.popMatrix();
             }
             rot += 1;
@@ -303,12 +281,12 @@ public class SarahVisual extends VScene {
         @Override
         public void render() {
             v.beginShape();
-            for (int i = 0; i < ab.size(); i++) {
-                float c = PApplet.map(i, 0, ab.size(), 0, 360);
+            for (int i = 0; i <  v.ab.size(); i++) {
+                float c = PApplet.map(i, 0,  v.ab.size(), 0, 360);
                 v.stroke(c, 50, 100);
                 v.strokeWeight(4);
-                float f = ab.get(i) * v.height / 2;
-                float x = PApplet.map(i, 0, aa.mix().lerpedAmplitude * 10000, 0, v.width);
+                float f =  v.ab.get(i) * v.height / 2;
+                float x = PApplet.map(i, 0, v.getSmoothedAmplitude() * 10000, 0, v.width);
                 v.line(x, v.height / 2 + f, x, v.height / 2 - f);
             }
             v.endShape();
@@ -359,9 +337,6 @@ public class SarahVisual extends VScene {
 
         @Override
         public synchronized void render() {
-            v.background(0, 0, 50);
-
-            v.background(0,0,50);
             v.beginShape();
 
             v.loadPixels();
@@ -373,10 +348,10 @@ public class SarahVisual extends VScene {
 
                     for (Blob b : blobs) {
                         float d = PApplet.dist(x, y, b.pos.x, b.pos.y);
-                        sum += 100 * b.r / d * (aa.mix().lerpedAmplitude * 50);
+                        sum += 100 * b.r / d * (v.getSmoothedAmplitude() * 50);
                     }
 
-                    v.pixels[index] = v.color(sum % 360, 100, 100); // modulus operator makes ball inside of ball
+                    v.pixels[index] = v.color(sum % 360, 255, 255); // modulus operator makes ball inside of ball
 
                 }
             }

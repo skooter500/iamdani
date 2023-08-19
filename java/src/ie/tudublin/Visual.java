@@ -10,8 +10,8 @@ public abstract class Visual extends PApplet
 	public int frameSize = 512;
 	public int sampleRate = 44100;
 
-	private float[] bands;
-	private float[] smoothedBands;
+	public float[] bands;
+	public float[] smoothedBands;
 
 	public Minim minim;
 	public AudioInput ai;
@@ -44,7 +44,6 @@ public abstract class Visual extends PApplet
 		bands = new float[(int) log2(frameSize)];
   		smoothedBands = new float[bands.length];
 
-		
         // Audio analysis
         fft.logAverages(60, 3);
 

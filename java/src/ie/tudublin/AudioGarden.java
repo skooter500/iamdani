@@ -3,8 +3,10 @@ package ie.tudublin;
 import java.util.ArrayList;
 
 import c21348423.AdriansVisual;
+import c21383126.JenniferVisuals;
+import c21415904.SarahVisual;
 import ddf.minim.analysis.BeatDetect;
-
+import infiniteforms.Models1;
 import themidibus.*; //Import the library
 
 public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListener{
@@ -19,6 +21,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     float trails = 20;
 
+    public float speed = 1;
+
     public AudioGarden()
     {
         super(1024, 44100, 0.5f);
@@ -30,7 +34,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     }
 
     public void settings(){
-        // fullScreen(P3D, 0);
+        //fullScreen(P3D, 0);
         size(1000, 1000, P3D);
 	}
 
@@ -69,7 +73,22 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println(value);
 
         boolean clockWise = (value < 100);
-        
+
+        if (number == 7)
+        {
+            if (clockWise)
+                whichVisual = (whichVisual + 1) % visuals.size();
+            else
+            {
+                whichVisual --;
+                if (whichVisual < 0)
+                {
+                    whichVisual = visuals.size() - 1;
+                }
+            }
+        }
+
+
         if (number == 10)
         {
             base = max(clockWise ? base + 0.01f : base - 0.1f, 0.01f);
@@ -84,7 +103,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
         if (number == 74)
         {
-            trails = max(clockWise ? trails + 0.1f : trails -0.1f, 0); 
+            trails = min(max(clockWise ? trails + 5f : trails -5f, 0), 50); 
             println("trails : " + trails);
         }
     }
@@ -108,16 +127,20 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         beat.setSensitivity(10);
         //bl = new BeatListener(beat, getAudioPlayer());
         		
+        visuals.add(new Models1(this, "infiniteForms.obj"));  
         colorMode(HSB, 360, 100, 100);
+        //visuals.add(new AdriansVisual(this));              
+        visuals.add(new Cubesquared2(this));  
+                      
+        visuals.add(new JenniferVisuals(this));                
+        visuals.add(new SarahVisual(this));                
         visuals.add(new Bloom(this));
         visuals.add(new kalidascope(this));
         visuals.add(new Cubes(this));
-        visuals.add(new AdriansVisual(this));
         visuals.add(new Spiral(this));
-        visuals.add(new Cubesquared2(this));
+        
         visuals.add(new SinWaves(this));
-        visuals.add(new SinWaves(this));
- 
+        
         background(0);
 	}
 
@@ -148,6 +171,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         // will pulse an object with music volume
         calculateAverageAmplitude();    
 
+        speed = map(getAmplitude(), 0, 1, 0, 0.1f);
+  
         visuals.get(whichVisual).render(frameCount); //renders the currently loaded visual
         
     }   

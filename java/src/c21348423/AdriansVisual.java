@@ -85,9 +85,6 @@ public class AdriansVisual extends VScene {
     }
 
     public void render(int elapsed) {
-        if (Math.round(sceneVisibility.getValue(elapsed)) == 0) {
-            return;
-        }
 
         // Background
         v.blendMode(PApplet.BLEND);
