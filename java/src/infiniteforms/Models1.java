@@ -6,6 +6,8 @@ import ie.tudublin.Poly;
 public class Models1 extends Poly
 {
   Model model;
+
+  int colorOffset = 0;
   
   public Models1(AudioGarden v, String fileName)
   {
@@ -16,6 +18,7 @@ public class Models1 extends Poly
   public void enter()
   {
     model.smoothedBoxSize = 0;
+    model.colorOffset = (int) v.random(0, 256);
   }
   
   public void render()

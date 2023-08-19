@@ -6,6 +6,7 @@ import c21348423.AdriansVisual;
 import c21383126.JenniferVisuals;
 import c21415904.SarahVisual;
 import ddf.minim.analysis.BeatDetect;
+import infiniteforms.Life;
 import infiniteforms.Models1;
 import themidibus.*; //Import the library
 
@@ -29,7 +30,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         trails = 20;
         sensitivity = 1.0f;
-        base = 0.1f;
+        base = 0.3f;
 
     }
 
@@ -63,8 +64,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void change(int into)
     {
+        if (whichVisual >= 0 && whichVisual < visuals.size())
+        {            
+            visuals.get(whichVisual).exit();            
+        }                
+        whichVisual = into;
         if (into >= 0 && into < visuals.size())
-        {
+        {            
             visuals.get(whichVisual).exit();
             whichVisual = into;
             visuals.get(whichVisual).enter();
@@ -145,6 +151,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
         //bl = new BeatListener(beat, getAudioPlayer());
+        visuals.add(new Life(this, 0, 1000));
+        visuals.add(new Life(this, 2, 1000));
+        
+        visuals.add(new Life(this, 1, 1000));
         
         visuals.add(new Cubes(this));        
         visuals.add(new SinWaves(this));
@@ -164,6 +174,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         
         
         background(0);
+        change(0);
 	}
 
 	public void draw(){

@@ -16,6 +16,8 @@ public class Model
 
   AudioGarden v;
 
+  
+
   Model(String fileName, float x, float y, float z, AudioGarden v)
   {
     //obj = new myObject(fileName);
@@ -25,6 +27,8 @@ public class Model
     this.v = v;
   }
   float c = 0;
+
+  public int colorOffset = 0;
 
   void render()
   {
@@ -36,6 +40,9 @@ public class Model
     
     int col1 = (int) v.map(v.getSmoothedAmplitude(), 0, 1, 0, 255);
     int col2 = (int) v.map(v.getSmoothedAmplitude(), 0, 1, 255, 0);
+
+    col1 = (col1 + colorOffset) % 256;
+    col2 = (col2 + colorOffset) % 256;
     
     v.fill(
       col1
