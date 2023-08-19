@@ -235,7 +235,7 @@ public class Life extends Poly
 
   public void render()
   {    
-    if (v.getAmplitude() > (1.0f / v.sensitivity + 1.0) && v.frameCount % 20 == 0)
+    if (v.frameCount % 20 == 0)
     {
       updateBoard();
     }

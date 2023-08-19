@@ -22,13 +22,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     MidiBus myBus; // The MidiBus
 
-    float trails = 20;
+    float trails = 10;
 
     public float speed = 1;
 
     void resetDefaults()
     {
-        trails = 20;
+        trails = 10;
         sensitivity = 1.0f;
         base = 0.3f;
         speed = 1;
@@ -40,12 +40,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         resetDefaults();
         
-
     }
 
     public void settings() {
-        //fullScreen(P3D, 0);
-        size(1000, 1000, P3D);
+        fullScreen(P3D, 0);
+        //size(1000, 1000, P3D);
     }
 
     public void noteOn(int channel, int pitch, int velocity) {
@@ -72,6 +71,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     }
 
     public void change(int into) {
+        println("Changing to: " + into);
         if (whichVisual >= 0 && whichVisual < visuals.size()) {
             visuals.get(whichVisual).exit();
         }
@@ -119,7 +119,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             println("sensitivity : " + sensitivity);
         }
         if (number == 74) {
-            trails = min(max(clockWise ? trails + 1f : trails - 1f, 0), 40);
+            trails = min(max(clockWise ? trails + 0.2f : trails - 0.2f, 0), 20);
             println("trails : " + trails);
         }
 
@@ -162,16 +162,23 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
         // bl = new BeatListener(beat, getAudioPlayer());
+        visuals.add(new Spiral(this));
+        
+         visuals.add(new SinWaves(this));
+       
+        visuals.add(new Cubes(this));
+        
+        visuals.add(new kalidascope(this));
+        
+        visuals.add(new Bloom(this));
+        visuals.add(new JenniferVisuals(this));
+        
+        
         visuals.add(new Tadpole(this));        
         visuals.add(new Life(this, 2, 1000));
         visuals.add(new Life(this, 1, 1000));
-        visuals.add(new Cubes(this));
-        visuals.add(new SinWaves(this));
-        visuals.add(new Bloom(this));
-        visuals.add(new kalidascope(this));
         visuals.add(new Life(this, 0, 1000));
 
-        visuals.add(new JenniferVisuals(this));
         visuals.add(new Models1(this, "msx.obj"));
 
         visuals.add(new Models1(this, "infiniteForms.obj"));
@@ -180,7 +187,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visuals.add(new Cubesquared2(this));
 
         visuals.add(new SarahVisual(this));
-        visuals.add(new Spiral(this));
 
         //Collections.shuffle(visuals);
 

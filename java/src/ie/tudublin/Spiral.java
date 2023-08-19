@@ -39,6 +39,8 @@ public class Spiral extends Poly{
         }
         diameter = v.getSmoothedAmplitude() * 600; //diametre of ellipse linked to song
         float c = PApplet.map(i,0, v.getAudioBuffer().size() , 0, cRange);
+        c = v.hueShift(c);
+
         v.fill(c,100,100);
         v.scale(0.95f); //0.95-og //0.98 // 0.5 //0.8
         v.rotate(AudioGarden.radians(angle)/2);// /2

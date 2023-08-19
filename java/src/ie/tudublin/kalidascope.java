@@ -10,7 +10,6 @@ public class kalidascope extends Poly
     @Override
     public void render(int ellapsed)
     {
-        v.background(0);
         v.stroke(255);
 
         kal();
@@ -30,6 +29,7 @@ public class kalidascope extends Poly
             v.rotate(PApplet.radians(v.frameCount));
             //map of bluish pinkish colours
             float c = PApplet.map(count, 0, v.getAudioBuffer().size() , 200, 400);
+            c = v.hueShift(c);
             
             v.beginShape();
             //create multiple octogons as one shape
