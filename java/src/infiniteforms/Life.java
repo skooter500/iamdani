@@ -225,7 +225,8 @@ public class Life extends Poly
       for (int col = 0; col < boardWidth; col ++) {
         if (board[row][col] != -1)
         {
-          v.fill(board[row][col], 255, 255);
+            float newC = v.hueShift(board[row][col]);
+          v.fill(newC, 255, 255);
           v.rect(col * cellWidth, row * cellWidth, cellWidth, cellWidth);
         }
       }
@@ -234,7 +235,7 @@ public class Life extends Poly
 
   public void render()
   {    
-    //if (v.getAmplitude() > v.sensitivity)
+    if (v.getAmplitude() > (1.0f / v.sensitivity + 1.0) && v.frameCount % 20 == 0)
     {
       updateBoard();
     }

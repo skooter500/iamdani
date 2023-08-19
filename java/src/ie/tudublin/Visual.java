@@ -133,6 +133,32 @@ public abstract class Visual extends PApplet
 		}
 	}
 
+	public float pingpongmap(float a, float b, float c, float d, float e) {
+        float range1 = c - b;
+        float range2 = e - d;
+        if (range1 == 0) {
+            return d;
+        }
+
+        if (range2 == 0) {
+            return d;
+        }
+
+        float howFar = a - b;
+
+        float howMany = floor(howFar / range1);
+        float fraction = (howFar - (howMany * range1)) / range1;
+        // println(a + " howMany" + howMany + " fraction: " + fraction);
+        // println(range2 + " " + fraction);
+        if (howMany % 2 == 0) {
+            return d + (fraction * range2);
+        } else {
+            return e - (fraction * range2);
+        }
+    }
+
+	public float hueShift = 0;
+
 	public void startListening()
 	{
 		ai = minim.getLineIn(Minim.MONO, frameSize, 44100, 16);
@@ -202,6 +228,10 @@ public abstract class Visual extends PApplet
 	public FFT getFFT() {
 		return fft;
 	}
+
+    public float hueShift(float f) {
+        return pingpongmap(f + hueShift, 0, 255, 0, 255);
+    }
 }
 
 class BeatListener implements AudioListener

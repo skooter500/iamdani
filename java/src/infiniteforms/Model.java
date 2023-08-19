@@ -38,12 +38,15 @@ public class Model
     //s.setStroke(v.color(200, 255, 255));
     //s.setFill(v.color(0, 0, 0, 0));
     
-    int col1 = (int) v.map(v.getSmoothedAmplitude(), 0, 1, 0, 255);
-    int col2 = (int) v.map(v.getSmoothedAmplitude(), 0, 1, 255, 0);
+    float col1 = v.map(v.getSmoothedAmplitude(), 0, 1, 0, 255);
+    float col2 = v.map(v.getSmoothedAmplitude(), 0, 1, 255, 0);
 
     col1 = (col1 + colorOffset) % 256;
     col2 = (col2 + colorOffset) % 256;
     
+    col1 = v.hueShift(col1);
+    col2 = v.hueShift(col2);
+
     v.fill(
       col1
       , 255, 255);
