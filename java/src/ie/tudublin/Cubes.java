@@ -13,6 +13,12 @@ public class Cubes extends Poly
         super(v);
     }
 
+    public void enter()
+    {
+        sizeBox = 1000;
+        sizeRect = 10;
+    }
+
     @Override
     public void render(int ellapsed)
     {

@@ -53,7 +53,7 @@ public class Model
     //scale(1);
     v.rotateX(-v.HALF_PI);
     v.rotateZ(v.PI);
-    v.rotateZ(0.2f + v.sin(theta) * 0.2f);
+    // v.rotateZ(0.2f + v.sin(theta) * 0.2f);
     theta += v.speed;
     c += v.speed * 100 * v.getAmplitude();
     v.scale(smoothedBoxSize * 2);

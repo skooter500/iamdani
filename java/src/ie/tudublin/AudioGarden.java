@@ -47,8 +47,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println("Pitch:"+pitch);
         println("Velocity:"+velocity);
 
-        whichVisual = pitch % visuals.size();
-
+        int newVisual = pitch % visuals.size();
+        change(newVisual); 
     }
         
     public void noteOff(int channel, int pitch, int velocity) {
@@ -59,6 +59,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     println("Channel:"+channel);
     println("Pitch:"+pitch);
     println("Velocity:"+velocity);
+    }
+
+    public void change(int into)
+    {
+        if (into >= 0 && into < visuals.size())
+        {
+            visuals.get(whichVisual).exit();
+            whichVisual = into;
+            visuals.get(whichVisual).enter();
+        }                
     }
 
     public void controllerChange(int channel, int number, int value) {
@@ -76,16 +86,18 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (number == 7)
         {
+            int newVisual = whichVisual;
             if (clockWise)
-                whichVisual = (whichVisual + 1) % visuals.size();
+                newVisual = (newVisual + 1) % visuals.size();
             else
             {
-                whichVisual --;
-                if (whichVisual < 0)
+                newVisual --;
+                if (newVisual < 0)
                 {
-                    whichVisual = visuals.size() - 1;
+                    newVisual = visuals.size() - 1;
                 }
             }
+            change(newVisual);
         }
 
 
@@ -108,6 +120,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
     }
 
+    public void keyPressed()
+    {
+        int newVisual = (keyCode - '0') % 10;
+        change(newVisual);
+    }
+        
+
 	public void setup(){
         colorMode(HSB,360,100,100);		        
         startMinim();
@@ -126,20 +145,23 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
         //bl = new BeatListener(beat, getAudioPlayer());
+        
+        visuals.add(new Cubes(this));        
+        visuals.add(new SinWaves(this));
+        visuals.add(new Bloom(this));
+        visuals.add(new kalidascope(this));        
+        visuals.add(new JenniferVisuals(this));                
+        visuals.add(new Models1(this, "msx.obj"));  
         		
         visuals.add(new Models1(this, "infiniteForms.obj"));  
         colorMode(HSB, 360, 100, 100);
         //visuals.add(new AdriansVisual(this));              
         visuals.add(new Cubesquared2(this));  
                       
-        visuals.add(new JenniferVisuals(this));                
         visuals.add(new SarahVisual(this));                
-        visuals.add(new Bloom(this));
-        visuals.add(new kalidascope(this));
-        visuals.add(new Cubes(this));
         visuals.add(new Spiral(this));
         
-        visuals.add(new SinWaves(this));
+        
         
         background(0);
 	}
@@ -154,7 +176,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         blendMode(BLEND);
         colorMode(HSB);
         
-
         stroke(255,255,255);
         //background(0);
         try

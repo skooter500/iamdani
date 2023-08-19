@@ -12,6 +12,14 @@ public abstract class Poly {
         render();
     }
 
+    public void enter()
+    {
+    }
+
+    public void exit()
+    {
+    }
+
     public void render()
     {
     }

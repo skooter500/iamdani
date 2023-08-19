@@ -13,7 +13,7 @@ public class Models1 extends Poly
     model = new Model(fileName, 0, 0, 0, v);    
   }
   
-  void restart()
+  public void enter()
   {
     model.smoothedBoxSize = 0;
   }
