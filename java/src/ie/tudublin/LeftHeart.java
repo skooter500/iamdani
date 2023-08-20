@@ -22,6 +22,7 @@ public class LeftHeart extends Poly
  
     public void draw()
     {
+        v.colorMode(v.RGB);
         //v.background(0); // set background to black
         analyzeMusic(); // call method to detect beats in the audio
         leftHeart(); // display fullHeart
@@ -51,7 +52,7 @@ public class LeftHeart extends Poly
     // method that draws left heart
     public void leftHeart()
     {
-        float heartSize = MyVisual.map(v.ab.level(), 0, 1, 50, 200) * 8; // calculate heart size based on left level channel of audio, from 0-1 to range of 50-200, multiply by 8
+        float heartSize = v.map(v.getAmplitude(), 0, 1, 50, 200) * 8; // calculate heart size based on left level channel of audio, from 0-1 to range of 50-200, multiply by 8
  
         v.strokeWeight(4);
         v.stroke(255, 0, 0);

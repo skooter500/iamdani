@@ -22,7 +22,7 @@ public class RightHeart extends Poly
  
     public void draw()
     {
-        p.background(0); // set background to black
+        v.colorMode(v.RGB);
         analyzeMusic(); // call method to detect beats in the audio
         rightHeart(); // display fullHeart
     }
@@ -35,7 +35,7 @@ public class RightHeart extends Poly
     // analyse music to detect beats
     public void analyzeMusic()
     {
-        beat.detect(p.getAudioPlayer().mix); // detect beats and updates
+        beat.detect(p.getAudioBuffer()); // detect beats and updates
         if (beat.isOnset()) // if statement to check if a beat has been detected
         {
             heartColor = p.color(p.random(255), p.random(255), p.random(255)); // set heart colour to random of 255
@@ -51,7 +51,7 @@ public class RightHeart extends Poly
     // method that draws only the right heart
     public void rightHeart()
     {
-        float heartSize = MyVisual.map(p.ap.left.level(), 0, 1, 50, 200) * 8; // calculate heart size based on left level channel of audio, from 0-1 to range of 50-200, multiply by 8
+        float heartSize = v.map(v.getAmplitude(), 0, 1, 50, 200) * 8; // calculate heart size based on left level channel of audio, from 0-1 to range of 50-200, multiply by 8
  
         p.strokeWeight(4);
         p.stroke(255, 0, 0);

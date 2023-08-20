@@ -1,10 +1,11 @@
 package ie.tudublin;
  
 import ddf.minim.analysis.BeatDetect;
+import example.MyVisual;
  
-public class LauraSun
+public class LauraSun extends Poly
 {
-    MyVisual p;
+    Visual p;
  
     //int mode = 0;
     int numDrops = 100; // set the number of drops to 25
@@ -12,10 +13,11 @@ public class LauraSun
     float[] dropY = new float[numDrops];
     float lightningProbability = 0.05f; // set the probability of lightning occurring
  
-    public LauraSun(MyVisual p, BeatDetect beat)
+    public LauraSun(AudioGarden v)
     {
-        this.p = p;
-        this.beat = beat;
+        super(v);
+        p = v;
+        this.beat = v.beat;
     }
  
     BeatDetect beat;
@@ -28,7 +30,7 @@ public class LauraSun
 
     public void draw()
     {
-        p.background(0);
+        v.colorMode(v.RGB);
         drawSun();
         drawSeawaves();
         drawLightning();

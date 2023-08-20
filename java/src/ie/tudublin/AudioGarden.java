@@ -3,6 +3,7 @@ package ie.tudublin;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import C21503599.MyFirstChange;
 import c21348423.AdriansVisual;
 import c21383126.JenniferVisuals;
 import c21415904.SarahVisual;
@@ -31,8 +32,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     public float speed = 1;
 
     public void settings() {
-        fullScreen(P3D, 0);
-        //size(1000, 1000, P3D);
+        //fullScreen(P3D, 0);
+        size(1000, 1000, P3D);
     }
 
     public void setup() {
@@ -52,32 +53,33 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        // bl = new BeatListener(beat, getAudioPlayer());
-        //visuals.add(new Anne(this));
 
-        visuals.add(new paris(this));
+        // LeftHeart lh;
+        // RightHeart rh;  
+        // JiaHeart jh;
+        // LauraSun ls;
+        // ManarBrain mb;
         
+        // visuals.add(new MyFirstChange(this)); not very exciting
+        visuals.add(new Models1(this, "tudub.obj"));
+        visuals.add(new Models1(this, "thc molecule.obj"));
 
-        LeftHeart lh;
-        RightHeart rh;  
-        JiaHeart jh;
-        LauraSun ls;
-        ManarBrain mb;
-        //Serial port;
-        BeatDetect beat;
+        visuals.add(new Models1(this, "audio garden 1.obj"));
+        visuals.add(new Models1(this, "audio garden 2.obj"));
+        
+        visuals.add(new Models1(this, "eden.obj"));
+        visuals.add(new ManarBrain(this));                
 
-        visuals.add(new LeftHeart(this));
-        visuals.add(new RightHeart(this));
         visuals.add(new JiaHeart(this));
+        visuals.add(new Tadpole(this));    
         visuals.add(new LauraSun(this));
-        visuals.add(new ManarBrain(this));
-
         visuals.add(new paris(this));
-        //visuals.add(new Mena(this));
+        visuals.add(new Mena(this));
         //visuals.add(new Airish(this));
-        //visuals.add(new Spiral(this));
         
-         visuals.add(new SinWaves(this));
+        visuals.add(new Spiral(this));
+        
+        visuals.add(new SinWaves(this));
        
         visuals.add(new Cubes(this));
         
@@ -86,14 +88,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visuals.add(new Bloom(this));
         visuals.add(new JenniferVisuals(this));
         
-        
-        visuals.add(new Tadpole(this));        
         visuals.add(new Life(this, 2, 1000));
         visuals.add(new Life(this, 1, 1000));
         visuals.add(new Life(this, 0, 1000));
-
+        
         visuals.add(new Models1(this, "msx.obj"));
-
+        
         visuals.add(new Models1(this, "infiniteForms.obj"));
         colorMode(HSB, 360, 100, 100);
         // visuals.add(new AdriansVisual(this));
@@ -101,7 +101,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         visuals.add(new SarahVisual(this));
 
-        //Collections.shuffle(visuals);
+        Collections.shuffle(visuals);
 
         background(0);
         change(0);
@@ -197,7 +197,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             println("sensitivity : " + sensitivity);
         }
         if (number == 74) {
-            trails = min(max(clockWise ? trails + 0.2f : trails - 0.2f, 0), 20);
+            trails = min(max(clockWise ? trails + 1f : trails - 1f, 0), 40);
             println("trails : " + trails);
         }
 
@@ -218,7 +218,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     }
 
     public void keyPressed() {
-        int newVisual = (int) pingpongmap(keyCode - '0', 0, 1024, 0, visuals.size());
+        int newVisual = keyCode - '0';
         change(newVisual);
     }
 
@@ -249,8 +249,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         speed = map(getAmplitude(), 0, 1, 0, 0.1f);
 
+        pushMatrix();
+        pushStyle();
         visuals.get(whichVisual).render(frameCount); // renders the currently loaded visual
-
+        popStyle();
+        popMatrix();
         //hueShift();
     }
 

@@ -1,7 +1,9 @@
 package infiniteforms;
 
 import ie.tudublin.AudioGarden;
+import ie.tudublin.DANI;
 import ie.tudublin.Poly;
+import processing.core.PFont;
 
 public class Tadpole extends Poly
 {
@@ -25,6 +27,7 @@ public class Tadpole extends Poly
 
     String[] nameCombos = {"Safe", "Milk", "Strictly", "Personal", "Trout", "Mask", "Replica", "Lick", "My", "Decals", "Off", "Baby", "Mirror", "Man", "Spotlight", "Kid", "Clear", "Spot", "Unconditionally", "Guaranteed", "Bluejeans", "Moonbeams", "Shiny", "Beast", "Bat", "Chain", "Puller", "Doc", "Radar", "Station", "Ice", "Cream", "Crow", "Bat", "Chain", "Puller"};
 
+    DANI dani;
 
   public Tadpole(AudioGarden v, int length, String name, int limbs, int eyes, char gender) {
     super(v);
@@ -33,17 +36,24 @@ public class Tadpole extends Poly
     this.limbs = limbs;
     this.eyes = eyes;
     this.gender = gender;
+    
   }
 
   public Tadpole(AudioGarden v)
   {
     super(v);
+    font = v.createFont("Hyperspace Bold.otf", 24);
+
+    dani = new DANI(v, "captainb.txt");
+    
   }
+
+  PFont font;
   
   
   public void enter()
   {
-    length = (int) v.random(1, 15); 
+    length = (int) v.random(1, 10); 
     limbs = (int) v.random(0, 2);
     eyes = (int) v.random(0, 9);
     
@@ -64,6 +74,8 @@ public class Tadpole extends Poly
     name = name.substring(0, name.length() - 1);
     colorOffset = v.random(0, 256);
     v.println(this);
+    dani.t = this;
+    dani.enter();
   }
 
   public void render()
@@ -81,18 +93,26 @@ public class Tadpole extends Poly
     float half = w * length * 0.5f;
     v.strokeWeight(3);
     v.pushMatrix();
-    v.translate(cx, cy);
+    v.translate(cx/2, cy);
     v.translate(0, - half);
     v.noFill();
     float hw = w / 2;
 
+    v.textFont(font);
     v.textSize(36);
-    v.textAlign(v.CENTER, v.CENTER);
-    c2 = v.hueShift(c2); 
+    
+    float c3 = v.pingpongmap(0, 0, (length-1) * 0.5f, 0, 255) % 255;
+    c3 = v.hueShift(c3 + colorOffset); 
       
-    v.fill(c2 % 255, 255, 255, alpha);
-
-    v.text(name, 0, -w * 3);
+    v.fill(c3 % 255, 255, 255, alpha);
+    v.textAlign(v.LEFT, v.CENTER);
+    v.textAlign(v.LEFT, v.CENTER);    
+    v.pushMatrix();    
+    v.translate(500, -150);
+    v.text(name, 0, -w * 2);    
+    
+    dani.render();
+    v.popMatrix();
     v.noFill();
     for (int i = 0; i < length; i ++)
     { 
