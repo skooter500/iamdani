@@ -31,6 +31,10 @@ public class Bloom extends Poly{
             //v.fill(v.getAudioBuffer().get(i)*i*i,v.getAudioBuffer().get(i)*i*i*i,v.getAudioBuffer().get(i)*i*i);
             float c2 = v.getAudioBuffer().get(i)*i*i;//allows for synced color change at centre of bloom creating a pistil-esque pattern
             float c = PApplet.map(i,0, v.getAudioBuffer().size() , 0, cRange);
+
+            c = v.hueShift(c);
+            c2 = v.hueShift(c2);
+
             v.fill((c2/2)+50,c+50,c+30);//allows for darker edges of the flower creating an almost 3d shape
             v.scale(0.95f);//scales the shape by the percentage given
             v.rotate(PApplet.radians(angle));

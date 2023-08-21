@@ -62,7 +62,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void setup() {
 
-        println("Hello");
+        println("Hello,");
+        println("I am DANI.");
+        
 
         colorMode(HSB);
         startMinim();
