@@ -6,7 +6,7 @@ import ie.tudublin.Poly;
 public class Life extends Poly
 {
   
-  int boardWidth = 200;
+  int boardWidth = 100;
   int boardHeight;
   float cellWidth;
   float[][] board = new float[boardHeight][boardWidth];

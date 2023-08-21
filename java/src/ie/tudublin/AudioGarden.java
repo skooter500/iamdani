@@ -33,7 +33,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     float trails = 10;
 
-    public float speed = 1;
 
     public void settings() {
         // fullScreen(P3D, 0);
@@ -62,10 +61,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void setup() {
 
-        println("Hello,");
-        println("I am DANI.");
-        
-
+        println("Hello. I aM DANI.");
+    
         colorMode(HSB);
         startMinim();
         rectMode(CENTER);
@@ -163,7 +160,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                   .setSize(1000,(int) consoleSize)
                   .setColor(color(consoleColor, 255, 255))                  
                   .setFont(createFont("Hyperspace Bold.otf",30))
-                  .setLineHeight(24)
+                  .setLineHeight(30)
+                  .setText(console.toString())
+                  .setVisible(true);
                   ;
   
     }
@@ -259,7 +258,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (number == 114) {
             sensitivity = max(clockWise ? sensitivity + 0.01f : sensitivity - 0.01f, 0);
-            println("MULT : " + sensitivity);
+            println("MUL : " + sensitivity);
         }
         if (number == 74) {
             trails = min(max(clockWise ? trails + 1f : trails - 1f, 0), 40);
@@ -269,12 +268,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         if (number == 18) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             hueShift = clockWise ? hueShift + 5 : hueShift - 5;
-            println("HUE_SHIFT: " + hueShift);
+            println("HUE_SH: " + hueShift);
         }
 
         if (number == 71) {
-            speed = min(max(clockWise ? speed + 0.2f : speed - -0.2f, 0), 5);
-            println("HUE_SHIFT: " + hueShift);
+            speed = min(max(clockWise ? speed + 0.2f : speed - 0.2f, 0), 10);
+            println("SPE: " + speed);
         }
     }
 
@@ -316,7 +315,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         // will pulse an object with music volume
         calculateAverageAmplitude();
 
-        speed = map(getAmplitude(), 0, 1, 0, 0.1f);
+        //speed = map(getAmplitude(), 0, 1, 0, 0.1f);
 
         pushMatrix();
         pushStyle();

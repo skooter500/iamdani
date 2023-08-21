@@ -105,14 +105,9 @@ public class Tadpole extends Poly
     c3 = v.hueShift(c3 + colorOffset); 
       
     v.fill(c3 % 255, 255, 255, alpha);
-    v.textAlign(v.LEFT, v.CENTER);
-    v.textAlign(v.LEFT, v.CENTER);    
-    v.pushMatrix();    
-    v.translate(500, -150);
-    v.text(name, 0, -w * 2);    
-    
-    dani.render();
-    v.popMatrix();
+    v.textAlign(v.CENTER, v.CENTER);
+    v.textAlign(v.CENTER, v.CENTER);    
+    v.text(name, 0, -w * 2);        
     v.noFill();
     for (int i = 0; i < length; i ++)
     { 
