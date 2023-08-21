@@ -13,7 +13,7 @@ import ddf.minim.analysis.BeatDetect;
 import infiniteforms.City;
 import infiniteforms.Life;
 import infiniteforms.Models1;
-import infiniteforms.Tadpole;
+import infiniteforms.Nematode;
 import oopBaddies.Airish;
 import oopBaddies.Anne;
 import oopBaddies.Mena;
@@ -35,8 +35,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
 
     public void settings() {
-        // fullScreen(P3D, 0);
-        size(1000, 1000, P3D);
+        fullScreen(P3D, 0);
+        // /size(1000, 1000, P3D);
     }
 
     public static AudioGarden instance;
@@ -61,8 +61,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void setup() {
 
-        println("Hello. I aM DANI.");
-    
+        println("Hello I aM DANI");
+        println("I am alive");
+        
         colorMode(HSB);
         startMinim();
         rectMode(CENTER);
@@ -81,8 +82,26 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
+        visuals.add(new Bands(this, 200, 0, 0, 0));
+        visuals.add(new Mena(this));
+        visuals.add(new Airish(this));
+        visuals.add(new paris(this));
+        visuals.add(new Spiral(this));
+        visuals.add(new AdriansVisual(this));
+        visuals.add(new Cubesquared2(this));
+        visuals.add(new SarahVisual(this));
+        visuals.add(new Cubes(this));
+        
+        
+        //visuals.add(new kalidascope(this)); // Not sure
+        visuals.add(new JenniferVisuals(this));
+        visuals.add(new Models1(this, "msx.obj"));
+        visuals.add(new SinWaves(this));
 
 
+        visuals.add(new LauraSun(this));
+        visuals.add(new DANI(this, "captainb.txt"));
+        visuals.add(new Nematode(this));
         visuals.add(new Bloom(this));
         visuals.add(new Models1(this, "audio garden 1.obj"));
         visuals.add(new Models1(this, "eden.obj"));
@@ -92,16 +111,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         // visuals.add(new Models1(this, "thc molecule.obj"));
 
         
-        visuals.add(new Tadpole(this));
+        
         visuals.add(new City(this));
         visuals.add(new Life(this, 2, 1000));
         visuals.add(new Life(this, 1, 1000));
         visuals.add(new Life(this, 0, 1000));
-
         
         visuals.add(new ManarBrain(this));  
-
-        visuals.add(new LauraSun(this));
+        visuals.add(new Models1(this, "eden.obj"));
+        visuals.add(new ManarBrain(this));  
+        
         
         // visuals.add(new MyFirstChange(this));
         // visuals.add(new Tadpole(this));
@@ -109,8 +128,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         ;
         
-        visuals.add(new Models1(this, "eden.obj"));
-        visuals.add(new ManarBrain(this));                
+                      
 
         // visuals.add(new JiaHeart(this));
             
@@ -119,29 +137,28 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         // visuals.add(new Mena(this));
         // visuals.add(new Airish(this));
         
-        // visuals.add(new Spiral(this));
+        // 
         
-        // visuals.add(new SinWaves(this));
-       
-        // visuals.add(new Cubes(this));
-        
-        // visuals.add(new kalidascope(this));
+        //        
+        // 
         
         // 
-        // visuals.add(new JenniferVisuals(this));
+        
+        // 
+        // 
         
         // visuals.add(new Life(this, 2, 1000));
         // visuals.add(new Life(this, 1, 1000));
         // visuals.add(new Life(this, 0, 1000));
         
-        // visuals.add(new Models1(this, "msx.obj"));
+        // 
         
         // 
         // colorMode(HSB, 360, 100, 100);
-        // // visuals.add(new AdriansVisual(this));
-        // visuals.add(new Cubesquared2(this));
+        // // 
+        // 
 
-        // visuals.add(new SarahVisual(this));
+        // 
 
         //Collections.shuffle(visuals);
 
@@ -202,12 +219,23 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             showConsole = !showConsole;
             println("CON:" + showConsole);   
             consoleSize = 0;
-            myTextarea.setVisible(showConsole);
+            if (!showConsole)
+            {
+                myTextarea.setVisible(showConsole);
+            }
             return;
         }
 
-        if (pitch == 43)
+        if (pitch == 42)
         {
+            println("restart");
+            visuals.get(whichVisual).enter();
+            return;
+        }
+
+        if (pitch == 50)
+        {
+            println("reset");
             resetDefaults();
             return;
         }
@@ -252,7 +280,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
 
         if (number == 10) {
-            base = max(clockWise ? base + 0.01f : base - 0.1f, 0.01f);
+            base = max(clockWise ? base + 0.01f : base - 0.01f, 0.01f);
             println("BAS: " + base);
         }
 

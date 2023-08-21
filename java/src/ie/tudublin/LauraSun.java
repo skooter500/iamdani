@@ -30,7 +30,8 @@ public class LauraSun extends Poly
 
     public void draw()
     {
-        v.colorMode(v.RGB);
+
+        //v.colorMode(v.RGB);
         drawSun();
         drawSeawaves();
         drawLightning();
@@ -50,7 +51,6 @@ public class LauraSun extends Poly
         float surroundingSize = 400;
         int surroundingDetailLevel = 6;
  
-        p.background(0);//black
         p.pushMatrix(); // drawSun push
         p.translate(p.width/2, p.height/2, -400); // move ball to center of canvas
         p.rotateY((float)(p.frameCount * 0.009)); // rotation speed
@@ -63,7 +63,8 @@ public class LauraSun extends Poly
             p.pushMatrix();// saves the current position
             p.rotateY(angle + p.frameCount * 0.01f);// rotates surrounding spheres
             p.translate(surroundingSize, 0, 0);
-            p.fill(255, 100, 0);
+            float c = v.hueShift(69);
+            p.fill(c, 255, 255);
             p.sphereDetail(surroundingDetailLevel);
             p.sphere(sunSize / 4);
             p.popMatrix();// used to restore the previous position
@@ -76,10 +77,12 @@ public class LauraSun extends Poly
             float offset = p.random(10, 20);
             p.translate(offset, 0, 0);
             // Set color of each sphere
-            p.fill(255,165,0);
+            float c = v.hueShift(200);
+            p.fill(c, 255, 255);            
             p.sphereDetail(sunDetailLevel);
             p.sphere(sunSize); // size of the sphere
-            p.stroke(255);
+
+            p.stroke(v.hueShift(22), 255, 255);
             p.popMatrix(); // restore overall transformation
         }
         p.popMatrix(); // drawSun pop
@@ -96,7 +99,7 @@ public class LauraSun extends Poly
             p.pushMatrix();
             p.translate(x, y, z);// translates the drawing
             p.noStroke();
-            p.fill(255);
+            p.fill(v.hueShift(37), 255, 255);
             p.sphere(2);
             p.popMatrix();
         }
@@ -111,8 +114,10 @@ public class LauraSun extends Poly
             float waveOffset = j * 40; // adjust the offset of each wave
        
             // Set the fill and stroke colors for the wave
-            p.fill(33, 150, 243, 100); // blue
-            p.stroke(33, 150, 243); // blue
+            p.fill(v.hueShift(37), 255, 255, 100); // blue
+            
+            p.stroke(v.hueShift(77), 255, 255); // blue
+       
             p.strokeWeight(2);
        
             p.beginShape();

@@ -5,7 +5,7 @@ import ie.tudublin.DANI;
 import ie.tudublin.Poly;
 import processing.core.PFont;
 
-public class Tadpole extends Poly
+public class Nematode extends Poly
 {
   float length = 5;
   String name = "";
@@ -29,7 +29,7 @@ public class Tadpole extends Poly
 
     DANI dani;
 
-  public Tadpole(AudioGarden v, int length, String name, int limbs, int eyes, char gender) {
+  public Nematode(AudioGarden v, int length, String name, int limbs, int eyes, char gender) {
     super(v);
     this.length = length;
     this.name = name;
@@ -39,7 +39,7 @@ public class Tadpole extends Poly
     
   }
 
-  public Tadpole(AudioGarden v)
+  public Nematode(AudioGarden v)
   {
     super(v);
     font = v.createFont("Hyperspace Bold.otf", 24);
@@ -63,7 +63,6 @@ public class Tadpole extends Poly
     //c1 = random(0, 255);
 
     fatness = v.random(50, 200);
-    
     
     int nameLength = (int)v.random(1,5);
     name = "";
@@ -93,7 +92,7 @@ public class Tadpole extends Poly
     float half = w * length * 0.5f;
     v.strokeWeight(3);
     v.pushMatrix();
-    v.translate(cx/2, cy);
+    v.translate(cx, cy);
     v.translate(0, - half);
     v.noFill();
     float hw = w / 2;
@@ -107,7 +106,7 @@ public class Tadpole extends Poly
     v.fill(c3 % 255, 255, 255, alpha);
     v.textAlign(v.CENTER, v.CENTER);
     v.textAlign(v.CENTER, v.CENTER);    
-    v.text(name, 0, -w * 2);        
+    v.text(name, 0, -w * 3);        
     v.noFill();
     for (int i = 0; i < length; i ++)
     { 

@@ -54,7 +54,6 @@ public class SarahVisual extends VScene {
 
         Spiral1(Visual v, PVector pos) {
             super(v, pos);
-            v.background(0);
         }
 
         float cx = v.width / 2;
@@ -68,7 +67,7 @@ public class SarahVisual extends VScene {
 
             for (int i = 0; i < v.ab.size(); i++) {
                 float c = PApplet.map(i, 0, v.ab.size(), 0, 360);
-                v.fill(c, 100, 100);
+                v.fill(c, 255, 255);
                 v.scale((float) 0.99);
                 v.rotate(PApplet.radians(theta));
                 v.ellipse(cx, cy, 50 + (v.getSmoothedAmplitude() * 750), 50 + (v.getSmoothedAmplitude() * 750));
@@ -103,7 +102,7 @@ public class SarahVisual extends VScene {
                 // colour calculation
                 float c = PApplet.map(i, 0, v.ab.size(), 0, 240);
                 v.strokeWeight(2);
-                v.stroke(c, c, c);
+                v.stroke(v.hueShift(c), 255, 255);
 
                 // calculate angle, TWO_PI/3 -> each segment has three points, shape moves up
                 // and down with amplitude
@@ -351,7 +350,8 @@ public class SarahVisual extends VScene {
                         sum += 100 * b.r / d * (v.getSmoothedAmplitude() * 50);
                     }
 
-                    v.pixels[index] = v.color(sum % 360, 255, 255); // modulus operator makes ball inside of ball
+                    float c = v.hueShift(sum % 360);
+                    v.pixels[index] = v.color(c, 255, 255); // modulus operator makes ball inside of ball
 
                 }
             }

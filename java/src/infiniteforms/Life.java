@@ -6,7 +6,7 @@ import ie.tudublin.Poly;
 public class Life extends Poly
 {
   
-  int boardWidth = 100;
+  int boardWidth = 50;
   int boardHeight;
   float cellWidth;
   float[][] board = new float[boardHeight][boardWidth];
@@ -235,6 +235,10 @@ public class Life extends Poly
 
   public void render()
   {    
+
+
+    
+
     if (v.frameCount % 20 == 0)
     {
       updateBoard();

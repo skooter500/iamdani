@@ -41,7 +41,7 @@ public class Spiral extends Poly{
         float c = PApplet.map(i,0, v.getAudioBuffer().size() , 0, cRange);
         c = v.hueShift(c);
 
-        v.fill(c,100,100);
+        v.fill(c,255,255);
         v.scale(0.95f); //0.95-og //0.98 // 0.5 //0.8
         v.rotate(AudioGarden.radians(angle)/2);// /2
         v.ellipse(x, 0, diameter, diameter); //first two x,y second width height
@@ -60,7 +60,7 @@ public class Spiral extends Poly{
         }
           diameter = v.getSmoothedAmplitude() * 600;
           float c = PApplet.map(i, 0, v.getAudioBuffer().size() , 0, cRange);
-          v.fill(c,150,250);
+          v.fill(v.hueShift(c),255,255);
           v.scale(0.95f); //0.95-og //.98 // 0.5f //0.8
           v.rotate(-AudioGarden.radians(angle)/2); //reverses angle of rotation
           v.ellipse(x, 0, diameter, diameter); //first two x,y second width height
@@ -70,7 +70,7 @@ public class Spiral extends Poly{
        
     }
 
-    angle+=(PApplet.map(v.getSmoothedAmplitude(), 0, 1.0f, 0, 1f)); //maps the rotation speed to the smoothedAmplitude
+    angle+=(PApplet.map(v.getSmoothedAmplitude() * v.speed, 0, 1.0f, 0, 1f)); //maps the rotation speed to the smoothedAmplitude
       
   }
 

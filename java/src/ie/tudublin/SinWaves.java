@@ -26,12 +26,14 @@ public class SinWaves extends Poly{
         //v.rotateY(v.radians(v.frameCount));
         //v.rotateZ(v.radians(v.frameCount));
 
+        float amp = v.max(v.getSmoothedAmplitude(), 0.18f);
+
         for (int x = -10; x < 10; x++) {
             for (int y = -10; y < 10; y++) {
             for (int z = -10; z < 10; z++) {//creates a 20X20X20 cube 
-                float offsetX = x * 20 *(v.getSmoothedAmplitude()*12);//value increasing/decreasing distance between cubes on x axis
-                float offsetY = y * 20 *(v.getSmoothedAmplitude()*12);//value increasing/decreasing distance between cubes on y axis
-                float offsetZ = z * 20 *(v.getSmoothedAmplitude()*12);//value increasing/decreasing distance between cubes on z axis
+                float offsetX = x * 20 *(amp*12);//value increasing/decreasing distance between cubes on x axis
+                float offsetY = y * 20 *(amp*12);//value increasing/decreasing distance between cubes on y axis
+                float offsetZ = z * 20 *(amp*12);//value increasing/decreasing distance between cubes on z axis
                 //float offsetX = x * 40;
                 //float offsetY = y * 40;
                 //float offsetZ = z * 40;
@@ -40,15 +42,19 @@ public class SinWaves extends Poly{
                 boxSize = (PApplet.sin(PApplet.radians(angle + distance))+1) * 20;//edits box size along a sin wave continously to appear like its fading 
                 v.pushMatrix();
                 v.translate(offsetX, offsetY, offsetZ-400);
-                v.fill((offsetX + v.frameCount) % 255, (offsetY + v.frameCount) % 255, (offsetZ + v.frameCount) % 255);
+                float c = v.hueShift((offsetX + offsetY + offsetZ + v.frameCount) % 255);
+                //p.fill(c, 255, 255);
+                v.fill(c, 255, 255);
                 v.noStroke();
                 v.box(boxSize);
                 v.popMatrix();
             }
             }
         }
-        angle += v.getSmoothedAmplitude()*20;//syncs the sin wave change for box size with the amplitude of song.
+        angle += amp*20 * v.speed;//syncs the sin wave change for box size with the amplitude of song.
         //angle+=2;
+        v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0f, 0f, 1f, 0f);  
     }
+
     
 }

@@ -2,11 +2,11 @@ package ie.tudublin;
 
 import java.util.ArrayList;
 
-import infiniteforms.Tadpole;
+import infiniteforms.Nematode;
 import processing.core.PApplet;
 
 
-public class DANI {
+public class DANI extends Poly {
 
 	int mode = 0;
 
@@ -16,10 +16,11 @@ public class DANI {
 
     int line = 0;
     int ch = 0;
-    public Tadpole t;
+    public Nematode t;
 
     public DANI(AudioGarden v, String fileName)
     {
+        super(v);
         this.v = v;
         this.fileName = fileName;
         loadFile();
@@ -87,13 +88,12 @@ public class DANI {
         }
     }
 
-
     String[] sonnet;
-
+    
     public String[] writeSonnet()
     {
-        String[] sonnet = new String[10];
-        for(int i = 0 ; i < 10 ; i ++)
+        String[] sonnet = new String[12];
+        for(int i = 0 ; i < 12 ; i ++)
         {
             String line = "";
             int start = (int) v.random(0, model.size());
@@ -125,6 +125,15 @@ public class DANI {
 
 	public void render() 
     {
+        v.textAlign(v.LEFT, v.CENTER);
+
+        float c = v.hueShift(99);
+
+        v.fill(c, 255, 255);
+        float cx = v.width / 2;
+        float cy = v.height / 2;
+
+        v.translate(cx / 4, cy/4);
 		for(int i = 0 ; i <= line ; i ++)
         {
             float h = 50;
@@ -150,21 +159,28 @@ public class DANI {
                 }
             }       
         }  
-        
-        if (v.frameCount % 5 == 0)
+        int interV = (int) (11 - v.speed);
+        if (v.frameCount % interV == 0)
         {
-            ch ++;
-            if (ch == sonnet[line].length())
+            try
             {
-                if (line < sonnet.length - 1)
-                {    
-                    ch = 0;
-                    line ++;
-                }
-                else
+                ch ++;
+                if (ch == sonnet[line].length())
                 {
-                    ch --;
+                    if (line < sonnet.length - 1)
+                    {    
+                        ch = 0;
+                        line ++;
+                    }
+                    else
+                    {
+                        ch --;
+                    }
                 }
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
             }
         }
 	}

@@ -81,8 +81,8 @@ public abstract class VObject extends Poly{
      */
     public void render() {
         applyTransforms();
-        v.colorMode(PApplet.RGB);
-        v.fill(255, 0, 255);
+        //v.colorMode(PApplet.RGB);
+        v.fill(v.hueShift(255), 255, 255);
         v.circle(10, 10, 10);
         v.popMatrix();
         System.out.println(this.getClass().getName() + " Warning: Empty Render Method");

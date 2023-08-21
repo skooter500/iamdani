@@ -29,20 +29,19 @@ public class Airish extends Poly {
         // make colours to music
         float c = v.map(avg, -1, 1, 0, 255);
 
-        v.background(0);// black background
-
+       
         v.noStroke();
         // fill the middle circles in white
-        v.fill(255, 255, 255);
+        v.fill(v.hueShift(66), 255, 255);
         // if a is 1 meaning this will only appear if user presses key that allows to
         // display this drwaing
         if (a == 1) {
             // circle must be first as it will interrupt with drawing other shapes
             // draws the centre pink circle of the shape
-            v.fill(255, 182, 193);
+            v.fill(v.hueShift(9), 255, 255);
             v.ellipse(250, 250, 100, 100);
 
-            v.fill(173, 216, 230);
+            v.fill(v.hueShift(173), 255, 255);
             v.ellipse(175, 175, 50, 50);
             v.triangle(175, 200, 250, 250, 200, 175);
 
@@ -72,9 +71,9 @@ public class Airish extends Poly {
         if (a >= 3) {
             for (int i = -250; i < 1400; i += 250) {
                 for (j = -250; j < 700; j += 250) {
-                    v.fill(193, 225, 193);
+                    v.fill(v.hueShift(193), 255, 255);
                     v.ellipse(250 + i, 250 + j, 100, 100);
-                    v.fill(c, 100, 100);
+                    v.fill(v.hueShift(c), 255, 255);
                     v.ellipse(175 + i, 175 + j, 50, 50);
                     v.triangle(175 + i, 200 + j, 250 + i, 250 + j, 200 + i, 175 + j);
                     v.ellipse(250 + i, 150 + j, 50, 50);
@@ -110,9 +109,9 @@ public class Airish extends Poly {
         if (a >= 2) {
             for (i = -125; i < 1400; i += 250) {
                 for (j = -125; j < 700; j += 250) {
-                    v.fill(253, 253, 150);
+                    v.fill(v.hueShift(93), 255, 255);
                     v.ellipse(250 + i, 250 + j, 100, 100);
-                    v.fill(200, 255, 255);
+                    v.fill(v.hueShift(13), 255, 255);
 
                     v.ellipse(175 + i, 175 + j, 50, 50);
                     v.triangle(175 + i, 200 + j, 250 + i, 250 + j, 200 + i, 175 + j);
@@ -145,17 +144,17 @@ public class Airish extends Poly {
         } // end if
 
         // draw butterfly
-        v.stroke(255);
+        v.stroke(v.hueShift(6), 255, 255);
         v.strokeWeight(2);
 
-        v.stroke(255);
+        
         v.strokeWeight(3);
-        v.fill(c, 255, 255);
+        v.fill(v.hueShift(c), 255, 255);
         v.quad(v.mouseX - 60, v.mouseY - 70, v.mouseX - 10, v.mouseY - 50, v.mouseX,
                 v.mouseY, v.mouseX - 40, v.mouseY - 10);
         v.quad(v.mouseX + 60, v.mouseY - 70, v.mouseX + 10, v.mouseY - 50, v.mouseX,
                 v.mouseY, v.mouseX + 40, v.mouseY - 10);
-        v.fill(c, 255, 255);
+        v.fill(v.hueShift(c), 255, 255);
         v.quad(v.mouseX - 60, v.mouseY + 40, v.mouseX - 40, v.mouseY, v.mouseX,
                 v.mouseY, v.mouseX - 18, v.mouseY + 30);
         v.quad(v.mouseX + 60, v.mouseY + 40, v.mouseX + 40, v.mouseY, v.mouseX,
