@@ -7,7 +7,10 @@ import C21503599.MyFirstChange;
 import c21348423.AdriansVisual;
 import c21383126.JenniferVisuals;
 import c21415904.SarahVisual;
+import controlP5.ControlP5;
+import controlP5.Textarea;
 import ddf.minim.analysis.BeatDetect;
+import infiniteforms.City;
 import infiniteforms.Life;
 import infiniteforms.Models1;
 import infiniteforms.Tadpole;
@@ -15,6 +18,7 @@ import oopBaddies.Airish;
 import oopBaddies.Anne;
 import oopBaddies.Mena;
 import oopBaddies.paris;
+import processing.core.PFont;
 import themidibus.*; //Import the library
 
 public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListener {
@@ -36,10 +40,25 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         size(1000, 1000, P3D);
     }
 
+    public static AudioGarden instance;
+
+    public StringBuilder console = new StringBuilder();
+
+    public static void println(String o)
+    {
+        instance.console.append(o + "\n");
+        System.out.println(o);
+    }
+
     public void setup() {
-        colorMode(HSB, 360, 100, 100);
+
+        println("Hello");
+
+        colorMode(HSB);
         startMinim();
         rectMode(CENTER);
+
+        cp5 = new ControlP5(this);
 
         MidiBus.list();
         myBus = new MidiBus(this, 1, 4);
@@ -54,13 +73,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
 
-        // LeftHeart lh;
-        // RightHeart rh;  
-        // JiaHeart jh;
-        // LauraSun ls;
-        // ManarBrain mb;
         
-        // visuals.add(new MyFirstChange(this)); not very exciting
+        
+        // visuals.add(new MyFirstChange(this));
+        visuals.add(new Tadpole(this));
+        visuals.add(new City(this));
+
         visuals.add(new Models1(this, "tudub.obj"));
         visuals.add(new Models1(this, "thc molecule.obj"));
 
@@ -71,11 +89,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visuals.add(new ManarBrain(this));                
 
         visuals.add(new JiaHeart(this));
-        visuals.add(new Tadpole(this));    
+            
         visuals.add(new LauraSun(this));
         visuals.add(new paris(this));
         visuals.add(new Mena(this));
-        //visuals.add(new Airish(this));
+        visuals.add(new Airish(this));
         
         visuals.add(new Spiral(this));
         
@@ -101,11 +119,30 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         visuals.add(new SarahVisual(this));
 
-        Collections.shuffle(visuals);
+        //Collections.shuffle(visuals);
 
         background(0);
         change(0);
+
+        // String[] fonts = PFont.list();
+
+        // for(String s:fonts)
+        // {
+        //     println(s);
+        // }
+
+        myTextarea = cp5.addTextarea("txt")
+                  .setPosition(50,50)
+                  .setSize(1000,400)
+                  .setColor(color(128, 255, 255))
+                  .setFont(createFont("Hyperspace Bold.otf",30))
+                  .setLineHeight(24)
+                  ;
+  
     }
+
+    ControlP5 cp5;
+    Textarea myTextarea;
 
     void resetDefaults()
     {
@@ -118,7 +155,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public AudioGarden() {
         super(1024, 44100, 0.5f);
-
+        instance = this;
+        
         resetDefaults();
         
     }
@@ -127,12 +165,15 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void noteOn(int channel, int pitch, int velocity) {
         // Receive a noteOn
-        println();
-        println("Note On:");
-        println("--------");
-        println("Channel:" + channel);
-        println("Pitch:" + pitch);
-        println("Velocity:" + velocity);
+        println("N+: " + " CH: " + channel +  " PI: " + pitch + " VE: " + velocity);        
+        // SPecial codes
+        if (pitch == 51)
+        {
+            showConsole = !showConsole;
+            println("CON:" + showConsole);   
+            myTextarea.setVisible(showConsole);
+            return;
+        }
 
         int newVisual = pitch % visuals.size();
         change(newVisual);
@@ -140,37 +181,23 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void noteOff(int channel, int pitch, int velocity) {
         // Receive a noteOff
-        println();
-        println("Note Off:");
-        println("--------");
-        println("Channel:" + channel);
-        println("Pitch:" + pitch);
-        println("Velocity:" + velocity);
+        println("N-: " + " CH: " + channel, " PI: " + pitch + "VE: " + velocity);  
     }
 
-    public void change(int into) {
-        println("Changing to: " + into);
-        if (whichVisual >= 0 && whichVisual < visuals.size()) {
-            visuals.get(whichVisual).exit();
-        }
-        whichVisual = into;
+    public void change(int into) {        
         if (into >= 0 && into < visuals.size()) {
-            visuals.get(whichVisual).exit();
+            if (whichVisual >= 0 && whichVisual < visuals.size()) {
+                visuals.get(whichVisual).exit();
+            }            
             whichVisual = into;
             visuals.get(whichVisual).enter();
-        }
+            println("ACT: " + whichVisual + ": " + visuals.get(whichVisual).getClass().getName());
+        }            
     }
 
     public void controllerChange(int channel, int number, int value) {
         // Receive a controllerChange
-        println();
-        println("Controller Change:");
-        println("--------");
-        println("Channel:" + channel);
-        println("Number:" + number);
-        println("Value:" + value);
-
-        println(value);
+        println("CC: " + " CH: " + channel, " NUM: " + number + "VA: " + value);  
 
         boolean clockWise = (value < 100);
 
@@ -189,22 +216,22 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (number == 10) {
             base = max(clockWise ? base + 0.01f : base - 0.1f, 0.01f);
-            println("base : " + base);
+            println("BA : " + base);
         }
 
         if (number == 114) {
             sensitivity = max(clockWise ? sensitivity + 0.01f : sensitivity - 0.01f, 0);
-            println("sensitivity : " + sensitivity);
+            println("SE : " + sensitivity);
         }
         if (number == 74) {
             trails = min(max(clockWise ? trails + 1f : trails - 1f, 0), 40);
-            println("trails : " + trails);
+            println("TR : " + trails);
         }
 
         if (number == 71) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             hueShift = clockWise ? hueShift + 5 : hueShift - 5;
-            println("hue shift : " + hueShift);
+            println("HS : " + hueShift);
         }
 
         if (number == 19) {
@@ -222,7 +249,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         change(newVisual);
     }
 
-    
+    boolean showConsole = true;
 
     public void draw() {
 
@@ -252,8 +279,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         pushMatrix();
         pushStyle();
         visuals.get(whichVisual).render(frameCount); // renders the currently loaded visual
-        popStyle();
+        popStyle();        
         popMatrix();
+
+        if (showConsole)
+        {
+            myTextarea.setVisible(true);
+            myTextarea.setText(console.toString());
+            myTextarea.scroll(1.0f);
+        }
+
         //hueShift();
     }
 

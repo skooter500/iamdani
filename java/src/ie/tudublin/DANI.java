@@ -92,8 +92,8 @@ public class DANI {
 
     public String[] writeSonnet()
     {
-        String[] sonnet = new String[14];
-        for(int i = 0 ; i < 14 ; i ++)
+        String[] sonnet = new String[10];
+        for(int i = 0 ; i < 10 ; i ++)
         {
             String line = "";
             int start = (int) v.random(0, model.size());
@@ -114,7 +114,7 @@ public class DANI {
                 }
             }
             sonnet[i] = line;
-            v.println(line);            
+            //v.println(line);            
         }
         return sonnet;
     }
@@ -152,21 +152,20 @@ public class DANI {
         }  
         
         if (v.frameCount % 5 == 0)
+        {
+            ch ++;
+            if (ch == sonnet[line].length())
             {
-                ch ++;
-                if (ch == sonnet[line].length())
-                {
+                if (line < sonnet.length - 1)
+                {    
                     ch = 0;
                     line ++;
-                    if (line == sonnet.length)
-                    {
-                        if (t != null)
-                        {
-                            t.enter();
-                        }
-                        enter();
-                    }
                 }
-            }   
+                else
+                {
+                    ch --;
+                }
+            }
         }
 	}
+}

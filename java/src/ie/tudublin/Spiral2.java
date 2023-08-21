@@ -20,7 +20,7 @@ public class Spiral2 extends Poly{
             float c = PApplet.map(i, 0, v.getAudioBuffer().size() , 0, 255);
             float n = v.noise(xoff) * v.width;
             xoff = v.getSmoothedAmplitude() *3;
-            v.stroke(c,255,255);
+            v.stroke(v.hueShift(c),255,255);
             theta = PApplet.map(i, 0, v.getAudioBuffer().size(),0 , PApplet.TWO_PI*15);
             radius = PApplet.map(i, 0, v.getAudioBuffer().size(), 100, 1000);
             float x = PApplet.sin(theta) * radius; // calculates the x co-ordinate of the next circle within the spiral
