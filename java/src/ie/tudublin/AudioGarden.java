@@ -35,8 +35,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        //fullScreen(P3D, 0);
-        size(1000, 1000, P3D);
+        fullScreen(P3D, 0);
+        //size(1000, 1000, P3D);
     }
 
     public static AudioGarden instance;
@@ -81,8 +81,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new Cubes(this));
         visions.add(new Bloom(this));
+        visions.add(new Cubes(this));
+        
         visions.add(new SinWaves(this));  
         visions.add(new Spiral(this));
         visions.add(new IFCubes(this, 2, 150, -600)); 

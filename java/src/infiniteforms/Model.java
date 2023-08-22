@@ -71,7 +71,7 @@ public class Model
     if (rotate)
       v.rotateY(-theta * 0.01f);
     // v.rotateZ(0.2f + v.sin(theta) * 0.2f);
-    theta += v.speed;
+    theta += (v.speed * 0.2f) ;
     c += v.speed * 100 * v.getAmplitude();
     v.scale(smoothedBoxSize * 4);
     v.shape(s);

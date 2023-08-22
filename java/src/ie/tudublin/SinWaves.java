@@ -45,15 +45,15 @@ public class SinWaves extends Poly{
                 float c = v.hueShift((offsetX + offsetY + offsetZ + v.frameCount) % 255);
                 //p.fill(c, 255, 255);
                 v.fill(c, 255, 255);
-                v.noStroke();
+                v.stroke(v.hueShift(c + 128));
                 v.box(boxSize);
                 v.popMatrix();
             }
             }
         }
-        angle += amp*20 * v.speed;//syncs the sin wave change for box size with the amplitude of song.
+        angle += amp*10 * v.speed;//syncs the sin wave change for box size with the amplitude of song.
         //angle+=2;
-        v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0f, 0f, 1f, 0f);  
+        // v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0f, 0f, 0.1f, 0f);  
     }
 
     
