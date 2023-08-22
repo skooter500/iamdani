@@ -69,10 +69,10 @@ public class Cubes extends Poly
         float angle = 0;
         
         //after 5 seconds the main box gets smaller until its 300 at a rate of 0.008f
-        if(v.millis() - start > 5000)
+        if(v.millis() - start > 5000 * v.speed)
         {
             //starts big and gets smaller after 5 seconds
-            sizeBox = PApplet.lerp(sizeBox, 300, 0.008f);
+            sizeBox = PApplet.lerp(sizeBox, 300, 0.008f * v.speed);
         }
         //cubes rotataing on diff angles to give effect they are enveloped in eachother
         for(int i= 0; i < 70; i++)
@@ -92,6 +92,6 @@ public class Cubes extends Poly
             //count for colour map
             count+=10;
         }
-        angle+=0.01;         
+        angle+=0.01 * v.speed;         
     } 
 }
