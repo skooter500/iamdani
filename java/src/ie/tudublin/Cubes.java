@@ -38,7 +38,7 @@ public class Cubes extends Poly
         
         for(int i = 0; i < 200;i++)
         {
-            v.push();
+            v.push();        
             v.rotate(PApplet.sin(v.frameCount+i)*100);
             //colour map
             float c = PApplet.map(count, 0, v.getAudioBuffer().size() , 100, 400);
@@ -48,13 +48,13 @@ public class Cubes extends Poly
             v.noFill();
             //background circles
             //+i causes circles to move outwards up to 400
-            v.circle(200, 200+i, 1);
+            v.circle(200, 200+i * v.speed, 1);
             //Rectangles with spaces between them to give effects.
             //getsmoothed causes them to beat out in width to the music
-            v.rect(100-i*5, 100, i, 0+i*v.getSmoothedAmplitude()*10);
-            v.rect(100-i*5, 100, i, 5+i*v.getSmoothedAmplitude()*10);
-            v.rect(100-i*5, 100, i, 10+i*v.getSmoothedAmplitude()*10);
-            v.rect(100-i*5, 100, i, 15+i*v.getSmoothedAmplitude()*10);
+            v.rect(100-i*5 * v.speed, 100, i, 0+i*v.getSmoothedAmplitude()*10);
+            v.rect(100-i*5 * v.speed, 100, i, 5+i*v.getSmoothedAmplitude()*10);
+            v.rect(100-i*5 * v.speed, 100, i, 10+i*v.getSmoothedAmplitude()*10);
+            v.rect(100-i*5 * v.speed, 100, i, 15+i*v.getSmoothedAmplitude()*10);
             v.pop();
             count++;
         }
@@ -69,7 +69,7 @@ public class Cubes extends Poly
         float angle = 0;
         
         //after 5 seconds the main box gets smaller until its 300 at a rate of 0.008f
-        if(v.millis() - start > 5000 * v.speed)
+        if(v.millis() - start > 5000)
         {
             //starts big and gets smaller after 5 seconds
             sizeBox = PApplet.lerp(sizeBox, 300, 0.008f * v.speed);
@@ -86,7 +86,7 @@ public class Cubes extends Poly
             v.rotateY(angle + pos *i*PApplet.sin(angle)+10);
             v.rotateX(angle/2 + pos*i+10);
             //rotate allows for movement
-            v.rotate(PApplet.radians(v.frameCount));
+            v.rotate(PApplet.radians(v.frameCount) * v.speed);
             v.box(sizeBox);
             v.popMatrix();
             //count for colour map
