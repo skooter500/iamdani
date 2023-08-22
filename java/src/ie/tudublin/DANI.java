@@ -154,7 +154,7 @@ public class DANI extends Poly {
 
         float c = v.hueShift(99);
 
-        v.fill(c, 255, 255);
+        v.fill(c, 255, 255, v.alp);
         float cx = v.width;
         float cy = v.height / 2;
 

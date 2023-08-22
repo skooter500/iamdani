@@ -38,7 +38,7 @@ public class IFCube
     if (useAmplitude)
     {
       float amp = v.getAmplitude();
-      float boxSize = size + (amp * 300); 
+      float boxSize = size + (amp * 1000); 
       smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f);                 
       v.box(smoothedBoxSize);
     }
@@ -46,7 +46,7 @@ public class IFCube
     {
         v.box(size);
     }
-    angle+=0.01f;
+    angle+=0.01f * v.speed;
     v.popMatrix();
   }
   
