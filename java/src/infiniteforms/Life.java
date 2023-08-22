@@ -227,6 +227,7 @@ public class Life extends Poly
         {
             float newC = v.hueShift(board[row][col]);
           v.fill(newC, 255, 255);
+          v.stroke(0);
           v.rect(col * cellWidth, row * cellWidth, cellWidth, cellWidth);
         }
       }

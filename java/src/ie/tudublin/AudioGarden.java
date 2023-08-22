@@ -11,6 +11,7 @@ import controlP5.ControlP5;
 import controlP5.Textarea;
 import ddf.minim.analysis.BeatDetect;
 import infiniteforms.City;
+import infiniteforms.IFCubes;
 import infiniteforms.Life;
 import infiniteforms.Models1;
 import infiniteforms.Nematode;
@@ -23,7 +24,7 @@ import themidibus.*; //Import the library
 
 public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListener {
 
-    ArrayList<Poly> visuals = new ArrayList<Poly>();
+    ArrayList<Poly> visions = new ArrayList<Poly>();
 
     // Poly play;
     int previousVisual = 0;
@@ -36,7 +37,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void settings() {
         fullScreen(P3D, 0);
-        // /size(1000, 1000, P3D);
+        //size(1000, 1000, P3D);
     }
 
     public static AudioGarden instance;
@@ -61,8 +62,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void setup() {
 
-        println("Hello I aM DANI");
-        println("I am alive");
+        println("I aM DANI");
         
         colorMode(HSB);
         startMinim();
@@ -82,44 +82,55 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visuals.add(new Bands(this, 200, 0, 0, 0));
-        visuals.add(new Mena(this));
-        visuals.add(new Airish(this));
-        visuals.add(new paris(this));
-        visuals.add(new Spiral(this));
-        visuals.add(new AdriansVisual(this));
-        visuals.add(new Cubesquared2(this));
-        visuals.add(new SarahVisual(this));
-        visuals.add(new Cubes(this));
+
+        visions.add(new Models1(this, "eye.obj"));
+
+        visions.add(new DANI(this, "captainb.txt"));
+        visions.add(new Models1(this, "audio garden 2.obj"));
+        visions.add(new Models1(this, "msx.obj"));
+        visions.add(new IFCubes(this, 2, 150, -600));  
+        visions.add(new IFCubes(this,7, 250, -600));  
+        visions.add(new IFCubes(this,30, 150, -400));
+        visions.add(new Airish(this));
+        visions.add(new Mena(this));
+        visions.add(new Bands(this, 200, 0, 0, 0));
+        
+        visions.add(new Airish(this));
+        visions.add(new paris(this));
+        visions.add(new Spiral(this));
+        visions.add(new AdriansVisual(this));
+        visions.add(new Cubesquared2(this));
+        visions.add(new SarahVisual(this));
+        visions.add(new Cubes(this));
         
         
         //visuals.add(new kalidascope(this)); // Not sure
-        visuals.add(new JenniferVisuals(this));
-        visuals.add(new Models1(this, "msx.obj"));
-        visuals.add(new SinWaves(this));
+        visions.add(new JenniferVisuals(this));
+        visions.add(new Models1(this, "msx.obj"));
+        visions.add(new SinWaves(this));
 
 
-        visuals.add(new LauraSun(this));
-        visuals.add(new DANI(this, "captainb.txt"));
-        visuals.add(new Nematode(this));
-        visuals.add(new Bloom(this));
-        visuals.add(new Models1(this, "audio garden 1.obj"));
-        visuals.add(new Models1(this, "eden.obj"));
-        visuals.add(new Models1(this, "tudub.obj"));
-        visuals.add(new Models1(this, "infiniteForms.obj"));
-        visuals.add(new Models1(this, "audio garden 2.obj"));
+        visions.add(new LauraSun(this));
+        visions.add(new DANI(this, "captainb.txt"));
+        visions.add(new Nematode(this));
+        visions.add(new Bloom(this));
+        
+        visions.add(new Models1(this, "eden.obj"));
+        visions.add(new Models1(this, "tudub.obj"));
+        visions.add(new Models1(this, "infiniteForms.obj"));
+        
         // visuals.add(new Models1(this, "thc molecule.obj"));
 
         
         
-        visuals.add(new City(this));
-        visuals.add(new Life(this, 2, 1000));
-        visuals.add(new Life(this, 1, 1000));
-        visuals.add(new Life(this, 0, 1000));
+        visions.add(new City(this));
+        visions.add(new Life(this, 2, 1000));
+        visions.add(new Life(this, 1, 1000));
+        visions.add(new Life(this, 0, 1000));
         
-        visuals.add(new ManarBrain(this));  
-        visuals.add(new Models1(this, "eden.obj"));
-        visuals.add(new ManarBrain(this));  
+        visions.add(new ManarBrain(this));  
+        visions.add(new Models1(this, "eden.obj"));
+        visions.add(new ManarBrain(this));  
         
         
         // visuals.add(new MyFirstChange(this));
@@ -196,7 +207,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         trails = 10;
         sensitivity = 1.0f;
         base = 0.3f;
-        speed = 1;
+        speed = 1.0f;
         hueShift = 0;
     }
 
@@ -208,12 +219,25 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         
     }
 
-    
-
     public void noteOn(int channel, int pitch, int velocity) {
         // Receive a noteOn
         println("N+: " + " CH: " + channel +  " PI: " + pitch + " VE: " + velocity);        
         // SPecial codes
+
+        if (pitch == 49)
+        {
+            change(whichVisual + 1);
+            println("Next");
+            return;
+        }
+
+        if (pitch == 41)
+        {
+            change(whichVisual - 1);
+            println("Prev");
+            return;
+        }
+
         if (pitch == 51)
         {
             showConsole = !showConsole;
@@ -229,7 +253,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         if (pitch == 42)
         {
             println("restart");
-            visuals.get(whichVisual).enter();
+            visions.get(whichVisual).enter();
             return;
         }
 
@@ -240,7 +264,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
 
-        int newVisual = pitch % visuals.size();
+        int newVisual = pitch % visions.size();
         change(newVisual);
     }
 
@@ -249,16 +273,22 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println("N-: " + " CH: " + channel, " PI: " + pitch + " VE: " + velocity);  
     }
 
-    public void change(int into) {        
-        if (into >= 0 && into < visuals.size()) {
-            if (whichVisual >= 0 && whichVisual < visuals.size()) {
-                visuals.get(whichVisual).exit();
-            }            
-            whichVisual = into;
-            visuals.get(whichVisual).enter();
-            println("ACT: " + whichVisual + ": " + visuals.get(whichVisual).getClass().getName());
+    public void change(int into) 
+    {    
+        if (into < 0)
+        {
+            into = visions.size() + into;
+        }
+        into = into % visions.size();
+        if (whichVisual >= 0 && whichVisual < visions.size()) {
+            visions.get(whichVisual).exit();
         }            
+        whichVisual = into;
+        visions.get(whichVisual).enter();
+        println("ACT: " + whichVisual + ": " + visions.get(whichVisual).getClass().getName());         
     }
+
+    public float alp = 255;
 
     public void controllerChange(int channel, int number, int value) {
         // Receive a controllerChange
@@ -267,16 +297,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         boolean clockWise = (value < 100);
 
         if (number == 7) {
-            int newVisual = whichVisual;
-            if (clockWise)
-                newVisual = (newVisual + 1) % visuals.size();
-            else {
-                newVisual--;
-                if (newVisual < 0) {
-                    newVisual = visuals.size() - 1;
-                }
-            }
-            change(newVisual);
+            speed = min(max(clockWise ? speed + 0.01f : speed - 0.1f, 0.1f), 2);
+            println("SPE: " + speed);
         }
 
         if (number == 10) {
@@ -285,25 +307,53 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
 
         if (number == 114) {
-            sensitivity = max(clockWise ? sensitivity + 0.01f : sensitivity - 0.01f, 0);
-            println("MUL : " + sensitivity);
+            sensitivity = max(clockWise ? sensitivity + 0.1f : sensitivity - 0.1f, 0);
+            println("MUL: " + sensitivity);
         }
         if (number == 74) {
-            trails = min(max(clockWise ? trails + 1f : trails - 1f, 0), 40);
-            println("BLA: " + trails);
+            //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
+            hueShift = clockWise ? hueShift + 0.1f : hueShift - 0.1f;
+            println("HUE: " + hueShift);
         }
 
         if (number == 18) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
-            hueShift = clockWise ? hueShift + 5 : hueShift - 5;
-            println("HUE_SH: " + hueShift);
+            hueShift = clockWise ? hueShift + 5f : hueShift - 5f;
+            println("HUE: " + hueShift);
+        }
+
+        if (number == 19) {
+            trails = min(max(clockWise ? trails + 1f : trails - 1f, 0), 40);
+            println("BLA: " + trails);
         }
 
         if (number == 71) {
-            speed = min(max(clockWise ? speed + 0.2f : speed - 0.2f, 0), 10);
-            println("SPE: " + speed);
+            alp = min(max(clockWise ? alp + 1f : alp - 1f, 0), 255);
+            println("APL: " + alp);
         }
+        if (number == 76) {
+            xRotation = clockWise ? xRotation + 0.01f : xRotation - 0.01f;
+            println("X: " + xRotation);
+        }
+        if (number == 16) {
+            zRotation = clockWise ? zRotation + 0.01f : zRotation - 0.01f;
+            println("APL: " + zRotation);
+        }
+        // int newVisual = whichVisual;
+        //     if (clockWise)
+        //         newVisual = (newVisual + 1) % visions.size();
+        //     else {
+        //         newVisual--;
+        //         if (newVisual < 0) {
+        //             newVisual = visions.size() - 1;
+        //         }
+        //     }
+        //     change(newVisual);        
     }
+
+    public float xRotation = 0;
+    public float zRotation = 0;
+
 
     public void keyPressed() {
         int newVisual = keyCode - '0';
@@ -347,7 +397,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         pushMatrix();
         pushStyle();
-        visuals.get(whichVisual).render(frameCount); // renders the currently loaded visual
+        visions.get(whichVisual).render(frameCount); // renders the currently loaded visual
         popStyle();        
         popMatrix();
 

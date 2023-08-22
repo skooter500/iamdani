@@ -36,7 +36,8 @@ public class Bands extends Poly {
     for(int i = 0 ; i < positions.length ; i ++)
     {
       v.pushMatrix();
-      v.stroke(v.map(i, 0, positions.length, 0, 255), 255, 255);
+      float c = v.map(i, 0, positions.length, 0, 255); 
+      v.stroke(v.hueShift(c), 255, 255);
       v.noFill();
       v.strokeWeight(2);
       float base = 40;
@@ -46,9 +47,9 @@ public class Bands extends Poly {
       v.box(base, base, boxSize);
       v.popMatrix();
     }
-    rot += v.speed * v.getAmplitude();
+    rot += v.speed * v.getAmplitude() * 0.01f;
     v.popMatrix();
-    v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0f, 0f, 1f, 0f);          
+    v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0f, 0f, 0.01f, 0f);          
     
   }
 }

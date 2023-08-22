@@ -15,7 +15,7 @@ public class Mena extends Poly {
     }
 
     // varaible for rocket
-    int y = 700;
+    int y = 1100;
 
     public void render()
     // start of the render
@@ -37,38 +37,38 @@ public class Mena extends Poly {
 
         float color = v.hueShift(217);
     
-        v.fill(color, 255, 255);
-        v.noStroke();
+        // v.fill(color, 255, 255);
+        // v.noStroke();
 
-        // create the moon and matching the beat of the moon
-        v.ellipse(v.width + 200, v.height + 100 , 300 + (smoothedavg*600) , 300 + (smoothedavg*600));
+        // // create the moon and matching the beat of the moon
+        // v.ellipse(v.width + 200, v.height + 100 , 300 + (smoothedavg*600) , 300 + (smoothedavg*600));
 
-        //draw a house
-        v.fill(v.hueShift(173), 255, 255);
-        v.rect(100, 600, 300, 300);
+        // //draw a house
+        // v.fill(v.hueShift(173), 255, 255);
+        // v.rect(100, 600, 300, 300);
 
-        //draw the roof
-        v.fill(v.hueShift(144), 255, 255);
-        v.triangle(100, 600, 250, 400, 400, 600);
-
-
-        // draw the window 
-        v.fill(v.hueShift(6), 255, 255);
-        v.rect(150, 656, 40, 50); // making the first window
-        v.rect(300, 656, 40, 50); // making the second window
-
-        v.fill(v.hueShift(87), 255, 255);
-        v.rect(200, 800, 100, 200);
-
-        // draw the door 
-        v.fill(v.hueShift(13), 255, 255);
-        v.rect(200, 800, 30, 100);
+        // //draw the roof
+        // v.fill(v.hueShift(144), 255, 255);
+        // v.triangle(100, 600, 250, 400, 400, 600);
 
 
-        // draw the grass
-        v.fill(v.hueShift(333), 255, 255);
-        v.noStroke(); // remove the stroke
-        v.rect(0, 900, 2000 ,120);     
+        // // draw the window 
+        // v.fill(v.hueShift(6), 255, 255);
+        // v.rect(150, 656, 40, 50); // making the first window
+        // v.rect(300, 656, 40, 50); // making the second window
+
+        // v.fill(v.hueShift(87), 255, 255);
+        // v.rect(200, 800, 100, 200);
+
+        // // draw the door 
+        // v.fill(v.hueShift(13), 255, 255);
+        // v.rect(200, 800, 30, 100);
+
+
+        // // draw the grass
+        // v.fill(v.hueShift(333), 255, 255);
+        // v.noStroke(); // remove the stroke
+        // v.rect(0, 900, 2000 ,120);     
 
          // draw a rocket
          v.translate(v.CENTER, v.CENTER);
@@ -87,47 +87,47 @@ public class Mena extends Poly {
          v.ellipse(0, 80, 40, 20); // Draw the engine of the rocket
         
         // move the rocket
-        y--;
+        y-= v.speed;
 
         if(y < 0){
-            y = 700;
+            y = 1100;
         }
 
-        //draw a street lights near the house
-        v.translate(200, 595); // move the street light the bottom of the screen
-        v.fill(v.hueShift(17763), 255, 255);
-        v.rect(350, 100, 20, 200);
-        v.ellipse(360, 90, 40+ (smoothedavg*200), 40); // make the circle of the light which will match the beat of the music
+        // //draw a street lights near the house
+        // v.translate(200, 595); // move the street light the bottom of the screen
+        // v.fill(v.hueShift(17763), 255, 255);
+        // v.rect(350, 100, 20, 200);
+        // v.ellipse(360, 90, 40+ (smoothedavg*200), 40); // make the circle of the light which will match the beat of the music
         
-        v.fill(v.hueShift(1723), 255, 255);
-        v.ellipse(360, 90, 20+ (smoothedavg*300), 20); // make the circle of the light which will match the beat of the music
-        v.strokeWeight(3);
-        v.fill(v.hueShift(3333), 255, 255);
-        v.line(345, 90, 375, 90);
+        // v.fill(v.hueShift(1723), 255, 255);
+        // v.ellipse(360, 90, 20+ (smoothedavg*300), 20); // make the circle of the light which will match the beat of the music
+        // v.strokeWeight(3);
+        // v.fill(v.hueShift(3333), 255, 255);
+        // v.line(345, 90, 375, 90);
 
-        v.fill(v.hueShift(13), 255, 255);
-        v.noStroke(); 
+        // v.fill(v.hueShift(13), 255, 255);
+        // v.noStroke(); 
   
-        // Draw the pond
-        v.ellipse(1000, 400, 450+ (smoothedavg*600), 200); // draw the pond of the water
+        // // Draw the pond
+        // v.ellipse(1000, 400, 450+ (smoothedavg*600), 200); // draw the pond of the water
 
-        v.fill(v.hueShift(172223), 255, 255);
-        v.ellipse(750, 350, 30+(smoothedavg*600) , 30); // draw a small rock
-        v.ellipse(1250, 350, 40+ (smoothedavg*600), 40); // draw a larger rock
-        v.ellipse(1400, 380, 60+ (smoothedavg*600), 60); // draw a medium rock
+        // v.fill(v.hueShift(172223), 255, 255);
+        // v.ellipse(750, 350, 30+(smoothedavg*600) , 30); // draw a small rock
+        // v.ellipse(1250, 350, 40+ (smoothedavg*600), 40); // draw a larger rock
+        // v.ellipse(1400, 380, 60+ (smoothedavg*600), 60); // draw a medium rock
         
-        // drawing a bigger version of the street light
-        v.fill(v.hueShift(87), 255, 255);
-        v.rect(1500, 100, 20, 200); // draw the pole of the street light
+        // // drawing a bigger version of the street light
+        // v.fill(v.hueShift(87), 255, 255);
+        // v.rect(1500, 100, 20, 200); // draw the pole of the street light
         
-        // drawing the head of the street light
-        v.fill(v.hueShift(1223), 255, 255);
-        v.ellipse(1500, 80, 80+(smoothedavg*200), 80); // draw the head of the street light
+        // // drawing the head of the street light
+        // v.fill(v.hueShift(1223), 255, 255);
+        // v.ellipse(1500, 80, 80+(smoothedavg*200), 80); // draw the head of the street light
         
-        // Draw the lamp light
-        v.fill(v.hueShift(123), 255, 255);
-        v.ellipse(1500, 80, 50+(smoothedavg*200), 50);
-        v.stroke(255, 255, 204); // set the color stroke to yellow
+        // // Draw the lamp light
+        // v.fill(v.hueShift(123), 255, 255);
+        // v.ellipse(1500, 80, 50+(smoothedavg*200), 50);
+        // v.stroke(255, 255, 204); // set the color stroke to yellow
 
  
     } // end of the render

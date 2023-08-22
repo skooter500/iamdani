@@ -10,7 +10,7 @@ public class Model
   float smoothedBoxSize = 0;
   float angle = 0;
   float weight = 5;
-  float size = 30;
+  float size = 10;
   //myObject obj;
   float theta = 0;
 
@@ -44,12 +44,12 @@ public class Model
     col1 = (col1 + colorOffset) % 256;
     col2 = (col2 + colorOffset) % 256;
     
-    col1 = v.hueShift(col1);
-    col2 = v.hueShift(col2);
+    col1 = v.round(v.hueShift(col1));
+    col2 = v.round(v.hueShift(col2));
 
     v.fill(
       col1
-      , 255, 255);
+      , 255, 255, v.alp);
     v.stroke(
       col2
       , 255, 255);
@@ -59,14 +59,19 @@ public class Model
     
     //strokeWeight(weight);
     float boxSize = size + (v.getAmplitude() * 30); 
-    smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f);
+    smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.speed);
     //scale(1);
-    v.rotateX(-v.HALF_PI);
-    v.rotateZ(v.PI);
+
+    v.rotateX(-v.HALF_PI + v.xRotation);
+    v.rotateZ(v.PI + v.zRotation);
+    //v.rotateX(v.xRotation);
+    // /v.rotateZ(v.zRotation);
+    
+    //v.rotateY(-theta * 0.01f);
     // v.rotateZ(0.2f + v.sin(theta) * 0.2f);
     theta += v.speed;
     c += v.speed * 100 * v.getAmplitude();
-    v.scale(smoothedBoxSize * 2);
+    v.scale(smoothedBoxSize * 4);
     v.shape(s);
     v.popMatrix();
 

@@ -80,7 +80,7 @@ public class paris extends Poly {
 
     v.noStroke();
     v.fill(v.hueShift(180), 255, 255);
-    v.frameRate(15);
+    //v.frameRate(15);
 
     // wave movement setting
 

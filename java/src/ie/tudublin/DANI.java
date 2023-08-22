@@ -89,11 +89,37 @@ public class DANI extends Poly {
     }
 
     String[] sonnet;
+
+    public String generateName()
+    {
+        String line = "";
+        int start = (int) v.random(0, model.size());
+        Word w = model.get(start);
+        for(int j = 0 ; j < 2 ; j ++)
+        {            
+            line += w.getWord() + " ";
+
+            if (w.follows.size() > 0)
+            {
+                int next = (int) v.random(0, w.follows.size());
+                Follow f = w.follows.get(next);
+                w = findWord(f.word);
+            }
+            else
+            {
+                break;
+            }
+        }
+        return line;
+    } 
     
     public String[] writeSonnet()
     {
-        String[] sonnet = new String[12];
-        for(int i = 0 ; i < 12 ; i ++)
+        String[] sonnet = new String[13];
+
+        sonnet[0] = generateName();
+        sonnet[1] = " ";
+        for(int i = 2 ; i < 12 ; i ++)
         {
             String line = "";
             int start = (int) v.random(0, model.size());
@@ -116,11 +142,10 @@ public class DANI extends Poly {
             sonnet[i] = line;
             //v.println(line);            
         }
+        sonnet[12] = " - DANI ";
         return sonnet;
     }
     
-
-
 	float off = 0;
 
 	public void render() 
@@ -130,12 +155,12 @@ public class DANI extends Poly {
         float c = v.hueShift(99);
 
         v.fill(c, 255, 255);
-        float cx = v.width / 2;
+        float cx = v.width;
         float cy = v.height / 2;
 
-        v.translate(cx / 4, cy/4);
+        v.translate(cx / 3, cy/3);
 		for(int i = 0 ; i <= line ; i ++)
-        {
+        { 
             float h = 50;
             if (i != line)
             {
@@ -151,15 +176,13 @@ public class DANI extends Poly {
                     }
                     else
                     {
-                        String s = sonnet[i].substring(0, j);
+                        String s = sonnet[i].substring(0, j);                        
                         v.text(s, 0, i * h);
-                    }
-
-                    
+                    }                    
                 }
             }       
         }  
-        int interV = (int) (11 - v.speed);
+        int interV = (int) (11 - (v.speed * 5));
         if (v.frameCount % interV == 0)
         {
             try

@@ -69,8 +69,8 @@ public class Airish extends Poly {
         } // end if
 
         if (a >= 3) {
-            for (int i = -250; i < 1400; i += 250) {
-                for (j = -250; j < 700; j += 250) {
+            for (int i = -250; i < 1600; i += 250) {
+                for (j = -250; j < 900; j += 250) {
                     v.fill(v.hueShift(193), 255, 255);
                     v.ellipse(250 + i, 250 + j, 100, 100);
                     v.fill(v.hueShift(c), 255, 255);
@@ -107,8 +107,8 @@ public class Airish extends Poly {
         } // end if
 
         if (a >= 2) {
-            for (i = -125; i < 1400; i += 250) {
-                for (j = -125; j < 700; j += 250) {
+            for (i = -125; i < 1700; i += 250) {
+                for (j = -125; j < 900; j += 250) {
                     v.fill(v.hueShift(93), 255, 255);
                     v.ellipse(250 + i, 250 + j, 100, 100);
                     v.fill(v.hueShift(13), 255, 255);
