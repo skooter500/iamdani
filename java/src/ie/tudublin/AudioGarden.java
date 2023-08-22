@@ -81,12 +81,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
+        visions.add(new IFCubes(this, 2, 150, -600)); 
+        
         visions.add(new Bloom(this));
         visions.add(new Cubes(this));
         
         visions.add(new SinWaves(this));  
         visions.add(new Spiral(this));
-        visions.add(new IFCubes(this, 2, 150, -600)); 
         visions.add(new ManarBrain(this));  
         visions.add(new Models1(this, "eye.obj", true));
         visions.add(new Models1(this, "eden.obj", false));
@@ -271,7 +272,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
 
         if (number == 71) {
-            alp = min(max(clockWise ? alp + 1f : alp - 1f, 0), 255);
+            alp = min(max(clockWise ? alp + 5f : alp - 5f, 0), 255);
             println("APL: " + alp);
         }
         if (number == 76) {

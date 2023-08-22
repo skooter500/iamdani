@@ -28,8 +28,8 @@ public class IFCube
     v.pushMatrix();
     v.strokeWeight(2);    
     float c = v.map(v.getSmoothedAmplitude(), 0, 1, 0, 255);
-    c = v.hueShift(c);
-    v.stroke((c + colorOffset) % 255, 255, 255);
+    c = v.hueShift(c + colorOffset);
+    v.stroke(c, 255, 255, v.alp);
     v.translate(position.x, position.y, position.z);       
     
     v.rotateY(angle);
