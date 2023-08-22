@@ -29,7 +29,7 @@ public class IFCubes extends Poly {
       float theta = v.map(i, 0, numCubes, v.HALF_PI, v.TWO_PI + v.HALF_PI);
       float x = v.sin(theta) * radius;
       float y = - v.cos(theta) * radius;
-      cubes[i] = new IFCube(v, x, y, 0.0f);        
+      cubes[i] = new IFCube(v, x + (v.width / 2), y + (v.height / 2), 0.0f);        
     }
     this.z = z;
   }
@@ -44,7 +44,7 @@ public class IFCubes extends Poly {
     col = v.hueShift(col); 
     v.stroke(col, 255, 255);
     v.pushMatrix();    
-    v.camera(0, 0, -z, 0, 0, -1, 0, 1, 0);
+    //v.camera(0, 0, -z, 0, 0, -1, 0, 1, 0);
     //rotateY(theta);   
     //rotateX(theta);    
     for(IFCube c:cubes)
@@ -53,6 +53,6 @@ public class IFCubes extends Poly {
     }    
     v.popMatrix();
     theta+=0.01f;
-    v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0f, 0f, 1f, 0f);
+    //v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0f, 0f, 0.001f, 0f);
   }
 }

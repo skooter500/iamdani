@@ -21,8 +21,7 @@ public class Cubes extends Poly
 
     @Override
     public void render(int ellapsed)
-    {
-        // v.background(0);
+    {        
         v.noStroke();
         v.lights();
         v.smooth();
@@ -44,7 +43,7 @@ public class Cubes extends Poly
             //colour map
             float c = PApplet.map(count, 0, v.getAudioBuffer().size() , 100, 400);
 
-            v.stroke(v.hueShift(c),255,255);
+            v.stroke(v.hueShift(c),255,255, v.alp);
             v.strokeWeight(2);
             v.noFill();
             //background circles
@@ -82,7 +81,7 @@ public class Cubes extends Poly
             //push/pop matrix keeps all the 200 boxes in the same spot
             v.pushMatrix();
             v.translate(v.width/2, v.height/2);
-            v.fill(v.hueShift(c), 255, 255);
+            v.fill(v.hueShift(c), 255, 255, v.alp);
             //rotates boxes on X + Y axis. This way we see the shape on its side. This doesn't move the shape, just positions it
             v.rotateY(angle + pos *i*PApplet.sin(angle)+10);
             v.rotateX(angle/2 + pos*i+10);

@@ -60,7 +60,7 @@ public class Model
     
     //strokeWeight(weight);
     float boxSize = size + (v.getAmplitude() * 30); 
-    smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.speed);
+    smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.speed * 0.2f);
     //scale(1);
 
     v.rotateX(-v.HALF_PI + v.xRotation);

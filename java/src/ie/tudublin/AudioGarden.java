@@ -32,11 +32,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     MidiBus myBus; // The MidiBus
 
-    float trails = 20;
+    float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 0);
-        //size(1000, 1000, P3D);
+        //fullScreen(P3D, 0);
+        size(1000, 1000, P3D);
     }
 
     public static AudioGarden instance;
@@ -81,7 +81,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-
+        visions.add(new Cubes(this));
+        visions.add(new Bloom(this));
+        visions.add(new SinWaves(this));  
+        visions.add(new Spiral(this));
+        visions.add(new IFCubes(this, 2, 150, -600)); 
         visions.add(new ManarBrain(this));  
         visions.add(new Models1(this, "eye.obj", true));
         visions.add(new Models1(this, "eden.obj", false));
@@ -89,7 +93,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new DANI(this, "captainb.txt"));
         visions.add(new Models1(this, "audio garden 2.obj", false));
         visions.add(new Models1(this, "msx.obj", false));
-        visions.add(new IFCubes(this, 2, 150, -600));  
+         
         visions.add(new IFCubes(this,7, 250, -600));  
         visions.add(new IFCubes(this,30, 150, -400));
         visions.add(new Airish(this));
@@ -98,7 +102,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new paris(this));        
         visions.add(new Spiral(this));
         visions.add(new Cubesquared2(this));
-        visions.add(new Cubes(this));
+        
         visions.add(new SarahVisual(this));
         visions.add(new JenniferVisuals(this));
         visions.add(new SinWaves(this));        
@@ -144,11 +148,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     void resetDefaults()
     {
-        trails = 10;
+        ald = 10;
         sensitivity = 1.0f;
         base = 0.3f;
         speed = 1.0f;
         hueShift = 0;
+        alp = 255;
     }
 
     public AudioGarden() {
@@ -167,14 +172,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         if (pitch == 49)
         {
             change(whichVisual + 1);
-            println("Next");
             return;
         }
 
         if (pitch == 41)
         {
             change(whichVisual - 1);
-            println("Prev");
             return;
         }
 
@@ -192,14 +195,14 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (pitch == 42)
         {
-            println("restart");
+            println("STA");
             visions.get(whichVisual).enter();
             return;
         }
 
         if (pitch == 50)
         {
-            println("reset");
+            println("RST");
             resetDefaults();
             return;
         }
@@ -225,7 +228,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }            
         whichVisual = into;
         visions.get(whichVisual).enter();
-        println("ACT: " + whichVisual + ": " + visions.get(whichVisual).getClass().getName());         
+        println("ACT " + whichVisual + ": " + visions.get(whichVisual).getClass().getName());         
     }
 
     
@@ -262,8 +265,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
 
         if (number == 19) {
-            trails = min(max(clockWise ? trails + 1f : trails - 1f, 0), 40);
-            println("BLA: " + trails);
+            ald = min(max(clockWise ? ald + 1f : ald - 1f, 0), 50);
+            println("ALD: " + ald);
         }
 
         if (number == 71) {
@@ -295,8 +298,29 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
 
     public void keyPressed() {
-        int newVisual = keyCode - '0';
-        change(newVisual);
+
+        if (key >= '0' && key <= '9') 
+        {
+            int newVisual = keyCode - '0';
+            change(newVisual);
+        }
+
+        if (keyCode == UP)
+        {
+            change(whichVisual - 1);
+            return;
+        }
+        if (keyCode == DOWN)
+        {
+            change(whichVisual + 1);
+            return;
+        }
+        if (key == ' ')
+        {
+
+        }
+
+
     }
 
     boolean showConsole = true;
@@ -304,12 +328,18 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     public void draw() {
 
         
-        // background(0);
-        colorMode(RGB);
-        blendMode(SUBTRACT);
-        fill(255, trails);
-        rect(0, 0, width * 4, height * 4);
-        blendMode(BLEND);
+        if (ald == 50)
+        {        
+            background(0);
+        }
+        else
+        {
+            colorMode(RGB);
+            blendMode(SUBTRACT);
+            fill(255, ald);
+            rect(0, 0, width * 4, height * 4);
+            blendMode(BLEND);
+        }
         colorMode(HSB);
 
         if (showConsole)
