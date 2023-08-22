@@ -36,6 +36,7 @@ public abstract class Visual extends PApplet
 	}
 
 
+	public float alp = 255;
 	public void startMinim() 
 	{
 		minim = new Minim(this);

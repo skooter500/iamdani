@@ -24,6 +24,7 @@ public class ManarBrain extends Poly
    
     public void draw()
     {
+        p = v;
         p.pushMatrix();//seperating drawBrain function from other functions
         drawBrain();//function to draw the brain
         p.popMatrix();
@@ -237,13 +238,13 @@ public class ManarBrain extends Poly
         for (int i = 0; i < 10; i++)
         {
             float x = p.cos(angle + i * p.TWO_PI / 10) * radius + p.width/2;
-            float y = p.sin(angle + i * p.TWO_PI / 10) * radius + p.height/2.5f;
-            p.stroke(p.hueShift(43), 255, 255);
+            float y = p.sin(angle + i * p.TWO_PI / 10) * radius + p.height/2f;
+            p.stroke(p.hueShift(43), 255, 255, v.alp);
             p.fill(p.hueShift(43), 255, 255);
 
             p.ellipse(x, y, 20, 20);
         }
-        angle += 0.05 * v.speed;//speed of the smaller rotating circles
+        angle += 0.01 * v.speed;//speed of the smaller rotating circles
     }//end function drawCircles
  
     // method that stops the program

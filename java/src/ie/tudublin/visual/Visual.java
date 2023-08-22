@@ -25,6 +25,9 @@ public abstract class Visual extends ie.tudublin.Visual {
         return frameSize;
     }
 
+    
+
+
     /** @return {@link #sampleRate} */
     public int sampleRate() {
         return sampleRate;

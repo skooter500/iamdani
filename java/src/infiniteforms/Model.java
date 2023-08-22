@@ -29,6 +29,7 @@ public class Model
   float c = 0;
 
   public int colorOffset = 0;
+  public boolean rotate = false;
 
   void render()
   {
@@ -52,7 +53,7 @@ public class Model
       , 255, 255, v.alp);
     v.stroke(
       col2
-      , 255, 255);
+      , 255, 255, v.alp);
 
       
     v.translate(position.x, position.y, position.z);       
@@ -67,7 +68,8 @@ public class Model
     //v.rotateX(v.xRotation);
     // /v.rotateZ(v.zRotation);
     
-    //v.rotateY(-theta * 0.01f);
+    if (rotate)
+      v.rotateY(-theta * 0.01f);
     // v.rotateZ(0.2f + v.sin(theta) * 0.2f);
     theta += v.speed;
     c += v.speed * 100 * v.getAmplitude();

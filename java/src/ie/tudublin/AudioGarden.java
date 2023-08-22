@@ -32,8 +32,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     MidiBus myBus; // The MidiBus
 
-    float trails = 10;
-
+    float trails = 20;
 
     public void settings() {
         fullScreen(P3D, 0);
@@ -83,93 +82,34 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
 
-        visions.add(new Models1(this, "eye.obj"));
-
+        visions.add(new ManarBrain(this));  
+        visions.add(new Models1(this, "eye.obj", true));
+        visions.add(new Models1(this, "eden.obj", false));
+        visions.add(new Models1(this, "tudub.obj", false));
         visions.add(new DANI(this, "captainb.txt"));
-        visions.add(new Models1(this, "audio garden 2.obj"));
-        visions.add(new Models1(this, "msx.obj"));
+        visions.add(new Models1(this, "audio garden 2.obj", false));
+        visions.add(new Models1(this, "msx.obj", false));
         visions.add(new IFCubes(this, 2, 150, -600));  
         visions.add(new IFCubes(this,7, 250, -600));  
         visions.add(new IFCubes(this,30, 150, -400));
         visions.add(new Airish(this));
         visions.add(new Mena(this));
-        visions.add(new Bands(this, 200, 0, 0, 0));
-        
-        visions.add(new Airish(this));
-        visions.add(new paris(this));
+        visions.add(new Bands(this, 200, 0, 0, 0));        
+        visions.add(new paris(this));        
         visions.add(new Spiral(this));
-        visions.add(new AdriansVisual(this));
         visions.add(new Cubesquared2(this));
-        visions.add(new SarahVisual(this));
         visions.add(new Cubes(this));
-        
-        
-        //visuals.add(new kalidascope(this)); // Not sure
+        visions.add(new SarahVisual(this));
         visions.add(new JenniferVisuals(this));
-        visions.add(new Models1(this, "msx.obj"));
-        visions.add(new SinWaves(this));
-
-
+        visions.add(new SinWaves(this));        
         visions.add(new LauraSun(this));
-        visions.add(new DANI(this, "captainb.txt"));
         visions.add(new Nematode(this));
         visions.add(new Bloom(this));
         
-        visions.add(new Models1(this, "eden.obj"));
-        visions.add(new Models1(this, "tudub.obj"));
-        visions.add(new Models1(this, "infiniteForms.obj"));
-        
-        // visuals.add(new Models1(this, "thc molecule.obj"));
 
         
-        
-        visions.add(new City(this));
-        visions.add(new Life(this, 2, 1000));
-        visions.add(new Life(this, 1, 1000));
-        visions.add(new Life(this, 0, 1000));
-        
-        visions.add(new ManarBrain(this));  
-        visions.add(new Models1(this, "eden.obj"));
-        visions.add(new ManarBrain(this));  
-        
-        
-        // visuals.add(new MyFirstChange(this));
-        // visuals.add(new Tadpole(this));
-        // visuals.add(new City(this));
-
-        ;
-        
-                      
-
-        // visuals.add(new JiaHeart(this));
-            
-        // visuals.add(new LauraSun(this));
-        // visuals.add(new paris(this));
-        // visuals.add(new Mena(this));
-        // visuals.add(new Airish(this));
-        
-        // 
-        
-        //        
-        // 
-        
-        // 
-        
-        // 
-        // 
-        
-        // visuals.add(new Life(this, 2, 1000));
-        // visuals.add(new Life(this, 1, 1000));
-        // visuals.add(new Life(this, 0, 1000));
-        
-        // 
-        
-        // 
-        // colorMode(HSB, 360, 100, 100);
-        // // 
-        // 
-
-        // 
+        //visuals.add(new Models1(this, "thc molecule.obj"));
+ 
 
         //Collections.shuffle(visuals);
 
@@ -288,8 +228,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println("ACT: " + whichVisual + ": " + visions.get(whichVisual).getClass().getName());         
     }
 
-    public float alp = 255;
-
+    
     public void controllerChange(int channel, int number, int value) {
         // Receive a controllerChange
         println("CC: " + " CH: " + channel + " NUM: " + number + " VA: " + value);  
@@ -297,7 +236,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         boolean clockWise = (value < 100);
 
         if (number == 7) {
-            speed = min(max(clockWise ? speed + 0.01f : speed - 0.1f, 0.1f), 2);
+            speed = min(max(clockWise ? speed + 0.1f : speed - 0.1f, 0.1f), 2);
             println("SPE: " + speed);
         }
 
@@ -312,7 +251,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
         if (number == 74) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
-            hueShift = clockWise ? hueShift + 0.1f : hueShift - 0.1f;
+            hueShift = clockWise ? hueShift + 1f : hueShift - 1f;
             println("HUE: " + hueShift);
         }
 
