@@ -370,7 +370,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         popStyle();        
         popMatrix();
 
-        
+        if (frameCount % 1200 == 0)
+        {
+            println(randomMessages[(int) random(0, randomMessages.length)]);
+        }
 
         //hueShift();
     }
@@ -389,6 +392,19 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         updatePixels();
     }
 
+    String [] randomMessages = {
+        "I am DANI",
+        "I am alive",
+        "the metaverse that can be named is not the metaverse",
+        "smoke weed",
+        "420",
+        "smoke DMT",
+        "smoke DMT",
+        "MSX system version 1.0 Copyright 1985 by microsoft",
+        "speak now or forever hold your peace",
+        "turn on, tune in, and drop out",
+        "god is playing hide and seek within you"
+    };
     
 
 }
