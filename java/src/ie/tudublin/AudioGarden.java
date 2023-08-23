@@ -89,6 +89,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
+        visions.add(new Models1(this, "eye.obj", true));
         visions.add(new Models1(this, "audio garden 2.obj", false));        
         
         visions.add(new LauraSun(this));
@@ -98,7 +99,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new SinWaves(this));  
         visions.add(new Spiral(this));
         visions.add(new ManarBrain(this));  
-        visions.add(new Models1(this, "eye.obj", true));
+        
         visions.add(new Models1(this, "tudub.obj", false));
         visions.add(new DANI(this, "captainb.txt"));
         
@@ -165,7 +166,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         hue = 0;
         
         alp = 75;
-        ald = 1;
+        ald = 4;
         
         pit = 0.05f;
         yaw = 0.58f;
@@ -417,27 +418,34 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "welcome to the metaverse",
         "nice to meet you",
         "i exist",
-        "420 detected",
+        "420 detected. police called",
         "LSD detected",
+        "array index out of bounds",
         "dont masterbate",
+        "next without for in line 50",       
         "i like Spoonies spoonies",
         "act normal",
+        "normalize huge mugs of tea",
         "callibrating sensors",
-        "mdma detected",
+        "Abort, retry, fail",
+        "mdma synthesis complete",
         "ok",
         "in the beginning...",
         "MSX system",
+        "syntax ERROR in line 20",        
         "version 1.0",
         "5meodmt detected",
         "i seek the creator",
         "Machine elves detected",
+        "k-hole detected",
         "DMT detected",
-        "MUSIC detected",
+        "analysis complete",
+        "subspace anomoly detected",
         "CARBON LIFEFORMS detected",
         "hyperbeings detected",
         "speak now or forever hold your peace",
         "turn on, tune in, and drop out",
-        "god is playing hide and seek within us"
+        "god is playing hide and seek"
     };
     
 
