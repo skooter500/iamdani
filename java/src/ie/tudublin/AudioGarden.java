@@ -81,19 +81,17 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new IFCubes(this, 2, 150, -600)); 
-        
-        visions.add(new Bloom(this));
-        visions.add(new Cubes(this));
-        
+        visions.add(new Models1(this, "audio garden 2.obj", false));
+        visions.add(new Models1(this, "eden.obj", false));        
+        visions.add(new Bloom(this));        
+        visions.add(new Cubes(this));        
         visions.add(new SinWaves(this));  
         visions.add(new Spiral(this));
         visions.add(new ManarBrain(this));  
         visions.add(new Models1(this, "eye.obj", true));
-        visions.add(new Models1(this, "eden.obj", false));
         visions.add(new Models1(this, "tudub.obj", false));
         visions.add(new DANI(this, "captainb.txt"));
-        visions.add(new Models1(this, "audio garden 2.obj", false));
+        
         visions.add(new Models1(this, "msx.obj", false));
          
         visions.add(new IFCubes(this,7, 250, -600));  
@@ -155,7 +153,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         base = 0.3f;
         speed = 1.0f;
         hueShift = 0;
-        alp = 255;
+        alp = 100;
     }
 
     public AudioGarden() {
@@ -273,7 +271,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (number == 71) {
             alp = min(max(clockWise ? alp + 5f : alp - 5f, 0), 255);
-            println("APL: " + alp);
+            println("ALP: " + alp);
         }
         if (number == 76) {
             xRotation = clockWise ? xRotation + 0.01f : xRotation - 0.01f;
@@ -281,7 +279,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
         if (number == 16) {
             zRotation = clockWise ? zRotation + 0.01f : zRotation - 0.01f;
-            println("APL: " + zRotation);
+            println("Z: " + zRotation);
         }
         // int newVisual = whichVisual;
         //     if (clockWise)
@@ -341,6 +339,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             fill(255, ald);
             rect(0, 0, width * 4, height * 4);
             blendMode(BLEND);
+            colorMode(HSB);
         }
         colorMode(HSB);
 

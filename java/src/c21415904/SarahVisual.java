@@ -340,8 +340,8 @@ public class SarahVisual extends VScene {
 
             v.loadPixels();
             // show every fourth pixel so processor can handle image
-            for (int x = 0; x < v.width; x += 4) {
-                for (int y = 0; y < v.height; y += 4) {
+            for (int x = 0; x < v.width; x += 1) {
+                for (int y = 0; y < v.height; y += 1) {
                     int index = x + y * v.width;
                     float sum = 0;
 

@@ -44,8 +44,8 @@ public class SinWaves extends Poly{
                 v.translate(offsetX, offsetY, offsetZ-400);
                 float c = v.hueShift((offsetX + offsetY + offsetZ + v.frameCount) % 255);
                 //p.fill(c, 255, 255);
-                v.fill(c, 255, 255);
-                v.stroke(v.hueShift(c + 128));
+                v.fill(c, 255, 255, v.alp);
+                //v.stroke(v.hueShift(c + 128), 255, 255, v.alp);
                 v.box(boxSize);
                 v.popMatrix();
             }

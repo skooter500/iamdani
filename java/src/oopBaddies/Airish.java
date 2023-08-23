@@ -30,7 +30,7 @@ public class Airish extends Poly {
         float c = v.map(avg, -1, 1, 0, 255);
 
        
-        v.noStroke();
+        v.stroke(v.hueShift(c + 128), 255, 255, v.alp);
         // fill the middle circles in white
         v.fill(v.hueShift(66), 255, 255);
         // if a is 1 meaning this will only appear if user presses key that allows to
@@ -38,10 +38,10 @@ public class Airish extends Poly {
         if (a == 1) {
             // circle must be first as it will interrupt with drawing other shapes
             // draws the centre pink circle of the shape
-            v.fill(v.hueShift(9), 255, 255);
+            v.fill(v.hueShift(9), 255, 255, v.alp);
             v.ellipse(250, 250, 100, 100);
 
-            v.fill(v.hueShift(173), 255, 255);
+            v.fill(v.hueShift(173), 255, 255, v.alp);
             v.ellipse(175, 175, 50, 50);
             v.triangle(175, 200, 250, 250, 200, 175);
 
@@ -71,9 +71,9 @@ public class Airish extends Poly {
         if (a >= 3) {
             for (int i = -250; i < 1600; i += 250) {
                 for (j = -250; j < 900; j += 250) {
-                    v.fill(v.hueShift(193), 255, 255);
+                    v.fill(v.hueShift(193), 255, 255, v.alp);
                     v.ellipse(250 + i, 250 + j, 100, 100);
-                    v.fill(v.hueShift(c), 255, 255);
+                    v.fill(v.hueShift(c), 255, 255, v.alp);
                     v.ellipse(175 + i, 175 + j, 50, 50);
                     v.triangle(175 + i, 200 + j, 250 + i, 250 + j, 200 + i, 175 + j);
                     v.ellipse(250 + i, 150 + j, 50, 50);
