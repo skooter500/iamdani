@@ -6,7 +6,7 @@ import ie.tudublin.Poly;
 public class Life extends Poly
 {
   
-  int boardWidth = 50;
+  int boardWidth = 100;
   int boardHeight;
   float cellWidth;
   float[][] board = new float[boardHeight][boardWidth];
@@ -226,7 +226,7 @@ public class Life extends Poly
         if (board[row][col] != -1)
         {
             float newC = v.hueShift(board[row][col]);
-          v.fill(newC, 255, 255);
+          v.fill(newC, 255, 255, v.alp);
           v.stroke(0);
           v.rect(col * cellWidth, row * cellWidth, cellWidth, cellWidth);
         }
@@ -237,13 +237,18 @@ public class Life extends Poly
   public void render()
   {    
 
-
     
+    int toPass = (int) v.map(v.spe, 0, 2, 120, 1);
 
-    if (v.frameCount % 20 == 0)
+    if (v.frameCount % toPass == 0)
     {
       updateBoard();
     }
+    //v.rotateX(v.pit);
+    v.rotateX(v.pit);
+
+    v.rotateY(v.yaw);
+
     drawBoard();
 
     if (generation == generationMax)

@@ -142,7 +142,7 @@ public class DANI extends Poly {
             sonnet[i] = line;
             //v.println(line);            
         }
-        sonnet[12] = " - DANI ";
+        sonnet[12] = "i am DANI ";
         return sonnet;
     }
     
@@ -150,6 +150,7 @@ public class DANI extends Poly {
 
 	public void render() 
     {
+
         v.textAlign(v.LEFT, v.CENTER);
 
         float c = v.hueShift(99);
@@ -159,6 +160,9 @@ public class DANI extends Poly {
         float cy = v.height / 2;
 
         v.translate(cx / 3, cy/3);
+
+        
+
 		for(int i = 0 ; i <= line ; i ++)
         { 
             float h = 50;

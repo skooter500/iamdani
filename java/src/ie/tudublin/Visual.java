@@ -25,6 +25,9 @@ public abstract class Visual extends PApplet
 	private float smothedAmplitude = 0;
 
 	public float spe = 1.0f;
+
+	public float pit = 0;
+    public float yaw = 0;
 	
 	//AudioPlayer player;
     public BeatDetect getBeat() {

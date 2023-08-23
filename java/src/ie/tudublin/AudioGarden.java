@@ -87,7 +87,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         noCursor();
         colorMode(HSB);
         startMinim();
-        rectMode(CENTER);
+        //rectMode(CENTER);
 
         cp5 = new ControlP5(this);
 
@@ -103,25 +103,34 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
+        visions.add(new Life(this, 0, 1000));
+        visions.add(new IFCubes(this,7, 250, -600)); 
+        visions.add(new IFCubes(this,30, 150, -400));        
+        visions.add(new Cubes(this));   
+        
+        visions.add(new ManarBrain(this));        
+                        
+        visions.add(new Life(this, 1, 1000));                
+        visions.add(new Life(this,2, 1000));                        
+                     
         visions.add(new SinWaves(this));
+        
         visions.add(new Models1(this, "eye.obj", true));
         visions.add(new Models1(this, "audio garden 2.obj", false));        
         
         visions.add(new LauraSun(this));
         visions.add(new Models1(this, "eden.obj", false));        
         visions.add(new Bloom(this));        
-        visions.add(new Cubes(this));        
           
         visions.add(new Spiral(this));
-        visions.add(new ManarBrain(this));  
+          
         
         visions.add(new Models1(this, "tudub.obj", false));
         visions.add(new DANI(this, "captainb.txt"));
         
         visions.add(new Models1(this, "msx.obj", false));
          
-        visions.add(new IFCubes(this,7, 250, -600));  
-        visions.add(new IFCubes(this,30, 150, -400));
+         
         visions.add(new Airish(this));
         visions.add(new Mena(this));
         visions.add(new Bands(this, 200, 0, 0, 0));        
@@ -130,11 +139,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new Cubesquared2(this));
         
         visions.add(new SarahVisual(this));
-        //visions.add(new JenniferVisuals(this));
-        visions.add(new SinWaves(this));        
+        //visions.add(new JenniferVisuals(this));    
         
         visions.add(new Nematode(this));
-        visions.add(new Bloom(this));
+    
         
 
         
@@ -325,9 +333,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         //     change(newVisual);        
     }
 
-    public float pit = 0;
-    public float yaw = 0;
-
+    
 
     public void keyPressed() {
 

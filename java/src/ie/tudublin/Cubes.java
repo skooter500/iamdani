@@ -38,8 +38,9 @@ public class Cubes extends Poly
         
         for(int i = 0; i < 200;i++)
         {
-            v.push();        
+            v.push();                    
             v.rotate(PApplet.sin(v.frameCount+i)*100);
+            
             //colour map
             float c = PApplet.map(count, 0, v.getAudioBuffer().size() , 100, 400);
 
@@ -79,19 +80,29 @@ public class Cubes extends Poly
         {
             float c = PApplet.map(count, 0, v.getAudioBuffer().size() , 0, 225);
             //push/pop matrix keeps all the 200 boxes in the same spot
-            v.pushMatrix();
+            v.pushMatrix();            
+            
             v.translate(v.width/2, v.height/2);
+
+
+            v.rotateX(v.pit);
+            v.rotateZ(v.yaw);
+
             v.fill(v.hueShift(c), 255, 255, v.alp);
             //rotates boxes on X + Y axis. This way we see the shape on its side. This doesn't move the shape, just positions it
             v.rotateY(angle + pos *i*PApplet.sin(angle)+10);
             v.rotateX(angle/2 + pos*i+10);
             //rotate allows for movement
             v.rotate(PApplet.radians(v.frameCount) * v.spe);
+
+            
+
             v.box(sizeBox);
             v.popMatrix();
             //count for colour map
             count+=10;
         }
-        angle+=0.01 * v.spe;         
+        angle+=0.01 * v.spe;
+         
     } 
 }

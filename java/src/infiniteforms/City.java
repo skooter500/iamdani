@@ -46,6 +46,9 @@ public class City extends Poly
             cameraZ/10.0f, cameraZ*100000.0f);
         v.pushMatrix();
 
+        v.rotateX(-v.HALF_PI + v.pit);
+        v.rotateZ(v.PI + v.yaw);
+
         //println(camY);
         
         for(int row = 0 ; row < rows ; row ++)
@@ -60,7 +63,7 @@ public class City extends Poly
                 float boxSize = base + (smoothedBands[i] * 2); 
                 v.strokeWeight(2);
                 float c = v.hueShift(v.map(j, 0, smoothedBands.length, 255, 0));
-                v.stroke(c, 255, 255);                
+                v.stroke(c, 255, 255, v.alp);                
                 v.pushMatrix();
                 v.translate(rowPos.x + (j+1) * gap, rowPos.y - (boxSize * 0.5f), rowPos.z);
                 v.box(base, boxSize, base);

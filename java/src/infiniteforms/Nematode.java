@@ -94,6 +94,10 @@ public class Nematode extends Poly
     v.pushMatrix();
     v.translate(cx, cy);
     v.translate(0, - half);
+
+    v.rotateX(-v.HALF_PI + v.pit);
+    v.rotateZ(v.PI + v.yaw);
+
     v.noFill();
     float hw = w / 2;
 
@@ -103,17 +107,17 @@ public class Nematode extends Poly
     float c3 = v.pingpongmap(0, 0, (length-1) * 0.5f, 0, 255) % 255;
     c3 = v.hueShift(c3 + colorOffset); 
       
-    v.fill(c3 % 255, 255, 255, alpha);
+    v.fill(c3 % 255, 255, 255, v.alp);
     v.textAlign(v.CENTER, v.CENTER);
     v.textAlign(v.CENTER, v.CENTER);    
-    v.text(name, 0, -w * 3);        
+    v.text(name, 500, w * 3);        
     v.noFill();
     for (int i = 0; i < length; i ++)
     { 
       //println(c1, c2);
       float c = v.pingpongmap(i, 0, (length-1) * 0.5f, 0, 255) % 255;
       c = v.hueShift(c + colorOffset); 
-      v.stroke(c, 255, 255, alpha);
+      v.stroke(c, 255, 255, v.alp);
     
       float y = i * w;
       float f = 0.5f;

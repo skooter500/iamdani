@@ -51,8 +51,9 @@ public class IFCubes extends Poly {
     {
       c.render();       
     }    
+    v.camera(v.width/2.0f, v.height/2.0f, -1000, v.width/2.0f, v.height/2.0f, 0f, 0f, 0.001f, 0f);
     v.popMatrix();
     theta+=0.01f * v.spe;
-    //v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0f, 0f, 0.001f, 0f);
+    
   }
 }

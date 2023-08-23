@@ -22,9 +22,9 @@ public class SinWaves extends Poly{
     
         
         v.translate(v.width / 2, v.height / 2, 0);//centre the display
-        //v.rotateX(v.radians(v.frameCount));
-        //v.rotateY(v.radians(v.frameCount));
-        //v.rotateZ(v.radians(v.frameCount));
+
+        v.rotateX(v.pit);
+        v.rotateZ(v.yaw);
 
         float amp = v.getSmoothedAmplitude();
 

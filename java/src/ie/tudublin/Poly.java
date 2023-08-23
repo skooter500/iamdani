@@ -3,6 +3,9 @@ package ie.tudublin;
 public abstract class Poly {
     public Visual v;
 
+    
+
+
 
     public Poly(Visual v){
         this.v = v;
