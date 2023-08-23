@@ -41,7 +41,7 @@ public class Bloom extends Poly{
             v.scale(0.95f);//scales the shape by the percentage given
             v.rotate(PApplet.radians(angle));
         
-            v.rect(0,0,v.getSmoothedAmplitude()*3000,v.getSmoothedAmplitude()*3000);
+            v.rect(0,0,v.getSmoothedAmplitude()*2000,v.getSmoothedAmplitude()*2000);
             //v.rect(0,0,700,700);
            
             

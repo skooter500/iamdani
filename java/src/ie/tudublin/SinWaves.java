@@ -16,7 +16,7 @@ public class SinWaves extends Poly{
     public void render(int ellapsed) {
         
 
-        // v.background(0); 
+        v.background(0); 
         float boxSize;
 
     
@@ -26,14 +26,14 @@ public class SinWaves extends Poly{
         //v.rotateY(v.radians(v.frameCount));
         //v.rotateZ(v.radians(v.frameCount));
 
-        float amp = v.max(v.getSmoothedAmplitude(), 0.18f);
+        float amp = v.getSmoothedAmplitude();
 
         for (int x = -10; x < 10; x++) {
             for (int y = -10; y < 10; y++) {
             for (int z = -10; z < 10; z++) {//creates a 20X20X20 cube 
-                float offsetX = x * 20 *(amp*12);//value increasing/decreasing distance between cubes on x axis
-                float offsetY = y * 20 *(amp*12);//value increasing/decreasing distance between cubes on y axis
-                float offsetZ = z * 20 *(amp*12);//value increasing/decreasing distance between cubes on z axis
+                float offsetX = x * 10 *(amp*11);//value increasing/decreasing distance between cubes on x axis
+                float offsetY = y * 10 *(amp*11);//value increasing/decreasing distance between cubes on y axis
+                float offsetZ = z * 10 *(amp*11);//value increasing/decreasing distance between cubes on z axis
                 //float offsetX = x * 40;
                 //float offsetY = y * 40;
                 //float offsetZ = z * 40;

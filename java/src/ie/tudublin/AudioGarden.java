@@ -20,6 +20,7 @@ import oopBaddies.Anne;
 import oopBaddies.Mena;
 import oopBaddies.paris;
 import processing.core.PFont;
+import processing.core.PShape;
 import themidibus.*; //Import the library
 
 public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListener {
@@ -38,6 +39,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         fullScreen(P3D, 0);
         //size(1000, 1000, P3D);
     }
+
+    PShape sphere;
 
     public static AudioGarden instance;
 
@@ -59,8 +62,18 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         System.out.println(o);
     }
 
+    // public void sphere(float size)
+    // {
+    //     pushMatrix();
+    //     scale(size);
+    //     shape(sphere);
+    //     popMatrix();
+    // }
+
     public void setup() {
 
+
+        sphere = loadShape("sphere.obj");
         println("MSX System");
         println("version 1.0");
         println("Copyright 1985 by microsoft");
@@ -90,6 +103,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
+        visions.add(new SinWaves(this));
         visions.add(new Models1(this, "eye.obj", true));
         visions.add(new Models1(this, "audio garden 2.obj", false));        
         
@@ -97,7 +111,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new Models1(this, "eden.obj", false));        
         visions.add(new Bloom(this));        
         visions.add(new Cubes(this));        
-        visions.add(new SinWaves(this));  
+          
         visions.add(new Spiral(this));
         visions.add(new ManarBrain(this));  
         
@@ -343,9 +357,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     boolean showConsole = true;
 
-    public void draw() {
-
-        
+    public void draw() {        
         if (ald == 50)
         {        
             background(0);
