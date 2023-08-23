@@ -60,19 +60,19 @@ public class Model
     
     //strokeWeight(weight);
     float boxSize = size + (v.getAmplitude() * 30); 
-    smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.speed * 0.2f);
+    smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
     //scale(1);
 
-    v.rotateX(-v.HALF_PI + v.xRotation);
-    v.rotateZ(v.PI + v.zRotation);
+    v.rotateX(-v.HALF_PI + v.pit);
+    v.rotateZ(v.PI + v.yaw);
     //v.rotateX(v.xRotation);
     // /v.rotateZ(v.zRotation);
     
     if (rotate)
       v.rotateY(-theta * 0.01f);
     // v.rotateZ(0.2f + v.sin(theta) * 0.2f);
-    theta += (v.speed * 0.2f) ;
-    c += v.speed * 100 * v.getAmplitude();
+    theta += (v.spe * 0.2f) ;
+    c += v.spe * 100 * v.getAmplitude();
     v.scale(smoothedBoxSize * 4);
     v.shape(s);
     v.popMatrix();

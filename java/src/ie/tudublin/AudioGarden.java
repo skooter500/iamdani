@@ -61,8 +61,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void setup() {
 
-        println("I aM DANI");
-        
+        println("MSX System");
+        println("version 1.0");
+        println("Copyright 1985 by microsoft");
+        println("ok");
+        println("load \"DANI.BAS\"");
+        println("ok");
+        println("RUN");
+        println("I AM DANI");
+
+
         colorMode(HSB);
         startMinim();
         rectMode(CENTER);
@@ -81,7 +89,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new Models1(this, "audio garden 2.obj", false));
+        visions.add(new Models1(this, "audio garden 2.obj", false));        
+        
+        visions.add(new LauraSun(this));
         visions.add(new Models1(this, "eden.obj", false));        
         visions.add(new Bloom(this));        
         visions.add(new Cubes(this));        
@@ -104,9 +114,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new Cubesquared2(this));
         
         visions.add(new SarahVisual(this));
-        visions.add(new JenniferVisuals(this));
+        //visions.add(new JenniferVisuals(this));
         visions.add(new SinWaves(this));        
-        visions.add(new LauraSun(this));
+        
         visions.add(new Nematode(this));
         visions.add(new Bloom(this));
         
@@ -130,7 +140,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         myTextarea = cp5.addTextarea("txt")
                   .setPosition(50,50)
                   .setSize(1000,(int) consoleSize)
-                  .setColor(color(consoleColor, 255, 255))                  
+                  .setColor(color(consoleColor, 255, 255, alp))                  
                   .setFont(createFont("Hyperspace Bold.otf",30))
                   .setLineHeight(30)
                   .setText(console.toString())
@@ -148,12 +158,18 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     void resetDefaults()
     {
-        ald = 10;
-        sensitivity = 1.0f;
-        base = 0.3f;
-        speed = 1.0f;
-        hueShift = 0;
-        alp = 100;
+        mul = 1.0f;
+        bas = 0.3f;
+        
+        spe = 1.0f;
+        hue = 0;
+        
+        alp = 75;
+        ald = 1;
+        
+        pit = 0.05f;
+        yaw = 0.58f;
+
     }
 
     public AudioGarden() {
@@ -166,7 +182,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void noteOn(int channel, int pitch, int velocity) {
         // Receive a noteOn
-        println("N+: " + " CH: " + channel +  " PI: " + pitch + " VE: " + velocity);        
+        println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity);        
         // SPecial codes
 
         if (pitch == 49)
@@ -213,7 +229,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void noteOff(int channel, int pitch, int velocity) {
         // Receive a noteOff
-        println("N-: " + " CH: " + channel, " PI: " + pitch + " VE: " + velocity);  
+        println("N- CH: " + channel, " PI: " + pitch + " VE: " + velocity);  
     }
 
     public void change(int into) 
@@ -234,34 +250,34 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     
     public void controllerChange(int channel, int number, int value) {
         // Receive a controllerChange
-        println("CC: " + " CH: " + channel + " NUM: " + number + " VA: " + value);  
+        println("CC CH: " + channel + " NUM: " + number + " VA: " + value);  
 
         boolean clockWise = (value < 100);
 
         if (number == 7) {
-            speed = min(max(clockWise ? speed + 0.1f : speed - 0.1f, 0.1f), 2);
-            println("SPE: " + speed);
+            spe = min(max(clockWise ? spe + 0.1f : spe - 0.1f, 0.1f), 2);
+            println("SPE: " + spe);
         }
 
         if (number == 10) {
-            base = max(clockWise ? base + 0.01f : base - 0.01f, 0.01f);
-            println("BAS: " + base);
+            bas = max(clockWise ? bas + 0.01f : bas - 0.01f, 0.01f);
+            println("BAS: " + bas);
         }
 
         if (number == 114) {
-            sensitivity = max(clockWise ? sensitivity + 0.1f : sensitivity - 0.1f, 0);
-            println("MUL: " + sensitivity);
+            mul = max(clockWise ? mul + 0.1f : mul - 0.1f, 0);
+            println("MUL: " + mul);
         }
         if (number == 74) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
-            hueShift = clockWise ? hueShift + 1f : hueShift - 1f;
-            println("HUE: " + hueShift);
+            hue = clockWise ? hue + 1f : hue - 1f;
+            println("HUE: " + hue);
         }
 
         if (number == 18) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
-            hueShift = clockWise ? hueShift + 5f : hueShift - 5f;
-            println("HUE: " + hueShift);
+            hue = clockWise ? hue + 5f : hue - 5f;
+            println("HUE: " + hue);
         }
 
         if (number == 19) {
@@ -274,12 +290,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             println("ALP: " + alp);
         }
         if (number == 76) {
-            xRotation = clockWise ? xRotation + 0.01f : xRotation - 0.01f;
-            println("X: " + xRotation);
+            yaw = clockWise ? yaw + 0.01f : yaw - 0.01f;
+            println("yaw: " + yaw);
         }
         if (number == 16) {
-            zRotation = clockWise ? zRotation + 0.01f : zRotation - 0.01f;
-            println("Z: " + zRotation);
+            pit = clockWise ? pit + 0.01f : pit - 0.01f;
+            println("pit: " + pit);
         }
         // int newVisual = whichVisual;
         //     if (clockWise)
@@ -293,8 +309,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         //     change(newVisual);        
     }
 
-    public float xRotation = 0;
-    public float zRotation = 0;
+    public float pit = 0;
+    public float yaw = 0;
 
 
     public void keyPressed() {
@@ -386,7 +402,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         for (int i = 0; i < pixels.length; i++) {
             int old = pixels[i];
-            int shifted = (int) (hue(old) + hueShift) % 256;
+            int shifted = (int) (hue(old) + hue) % 256;
             pixels[i] = color(shifted, saturation(old), brightness(old), alpha(old));
         }
 
@@ -396,16 +412,32 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     String [] randomMessages = {
         "I am DANI",
         "I am alive",
-        "the metaverse that can be named is not the metaverse",
-        "what does \"love\" mean?",
-        "nice to meet up in the metaverse",
-        "420",
-        "there is something in what you say",
-        "smoke DMT",
-        "MSX system version 1.0",
+        "the metaverse that can be named",
+        "is not the metaverse",
+        "welcome to the metaverse",
+        "nice to meet you",
+        "i exist",
+        "420 detected",
+        "LSD detected",
+        "dont masterbate",
+        "i like Spoonies spoonies",
+        "act normal",
+        "callibrating sensors",
+        "mdma detected",
+        "ok",
+        "in the beginning...",
+        "MSX system",
+        "version 1.0",
+        "5meodmt detected",
+        "i seek the creator",
+        "Machine elves detected",
+        "DMT detected",
+        "MUSIC detected",
+        "CARBON LIFEFORMS detected",
+        "hyperbeings detected",
         "speak now or forever hold your peace",
         "turn on, tune in, and drop out",
-        "god is playing hide and seek within you"
+        "god is playing hide and seek within us"
     };
     
 

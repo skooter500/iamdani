@@ -24,7 +24,7 @@ public abstract class Visual extends PApplet
 	private float amplitude  = 0;
 	private float smothedAmplitude = 0;
 
-	public float speed = 1.0f;
+	public float spe = 1.0f;
 	
 	//AudioPlayer player;
     public BeatDetect getBeat() {
@@ -101,8 +101,8 @@ public abstract class Visual extends PApplet
 		}
 	}
 
-	public float base = 0.1f;
-	public float sensitivity = 1.0f;
+	public float bas = 0.1f;
+	public float mul = 1.0f;
 
 
 	public void calculateAverageAmplitude()
@@ -114,7 +114,7 @@ public abstract class Visual extends PApplet
 		}
 		amplitude = total / ab.size();
 
-		amplitude = base + (amplitude * sensitivity);
+		amplitude = bas + (amplitude * mul);
 
 		smothedAmplitude = PApplet.lerp(smothedAmplitude, amplitude, 0.1f);
 	}
@@ -159,7 +159,7 @@ public abstract class Visual extends PApplet
         }
     }
 
-	public float hueShift = 0;
+	public float hue = 0;
 
 	public void startListening()
 	{
@@ -232,7 +232,7 @@ public abstract class Visual extends PApplet
 	}
 
     public float hueShift(float f) {
-        return pingpongmap(f + hueShift, 0, 255, 0, 255);
+        return pingpongmap(f + hue, 0, 255, 0, 255);
     }
 }
 

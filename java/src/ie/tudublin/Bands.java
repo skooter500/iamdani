@@ -47,7 +47,7 @@ public class Bands extends Poly {
       v.box(base, base, boxSize);
       v.popMatrix();
     }
-    rot += v.speed * v.getAmplitude() * 0.01f;
+    rot += v.spe * v.getAmplitude() * 0.01f;
     v.popMatrix();
     v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0f, 0f, 0.01f, 0f);          
     

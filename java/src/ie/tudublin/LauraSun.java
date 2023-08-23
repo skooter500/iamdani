@@ -5,7 +5,7 @@ import example.MyVisual;
  
 public class LauraSun extends Poly
 {
-    Visual p;
+    AudioGarden p;
  
     //int mode = 0;
     int numDrops = 100; // set the number of drops to 25
@@ -31,6 +31,7 @@ public class LauraSun extends Poly
     public void draw()
     {
 
+        v.background(0);
         //v.colorMode(v.RGB);
         drawSun();
         drawSeawaves();
@@ -54,7 +55,8 @@ public class LauraSun extends Poly
         p.pushMatrix(); // drawSun push
         p.translate(p.width/2, p.height/2, -400); // move ball to center of canvas
         p.rotateY((float)(p.frameCount * 0.009)); // rotation speed
- 
+        p.rotateX(p.pit);
+        p.rotateZ(p.yaw);
         // Draw surrounding shapes
         p.noStroke();
         for (int i = 0; i < 20; i++)
@@ -64,7 +66,7 @@ public class LauraSun extends Poly
             p.rotateY(angle + p.frameCount * 0.01f);// rotates surrounding spheres
             p.translate(surroundingSize, 0, 0);
             float c = v.hueShift(69);
-            p.fill(c, 255, 255);
+            p.fill(c, 255, 255, v.alp);
             p.sphereDetail(surroundingDetailLevel);
             p.sphere(sunSize / 4);
             p.popMatrix();// used to restore the previous position
@@ -78,11 +80,11 @@ public class LauraSun extends Poly
             p.translate(offset, 0, 0);
             // Set color of each sphere
             float c = v.hueShift(200);
-            p.fill(c, 255, 255);            
+            p.fill(c, 255, 255, v.alp);            
             p.sphereDetail(sunDetailLevel);
             p.sphere(sunSize); // size of the sphere
 
-            p.stroke(v.hueShift(22), 255, 255);
+            p.stroke(v.hueShift(22), 255, 255, v.alp);
             p.popMatrix(); // restore overall transformation
         }
         p.popMatrix(); // drawSun pop
@@ -99,7 +101,7 @@ public class LauraSun extends Poly
             p.pushMatrix();
             p.translate(x, y, z);// translates the drawing
             p.noStroke();
-            p.fill(v.hueShift(37), 255, 255);
+            p.fill(v.hueShift(37), 255, 255, v.alp);
             p.sphere(2);
             p.popMatrix();
         }
@@ -116,7 +118,7 @@ public class LauraSun extends Poly
             // Set the fill and stroke colors for the wave
             p.fill(v.hueShift(37), 255, 255, 100); // blue
             
-            p.stroke(v.hueShift(77), 255, 255); // blue
+            p.stroke(v.hueShift(77), 255, 255, v.alp); // blue
        
             p.strokeWeight(2);
        
@@ -190,8 +192,8 @@ public class LauraSun extends Poly
     public void drawRaindrops()
     {
         // define colors
-        int c3 = p.color(150, 200, 255); // light blue
-        int c4 = p.color(200, 230, 255); // lighter blue
+        int c3 = p.color(150, 200, 255, v.alp); // light blue
+        int c4 = p.color(200, 230, 255, v.alp); // lighter blue
  
         // draw rain drops
         for (int i = 0; i < dropX.length; i++)

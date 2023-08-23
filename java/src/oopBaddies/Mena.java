@@ -87,7 +87,7 @@ public class Mena extends Poly {
          v.ellipse(0, 80, 40, 20); // Draw the engine of the rocket
         
         // move the rocket
-        y-= v.speed;
+        y-= v.spe;
 
         if(y < 0){
             y = 1100;

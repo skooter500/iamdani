@@ -46,7 +46,7 @@ public class IFCube
     {
         v.box(size);
     }
-    angle+=0.01f * v.speed;
+    angle+=0.01f * v.spe;
     v.popMatrix();
   }
   

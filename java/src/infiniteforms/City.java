@@ -74,7 +74,7 @@ public class City extends Poly
             }
         }        
         v.popMatrix();
-        pos.z += 10 * v.getAmplitude() * v.speed;
+        pos.z += 10 * v.getAmplitude() * v.spe;
         if (pos.z >= cutoff)
         {
           pos.z = cutoff - gap;

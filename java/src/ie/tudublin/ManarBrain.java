@@ -244,7 +244,7 @@ public class ManarBrain extends Poly
 
             p.ellipse(x, y, 20, 20);
         }
-        angle += 0.01 * v.speed;//speed of the smaller rotating circles
+        angle += 0.01 * v.spe;//speed of the smaller rotating circles
     }//end function drawCircles
  
     // method that stops the program

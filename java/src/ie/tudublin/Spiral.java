@@ -70,7 +70,7 @@ public class Spiral extends Poly{
        
     }
 
-    angle+=(PApplet.map(v.getSmoothedAmplitude() * v.speed * 0.1f, 0, 1.0f, 0, 1f)); //maps the rotation speed to the smoothedAmplitude
+    angle+=(PApplet.map(v.getSmoothedAmplitude() * v.spe * 0.1f, 0, 1.0f, 0, 1f)); //maps the rotation speed to the smoothedAmplitude
       
   }
 

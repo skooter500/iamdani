@@ -48,13 +48,13 @@ public class Cubes extends Poly
             v.noFill();
             //background circles
             //+i causes circles to move outwards up to 400
-            v.circle(200, 200+i * v.speed, 1);
+            v.circle(200, 200+i * v.spe, 1);
             //Rectangles with spaces between them to give effects.
             //getsmoothed causes them to beat out in width to the music
-            v.rect(100-i*5 * v.speed, 100, i, 0+i*v.getSmoothedAmplitude()*10);
-            v.rect(100-i*5 * v.speed, 100, i, 5+i*v.getSmoothedAmplitude()*10);
-            v.rect(100-i*5 * v.speed, 100, i, 10+i*v.getSmoothedAmplitude()*10);
-            v.rect(100-i*5 * v.speed, 100, i, 15+i*v.getSmoothedAmplitude()*10);
+            v.rect(100-i*5 * v.spe, 100, i, 0+i*v.getSmoothedAmplitude()*10);
+            v.rect(100-i*5 * v.spe, 100, i, 5+i*v.getSmoothedAmplitude()*10);
+            v.rect(100-i*5 * v.spe, 100, i, 10+i*v.getSmoothedAmplitude()*10);
+            v.rect(100-i*5 * v.spe, 100, i, 15+i*v.getSmoothedAmplitude()*10);
             v.pop();
             count++;
         }
@@ -72,7 +72,7 @@ public class Cubes extends Poly
         if(v.millis() - start > 5000)
         {
             //starts big and gets smaller after 5 seconds
-            sizeBox = PApplet.lerp(sizeBox, 300, 0.008f * v.speed);
+            sizeBox = PApplet.lerp(sizeBox, 300, 0.008f * v.spe);
         }
         //cubes rotataing on diff angles to give effect they are enveloped in eachother
         for(int i= 0; i < 70; i++)
@@ -86,12 +86,12 @@ public class Cubes extends Poly
             v.rotateY(angle + pos *i*PApplet.sin(angle)+10);
             v.rotateX(angle/2 + pos*i+10);
             //rotate allows for movement
-            v.rotate(PApplet.radians(v.frameCount) * v.speed);
+            v.rotate(PApplet.radians(v.frameCount) * v.spe);
             v.box(sizeBox);
             v.popMatrix();
             //count for colour map
             count+=10;
         }
-        angle+=0.01 * v.speed;         
+        angle+=0.01 * v.spe;         
     } 
 }
