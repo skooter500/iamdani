@@ -168,7 +168,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
  
 
         //Collections.shuffle(visuals);
-
+        defaults();
         background(0);
         change(0);
 
@@ -192,13 +192,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     }
 
     float consoleSize = 0;
-    float targetSize = 400;
+    float originalTargetSize = 400;
     
+    float targetSize = 800;
+    
+
     ControlP5 cp5;
     Textarea myTextarea;
     float consoleColor = 128;
 
-    void resetDefaults()
+    void defaults()
     {
         println("DEF");  
         mul = 1.0f;
@@ -219,8 +222,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         super(1024, 44100, 0.5f);
         instance = this;
         
-        resetDefaults();
-        
     }
 
     public void noteOn(int channel, int pitch, int velocity) {
@@ -229,27 +230,18 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         {
             case Auto:
             {
+                println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = pitch % visions.size();
                 change(newVisual);
                 break;
             }
             case AutoRandom:
             {
+                println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = (int) random(0, visions.size());
                 change(newVisual);
                 break;
             }
-        }
-
-
-        // Receive a noteOn
-        println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity);        
-        // SPecial codes
-
-        if (pitch == 49)
-        {
-            change(whichVisual + 1);
-            return;
         }
 
         if (pitch == 43)
@@ -258,11 +250,24 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
 
+        // Receive a noteOn
+        // SPecial codes
+        println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+        if (pitch == 49)
+        {
+            change(whichVisual + 1);
+            return;
+        }
+
+        
         if (pitch == 41)
         {
             change(whichVisual - 1);
             return;
         }
+
+        
+
 
         if (pitch == 51)
         {
@@ -290,10 +295,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         if (pitch == 50)
         {
              
-            resetDefaults();
+            defaults();
             return;
         }
-
+        
+               
+        
         
     }
 
@@ -470,6 +477,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             myTextarea.setVisible(true);
             myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
         }
+
 
         // background(0);
         try {
