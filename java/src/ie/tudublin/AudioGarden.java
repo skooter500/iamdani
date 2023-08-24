@@ -23,6 +23,8 @@ import processing.core.PFont;
 import processing.core.PShape;
 import themidibus.*; //Import the library
 
+
+
 public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListener {
 
     ArrayList<Poly> visions = new ArrayList<Poly>();
@@ -45,6 +47,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     public static AudioGarden instance;
 
     public StringBuilder console = new StringBuilder();
+
+    public enum Modes { Ctrl, Auto, AutoRandom};
+    
+    public Modes mode = Modes.Ctrl;
 
     public static void println(String o)
     {
@@ -116,7 +122,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         //visions.add(new Bands(this, 200, 0, 0, 0));        
         visions.add(new paris(this));        
         //visions.add(new Spiral(this));
-        visions.add(new SarahVisual(this));
+        //visions.add(new SarahVisual(this));
         //visions.add(new JenniferVisuals(this));    
         
         
@@ -194,6 +200,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     void resetDefaults()
     {
+        println("DEF");  
         mul = 1.0f;
         bas = 0.3f;
         
@@ -217,6 +224,25 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     }
 
     public void noteOn(int channel, int pitch, int velocity) {
+
+        switch(mode)
+        {
+            case Auto:
+            {
+                int newVisual = pitch % visions.size();
+                change(newVisual);
+                break;
+            }
+            case AutoRandom:
+            {
+                int newVisual = (int) random(0, visions.size());
+                change(newVisual);
+                break;
+            }
+
+        }
+
+
         // Receive a noteOn
         println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity);        
         // SPecial codes
@@ -258,13 +284,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (pitch == 50)
         {
-            println("DEF");   
+             
             resetDefaults();
             return;
         }
 
-        int newVisual = pitch % visions.size();
-        change(newVisual);
+        
     }
 
     public void noteOff(int channel, int pitch, int velocity) {
@@ -365,6 +390,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
         if (keyCode == DOWN)
+        {
+            change(whichVisual + 1);
+            return;
+        }
+        if (keyCode == LEFT)
+        {
+            change(whichVisual - 1);
+            return;
+        }
+        if (keyCode == RIGHT)
         {
             change(whichVisual + 1);
             return;
