@@ -36,8 +36,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 0);
-        //size(1000, 1000, P3D);
+        // /fullScreen(P3D, 0);
+        size(1000, 1000, P3D);
     }
 
     PShape sphere;
@@ -104,8 +104,17 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
 
-        visions.add(new Cubesquared2(this));
+        visions.add(new SinWaves(this));
         
+        //visions.add(new SarahVisual(this));
+        visions.add(new Cubesquared2(this));
+        visions.add(new Mena(this));
+        visions.add(new Models1(this, "tudub.obj", false));
+        visions.add(new DANI(this, "captainb.txt"));        
+        visions.add(new Models1(this, "msx.obj", false));
+        //visions.add(new Bands(this, 200, 0, 0, 0));        
+        visions.add(new paris(this));        
+        //visions.add(new Spiral(this));
         visions.add(new SarahVisual(this));
         //visions.add(new JenniferVisuals(this));    
         
@@ -129,27 +138,20 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                        
         visions.add(new Life(this,2, 1000));                        
                      
-        visions.add(new SinWaves(this));
         
         
         
         visions.add(new Models1(this, "eden.obj", false));        
         visions.add(new Bloom(this));        
           
-        visions.add(new Spiral(this));
+        //visions.add(new Spiral(this));
           
         
-        visions.add(new Models1(this, "tudub.obj", false));
-        visions.add(new DANI(this, "captainb.txt"));
         
-        visions.add(new Models1(this, "msx.obj", false));
          
          
         //visions.add(new Airish(this));
-        visions.add(new Mena(this));
-        //visions.add(new Bands(this, 200, 0, 0, 0));        
-        visions.add(new paris(this));        
-        visions.add(new Spiral(this));
+        
         
     
         

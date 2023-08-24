@@ -340,8 +340,8 @@ public class SarahVisual extends VScene {
 
             v.loadPixels();
             // show every fourth pixel so processor can handle image
-            for (int x = 0; x < v.width; x += 1) {
-                for (int y = 0; y < v.height; y += 1) {
+            for (int x = 0; x < v.width; x += 4) {
+                for (int y = 0; y < v.height; y += 4) {
                     int index = x + y * v.width;
                     float sum = 0;
 
@@ -351,7 +351,15 @@ public class SarahVisual extends VScene {
                     }
 
                     float c = v.hueShift(sum % 360);
-                    v.pixels[index] = v.color(c, 255, 255); // modulus operator makes ball inside of ball
+                    for(int row = 0 ; row < 4 ; row ++)
+                    {
+                        for(int col = 0 ; col < 4 ; col ++)
+                        {
+                            int i = (x + col) + (y + row) * v.width;
+                            v.pixels[i] = v.color(c, 255, 255);
+                        }                    
+                    }
+                     // modulus operator makes ball inside of ball
 
                 }
             }

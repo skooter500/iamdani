@@ -23,9 +23,9 @@ public class Cubesquared2 extends Poly{
        v.colorMode(PApplet.HSB); 
        //v.background(0);
        v.translate( v.width/2, v.height/2, -off_max*2.3f);
-       v.rotateY(v.frameCount*0.01f);
-       v.rotateX(v.frameCount*0.01f);
-       v.rotateZ(v.frameCount*0.01f);
+       v.rotateY(v.frameCount*0.01f * v.spe);
+       v.rotateX(v.frameCount*0.01f * v.spe);
+       v.rotateZ(v.frameCount*0.01f * v.spe);
        v.strokeWeight(1);
        v.stroke(v.hueShift(90), 255, 255, v.alp);
        //v.rotateY(v.frameCount*v.getSmoothedAmplitude()/100);
@@ -44,7 +44,7 @@ public class Cubesquared2 extends Poly{
                 //v.translate(xo, yo , zo+100);
 
 
-                v.translate(xo*(8*v.getSmoothedAmplitude()),yo*(8*v.getSmoothedAmplitude()),zo*(8*v.getSmoothedAmplitude()));
+                v.translate(xo*(4*v.getSmoothedAmplitude()),yo*(4*v.getSmoothedAmplitude()),zo*(4*v.getSmoothedAmplitude()));
 
               
                 float c = PApplet.map(zo, 0, v.getAudioBuffer().size(),0,255);
