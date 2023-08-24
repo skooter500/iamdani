@@ -239,7 +239,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                 change(newVisual);
                 break;
             }
-
         }
 
 
@@ -408,6 +407,25 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         {
 
         }
+
+        if (key == 'a')
+        {
+            println("AUTO");
+            mode = Modes.Auto;
+        }
+
+        if (key == 'r')
+        {
+            println("RAND");
+            mode = Modes.AutoRandom;
+        }
+
+        if (key == 'm')
+        {
+            println("DRIV");
+            mode = Modes.AutoRandom;
+        }
+        
 
 
     }
