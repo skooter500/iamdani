@@ -103,20 +103,27 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new Life(this, 0, 1000));
-        visions.add(new IFCubes(this,7, 250, -600)); 
-        visions.add(new IFCubes(this,30, 150, -400));        
-        visions.add(new Cubes(this));   
+
+        visions.add(new ManarBrain(this));
+        visions.add(new Life(this, 1, 1000));
+        visions.add(new infiniteforms.Cube(this));
+         
+        visions.add(new IFCubes(this,7, 150, -600)); 
+        visions.add(new IFCubes(this,30, 150, -400));       
+        visions.add(new Models1(this, "eye.obj", true));
         
-        visions.add(new ManarBrain(this));        
+        visions.add(new Models1(this, "audio garden 2.obj", false));        
+        
+        visions.add(new Life(this, 0, 1000));
+         
+        visions.add(new Cubes(this));   
+                
                         
-        visions.add(new Life(this, 1, 1000));                
+                       
         visions.add(new Life(this,2, 1000));                        
                      
         visions.add(new SinWaves(this));
         
-        visions.add(new Models1(this, "eye.obj", true));
-        visions.add(new Models1(this, "audio garden 2.obj", false));        
         
         visions.add(new LauraSun(this));
         visions.add(new Models1(this, "eden.obj", false));        
@@ -235,14 +242,18 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (pitch == 42)
         {
-            println("STA");
+            println("RST");
+            println("MSX System");
+            println("version 1.0");
+            println("Copyright 1985 by microsoft");
+            println("ok"); 
             visions.get(whichVisual).enter();
             return;
         }
 
         if (pitch == 50)
         {
-            println("RST");
+            println("DEF");   
             resetDefaults();
             return;
         }
@@ -279,7 +290,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         boolean clockWise = (value < 100);
 
         if (number == 7) {
-            spe = min(max(clockWise ? spe + 0.1f : spe - 0.1f, 0.1f), 2);
+            spe = min(max(clockWise ? spe + 0.1f : spe - 0.1f, 0.0f), 2);
             println("SPE: " + spe);
         }
 
@@ -310,7 +321,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
 
         if (number == 71) {
-            alp = min(max(clockWise ? alp + 5f : alp - 5f, 0), 255);
+            alp = min(max(clockWise ? alp + 5f : alp - 5f, 0.1f), 255);
             println("ALP: " + alp);
         }
         if (number == 76) {
@@ -364,6 +375,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     boolean showConsole = true;
 
     public void draw() {        
+
         if (ald == 50)
         {        
             background(0);

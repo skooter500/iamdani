@@ -1,42 +1,40 @@
 class Cube
 {
-  PVector position;
+  float size;
+  float speed;
+  float theta;
+  color c;
+  PVector pos;
   
-  float smoothedBoxSize = 0;
-  float angle = 0;
-  float weight = 5;
-  float size = 50;
-  
-  boolean useAmplitude = true;
-  
-  
-  Cube(float x, float y, float z)
+  Cube()
   {
-    position = new PVector(x, y, z);
+    this(100, 0.05f, color(255, 255, 255), width / 2, height / 2);
+  }
+  
+  Cube(float size, float speed, color c, float x, float y)
+  {
+    this.size = size; // Disambiguation
+    this.speed = speed;
+    this.c = c;
+    theta = 0;
+    this.pos = new PVector(x, y);
+  }
+  
+  void update()
+  {
+    theta += speed;
   }
   
   void render()
   {
     pushMatrix();
-    strokeWeight(2);        
-    stroke((map(smoothedAmplitude, 0, 1, 0, 255) + colorOffset) % 255, 255, 255);
-    translate(position.x, position.y, position.z);       
-    
-    rotateY(angle);
-    rotateX(angle);
-    strokeWeight(weight);
-    if (useAmplitude)
-    {
-      float boxSize = size + (amplitude * 300); 
-      smoothedBoxSize = lerp(smoothedBoxSize, boxSize, 0.1f);                 
-      box(smoothedBoxSize);
-    }
-    else
-    {
-      box(size);
-    }
-    angle+=0.01f;
+    strokeWeight(5);
+    noFill();
+    stroke(c);
+    translate(pos.x, pos.y);  
+    rotateX(theta);
+    rotateY(theta);  
+    box(size);
     popMatrix();
   }
-  
 }

@@ -26,6 +26,7 @@ public class ManarBrain extends Poly
     {
         p = v;
         p.pushMatrix();//seperating drawBrain function from other functions
+        v.rotateX(v.pit);
         drawBrain();//function to draw the brain
         //z ++;
         p.popMatrix();
