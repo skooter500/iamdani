@@ -61,12 +61,12 @@ public class paris extends Poly {
 
     // colouring of the background
 
-    v.stroke(v.hueShift(255), 255, 255);
+    v.stroke(v.hueShift(255), 255, 255, v.alp);
     v.noFill();
 
     // this is to add the rainbow pixel effect
 
-    v.fill(v.hueShift(v.random(0, 256)), 255, 255);
+    v.fill(v.hueShift(v.random(0, 256)), 255, 255, v.alp);
     v.noStroke();
     v.rect(v.random(w), v.random(h), 25, 25);
 
@@ -79,7 +79,7 @@ public class paris extends Poly {
     // colouring of the blue ocean
 
     v.noStroke();
-    v.fill(v.hueShift(180), 255, 255);
+    v.fill(v.hueShift(180), 255, 255, v.alp);
     //v.frameRate(15);
 
     // wave movement setting
@@ -100,7 +100,7 @@ public class paris extends Poly {
 
     v.pushMatrix();
     v.translate(+1000, +130);
-    v.fill(v.hueShift(55), 255, 255);
+    v.fill(v.hueShift(55), 255, 255, v.alp);
     v.noStroke();
     v.ellipse(v.width - 100, v.height - 25, 400 + (smoothedavg * 600), 400 + (smoothedavg * 600));
     v.popMatrix();
@@ -109,7 +109,7 @@ public class paris extends Poly {
 
     v.pushMatrix();
     v.translate(+500, +160);
-    v.fill(v.hueShift(v.random(0, 256)), 255, 255);
+    v.fill(v.hueShift(v.random(0, 256)), 255, 255, v.alp);
     v.noStroke();
     v.beginShape();
     v.vertex(0, -50, 0);
@@ -126,7 +126,7 @@ public class paris extends Poly {
 
     v.pushMatrix();
     v.translate(1500, +160);
-    v.fill(v.hueShift(v.random(0, 256)), 255, 255);
+    v.fill(v.hueShift(v.random(0, 256)), 255, 255, v.alp);
     v.noStroke();
     v.beginShape();
     v.vertex(0, -50, 0);
@@ -144,7 +144,7 @@ public class paris extends Poly {
     v.pushMatrix();
     v.translate(0, 160);
     v.fill(200);
-    v.stroke(v.hueShift(90), 255, 255);
+    v.stroke(v.hueShift(90), 255, 255, v.alp);
     v.strokeWeight(2);
     v.beginShape();
     v.vertex(planeX, planeY);
@@ -152,8 +152,8 @@ public class paris extends Poly {
     v.vertex(planeX + 120, planeY);
     v.vertex(planeX + 40, planeY + 20);
     v.endShape(v.CLOSE);
-    v.fill(v.hueShift(120), 255, 255);
-    v.stroke(v.hueShift(30), 255, 255);
+    v.fill(v.hueShift(120), 255, 255, v.alp);
+    v.stroke(v.hueShift(30), 255, 255, v.alp);
     v.ellipse(planeX + 50, planeY - 5, 55, 25);
     v.popMatrix();
 
