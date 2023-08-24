@@ -16,8 +16,10 @@ public class Cubesquared2 extends Poly{
     @Override
     public void render(int ellapsed) {
         
-        
-      
+
+        v.rotateX(v.pit);
+    //v.rotateY(v.yaw - 0.6f);
+       v.background(0);
        v.colorMode(PApplet.HSB); 
        //v.background(0);
        v.translate( v.width/2, v.height/2, -off_max*2.3f);
@@ -25,7 +27,7 @@ public class Cubesquared2 extends Poly{
        v.rotateX(v.frameCount*0.01f);
        v.rotateZ(v.frameCount*0.01f);
        v.strokeWeight(1);
-       v.stroke(v.hueShift(90), 255, 255);
+       v.stroke(v.hueShift(90), 255, 255, v.alp);
        //v.rotateY(v.frameCount*v.getSmoothedAmplitude()/100);
        //v.rotateX(v.frameCount*v.getSmoothedAmplitude()/100);
        //v.rotateZ(v.frameCount*v.getSmoothedAmplitude()/100);
@@ -50,7 +52,7 @@ public class Cubesquared2 extends Poly{
                 v.rotateX(v.frameCount*0.1f);//rotates individual cubes on x axis 
                 v.rotateZ(v.frameCount*0.1f);//rotates individual cubes on z axis
 
-                v.fill(v.hueShift(c),(255+v.frameCount)%255,(255+v.frameCount)%255);
+                v.fill(v.hueShift(c),(255+v.frameCount)%255,(255+v.frameCount)%255, v.alp);
                 v.scale(scaleFactor); 
                 v.box(v.getSmoothedAmplitude()*150);//box size changes by amplitude of song
                 //v.box(20);

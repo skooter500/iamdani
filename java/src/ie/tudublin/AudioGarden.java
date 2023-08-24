@@ -104,6 +104,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
 
+        visions.add(new Cubesquared2(this));
+        
+        visions.add(new SarahVisual(this));
+        //visions.add(new JenniferVisuals(this));    
+        
+        visions.add(new Nematode(this));
+        visions.add(new LauraSun(this));
         visions.add(new ManarBrain(this));
         visions.add(new Life(this, 1, 1000));
         visions.add(new infiniteforms.Cube(this));
@@ -125,7 +132,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new SinWaves(this));
         
         
-        visions.add(new LauraSun(this));
+        
         visions.add(new Models1(this, "eden.obj", false));        
         visions.add(new Bloom(this));        
           
@@ -138,17 +145,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new Models1(this, "msx.obj", false));
          
          
-        visions.add(new Airish(this));
+        //visions.add(new Airish(this));
         visions.add(new Mena(this));
-        visions.add(new Bands(this, 200, 0, 0, 0));        
+        //visions.add(new Bands(this, 200, 0, 0, 0));        
         visions.add(new paris(this));        
         visions.add(new Spiral(this));
-        visions.add(new Cubesquared2(this));
         
-        visions.add(new SarahVisual(this));
-        //visions.add(new JenniferVisuals(this));    
-        
-        visions.add(new Nematode(this));
     
         
 
