@@ -152,6 +152,7 @@ public class DANI extends Poly {
     int reset = 0;
 
 	public void render() 
+    
     {
 
         if (reset == 60 * 35)
