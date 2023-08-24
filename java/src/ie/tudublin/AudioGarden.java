@@ -201,6 +201,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     Textarea myTextarea;
     float consoleColor = 128;
 
+    private boolean takeScreenshot = false;
+
     void defaults()
     {
         println("DEF");  
@@ -233,20 +235,20 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                 println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = pitch % visions.size();
                 change(newVisual);
-                break;
+                return;
             }
             case AutoRandom:
             {
                 println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = (int) random(0, visions.size());
                 change(newVisual);
-                break;
+                return;
             }
         }
 
         if (pitch == 43)
         {
-            takeScreenshot();
+            takeScreenshot = true;            
             return;
         }
 
@@ -441,7 +443,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         
         if (key == 'p')
         {
-            takeScreenshot();
+            takeScreenshot = true;
         }
     }
 
@@ -503,7 +505,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         {
             println(randomMessages[(int) random(0, randomMessages.length)]);
         }
-
+        if (takeScreenshot)
+        {
+            takeScreenshot();
+            takeScreenshot = false;
+        }
         //hueShift();
     }
     
