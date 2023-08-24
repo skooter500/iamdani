@@ -88,6 +88,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println("ok");
         println("RUN");
         println("I AM DANI");
+        println("dynamic articicial non-intelligence");
 
 
         noCursor();
@@ -232,6 +233,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         {
             case Auto:
             {
+                if (pitch == 43)
+                {
+                    takeScreenshot = true;            
+                    return;
+                }
                 println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = pitch % visions.size();
                 change(newVisual);
@@ -239,6 +245,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             }
             case AutoRandom:
             {
+                if (pitch == 43)
+                {
+                    takeScreenshot = true;            
+                    return;
+                }
                 println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = (int) random(0, visions.size());
                 change(newVisual);
@@ -254,7 +265,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         // Receive a noteOn
         // SPecial codes
-        println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
         if (pitch == 49)
         {
             change(whichVisual + 1);
@@ -301,6 +311,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
         
+        println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+        
                
         
         
@@ -323,13 +335,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }            
         whichVisual = into;
         visions.get(whichVisual).enter();
-        println("ACT " + whichVisual + ": " + visions.get(whichVisual).getClass().getName());         
+        println(whichVisual + ": " + visions.get(whichVisual).getClass().getName());         
     }
 
     
     public void controllerChange(int channel, int number, int value) {
         // Receive a controllerChange
-        println("CC CH: " + channel + " NUM: " + number + " VA: " + value);  
+        println("CH: " + channel + " NUM: " + number + " VA: " + value);  
 
         boolean clockWise = (value < 100);
 
@@ -435,10 +447,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             mode = Modes.AutoRandom;
         }
 
-        if (key == 'm')
+        if (key == 'c')
         {
-            println("DRIV");
-            mode = Modes.AutoRandom;
+            println("CTRL");
+            mode = Modes.Ctrl;
         }
         
         if (key == 'p')
@@ -534,11 +546,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "welcome to the metaverse",
         "nice to meet you",
         "i exist",
-        "420 detected. police called",
+        "420 detected",
         "LSD detected",
         "array index out of bounds",
         "dont masterbate",
         "i like Spoonies spoonies",
+        "dynamic artificial non-intelligence",
         "act normal",
         "normalize huge mugs of tea",
         "callibrating sensors",
