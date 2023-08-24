@@ -477,7 +477,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             consoleSize = lerp(consoleSize, targetSize, 0.1f);
             myTextarea.setSize(800, (int) consoleSize);
             myTextarea.setVisible(true);
-            myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
+            myTextarea.setColor(color(hueShift(consoleColor), 255, 255, alp));
         }
 
 
