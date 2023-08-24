@@ -38,8 +38,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        // /fullScreen(P3D, 0);
-        size(1000, 1000, P3D);
+        fullScreen(P3D, 2);
+        //size(1000, 1000, P3D);
     }
 
     PShape sphere;
@@ -252,6 +252,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
 
+        if (pitch == 43)
+        {
+            takeScreenshot();
+            return;
+        }
+
         if (pitch == 41)
         {
             change(whichVisual - 1);
@@ -426,8 +432,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             mode = Modes.AutoRandom;
         }
         
+        if (key == 'p')
+        {
+            takeScreenshot();
+        }
+    }
 
-
+    public void takeScreenshot()
+    {
+        println("insert disk");
+        saveFrame("i.am.dani-######.png");
     }
 
     boolean showConsole = true;
@@ -484,7 +498,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         //hueShift();
     }
-
     
 
     public void hueShift() {
@@ -511,7 +524,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "LSD detected",
         "array index out of bounds",
         "dont masterbate",
-        "next without for in line 50",       
         "i like Spoonies spoonies",
         "act normal",
         "normalize huge mugs of tea",
