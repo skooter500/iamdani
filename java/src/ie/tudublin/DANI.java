@@ -18,8 +18,6 @@ public class DANI extends Poly {
     int ch = 0;
     public Nematode t;
 
-    int aliveFor = 0;
-
     public DANI(AudioGarden v, String fileName)
     {
         super(v);
@@ -33,8 +31,6 @@ public class DANI extends Poly {
         sonnet = writeSonnet();
         line = 0;
         ch = 0;
-
-        aliveFor = 0;
     }
 
     void printAll()
@@ -143,7 +139,7 @@ public class DANI extends Poly {
                     break;
                 }
             }
-            sonnet[i+1] = line;
+            sonnet[i] = line;
             //v.println(line);            
         }
         sonnet[12] = " ";
@@ -153,13 +149,17 @@ public class DANI extends Poly {
     
 	float off = 0;
 
+    int reset = 0;
+
 	public void render() 
     {
 
-        // if (aliveFor == 60 * 20)
-        // {
-        //     enter();
-        // }
+        if (reset == 60 * 35)
+        {
+            reset = 0;
+            enter();      
+        }
+        reset ++;
         v.textAlign(v.LEFT, v.CENTER);
 
         float c = v.hueShift(99);

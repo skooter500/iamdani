@@ -50,6 +50,7 @@ public class Nematode extends Poly
 
   PFont font;
   
+  int reset = 0;
   
   public void enter()
   {
@@ -75,6 +76,7 @@ public class Nematode extends Poly
     v.println(this);
     dani.t = this;
     dani.enter();
+    reset = 0;
   }
 
   public void render()
@@ -87,16 +89,23 @@ public class Nematode extends Poly
   public void render(float cx, float cy, float offs)
   {
     
+    if (reset == 60 * 5)
+    {
+      reset = 0;
+      enter();      
+    }
+    reset ++;
     c2 = c1 + cw;
 
     float half = w * length * 0.5f;
     v.strokeWeight(3);
     v.pushMatrix();
+    //v.camera(0, 0, -5000, 0, 0, 0f, 0f, 0.001f, 0f);
     v.translate(cx, cy);
     v.translate(0, - half);
 
-    v.rotateX(-v.HALF_PI + v.pit);
-    v.rotateZ(v.PI + v.yaw);
+    //v.rotateX(v.pit);
+    //v.rotateZ(v.PI + v.yaw);
 
     v.noFill();
     float hw = w / 2;

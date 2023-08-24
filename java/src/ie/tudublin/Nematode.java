@@ -165,7 +165,6 @@ public class Nematode extends Poly
 
     public void render(float cx, float cy)
     {
-
         
         float half = w * length * 0.5f; 
 
