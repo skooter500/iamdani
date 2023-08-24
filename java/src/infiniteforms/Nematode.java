@@ -89,7 +89,7 @@ public class Nematode extends Poly
   public void render(float cx, float cy, float offs)
   {
     
-    if (reset == 60 * 5)
+    if (reset == 60 * 20)
     {
       reset = 0;
       enter();      
@@ -97,6 +97,7 @@ public class Nematode extends Poly
     reset ++;
     c2 = c1 + cw;
 
+    w = v.yaw * 100;
     float half = w * length * 0.5f;
     v.strokeWeight(3);
     v.pushMatrix();
@@ -130,7 +131,7 @@ public class Nematode extends Poly
     
       float y = i * w;
       float f = 0.5f;
-      float w1 = v.sin(v.map(i, 0, length, f + f, v.PI)) * w; 
+      float w1 = v.sin(v.map(i, 0, length, f + f, v.PI)) * w;
       //w = w1;
       //w = w1;
       v.ellipse(0, y, w1  * 2f, w);
@@ -138,8 +139,8 @@ public class Nematode extends Poly
       {
         v.line(-w1, y, - w1 - w1, y);
         v.line(w1, y, w1 * 2, y);
-        v.circle((-w1 * 2.0f) - eyeRadius, y, eyeRadius * 2);
-        v.circle((w1 * 2.0f) + eyeRadius, y, eyeRadius * 2);
+        v.circle((-w1 * 2.0f) - eyeRadius, y, eyeRadius * 10);
+        v.circle((w1 * 2.0f) + eyeRadius, y, eyeRadius * 10);
       }      
       if (i == 0)
       {
