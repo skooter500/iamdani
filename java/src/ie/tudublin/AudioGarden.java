@@ -371,13 +371,19 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             println("HUE: " + hue);
         }
 
-        if (number == 19) {
+        if (number == 77) {
             ald = min(max(clockWise ? ald + 1f : ald - 1f, 0), 50);
             println("ALD: " + ald);
         }
 
+        if (number == 19) {
+            alp = min(max(clockWise ? alp + 5f : alp - 5f, 0), 255);
+            println("ALP: " + alp);
+        }
+
+
         if (number == 71) {
-            alp = min(max(clockWise ? alp + 5f : alp - 5f, 0.1f), 255);
+            alp = min(max(clockWise ? alp + 1f : alp - 1f, 0.1f), 255);
             println("ALP: " + alp);
         }
         if (number == 76) {
