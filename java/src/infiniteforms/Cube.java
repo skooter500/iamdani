@@ -47,7 +47,7 @@ public class Cube extends Poly
         v.rotateX(angle);
         v.strokeWeight(weight);
 
-        float boxSize = size + (v.getAmplitude() * 300); 
+        float boxSize = size + (v.getAmplitude() * 200); 
         smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f);                 
         v.box(smoothedBoxSize);
         

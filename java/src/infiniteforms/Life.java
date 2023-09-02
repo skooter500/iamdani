@@ -6,7 +6,7 @@ import ie.tudublin.Poly;
 public class Life extends Poly
 {
   
-  int boardWidth = 100;
+  int boardWidth = 200;
   int boardHeight;
   float cellWidth;
   float[][] board = new float[boardHeight][boardWidth];
@@ -18,9 +18,11 @@ public class Life extends Poly
   int generation = 0;
   int generationMax = 10000;
 
-  public Life(AudioGarden v,  int pattern, int generationMax)
+  public Life(AudioGarden v,  int pattern, int generationMax, int boardSize)
   {
     super(v);
+    this.boardWidth = boardSize;
+    clearBoard();
     this.pattern = pattern;
     this.generationMax = generationMax;
     initialize();
@@ -41,8 +43,137 @@ public class Life extends Poly
       case 2:
         boxShape();
         break;
+      case 3:
+        MakeGosperGun((int) (boardWidth * 0.4f) , (int) (boardHeight * 0.45f));
+        break;
+      case 4:
+        MakeTumbler((int) (boardWidth * 0.5) , boardHeight /2);
+        break;
+      case 5:
+        MakeLightWeightSpaceShip((int) (boardWidth * 0.25f) , boardHeight /2);
+        break;
+
+
     }
   }
+
+  public void MakeGosperGun(int x, int y)
+    {
+      clearBoard();
+        On(x + 23, y);
+        On(x + 24, y);
+        On(x + 34, y);
+        On(x + 35, y);
+
+        On(x + 22, y + 1);
+        On(x + 24, y + 1);
+        On(x + 34, y + 1);
+        On(x + 35, y + 1);
+
+        On(x + 0, y + 2);
+        On(x + 1, y + 2);
+        On(x + 9, y + 2);
+        On(x + 10, y + 2);
+        On(x + 22, y + 2);
+        On(x + 23, y + 2);
+
+        On(x + 0, y + 3);
+        On(x + 1, y + 3);
+        On(x + 8, y + 3);
+        On(x + 10, y + 3);
+
+        On(x + 8, y + 4);
+        On(x + 9, y + 4);
+        On(x + 16, y + 4);
+        On(x + 17, y + 4);
+
+        On(x + 16, y + 5);
+        On(x + 18, y + 5);
+
+        On(x + 16, y + 6);
+
+        On(x + 35, y + 7);
+        On(x + 36, y + 7);
+
+        On(x + 35, y + 8);
+        On(x + 37, y + 8);
+
+        On(x + 35, y + 9);
+
+        On(x + 24, y + 12);
+        On(x + 25, y + 12);
+        On(x + 26, y + 12);
+
+        On(x + 24, y + 13);
+
+        On(x + 25, y + 14);
+    }
+
+    public void MakeLightWeightSpaceShip(int x, int y)
+    {
+      clearBoard();
+        On(x + 1, y);
+        On(x + 2, y);
+        On(x + 3, y);
+        On(x + 4, y);
+
+        On(x, y + 1);
+        On(x + 4, y + 1);
+
+        On(x + 4, y + 2);
+
+        On(x, y + 3);
+        On(x + 3, y + 3);
+    }
+
+
+    public void MakeTumbler(int x, int y)
+    {
+      clearBoard();
+        On(x + 1, y);
+        On(x + 2, y);
+        On(x + 4, y);
+        On(x + 5, y);
+
+        On(x + 1, y + 1);
+        On(x + 2, y + 1);
+        On(x + 4, y + 1);
+        On(x + 5, y + 1);
+
+        On(x + 2, y + 2);
+        On(x + 4, y + 2);
+
+        On(x, y + 3);
+        On(x + 2, y + 3);
+        On(x + 4, y + 3);
+        On(x + 6, y + 3);
+
+        On(x, y + 4);
+        On(x + 2, y + 4);
+        On(x + 4, y + 4);
+        On(x + 6, y + 4);
+
+        On(x, y + 5);
+        On(x + 1, y + 5);
+        On(x + 5, y + 5);
+        On(x + 6, y + 5);
+
+    }
+
+    public void  on (int y, int x)
+    {
+      board[y][x] = v.random(255);
+    }
+
+    public void MakeGlider(int x, int y)
+    {
+      clearBoard();
+        on(y, x + 1);
+        on(y + 1, x + 2) ;
+        on(y + 2, x);
+        on(y + 2, x + 1) ;
+        on(y + 2, x + 2) ;
+    }
   
   void boxShape()
   {
@@ -190,6 +321,22 @@ public class Life extends Poly
     ysum /= 3.0f;
 
     return v.map(v.atan2(ysum, xsum), -v.PI, v.PI, 0, 255);
+  }
+
+  public void On(int x, int y)
+  {
+      if ((x >= 0) && (x < boardWidth) && (y >= 0) && (y < boardHeight))
+      {
+          board[y][x] = v.random(255);
+      }
+  }
+
+  public void Off(int x, int y)
+  {
+      if ((x >= 0) && (x < boardWidth) && (y >= 0) && (y < boardHeight))
+      {
+          board[y][x] = 0;
+      }
   }
 
 

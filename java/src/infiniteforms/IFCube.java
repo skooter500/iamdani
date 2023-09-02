@@ -38,7 +38,7 @@ public class IFCube
     if (useAmplitude)
     {
       float amp = v.getAmplitude();
-      float boxSize = size + (amp * 1000); 
+      float boxSize = size + (amp * 100); 
       smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f);                 
       v.box(smoothedBoxSize);
     }

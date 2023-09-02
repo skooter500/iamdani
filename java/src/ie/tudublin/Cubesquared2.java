@@ -44,7 +44,7 @@ public class Cubesquared2 extends Poly{
                 //v.translate(xo, yo , zo+100);
 
 
-                v.translate(xo*(4*v.getSmoothedAmplitude()),yo*(4*v.getSmoothedAmplitude()),zo*(4*v.getSmoothedAmplitude()));
+                v.translate(xo*(1.5f*v.getSmoothedAmplitude()),yo*(1.5f*v.getSmoothedAmplitude()),zo*(1.5f*v.getSmoothedAmplitude()));
 
               
                 float c = PApplet.map(zo, 0, v.getAudioBuffer().size(),0,255);
@@ -54,7 +54,7 @@ public class Cubesquared2 extends Poly{
 
                 v.fill(v.hueShift(c),(255+v.frameCount)%255,(255+v.frameCount)%255, v.alp);
                 v.scale(scaleFactor); 
-                v.box(v.getSmoothedAmplitude()*150);//box size changes by amplitude of song
+                v.box(v.getSmoothedAmplitude()*50);//box size changes by amplitude of song
                 //v.box(20);
                 //v.sphere(v.getSmoothedAmplitude());;
                 v.popMatrix();

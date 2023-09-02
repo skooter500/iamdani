@@ -31,6 +31,8 @@ public class Model
   public int colorOffset = 0;
   public boolean rotate = false;
 
+  public boolean rotateX = false;
+
   void render()
   {
     v.pushMatrix();
@@ -39,8 +41,8 @@ public class Model
     //s.setStroke(v.color(200, 255, 255));
     //s.setFill(v.color(0, 0, 0, 0));
     
-    float col1 = v.map(v.getSmoothedAmplitude(), 0, 1, 0, 255);
-    float col2 = v.map(v.getSmoothedAmplitude(), 0, 1, 255, 0);
+    float col1 = v.map(v.getSmoothedAmplitude() * 1.1f, 0, 1, 0, 255);
+    float col2 = v.map(v.getSmoothedAmplitude() * 1.1f, 0, 1, 255, 0);
 
     col1 = (col1 + colorOffset) % 256;
     col2 = (col2 + colorOffset) % 256;
@@ -59,23 +61,29 @@ public class Model
     v.translate(position.x, position.y, position.z);       
     
     //strokeWeight(weight);
-    float boxSize = size + (v.getAmplitude() * 30); 
+    float boxSize = size + (v.getAmplitude() * 10); 
     smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
     //scale(1);
 
+    
     v.rotateX(-v.HALF_PI + v.pit);
     v.rotateZ(v.PI + v.yaw);
     //v.rotateX(v.xRotation);
     // /v.rotateZ(v.zRotation);
     
     if (rotate)
-      v.rotateY(-theta * 0.01f);
-    // v.rotateZ(0.2f + v.sin(theta) * 0.2f);
+      v.rotateY(angle);
+    if (rotateX)
+      v.rotateZ(-angle);
+
+      // v.rotateZ(0.2f + v.sin(theta) * 0.2f);
     theta += (v.spe * 0.2f) ;
     c += v.spe * 100 * v.getAmplitude();
     v.scale(smoothedBoxSize * 4);
     v.shape(s);
     v.popMatrix();
+
+    angle+=0.01f * v.spe;
 
 
     /*

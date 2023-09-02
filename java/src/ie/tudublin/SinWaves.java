@@ -26,7 +26,7 @@ public class SinWaves extends Poly{
         v.rotateX(v.pit);
         v.rotateZ(v.yaw);
 
-        float amp = v.getSmoothedAmplitude();
+        float amp = v.getSmoothedAmplitude() * 0.8f;
 
         for (int x = -10; x < 10; x++) {
             for (int y = -10; y < 10; y++) {
@@ -51,7 +51,7 @@ public class SinWaves extends Poly{
             }
             }
         }
-        angle += amp*10 * v.spe;//syncs the sin wave change for box size with the amplitude of song.
+        angle += amp*5 * v.spe;//syncs the sin wave change for box size with the amplitude of song.
         //angle+=2;
         // v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0f, 0f, 0.1f, 0f);  
     }

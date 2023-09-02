@@ -38,7 +38,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 0);
         //size(1000, 1000, P3D);
     }
 
@@ -89,6 +89,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println("RUN");
         println("I AM DANI");
         println("dynamic articicial non-intelligence");
+        println("speak now or forever hold your peace");
 
 
         noCursor();
@@ -110,55 +111,61 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
+        visions.add(new Life(this, 0, 50, 100));
+        visions.add(new Life(this, 1, 50, 100));
+        visions.add(new Life(this, 2, 50, 100));            
+        visions.add(new Life(this, 3, 10000, 200));
+        visions.add(new Life(this, 4, 10000, 100));
+        visions.add(new Models1(this, "eye.obj", true, false));
         visions.add(new DANI(this, "captainb.txt"));
         visions.add(new Nematode(this));
         visions.add(new SinWaves(this));
-        
-        //visions.add(new SarahVisual(this));
         visions.add(new Cubesquared2(this));
-        //visions.add(new Mena(this));
-        visions.add(new Models1(this, "tudub.obj", false));
+        visions.add(new Mena(this));
+        visions.add(new LauraSun(this));
+        visions.add(new ManarBrain(this));
+        // 
+        visions.add(new Models1(this, "tudub.obj", false, true));
+        visions.add(new Models1(this, "msx.obj", false, true));
+        visions.add(new infiniteforms.Cube(this));
+        visions.add(new IFCubes(this,7, 150, -600)); 
+        visions.add(new IFCubes(this,30, 150, -400));       
+        
+        visions.add(new Cubes(this));   
                 
-        visions.add(new Models1(this, "msx.obj", false));
+                        
+                       
+        visions.add(new Bloom(this));        
+          
+        visions.add(new Spiral(this));
+          
+        
+        
+         
+         
+        visions.add(new Airish(this));
+        
+        
         //visions.add(new Bands(this, 200, 0, 0, 0));        
-        visions.add(new paris(this));        
+        //visions.add(new paris(this));        
         //visions.add(new Spiral(this));
         //visions.add(new SarahVisual(this));
         //visions.add(new JenniferVisuals(this));    
         
         
-        visions.add(new LauraSun(this));
-        visions.add(new ManarBrain(this));
-        visions.add(new Life(this, 1, 1000));
-        visions.add(new infiniteforms.Cube(this));
-         
-        visions.add(new IFCubes(this,7, 150, -600)); 
-        visions.add(new IFCubes(this,30, 150, -400));       
-        visions.add(new Models1(this, "eye.obj", true));
+        // visions.add(new Life(this, 1, 1000));
         
-        visions.add(new Models1(this, "audio garden 2.obj", false));        
-        
-        visions.add(new Life(this, 0, 1000));
-         
-        visions.add(new Cubes(this));   
-                
-                        
-                       
-        visions.add(new Life(this,2, 1000));                        
-                     
+
+        // new set
         
         
+
+
         
-        visions.add(new Models1(this, "eden.obj", false));        
-        visions.add(new Bloom(this));        
-          
-        //visions.add(new Spiral(this));
-          
+        ////visions.add(new SarahVisual(this));
         
         
          
-         
-        //visions.add(new Airish(this));
         
         
     
@@ -195,7 +202,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float consoleSize = 0;
     float originalTargetSize = 400;
     
-    float targetSize = 800;
+    float targetSize = 1030;
     
 
     ControlP5 cp5;
@@ -495,7 +502,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             consoleSize = lerp(consoleSize, targetSize, 0.1f);
             myTextarea.setSize(800, (int) consoleSize);
             myTextarea.setVisible(true);
-            myTextarea.setColor(color(hueShift(consoleColor), 255, 255, alp));
+            myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
         }
 
 

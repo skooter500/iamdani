@@ -9,11 +9,12 @@ public class Models1 extends Poly
 
   int colorOffset = 0;
   
-  public Models1(AudioGarden v, String fileName, boolean rotate)
+  public Models1(AudioGarden v, String fileName, boolean rotate, boolean rotateX)
   {
     super(v);
     model = new Model(fileName, 0, 0, 0, v);    
     model.rotate = rotate;
+    model.rotateX = rotateX;
   }
   
   public void enter()

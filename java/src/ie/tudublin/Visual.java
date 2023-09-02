@@ -117,7 +117,7 @@ public abstract class Visual extends PApplet
 		}
 		amplitude = total / ab.size();
 
-		amplitude = bas + (amplitude * mul);
+		amplitude = bas * 0.2f + (amplitude * mul);
 
 		smothedAmplitude = PApplet.lerp(smothedAmplitude, amplitude, 0.1f);
 	}

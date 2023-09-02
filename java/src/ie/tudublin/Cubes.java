@@ -5,7 +5,7 @@ import processing.core.PApplet;
 public class Cubes extends Poly
 {
     float start = v.millis();
-    float sizeBox = 1000;
+    float sizeBox = 800;
     float sizeRect = 10;
 
     public Cubes(AudioGarden v)
@@ -52,10 +52,10 @@ public class Cubes extends Poly
             v.circle(200, 200+i * v.spe, 1);
             //Rectangles with spaces between them to give effects.
             //getsmoothed causes them to beat out in width to the music
-            v.rect(100-i*5 * v.spe, 100, i, 0+i*v.getSmoothedAmplitude()*10);
-            v.rect(100-i*5 * v.spe, 100, i, 5+i*v.getSmoothedAmplitude()*10);
-            v.rect(100-i*5 * v.spe, 100, i, 10+i*v.getSmoothedAmplitude()*10);
-            v.rect(100-i*5 * v.spe, 100, i, 15+i*v.getSmoothedAmplitude()*10);
+            v.rect(100-i*2 * v.spe, 100, i, 0+i*v.getSmoothedAmplitude()*4);
+            v.rect(100-i*2 * v.spe, 100, i, 5+i*v.getSmoothedAmplitude()*4);
+            v.rect(100-i*2 * v.spe, 100, i, 10+i*v.getSmoothedAmplitude()*4);
+            v.rect(100-i*2 * v.spe, 100, i, 15+i*v.getSmoothedAmplitude()*4);
             v.pop();
             count++;
         }
