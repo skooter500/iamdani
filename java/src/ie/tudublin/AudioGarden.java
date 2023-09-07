@@ -38,7 +38,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 0);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -475,7 +475,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     public void takeScreenshot()
     {
         println("insert disk");
-        saveFrame("i.am.dani-######.png");
+        saveFrame("../screenshots/i.am.dani-######.png");
     }
 
     boolean showConsole = true;
