@@ -8,6 +8,8 @@ i.am.dani is a creative coding project that celebrates the 40th Anniversary of t
 
 ![](screenshots/i.am.dani-011423.png)
 
+![](screenshots/i.am.dani-009379.png)
+
 ## Contributors:
 
 - Bryan Duggan
