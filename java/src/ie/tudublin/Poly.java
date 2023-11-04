@@ -1,14 +1,14 @@
 package ie.tudublin;
 
 public abstract class Poly {
-    public Visual v;
+    public AudioGarden v;
 
     
 
 
 
     public Poly(Visual v){
-        this.v = v;
+        this.v = (AudioGarden) v;
     }
 
     public void render(int ellapsed)

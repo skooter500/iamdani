@@ -38,8 +38,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 2);
-        //size(1000, 1000, P3D);
+        fullScreen(P3D);
+        //size(500, 500, P3D);
     }
 
     PShape sphere;
@@ -111,13 +111,15 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new Life(this, 0, 50, 100));
-        visions.add(new Life(this, 1, 50, 100));
-        visions.add(new Life(this, 2, 50, 100));            
+        visions.add(new DANI(this, "captainb.txt"));
+        
         visions.add(new Life(this, 3, 10000, 200));
+        
+        visions.add(new Life(this, 0, 10000, 100));
+        visions.add(new Life(this, 1, 10000, 100));
+        visions.add(new Life(this, 2, 10000, 100));            
         visions.add(new Life(this, 4, 10000, 100));
         visions.add(new Models1(this, "eye.obj", true, false));
-        visions.add(new DANI(this, "captainb.txt"));
         visions.add(new Nematode(this));
         visions.add(new SinWaves(this));
         visions.add(new Cubesquared2(this));
@@ -193,6 +195,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                   .setColor(color(consoleColor, 255, 255, alp))                  
                   .setFont(createFont("Hyperspace Bold.otf",30))
                   .setLineHeight(30)
+                  .hideScrollbar()
                   .setText(console.toString())
                   .setVisible(true);
                   ;
@@ -474,7 +477,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void takeScreenshot()
     {
-        println("insert disk");
+        println("insert disk in drive A:");
         saveFrame("../screenshots/i.am.dani-######.png");
     }
 
@@ -561,17 +564,19 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "i exist",
         "420 detected",
         "LSD detected",
-        "array index out of bounds",
+        "20 PRINT \"HELLO\", $name",
+        "10 INPUT \"What is your name\", $name",
         "dont masterbate",
         "i like Spoonies spoonies",
         "dynamic artificial non-intelligence",
+        "subscript out of range in line 40",
         "act normal",
         "normalize huge mugs of tea",
         "callibrating sensors",
-        "Abort, retry, fail",
+        "(A)bort?,(R)etry ?,(F)ail?",
         "mdma synthesis complete",
         "ok",
-        "in the beginning...",
+        "in the beginning",
         "MSX system",
         "syntax ERROR in line 20",        
         "version 1.0",

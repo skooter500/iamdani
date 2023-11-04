@@ -1,6 +1,8 @@
 package ie.tudublin;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import infiniteforms.Nematode;
 import processing.core.PApplet;
@@ -115,7 +117,7 @@ public class DANI extends Poly {
     
     public String[] writeSonnet()
     {
-        String[] sonnet = new String[14];
+        String[] sonnet = new String[16];
 
         sonnet[0] = generateName();
         sonnet[1] = " ";
@@ -144,18 +146,19 @@ public class DANI extends Poly {
         }
         sonnet[12] = " ";
         sonnet[13] = "i am DANI ";
-        return sonnet;
+        sonnet[14] = " ";        
+        sonnet[15] = new SimpleDateFormat("HH:mm:ss dd/MM/YYYY").format(Calendar.getInstance().getTime());
+
+         return sonnet;
     }
     
 	float off = 0;
 
     int reset = 0;
 
-	public void render() 
-    
+	public void render()     
     {
-
-        if (reset == 60 * 35)
+        if (reset == 60 * 60)
         {
             reset = 0;
             enter();      
@@ -169,9 +172,7 @@ public class DANI extends Poly {
         float cx = v.width;
         float cy = v.height / 2;
 
-        v.translate(cx / 3, cy/3);
-
-        
+        v.translate(cx * .4f, cy/3);
 
 		for(int i = 0 ; i <= line ; i ++)
         { 
@@ -206,8 +207,8 @@ public class DANI extends Poly {
                 {
                     if (line < sonnet.length - 1)
                     {    
-                        ch = 0;
                         line ++;
+                        ch = 0;
                     }
                     else
                     {

@@ -284,6 +284,7 @@ public class Life extends Poly
     float[][] temp = board;
     board = nextBoard;
     nextBoard = temp;
+    v.println("Generation: " + generation + " ALIVE: " + numAlive);
     generation ++;
   }
 
