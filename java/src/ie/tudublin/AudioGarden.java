@@ -38,7 +38,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D);
+        fullScreen(P3D, 2);
         //size(500, 500, P3D);
     }
 
