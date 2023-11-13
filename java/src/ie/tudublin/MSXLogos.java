@@ -28,7 +28,7 @@ class MSXModel {
             v.pushMatrix();
             v.translate(pos.x, pos.y, pos.z);
             v.rotateX(-v.HALF_PI);
-            v.rotateY(v.yaw);
+            v.rotateY(-v.yaw);
             v.rotateZ(v.pit);
             v.scale(1.0f + v.noise(theta * 2) * 100);
             v.stroke(v.hueShift(h), 255, 255, v.alp);
@@ -36,7 +36,7 @@ class MSXModel {
             v.shape(sh);
             v.popMatrix();
             theta += v.spe * 0.003f * v.getSmoothedAmplitude();
-            pos.z += v.spe * v.getSmoothedAmplitude() * 2.0f;
+            pos.z += v.spe * v.getSmoothedAmplitude() * 40.0f;
 
             if (pos.z > 1000) {
                 pos.z = 0 ;
@@ -70,7 +70,7 @@ public class MSXLogos extends Poly{
 
         v.lights();
         v.strokeWeight(2);
-        v.translate(v.width / 2, v.height / 2, 100);
+        v.translate(v.width / 2, v.height / 2, -500);
         for (MSXModel model:models)
         {
             model.render();
