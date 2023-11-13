@@ -39,7 +39,7 @@ public class Cubesquared2 extends Poly{
             for(zo=-off_max;zo<=off_max;zo+=50){
                 v.pushMatrix();
 
-                float scaleFactor = v.random(0.5f, 2.0f);// scales individual cubes by a random float between 0.5 and 2.0
+                float scaleFactor = v.random(0.5f, 2.0f) * v.spe;// scales individual cubes by a random float between 0.5 and 2.0
                 
                 //v.translate(xo, yo , zo+100);
 

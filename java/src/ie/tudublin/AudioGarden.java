@@ -38,7 +38,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -109,7 +109,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
+        visions.add(new MSXLogos(this));
         visions.add(new Cubesquared2(this));
+        
         
         visions.add(new DANI(this, "captainb.txt"));
         
@@ -121,7 +123,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new Life(this, 4, 10000, 100));
         visions.add(new Models1(this, "eye.obj", true, false));
         visions.add(new Nematode(this));
-        visions.add(new SinWaves(this));
+        
         visions.add(new Mena(this));
         visions.add(new LauraSun(this));
         visions.add(new ManarBrain(this));

@@ -4,7 +4,7 @@ import processing.core.PVector;
 
 public class Bands extends Poly {
 
-        //TODO Auto-generated constructor stub
+        //
   PVector[] positions;
   
   float radius;

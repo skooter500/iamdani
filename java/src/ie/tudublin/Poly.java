@@ -1,10 +1,11 @@
 package ie.tudublin;
 
+import processing.core.PApplet;
+import processing.core.PShape;
+import processing.core.PVector;
+
 public abstract class Poly {
     public AudioGarden v;
-
-    
-
 
 
     public Poly(Visual v){
@@ -27,5 +28,6 @@ public abstract class Poly {
     public void render()
     {
     }
-
 }
+
+
