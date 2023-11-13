@@ -31,7 +31,7 @@ public class LauraSun extends Poly
     public void draw()
     {
 
-        v.background(0);
+        //v.background(0);
         //v.colorMode(v.RGB);
         drawSun();
         drawSeawaves();

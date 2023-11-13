@@ -13,7 +13,7 @@ public class WaveyVisual extends Poly{
     float scaleFactor;
     @Override
     public void render(int ellapsed) {
-        v.background(0);
+        //v.background(0);
         v.lights();
 
         float numberOfVisuals = 5;//30 *v.getSmoothedAmplitude();

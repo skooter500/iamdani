@@ -38,8 +38,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 2);
-        //size(500, 500, P3D);
+        fullScreen(P3D);
+        //size(1000, 1000, P3D);
     }
 
     PShape sphere;
@@ -77,9 +77,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     // }
 
     public void setup() {
-
-
-        sphere = loadShape("sphere.obj");
         println("MSX System");
         println("version 1.0");
         println("Copyright 1985 by microsoft");
@@ -90,6 +87,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println("I AM DANI");
         println("dynamic articicial non-intelligence");
         println("speak now or forever hold your peace");
+        sphere = loadShape("sphere.obj");
 
 
         noCursor();
@@ -111,6 +109,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
+        visions.add(new Cubesquared2(this));
+        
         visions.add(new DANI(this, "captainb.txt"));
         
         visions.add(new Life(this, 3, 10000, 200));
@@ -122,7 +122,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new Models1(this, "eye.obj", true, false));
         visions.add(new Nematode(this));
         visions.add(new SinWaves(this));
-        visions.add(new Cubesquared2(this));
         visions.add(new Mena(this));
         visions.add(new LauraSun(this));
         visions.add(new ManarBrain(this));
@@ -485,21 +484,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void draw() {        
 
-        if (ald == 50)
-        {        
-            background(0);
-        }
-        else
-        {
-            colorMode(RGB);
-            blendMode(SUBTRACT);
-            fill(255, ald);
-            rect(0, 0, width * 4, height * 4);
-            blendMode(BLEND);
-            colorMode(HSB);
-        }
+        colorMode(RGB);
+        blendMode(SUBTRACT);
+        fill(255, ald);
+        pushMatrix();
+        translate(0, 0, -1000);
+        rect(-width, -height, width * 4, height * 4);
+        popMatrix();
+        blendMode(BLEND);
         colorMode(HSB);
-
+    
         if (showConsole)
         {
             consoleSize = lerp(consoleSize, targetSize, 0.1f);

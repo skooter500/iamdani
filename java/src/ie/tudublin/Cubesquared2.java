@@ -19,7 +19,7 @@ public class Cubesquared2 extends Poly{
 
         v.rotateX(v.pit);
     //v.rotateY(v.yaw - 0.6f);
-       v.background(0);
+       //v.background(0);
        v.colorMode(PApplet.HSB); 
        //v.background(0);
        v.translate( v.width/2, v.height/2, -off_max*2.3f);

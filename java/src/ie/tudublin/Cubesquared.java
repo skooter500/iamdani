@@ -18,7 +18,7 @@ public class Cubesquared extends Poly{
         
       
        v.colorMode(PApplet.RGB); 
-       v.background(0);
+       //v.background(0);
        v.translate( v.width/2, v.height/2, -off_max*1.3f);
        v.rotateY(v.frameCount*0.01f * v.spe);
        v.rotateX(v.frameCount*0.01f * v.spe);
