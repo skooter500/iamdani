@@ -490,8 +490,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         blendMode(SUBTRACT);
         fill(255, ald);
         pushMatrix();
-        translate(0, 0, -1000);
-        rect(-width, -height, width * 4, height * 4);
+        translate(0, 0, -5000);
+        rect(-width * 5, -height * 5, width * 10, height * 10);
         popMatrix();
         blendMode(BLEND);
         colorMode(HSB);
