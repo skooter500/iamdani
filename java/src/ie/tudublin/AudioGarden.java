@@ -109,46 +109,36 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new Cubesquared2(this));
-        visions.add(new Life(this, 3, 10000, 200));
-        
-        visions.add(new MSXLogos(this));
-        
-        
-        
+        visions.add(new infiniteforms.Cube(this));
+        visions.add(new IFCubes(this,7, 150, -600));
+        visions.add(new IFCubes(this,30, 150, -400)); 
         visions.add(new DANI(this, "captainb.txt"));
         
         
-        visions.add(new Life(this, 0, 10000, 100));
-        visions.add(new Life(this, 1, 10000, 100));
-        visions.add(new Life(this, 2, 10000, 100));            
-        visions.add(new Life(this, 4, 10000, 100));
-        visions.add(new Models1(this, "eye.obj", true, false));
-        visions.add(new Nematode(this));
+        visions.add(new Cubesquared2(this));
+        visions.add(new Life(this, 3, 10000, 200));
+        visions.add(new Life(this, 2, 10000, 100));
+        visions.add(new Life(this, 0, 10000, 100));        
+        visions.add(new Life(this, 1, 10000, 100));                    
+        visions.add(new Nematode(this));        
+        visions.add(new MSXLogos(this));
+        visions.add(new Life(this, 4, 10000, 100));        
         
-        visions.add(new Mena(this));
-        visions.add(new LauraSun(this));
-        visions.add(new ManarBrain(this));
-        // 
         visions.add(new Models1(this, "tudub.obj", false, true));
+        visions.add(new Mena(this));
         visions.add(new Models1(this, "msx.obj", false, true));
-        visions.add(new infiniteforms.Cube(this));
-        visions.add(new IFCubes(this,7, 150, -600)); 
-        visions.add(new IFCubes(this,30, 150, -400));       
+        visions.add(new LauraSun(this));
+        visions.add(new Cubes(this));
         
-        visions.add(new Cubes(this));   
-                
-                        
-                       
-        visions.add(new Bloom(this));        
-          
-        visions.add(new Spiral(this));
-          
+        visions.add(new Bloom(this));   
+        visions.add(new Models1(this, "eye.obj", true, false));
         
+        visions.add(new ManarBrain(this));
+        visions.add(new Spiral(this));        
+              
         
-         
-         
-        visions.add(new Airish(this));
+                                          
+        // visions.add(new Airish(this));
         
         
         //visions.add(new Bands(this, 200, 0, 0, 0));        
