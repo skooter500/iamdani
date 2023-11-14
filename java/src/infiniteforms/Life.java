@@ -59,7 +59,7 @@ public class Life extends Poly
 
   public void MakeGosperGun(int x, int y)
     {
-      clearBoard();
+      //clearBoard();
         On(x + 23, y);
         On(x + 24, y);
         On(x + 34, y);
@@ -111,7 +111,7 @@ public class Life extends Poly
 
     public void MakeLightWeightSpaceShip(int x, int y)
     {
-      clearBoard();
+      //clearBoard();
         On(x + 1, y);
         On(x + 2, y);
         On(x + 3, y);
@@ -129,7 +129,7 @@ public class Life extends Poly
 
     public void MakeTumbler(int x, int y)
     {
-      clearBoard();
+      //clearBoard();
         On(x + 1, y);
         On(x + 2, y);
         On(x + 4, y);
@@ -167,7 +167,7 @@ public class Life extends Poly
 
     public void MakeGlider(int x, int y)
     {
-      clearBoard();
+      //clearBoard();
         on(y, x + 1);
         on(y + 1, x + 2) ;
         on(y + 2, x);
@@ -177,7 +177,7 @@ public class Life extends Poly
   
   void boxShape()
   {
-    clearBoard();
+    //clearBoard();
     int x1 = (int)(boardWidth * 0.2f);
     int x2 = (int)(boardWidth * 0.8f);
     
@@ -201,7 +201,7 @@ public class Life extends Poly
 
   void crossShape()
   {
-    clearBoard();
+    //clearBoard();
     //generation = 0;
     int halfW = boardWidth / 2;
     int halfH = boardHeight / 2;  
@@ -219,7 +219,7 @@ public class Life extends Poly
 
   void xShape()
   {  
-    clearBoard();
+    //clearBoard();
     int half = boardHeight / 2;
     for (int i = 0; i < boardHeight; i ++)
     {
@@ -392,15 +392,16 @@ public class Life extends Poly
   {    
 
     v.camera(0, 0, -500, 0, 0, 0f, 0f, 0.001f, 0f);
+    v.rotateX(v.pit);
+    v.rotateY(v.yaw - 0.6f);
+    
     v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
-    int toPass = (int) v.map(v.spe, 0, 2, 120, 10);  
+    int toPass = (int) v.map(v.spe, 0, 2, 120, 5);  
 
     if (v.frameCount % toPass == 0)
     {
       updateBoard();
     }
-    v.rotateX(v.pit);
-    v.rotateY(v.yaw - 0.6f);
     
 
     drawBoard();
