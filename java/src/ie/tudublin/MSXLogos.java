@@ -22,13 +22,17 @@ class MSXModel {
             theta = v.random(v.TWO_PI);
         }
 
+        float lerpedS = 0;
+
         void render() {
             v.pushMatrix();
             v.translate(pos.x, pos.y, pos.z);
             v.rotateX(-v.HALF_PI);
             v.rotateY(-v.yaw);
             v.rotateZ(v.pit);
-            v.scale(1.0f + v.noise(theta * 2) * 200);
+            float s = 1.0f + v.noise(theta * 3) * 400;
+            lerpedS = v.lerp(lerpedS, s, 0.01f);
+            v.scale(s);
             v.stroke(v.hueShift(h), 255, 255, v.alp);
             v.noFill();
             v.shape(sh);
@@ -38,6 +42,8 @@ class MSXModel {
 
             if (pos.z > 2000) {
                 pos.z = -1000 ;
+                lerpedS = 0;
+                h = 127;
             }        
         }
     }
@@ -62,7 +68,7 @@ public class MSXLogos extends Poly{
         float halfH = v.height / 2;
         if (models.size() < numLogos && v.frameCount % 20 == 0 )
         {
-            MSXModel msxModel = new MSXModel("msx.obj", v.random(-halfW, halfW), v.random(-halfH, halfH), v.random(0, 1), v.random(256), v);
+            MSXModel msxModel = new MSXModel("msx.obj", v.random(-halfW, halfW), v.random(-halfH, halfH), v.random(0, 1), 100, v);
             models.add(msxModel);
         }
 
