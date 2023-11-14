@@ -28,16 +28,16 @@ class MSXModel {
             v.rotateX(-v.HALF_PI);
             v.rotateY(-v.yaw);
             v.rotateZ(v.pit);
-            v.scale(1.0f + v.noise(theta * 2) * 50);
+            v.scale(1.0f + v.noise(theta * 2) * 200);
             v.stroke(v.hueShift(h), 255, 255, v.alp);
             v.noFill();
             v.shape(sh);
             v.popMatrix();
-            theta += v.spe * 0.003f * v.getSmoothedAmplitude();
+            theta += v.spe * 0.03f * v.getSmoothedAmplitude();
             pos.z += v.spe * v.getSmoothedAmplitude() * 40.0f;
 
-            if (pos.z > 1000) {
-                pos.z = 0 ;
+            if (pos.z > 2000) {
+                pos.z = -1000 ;
             }        
         }
     }
@@ -46,7 +46,7 @@ public class MSXLogos extends Poly{
 
     ArrayList<MSXModel> models = new ArrayList<MSXModel>();
 
-    int numLogos = 50;
+    int numLogos = 20;
 
     public MSXLogos(AudioGarden v) {
         super(v);
@@ -60,7 +60,7 @@ public class MSXLogos extends Poly{
     public void render() {
         float halfW = v.width / 2;
         float halfH = v.height / 2;
-        if (models.size() < numLogos)
+        if (models.size() < numLogos && v.frameCount % 20 == 0 )
         {
             MSXModel msxModel = new MSXModel("msx.obj", v.random(-halfW, halfW), v.random(-halfH, halfH), v.random(0, 1), v.random(256), v);
             models.add(msxModel);

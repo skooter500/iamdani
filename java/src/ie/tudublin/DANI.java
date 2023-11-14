@@ -219,6 +219,10 @@ public class DANI extends Poly {
             catch(Exception e)
             {
                 e.printStackTrace();
+                v.println("ch: " + ch);
+                v.println("line: " + line);
+                
+                sonnet = writeSonnet();
             }
         }
 	}

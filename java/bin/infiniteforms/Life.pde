@@ -215,7 +215,7 @@ class Life extends Vision
         if (board[row][col] != -1)
         {
           fill(board[row][col], 255, 255);
-          rect(col * cellWidth, row * cellWidth, cellWidth, cellWidth);
+          
         }
       }
     }

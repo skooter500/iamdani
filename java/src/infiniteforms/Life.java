@@ -375,8 +375,14 @@ public class Life extends Poly
         {
             float newC = v.hueShift(board[row][col]);
           v.fill(newC, 255, 255, v.alp);
-          v.stroke(0);
-          v.rect(col * cellWidth, row * cellWidth, cellWidth, cellWidth);
+          v.stroke(v.hueShift(newC + 127), 255, 255, v.alp);
+          v.strokeWeight(2);
+          v.pushMatrix();
+          v.translate(col * cellWidth, row * cellWidth, 0);
+          v.box(cellWidth);
+          v.popMatrix();
+          //rect(col * cellWidth, row * cellWidth, cellWidth, cellWidth);
+          //v.rect(col * cellWidth, row * cellWidth, cellWidth, cellWidth);
         }
       }
     }
@@ -387,7 +393,7 @@ public class Life extends Poly
 
     v.camera(0, 0, -500, 0, 0, 0f, 0f, 0.001f, 0f);
     v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
-    int toPass = (int) v.map(v.spe, 0, 2, 120, 1);
+    int toPass = (int) v.map(v.spe, 0, 2, 120, 10);  
 
     if (v.frameCount % toPass == 0)
     {

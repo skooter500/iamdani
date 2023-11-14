@@ -26,13 +26,11 @@ public class ManarBrain extends Poly
     {
         p = v;
         p.pushMatrix();//seperating drawBrain function from other functions
-        v.rotateX(v.pit);
-        drawBrain();//function to draw the brain
         //z ++;
         p.popMatrix();
         drawCircles();//function to draw the circles
     }
- 
+
     int brainHeight = 550;
     float rotationSpeed = 0.02f;
    

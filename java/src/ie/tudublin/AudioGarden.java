@@ -109,13 +109,15 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new MSXLogos(this));
         visions.add(new Cubesquared2(this));
+        visions.add(new Life(this, 3, 10000, 200));
+        
+        visions.add(new MSXLogos(this));
+        
         
         
         visions.add(new DANI(this, "captainb.txt"));
         
-        visions.add(new Life(this, 3, 10000, 200));
         
         visions.add(new Life(this, 0, 10000, 100));
         visions.add(new Life(this, 1, 10000, 100));
@@ -178,7 +180,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         //visuals.add(new Models1(this, "thc molecule.obj"));
  
 
-        //Collections.shuffle(visuals);
+        //Collections.shuffle(visions);
         defaults();
         background(0);
         change(0);
@@ -382,28 +384,33 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             println("HUE: " + hue);
         }
 
-        if (number == 77) {
+        if (number == 76) {
             ald = min(max(clockWise ? ald + 1f : ald - 1f, 0), 50);
             println("ALD: " + ald);
         }
 
+        if (number == 16) {
+            ald = min(max(clockWise ? ald + 5f : ald - 5f, 0), 50);
+            println("ALD: " + ald);
+        }
+
         if (number == 19) {
-            alp = min(max(clockWise ? alp + 5f : alp - 5f, 0), 255);
+            alp = min(max(clockWise ? alp + 5f : alp - 5f, 5), 255);
             println("ALP: " + alp);
         }
 
 
         if (number == 71) {
-            alp = min(max(clockWise ? alp + 1f : alp - 1f, 0.1f), 255);
+            alp = min(max(clockWise ? alp + 1f : alp - 1f, 2f), 255);
             println("ALP: " + alp);
         }
-        if (number == 76) {
-            yaw = clockWise ? yaw + 0.01f : yaw - 0.01f;
-            println("yaw: " + yaw);
-        }
-        if (number == 16) {
-            pit = clockWise ? pit + 0.01f : pit - 0.01f;
-            println("pit: " + pit);
+         if (number == 77) {
+             yaw = clockWise ? yaw + 0.003f : yaw - 0.003f;
+             println("yaw: " + yaw);
+         }
+        if (number == 17) {
+             pit = clockWise ? pit + 0.003f : pit - 0.003f;
+             println("pit: " + pit);
         }
         // int newVisual = whichVisual;
         //     if (clockWise)
