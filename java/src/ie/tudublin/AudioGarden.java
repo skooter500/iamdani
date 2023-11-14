@@ -79,7 +79,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     public void setup() {
         println("MSX System");
         println("version 1.0");
-        println("Copyright 1985 by microsoft");
+        println("Copyright 1983 by microsoft");
         println("ok");
         println("load \"DANI.BAS\"");
         println("ok");
@@ -301,7 +301,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             println("RST");
             println("MSX System");
             println("version 1.0");
-            println("Copyright 1985 by microsoft");
+            println("Copyright 1983 by microsoft");
             println("ok"); 
             visions.get(whichVisual).enter();
             return;
