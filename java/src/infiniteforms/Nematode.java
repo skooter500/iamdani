@@ -79,6 +79,9 @@ public class Nematode extends Poly
     reset = 0;
   }
 
+  float theta = 0;
+
+
   public void render()
   {
     render(v.width / 2, v.height / 1.8f, v.frameCount * speed);
@@ -97,13 +100,17 @@ public class Nematode extends Poly
     reset ++;
     c2 = c1 + cw;
 
-    w = v.yaw * 100;
+    w = 80;
     float half = w * length * 0.5f;
     v.strokeWeight(3);
+
+    v.rotateX(v.pit);
+    v.rotateY(v.yaw);
+    
     v.pushMatrix();
     //v.camera(0, 0, -5000, 0, 0, 0f, 0f, 0.001f, 0f);
     v.translate(cx, cy);
-    v.translate(0, - half);
+    v.translate(220, - half * 0.2f);
 
     //v.rotateX(v.pit);
     //v.rotateZ(v.PI + v.yaw);
@@ -120,7 +127,7 @@ public class Nematode extends Poly
     v.fill(c3 % 255, 255, 255, v.alp);
     v.textAlign(v.CENTER, v.CENTER);
     v.textAlign(v.CENTER, v.CENTER);    
-    v.text(name, 500, w * 3);        
+    v.text(name, 0, -w * 3.5f);        
     v.noFill();
     for (int i = 0; i < length; i ++)
     { 
@@ -149,7 +156,7 @@ public class Nematode extends Poly
     }
     
     drawGenitals();
-
+    theta += v.spe * 0.03f * v.getSmoothedAmplitude();
     v.popMatrix();
   }
 

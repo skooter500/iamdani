@@ -163,9 +163,13 @@ public class Nematode extends Poly
         render(v.width / 2, v.height / 1.8f);
     }
 
+    float theta = 0;
+
     public void render(float cx, float cy)
     {
-        
+        float w = this.w;
+        w = w * v.noise(theta);
+        v.println(w);
         float half = w * length * 0.5f; 
 
         v.strokeWeight(2);
@@ -198,7 +202,7 @@ public class Nematode extends Poly
         }
 
         drawGenitals();
-
+        
         v.popMatrix();
     }
 

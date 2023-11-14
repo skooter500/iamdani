@@ -22,15 +22,14 @@ public class Life extends Poly
   {
     super(v);
     this.boardWidth = boardSize;
-    clearBoard();
+    
     this.pattern = pattern;
     this.generationMax = generationMax;
     initialize();
+    clearBoard();
   }
-  
-  
-  
-  public void enter()
+
+  public void makePattern()
   {
     switch(pattern)
     {
@@ -55,6 +54,12 @@ public class Life extends Poly
 
 
     }
+  }
+  
+  public void enter()
+  {
+    clearBoard();
+    makePattern();
   }
 
   public void MakeGosperGun(int x, int y)
@@ -243,8 +248,8 @@ public class Life extends Poly
 
   void initialize()
   {
-    cellWidth = v.width / (float) boardWidth;
-    boardHeight = v.round(v.height / cellWidth);
+    cellWidth = v.width * 2.0f / (float) boardWidth;
+    boardHeight = v.round(v.height * 2.0f / cellWidth);
     board = new float[boardHeight][boardWidth];
     nextBoard  = new float[boardHeight][boardWidth];
     enter();
@@ -391,7 +396,7 @@ public class Life extends Poly
   public void render()
   {    
 
-    v.camera(0, 0, -500, 0, 0, 0f, 0f, 0.001f, 0f);
+    v.camera(0, 0, -1000, 0, 0, 0f, 0f, 0.001f, 0f);
     v.rotateX(v.pit);
     v.rotateY(v.yaw - 0.6f);
     
