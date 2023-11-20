@@ -1,6 +1,6 @@
 # i.am.dani
 
-i.am.dani is celebrates the 40th Anniversary of the creation of the MSX Computer System in 1983. Inspired by DANI chatbot from 1986, i.am.dani is about the joy of learning programming, and features work by myself and teams of students from TU Dublin. Developed in Java using the Processing libraries for creative coding, i.am.dani features MIDI controlled, sound responsive visual pieces that can be used for visuals for DJ's and live music. Processing can trace it's inspirations from graphical programming languages used to learn programming such as MSX Basic as it contains commands for drawing shapes, manipulating colors and making sounds. 
+i.am.dani celebrates the 40th Anniversary of the creation of the MSX Computer System in 1983. Inspired by DANI chatbot from 1986, i.am.dani is about the joy of learning programming, and features work by myself and teams of students from TU Dublin. Developed in Java using the Processing libraries for creative coding, i.am.dani features MIDI controlled, sound responsive visual pieces that can be used for visuals for DJ's and live music. Processing can trace it's inspirations from graphical programming languages used to learn programming such as MSX Basic as it contains commands for drawing shapes, manipulating colors and making sounds. 
 
 ![](screenshots/i.am.dani-000360.png)
 
