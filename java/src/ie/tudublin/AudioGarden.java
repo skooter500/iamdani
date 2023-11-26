@@ -71,8 +71,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }   
         if (instance.myTextarea != null)
         {
-            instance.myTextarea.setText(instance.console.toString());
-            instance.myTextarea.scroll(1.0f);
+            try
+            {
+                instance.myTextarea.setText(instance.console.toString());
+                instance.myTextarea.scroll(1.0f);
+            }
+            catch(Exception e)
+            {
+                System.out.println("WTF");
+                e.printStackTrace();
+            }
         }            
         System.out.println(o);
     }
@@ -642,7 +650,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "CARBON LIFEFORMS detected",
         "hyperbeings on line 10",
         "speak now or forever hold your peace",
-        "type \'list\'",
+        "type \"list\"",
         "record output to printer y/n?",        
         "turn on, tune in, and drop out",
         "god is playing hide and seek within us",
