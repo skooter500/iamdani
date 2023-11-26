@@ -53,16 +53,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     public Modes mode = Modes.Ctrl;
 
     public static void println(String o)
-    {
-        if (o.length() > 3 && o.charAt(3) == ':' && !controlMessages)
-        {
-            return;
-        }
+    {        
         print(o + "\n");
     }
 
     public static void print(String o)
     {
+        if (o.length() > 3 && o.charAt(3) == ':' && !controlMessages)
+        {
+            return;
+        }
         instance.console.append(o);
         int len = instance.console.length(); 
         if (len > 2000)
@@ -98,7 +98,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println("This is your MSX speaking");
         println("I AM DANI");        
         println("dynamic articicial non-intelligence");
-        println("Talk to me and I will learn what you say and answer you");
+        println("Talk to me");
         println("speak now or forever hold your peace");
         sphere = loadShape("sphere.obj");
 
@@ -138,7 +138,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new DANI(this, "DANI.BAS"));
+        //visions.add(new Basic(this, "DANI.BAS"));
         
         visions.add(new infiniteforms.Cube(this));
         visions.add(new IFCubes(this,7, 150, -600));
@@ -304,6 +304,22 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
 
+        if (pitch == 48)
+        {
+            println("TRON");
+            midiMessages = true;
+            controlMessages = true;     
+            return;    
+        }
+
+        if (pitch == 40)
+        {
+            println("TROFF");
+            midiMessages = false;
+            controlMessages = false;
+            return;            
+        }
+
         
         if (pitch == 41)
         {
@@ -328,10 +344,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (pitch == 42)
         {
-            println("RST");
-            println("MSX System");
-            println("version 1.0");
-            println("Copyright 1983 by microsoft");
+            println("RUN");
             println("ok"); 
             visions.get(whichVisual).enter();
             return;
@@ -444,8 +457,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         //     change(newVisual);        
     }
 
-    boolean midiMessages = false;
-    static boolean controlMessages = false;
+    static boolean midiMessages = true;
+    static boolean controlMessages = true;
 
     public void keyPressed() {
 
@@ -523,55 +536,62 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     boolean showConsole = true;
 
-    public void draw() {        
-
-        colorMode(RGB);
-        blendMode(SUBTRACT);
-        fill(255, ald);
-        pushMatrix();
-        translate(0, 0, -5000);
-        rect(-width * 5, -height * 5, width * 10, height * 10);
-        popMatrix();
-        blendMode(BLEND);
-        colorMode(HSB);
-    
-        if (showConsole)
+    public void draw() {      
+        
+        try
         {
-            consoleSize = lerp(consoleSize, targetSize, 0.1f);
-            myTextarea.setSize(800, (int) consoleSize);
-            myTextarea.setVisible(true);
-            myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
+            colorMode(RGB);
+            blendMode(SUBTRACT);
+            fill(255, ald);
+            pushMatrix();
+            translate(0, 0, -5000);
+            rect(-width * 5, -height * 5, width * 10, height * 10);
+            popMatrix();
+            blendMode(BLEND);
+            colorMode(HSB);
+        
+            if (showConsole)
+            {
+                consoleSize = lerp(consoleSize, targetSize, 0.1f);
+                myTextarea.setSize(800, (int) consoleSize);
+                myTextarea.setVisible(true);
+                myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
+            }
+
+
+            // background(0);
+            try {
+                // Call this if you want to use FFT data
+                calculateFFT();
+            } catch (VisualException e) {
+                e.printStackTrace();
+            }
+            // Call this is you want to use frequency bands
+            calculateFrequencyBands();
+            // will pulse an object with music volume
+            calculateAverageAmplitude();
+
+            //speed = map(getAmplitude(), 0, 1, 0, 0.1f);
+
+            pushMatrix();
+            pushStyle();
+            visions.get(whichVisual).render(frameCount); // renders the currently loaded visual
+            popStyle();        
+            popMatrix();
+
+            if (frameCount % 600 == 0)
+            {
+                println(randomMessages[(int) random(0, randomMessages.length)]);
+            }
+            if (takeScreenshot)
+            {
+                takeScreenshot();
+                takeScreenshot = false;
+            }
         }
-
-
-        // background(0);
-        try {
-            // Call this if you want to use FFT data
-            calculateFFT();
-        } catch (VisualException e) {
+        catch(Exception e)
+        {
             e.printStackTrace();
-        }
-        // Call this is you want to use frequency bands
-        calculateFrequencyBands();
-        // will pulse an object with music volume
-        calculateAverageAmplitude();
-
-        //speed = map(getAmplitude(), 0, 1, 0, 0.1f);
-
-        pushMatrix();
-        pushStyle();
-        visions.get(whichVisual).render(frameCount); // renders the currently loaded visual
-        popStyle();        
-        popMatrix();
-
-        if (frameCount % 600 == 0)
-        {
-            println(randomMessages[(int) random(0, randomMessages.length)]);
-        }
-        if (takeScreenshot)
-        {
-            takeScreenshot();
-            takeScreenshot = false;
         }
         //hueShift();
     }
@@ -598,7 +618,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "nice to meet you",
         "i exist",
         "420 detected",
-        "LSD detected",
         "20 PRINT \"HELLO\", $name",
         "10 INPUT \"What is your name\", $name",
         "dont masterbate",
@@ -607,33 +626,36 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "subscript out of range in line 40",
         "act normal",
         "normalize huge mugs of tea",
-        "re-callibrating sensor matrix",
+        "re-callibrating sensors",
         "(A)bort?,(R)etry ?,(F)ail?",
-        "mdma synthesis complete",
         "ok",
         "in the beginning",
         "MSX system",
         "Copyright 1983 by microsoft",
-        "syntax ERROR in line 20",        
-        "version 1.0",
-        "5meodmt detected",
+        "syntax ERROR in line 1",        
+        "version 1.0",        
         "i seek the creator",
         "Machine elves detected",
-        "k-hole detected",
-        "DMT detected",
+        "i am in a k-hole",        
         "analysis complete",
-        "subspace anomoly detected",
+        "subspace anomoly on line 40",
         "CARBON LIFEFORMS detected",
-        "hyperbeings detected",
+        "hyperbeings on line 10",
         "speak now or forever hold your peace",
-        "type \'list\' and I will divulge my knowledge",
-        "would you like our conversation to be recorded on printer?",        
+        "type \'list\'",
+        "record output to printer y/n?",        
         "turn on, tune in, and drop out",
         "god is playing hide and seek within us",
         "Greetings Human!",
         "This is your MSX speaking",
-        "Talk to me and I will learn what you say and answer you",
+        "I will learn what you say",
     };
     
 
+    /*
+    "mdma synthesis complete",
+    "DMT detected",
+    "5meodmt detected",
+    "LSD detected",o
+    */  
 }
