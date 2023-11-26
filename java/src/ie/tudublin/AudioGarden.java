@@ -94,8 +94,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println("load \"DANI.BAS\"");
         println("ok");
         println("RUN");
-        println("I AM DANI");
+        println("Greetings Human!");
+        println("This is your MSX speaking");
+        println("I AM DANI");        
         println("dynamic articicial non-intelligence");
+        println("Talk to me and I will learn what you say and answer you");
         println("speak now or forever hold your peace");
         sphere = loadShape("sphere.obj");
 
@@ -135,6 +138,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
+        visions.add(new DANI(this, "DANI.BAS"));
         
         visions.add(new infiniteforms.Cube(this));
         visions.add(new IFCubes(this,7, 150, -600));
@@ -560,7 +564,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         popStyle();        
         popMatrix();
 
-        if (frameCount % 1200 == 0)
+        if (frameCount % 600 == 0)
         {
             println(randomMessages[(int) random(0, randomMessages.length)]);
         }
@@ -622,8 +626,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "CARBON LIFEFORMS detected",
         "hyperbeings detected",
         "speak now or forever hold your peace",
+        "type \'list\' and I will divulge my knowledge",
+        "would you like our conversation to be recorded on printer?",        
         "turn on, tune in, and drop out",
-        "god is playing hide and seek"
+        "god is playing hide and seek within us",
+        "Greetings Human!",
+        "This is your MSX speaking",
+        "Talk to me and I will learn what you say and answer you",
     };
     
 
