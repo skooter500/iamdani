@@ -68,20 +68,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         if (len > 2000)
         {
             instance.console = new StringBuilder(instance.console.subSequence(len - 2000, len));
-        }   
-        if (instance.myTextarea != null)
-        {
-            try
-            {
-                instance.myTextarea.setText(instance.console.toString());
-                instance.myTextarea.scroll(1.0f);
-            }
-            catch(Exception e)
-            {
-                System.out.println("WTF");
-                e.printStackTrace();
-            }
-        }            
+        }                  
         System.out.println(o);
     }
 
@@ -561,6 +548,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             if (showConsole)
             {
                 consoleSize = lerp(consoleSize, targetSize, 0.1f);
+                myTextarea.setText(instance.console.toString());
+                instance.myTextarea.scroll(1.0f);
                 myTextarea.setSize(800, (int) consoleSize);
                 myTextarea.setVisible(true);
                 myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
