@@ -38,8 +38,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 2);
-        //size(1000, 1000, P3D);
+        fullScreen(P3D, 3);
+        //size(1280, 720, P3D);
     }
 
     PShape sphere;
@@ -54,7 +54,16 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public static void println(String o)
     {
-        instance.console.append(o + "\n");
+        if (o.length() > 3 && o.charAt(3) == ':' && !controlMessages)
+        {
+            return;
+        }
+        print(o + "\n");
+    }
+
+    public static void print(String o)
+    {
+        instance.console.append(o);
         int len = instance.console.length(); 
         if (len > 2000)
         {
@@ -67,6 +76,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }            
         System.out.println(o);
     }
+
 
     // public void sphere(float size)
     // {
@@ -97,11 +107,27 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         cp5 = new ControlP5(this);
 
+        int daniMidi = -1;
+        for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
+        {
+            String curr = MidiBus.availableInputs()[i];
+            if (curr.equals("iamdani"))
+            {
+                daniMidi = i;
+                println("Joystick selected on port: " + daniMidi);
+            }
+        }
+        
+        if (daniMidi == -1)
+        {
+            println("Insert joystick");
+        }
+        
         MidiBus.list();
-        myBus = new MidiBus(this, 1, 4);
+        myBus = new MidiBus(this, daniMidi, 0);
         // myBus.addMidiListener(this);
         startListening();
-
+ 
         // eye = loadShape("eyeball.obj");
         // grave = loadShape("gravestone.obj");
         // texture = loadImage("gravestone.mtl");
@@ -195,7 +221,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                   ;
   
     }
-
     float consoleSize = 0;
     float originalTargetSize = 400;
     
@@ -214,7 +239,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         mul = 1.0f;
         bas = 0.3f;
         
-        spe = 1.0f;
+        // spe = 1.0f;
         hue = 0;
         
         alp = 75;
@@ -242,7 +267,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     takeScreenshot = true;            
                     return;
                 }
-                println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+                if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = pitch % visions.size();
                 change(newVisual);
                 return;
@@ -254,7 +279,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     takeScreenshot = true;            
                     return;
                 }
-                println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+                if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = (int) random(0, visions.size());
                 change(newVisual);
                 return;
@@ -315,7 +340,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
         
-        println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+        if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
         
                
         
@@ -324,7 +349,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void noteOff(int channel, int pitch, int velocity) {
         // Receive a noteOff
-        println("N- CH: " + channel, " PI: " + pitch + " VE: " + velocity);  
+        if (midiMessages) println("N- CH: " + channel, " PI: " + pitch + " VE: " + velocity);  
     }
 
     public void change(int into) 
@@ -345,7 +370,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     
     public void controllerChange(int channel, int number, int value) {
         // Receive a controllerChange
-        println("CH: " + channel + " NUM: " + number + " VA: " + value);  
+        if (midiMessages) println("CH: " + channel + " NUM: " + number + " VA: " + value + " ");  
 
         boolean clockWise = (value < 100);
 
@@ -376,7 +401,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
 
         if (number == 76) {
-            ald = min(max(clockWise ? ald + 1f : ald - 1f, 0), 50);
+            ald = min(max(clockWise ? ald + 0.1f : ald - 0.1f, 0), 50);
             println("ALD: " + ald);
         }
 
@@ -415,7 +440,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         //     change(newVisual);        
     }
 
-    
+    boolean midiMessages = false;
+    static boolean controlMessages = false;
 
     public void keyPressed() {
 
@@ -466,6 +492,17 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         {
             println("CTRL");
             mode = Modes.Ctrl;
+        }
+
+        if (key == 'm')
+        {
+            midiMessages = ! midiMessages;
+            println("MIDI: " + (midiMessages ? "on" : "off"));
+        }
+        if (key == 'o')
+        {
+            controlMessages = ! controlMessages;
+            println("CONTROL " + (controlMessages ? "on" : "off"));
         }
         
         if (key == 'p')

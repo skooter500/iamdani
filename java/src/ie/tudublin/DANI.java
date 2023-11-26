@@ -197,7 +197,7 @@ public class DANI extends Poly {
                 }
             }       
         }  
-        int interV = (int) (11 - (v.spe * 5));
+        int interV = v.max(1, (int) (11 - (v.spe * 5)));
         if (v.frameCount % interV == 0)
         {
             try

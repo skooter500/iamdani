@@ -9,7 +9,7 @@ public class IFCube
   
   float smoothedBoxSize = 0;
   float angle = 0;
-  float weight = 5;
+  float weight = 2;
   float size = 50;
   
   boolean useAmplitude = true;
@@ -26,8 +26,8 @@ public class IFCube
   void render()
   {
     v.pushMatrix();
-    v.strokeWeight(2);    
-    float c = v.map(v.getSmoothedAmplitude(), 0, 1, 0, 255);
+    v.strokeWeight(1);    
+    float c = v.map(colorOffset, 0, 1, 0, 255);
     c = v.hueShift(c + colorOffset);
     v.stroke(c, 255, 255, v.alp);
     v.translate(position.x, position.y, position.z);       

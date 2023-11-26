@@ -11,7 +11,7 @@ public class Cube extends Poly
   
     float smoothedBoxSize = 0;
     float angle = 0;
-    float weight = 5;
+    float weight = 1;
     float size = 50;
   
     boolean useAmplitude = true;
@@ -38,7 +38,7 @@ public class Cube extends Poly
         //v.rotateZ(v.PI + v.yaw);
         //v.translate(v.width / 2, v.height / 2, 0); 
         v.strokeWeight(2);
-        float c = v.hueShift((v.map(v.getSmoothedAmplitude(), 0, 1, 0, 255) + colorOffset) % 255);        
+        float c = v.hueShift((colorOffset) % 255);        
         v.stroke(c, 255, 255, v.alp);
         v.noFill();
 
