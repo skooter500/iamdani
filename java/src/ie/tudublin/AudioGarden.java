@@ -68,6 +68,51 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         System.out.println(o);
     }
 
+    public void midiConnect()
+    {
+        MidiBus.list();
+        int daniMidi = -1;
+        for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
+        {
+            String curr = MidiBus.availableInputs()[i];
+            if (curr.equals("iamdani"))
+            {
+                daniMidi = i;
+                println("Joystick A in port: " + daniMidi);
+            }
+        }
+
+        if (daniMidi == -1)
+        {
+            for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
+            {
+                String curr = MidiBus.availableInputs()[i];
+                if (curr.equals("Arturia BeatStep"))
+                {
+                    daniMidi = i;
+                    println("Joystick B in port: " + daniMidi);
+                }
+            }
+        }
+
+                
+        
+        if (daniMidi == -1)
+        {
+            println("Insert joystick and press enter");
+        }
+        else
+        {
+            if (myBus != null)
+            {
+                myBus.close();
+            }
+
+            
+            myBus = new MidiBus(this, daniMidi, 0);
+        }        
+    }
+
     // public void sphere(float size)
     // {
     //     pushMatrix();
@@ -100,8 +145,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         cp5 = new ControlP5(this);
 
-        MidiBus.list();
-        myBus = new MidiBus(this, 1, 4);
+        midiConnect();
+
+
         // myBus.addMidiListener(this);
         startListening();
 
@@ -425,6 +471,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     
 
     public void keyPressed() {
+
+        if (key == ENTER)
+        {
+            midiConnect();
+            return;
+        }
 
         if (key >= '0' && key <= '9') 
         {
