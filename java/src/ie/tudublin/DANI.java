@@ -33,7 +33,10 @@ public class DANI extends Poly {
         sonnet = writeSonnet();
         line = 0;
         ch = 0;
+        f = (int) v.random(256);
     }
+
+    int f = 0;
 
     void printAll()
     {
@@ -158,15 +161,10 @@ public class DANI extends Poly {
 
 	public void render()     
     {
-        if (reset == 60 * 60)
-        {
-            reset = 0;
-            enter();      
-        }
         reset ++;
         v.textAlign(v.LEFT, v.CENTER);
 
-        float c = v.hueShift(99);
+        float c = v.hueShift(f);
 
         v.fill(c, 255, 255, v.alp);
         float cx = v.width;

@@ -30,10 +30,10 @@ class MSXModel {
             v.rotateX(-v.HALF_PI);
             v.rotateY(-v.yaw);
             v.rotateZ(v.pit);
-            float s = 1.0f + v.noise(theta * 3) * 400;
+            float s = 1.0f + v.noise(theta * 3) * 300;
             lerpedS = v.lerp(lerpedS, s, 0.01f);
             v.scale(s);
-            v.stroke(v.hueShift(h), 255, 255, v.alp);
+            v.stroke(v.hueShift(h + v.getSmoothedAmplitude() * 256 + lerpedS), 255, 255, v.alp);
             v.noFill();
             v.shape(sh);
             v.popMatrix();
@@ -68,7 +68,7 @@ public class MSXLogos extends Poly{
         float halfH = v.height / 2;
         if (models.size() < numLogos && v.frameCount % 20 == 0 )
         {
-            MSXModel msxModel = new MSXModel("msx.obj", v.random(-halfW, halfW), v.random(-halfH, halfH), 127, 100, v);
+            MSXModel msxModel = new MSXModel("msx.obj", v.random(-halfW, halfW), v.random(-halfW, halfW), 127, 100, v);
             models.add(msxModel);
         }
 
