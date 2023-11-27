@@ -33,7 +33,10 @@ public class Basic extends Poly {
         writeSonnet();
         line = 0;
         ch = 0;
+        f = v.random(265);
     }
+
+    float f = 0;
 
     void printAll()
     {
@@ -54,7 +57,7 @@ public class Basic extends Poly {
 
     public String generateName()
     {
-        return "DANI.BAS";
+        return "LISt";
     } 
     
     public String[] writeSonnet()
@@ -62,7 +65,7 @@ public class Basic extends Poly {
         String[] sonnet = new String[16];
 
         sonnet[0] = generateName();
-        sonnet[1] = " ";
+        sonnet[1] = "ok";
         int startAt = (int) v.random(lines.length - 16);
         for (int i = 0 ; i < 10; i ++)
         {
@@ -82,15 +85,9 @@ public class Basic extends Poly {
 
 	public void render()     
     {
-        if (reset == 60 * 60)
-        {
-            reset = 0;
-            enter();      
-        }
-        reset ++;
         v.textAlign(v.LEFT, v.CENTER);
 
-        float c = v.hueShift(99);
+        float c = v.hueShift(f);
 
         v.fill(c, 255, 255, v.alp);
         float cx = v.width;

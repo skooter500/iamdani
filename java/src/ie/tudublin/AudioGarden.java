@@ -158,7 +158,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new DANI(this, "DANI.BAS"));
+        visions.add(new Basic(this, "DANI.BAS"));
         
         visions.add(new infiniteforms.Cube(this));
         visions.add(new IFCubes(this,7, 150, -600));
@@ -476,6 +476,19 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         {
             midiConnect();
             return;
+        }
+
+        if (key == 'o')
+        {
+            midiMessages = ! midiMessages;
+            if (midiMessages)
+            {
+                println("TRON");
+            }
+            else
+            {
+                println("TROFF");
+            }
         }
 
         if (key >= '0' && key <= '9') 
