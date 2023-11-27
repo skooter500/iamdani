@@ -39,7 +39,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void settings() {
         fullScreen(P3D, 2);
-        //size(1280, 720, P3D);
+        //size(1000, 1000, P3D);
     }
 
     PShape sphere;
@@ -53,17 +53,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     public Modes mode = Modes.Ctrl;
 
     public static void println(String o)
-    {        
-        print(o + "\n");
-    }
-
-    public static void print(String o)
     {
-        if (o.length() > 3 && o.charAt(3) == ':' && !controlMessages)
-        {
-            return;
-        }
-        instance.console.append(o);
+        instance.console.append(o + "\n");
         int len = instance.console.length(); 
         if (len > 2000)
         {
@@ -71,20 +62,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }   
         if (instance.myTextarea != null)
         {
-            try
-            {
-                instance.myTextarea.setText(instance.console.toString());
-                instance.myTextarea.scroll(1.0f);
-            }
-            catch(Exception e)
-            {
-                System.out.println("WTF");
-                e.printStackTrace();
-            }
+            instance.myTextarea.setText(instance.console.toString());
+            instance.myTextarea.scroll(1.0f);
         }            
         System.out.println(o);
     }
-
 
     // public void sphere(float size)
     // {
@@ -93,52 +75,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     //     shape(sphere);
     //     popMatrix();
     // }
-
-    public void midiConnect()
-    {
-        MidiBus.list();
-        int daniMidi = -1;
-        for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
-        {
-            String curr = MidiBus.availableInputs()[i];
-            if (curr.equals("iamdani"))
-            {
-                daniMidi = i;
-                println("Joystick A in port: " + daniMidi);
-            }
-        }
-
-        if (daniMidi == -1)
-        {
-            for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
-            {
-                String curr = MidiBus.availableInputs()[i];
-                if (curr.equals("Arturia BeatStep"))
-                {
-                    daniMidi = i;
-                    println("Joystick B in port: " + daniMidi);
-                }
-            }
-        }
-
-                
-        
-        if (daniMidi == -1)
-        {
-            println("Insert joystick and press enter");
-        }
-        else
-        {
-            if (myBus != null)
-            {
-                myBus.close();
-            }
-
-            
-            myBus = new MidiBus(this, daniMidi, 0);
-        }        
-    }
-
 
     public void setup() {
         println("MSX System");
@@ -152,7 +88,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println("This is your MSX speaking");
         println("I AM DANI");        
         println("dynamic articicial non-intelligence");
-        println("Talk to me");
+        println("Talk to me and I will learn what you say and answer you");
         println("speak now or forever hold your peace");
         sphere = loadShape("sphere.obj");
 
@@ -164,16 +100,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         cp5 = new ControlP5(this);
 
-        
-
-                
-        
-        midiConnect();
-
-        
+        MidiBus.list();
+        myBus = new MidiBus(this, 1, 4);
         // myBus.addMidiListener(this);
         startListening();
- 
+
         // eye = loadShape("eyeball.obj");
         // grave = loadShape("gravestone.obj");
         // texture = loadImage("gravestone.mtl");
@@ -181,7 +112,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        //visions.add(new Basic(this, "DANI.BAS"));
+        visions.add(new DANI(this, "DANI.BAS"));
         
         visions.add(new infiniteforms.Cube(this));
         visions.add(new IFCubes(this,7, 150, -600));
@@ -268,6 +199,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                   ;
   
     }
+
     float consoleSize = 0;
     float originalTargetSize = 400;
     
@@ -286,7 +218,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         mul = 1.0f;
         bas = 0.3f;
         
-        // spe = 1.0f;
+        spe = 1.0f;
         hue = 0;
         
         alp = 75;
@@ -314,7 +246,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     takeScreenshot = true;            
                     return;
                 }
-                if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+                println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = pitch % visions.size();
                 change(newVisual);
                 return;
@@ -326,7 +258,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     takeScreenshot = true;            
                     return;
                 }
-                if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+                println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = (int) random(0, visions.size());
                 change(newVisual);
                 return;
@@ -345,22 +277,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         {
             change(whichVisual + 1);
             return;
-        }
-
-        if (pitch == 48)
-        {
-            println("TRON");
-            midiMessages = true;
-            controlMessages = true;     
-            return;    
-        }
-
-        if (pitch == 40)
-        {
-            println("TROFF");
-            midiMessages = false;
-            controlMessages = false;
-            return;            
         }
 
         
@@ -387,7 +303,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (pitch == 42)
         {
-            println("RUN");
+            println("RST");
+            println("MSX System");
+            println("version 1.0");
+            println("Copyright 1983 by microsoft");
             println("ok"); 
             visions.get(whichVisual).enter();
             return;
@@ -400,7 +319,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
         
-        if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+        println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
         
                
         
@@ -409,7 +328,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void noteOff(int channel, int pitch, int velocity) {
         // Receive a noteOff
-        if (midiMessages) println("N- CH: " + channel, " PI: " + pitch + " VE: " + velocity);  
+        println("N- CH: " + channel, " PI: " + pitch + " VE: " + velocity);  
     }
 
     public void change(int into) 
@@ -427,10 +346,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println(whichVisual + ": " + visions.get(whichVisual).getClass().getName());         
     }
 
+    static boolean midiMessages = true;
+
     
     public void controllerChange(int channel, int number, int value) {
-        // Receive a controllerChange
-        if (midiMessages) println("CH: " + channel + " NUM: " + number + " VA: " + value + " ");  
+
+        if (midiMessages)
+            println("CH: " + channel + " NUM: " + number + " VA: " + value);  
 
         boolean clockWise = (value < 100);
 
@@ -461,12 +383,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
 
         if (number == 76) {
-            ald = min(max(clockWise ? ald + 0.1f : ald - 0.1f, 0), 50);
+            ald = min(max(clockWise ? ald + .1f : ald - .1f, 0), 50);
             println("ALD: " + ald);
         }
 
         if (number == 16) {
-            ald = min(max(clockWise ? ald + 5f : ald - 5f, 0), 50);
+            ald = min(max(clockWise ? ald + 1f : ald - 1f, 0), 50);
             println("ALD: " + ald);
         }
 
@@ -500,15 +422,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         //     change(newVisual);        
     }
 
-    static boolean midiMessages = true;
-    static boolean controlMessages = true;
+    
 
     public void keyPressed() {
-
-        if (key == ENTER)
-        {
-            midiConnect();
-        }
 
         if (key >= '0' && key <= '9') 
         {
@@ -558,17 +474,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             println("CTRL");
             mode = Modes.Ctrl;
         }
-
-        if (key == 'm')
-        {
-            midiMessages = ! midiMessages;
-            println("MIDI: " + (midiMessages ? "on" : "off"));
-        }
-        if (key == 'o')
-        {
-            controlMessages = ! controlMessages;
-            println("CONTROL " + (controlMessages ? "on" : "off"));
-        }
         
         if (key == 'p')
         {
@@ -584,62 +489,55 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     boolean showConsole = true;
 
-    public void draw() {      
-        
-        try
+    public void draw() {        
+
+        colorMode(RGB);
+        blendMode(SUBTRACT);
+        fill(255, ald);
+        pushMatrix();
+        translate(0, 0, -5000);
+        rect(-width * 5, -height * 5, width * 10, height * 10);
+        popMatrix();
+        blendMode(BLEND);
+        colorMode(HSB);
+    
+        if (showConsole)
         {
-            colorMode(RGB);
-            blendMode(SUBTRACT);
-            fill(255, ald);
-            pushMatrix();
-            translate(0, 0, -5000);
-            rect(-width * 5, -height * 5, width * 10, height * 10);
-            popMatrix();
-            blendMode(BLEND);
-            colorMode(HSB);
-        
-            if (showConsole)
-            {
-                consoleSize = lerp(consoleSize, targetSize, 0.1f);
-                myTextarea.setSize(800, (int) consoleSize);
-                myTextarea.setVisible(true);
-                myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
-            }
-
-
-            // background(0);
-            try {
-                // Call this if you want to use FFT data
-                calculateFFT();
-            } catch (VisualException e) {
-                e.printStackTrace();
-            }
-            // Call this is you want to use frequency bands
-            calculateFrequencyBands();
-            // will pulse an object with music volume
-            calculateAverageAmplitude();
-
-            //speed = map(getAmplitude(), 0, 1, 0, 0.1f);
-
-            pushMatrix();
-            pushStyle();
-            visions.get(whichVisual).render(frameCount); // renders the currently loaded visual
-            popStyle();        
-            popMatrix();
-
-            if (frameCount % 600 == 0)
-            {
-                println(randomMessages[(int) random(0, randomMessages.length)]);
-            }
-            if (takeScreenshot)
-            {
-                takeScreenshot();
-                takeScreenshot = false;
-            }
+            consoleSize = lerp(consoleSize, targetSize, 0.1f);
+            myTextarea.setSize(800, (int) consoleSize);
+            myTextarea.setVisible(true);
+            myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
         }
-        catch(Exception e)
-        {
+
+
+        // background(0);
+        try {
+            // Call this if you want to use FFT data
+            calculateFFT();
+        } catch (VisualException e) {
             e.printStackTrace();
+        }
+        // Call this is you want to use frequency bands
+        calculateFrequencyBands();
+        // will pulse an object with music volume
+        calculateAverageAmplitude();
+
+        //speed = map(getAmplitude(), 0, 1, 0, 0.1f);
+
+        pushMatrix();
+        pushStyle();
+        visions.get(whichVisual).render(frameCount); // renders the currently loaded visual
+        popStyle();        
+        popMatrix();
+
+        if (frameCount % 600 == 0)
+        {
+            println(randomMessages[(int) random(0, randomMessages.length)]);
+        }
+        if (takeScreenshot)
+        {
+            takeScreenshot();
+            takeScreenshot = false;
         }
         //hueShift();
     }
@@ -700,10 +598,4 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     };
     
 
-    /*
-    "mdma synthesis complete",
-    "DMT detected",
-    "5meodmt detected",
-    "LSD detected",o
-    */  
 }
