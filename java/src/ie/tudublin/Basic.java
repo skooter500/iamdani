@@ -76,6 +76,10 @@ public class Basic extends Poly {
         sonnet[14] = " ";        
         sonnet[15] = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(Calendar.getInstance().getTime());
 
+        for(String s:sonnet)
+        {
+            v.println(s);
+        }
          return sonnet;
     }
     
