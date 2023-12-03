@@ -78,7 +78,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             if (curr.equals("iamdani"))
             {
                 daniMidi = i;
-                println("Joystick A in port: " + daniMidi);
+                println("iamdani in port: " + daniMidi);
             }
         }
 
@@ -90,7 +90,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                 if (curr.equals("Arturia BeatStep"))
                 {
                     daniMidi = i;
-                    println("Joystick B in port: " + daniMidi);
+                    println("Arturia BeatStep in port: " + daniMidi);
                 }
             }
         }
