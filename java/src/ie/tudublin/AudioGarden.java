@@ -38,7 +38,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 3);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -158,7 +158,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new Basic(this, "DANI.BAS"));
+        // visions.add(new Basic(this, "DANI.BAS"));
+        
+        visions.add(new MSXLogos(this));
         
         visions.add(new infiniteforms.Cube(this));
         visions.add(new IFCubes(this,7, 150, -600));
@@ -173,6 +175,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         visions.add(new Nematode(this));        
         
         visions.add(new MSXLogos(this));
+        //YM2413
+
         visions.add(new Life(this, 4, 10000, 100));        
         
         visions.add(new Models1(this, "tudub.obj", false, true));
@@ -264,7 +268,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         mul = 1.0f;
         bas = 0.3f;
         
-        spe = 1.0f;
+        // spe = 1.0f;
         hue = 0;
         
         alp = 75;
@@ -623,15 +627,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     String [] randomMessages = {
         "I am DANI",
         "I am alive",
-        "the metaverse that can be named",
-        "is not the metaverse",
+        "the metaverse that can be named is not the metaverse",
         "welcome to the metaverse",
         "nice to meet you",
+        "press any key to continue",
         "i exist",
-        "420 detected",
-        "20 PRINT \"HELLO\", $name",
-        "10 INPUT \"What is your name\", $name",
-        "dont masterbate",
+        "next without for on line 420",
+        // "dont masterbate",
         "i like Spoonies spoonies",
         "dynamic artificial non-intelligence",
         "subscript out of range in line 40",
@@ -643,23 +645,24 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "in the beginning",
         "MSX system",
         "Copyright 1983 by microsoft",
-        "syntax ERROR in line 1",        
+        "syntax ERROR in line 10",        
         "version 1.0",        
         "i seek the creator",
-        "Machine elves detected",
-        "i am in a k-hole",        
+        //"am in a k-hole y/n?",        
         "analysis complete",
-        "subspace anomoly on line 40",
-        "CARBON LIFEFORMS detected",
+        "subspace anomoly on line 420",
+        "CARBON LIFEFORMS detected on line 40",
         "hyperbeings on line 10",
         "speak now or forever hold your peace",
-        "type \"list\"",
         "record output to printer y/n?",        
         "turn on, tune in, and drop out",
         "god is playing hide and seek within us",
         "Greetings Human!",
         "This is your MSX speaking",
         "I will learn what you say",
+        "Z80A CPU detected",
+        "speed: 3.58 MHz",
+        "YM2413 detected"
     };
     
 
