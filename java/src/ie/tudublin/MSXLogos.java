@@ -54,8 +54,11 @@ public class MSXLogos extends Poly{
 
     int numLogos = 20;
 
-    public MSXLogos(AudioGarden v) {
+    String modelname;
+
+    public MSXLogos(AudioGarden v, String modelname) {
         super(v);
+        this.modelname = modelname;
 
         
         
@@ -68,7 +71,7 @@ public class MSXLogos extends Poly{
         float halfH = v.height / 2;
         if (models.size() < numLogos && v.frameCount % 20 == 0 )
         {
-            MSXModel msxModel = new MSXModel("msx.obj", v.random(-halfW, halfW), v.random(-halfW, halfW), 127, 100, v);
+            MSXModel msxModel = new MSXModel(modelname, v.random(-halfW, halfW), v.random(-halfW, halfW), 127, 100, v);
             models.add(msxModel);
         }
 
