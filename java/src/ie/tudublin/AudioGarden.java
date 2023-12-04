@@ -68,6 +68,25 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         System.out.println(o);
     }
 
+    public void resetMessage()
+    {
+        console = new StringBuilder();
+        println("MSX System");
+        println("version 1.0");
+        println("Copyright 1983 by microsoft");
+        println("ok");
+        println("load \"DANI.BAS\"");
+        println("ok");
+        println("RUN");
+        println("Greetings Human!");
+        println("This is your MSX speaking");
+        println("I AM DANI");        
+        println("dynamic articicial non-intelligence");
+        println("Talk to me and I will learn what you say and answer you");
+        println("speak now or forever hold your peace");
+        
+    }
+
     public void midiConnect()
     {
         MidiBus.list();
@@ -122,19 +141,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     // }
 
     public void setup() {
-        println("MSX System");
-        println("version 1.0");
-        println("Copyright 1983 by microsoft");
-        println("ok");
-        println("load \"DANI.BAS\"");
-        println("ok");
-        println("RUN");
-        println("Greetings Human!");
-        println("This is your MSX speaking");
-        println("I AM DANI");        
-        println("dynamic articicial non-intelligence");
-        println("Talk to me and I will learn what you say and answer you");
-        println("speak now or forever hold your peace");
         sphere = loadShape("sphere.obj");
 
 
@@ -155,6 +161,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         // grave = loadShape("gravestone.obj");
         // texture = loadImage("gravestone.mtl");
         noiseSeed(0l);
+
+        resetMessage();
 
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
@@ -352,12 +360,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
 
         if (pitch == 42)
-        {
-            println("RST");
-            println("MSX System");
-            println("version 1.0");
-            println("Copyright 1983 by microsoft");
-            println("ok"); 
+        {             
+            resetMessage();
             visions.get(whichVisual).enter();
             return;
         }

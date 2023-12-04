@@ -30,10 +30,10 @@ class MSXModel {
             v.rotateX(-v.HALF_PI);
             v.rotateY(-v.yaw);
             v.rotateZ(v.pit);
-            float s = 1.0f + v.noise(theta * 3) * 400;
+            float s = 1.0f + v.noise(theta * 3) * 350;
             lerpedS = v.lerp(lerpedS, s, 0.01f);
             v.scale(s);
-            v.stroke(v.hueShift(h), 255, 255, v.alp);
+            v.stroke(v.hueShift(h + lerpedS), 255, 255, v.alp);
             v.noFill();
             v.shape(sh);
             v.popMatrix();
@@ -42,6 +42,11 @@ class MSXModel {
 
             if (pos.z > 2000) {
                 pos.z = -1000 ;
+                float halfW = v.width / 2;
+                float halfH = v.height / 2;
+                pos.x = v.random(-halfW, halfW);
+                pos.y = v.random(-halfH, halfH);
+                
                 lerpedS = 0;
                 h = 127;
             }        
@@ -52,7 +57,7 @@ public class MSXLogos extends Poly{
 
     ArrayList<MSXModel> models = new ArrayList<MSXModel>();
 
-    int numLogos = 20;
+    int numLogos = 8;
 
     String filename;
 
