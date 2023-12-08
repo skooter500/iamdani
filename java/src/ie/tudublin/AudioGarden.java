@@ -33,13 +33,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     int previousVisual = 0;
     int whichVisual = 0;
 
-    MidiBus myBus; // The MidiBus
+    MidiBus myBus = null; // The MidiBus
 
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 3);
-        //size(1000, 1000, P3D);
+        //fullScreen(P3D, 3);
+        size(1000, 1000, P3D);
     }
 
     PShape sphere;
@@ -113,8 +113,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                 }
             }
         }
-
-                
         
         if (daniMidi == -1)
         {
@@ -126,7 +124,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             {
                 myBus.close();
             }
-
             
             myBus = new MidiBus(this, daniMidi, 0);
         }        
@@ -151,6 +148,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         cp5 = new ControlP5(this);
 
+        resetMessage();
+
         midiConnect();
 
 
@@ -162,8 +161,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         // texture = loadImage("gravestone.mtl");
         noiseSeed(0l);
 
-        resetMessage();
-
+        
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
         //visions.add(new Basic(this, "DANI.BAS"));
