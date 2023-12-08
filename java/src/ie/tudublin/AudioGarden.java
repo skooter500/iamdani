@@ -302,7 +302,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     takeScreenshot = true;            
                     return;
                 }
-                println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+                if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = pitch % visions.size();
                 change(newVisual);
                 return;
@@ -314,7 +314,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     takeScreenshot = true;            
                     return;
                 }
-                println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+                if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = (int) random(0, visions.size());
                 change(newVisual);
                 return;
@@ -371,7 +371,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
         
-        println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+        if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
         
                
         
@@ -380,7 +380,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void noteOff(int channel, int pitch, int velocity) {
         // Receive a noteOff
-        println("N- CH: " + channel, " PI: " + pitch + " VE: " + velocity);  
+        if (midiMessages) println("N- CH: " + channel, " PI: " + pitch + " VE: " + velocity);  
     }
 
     public void change(int into) 
