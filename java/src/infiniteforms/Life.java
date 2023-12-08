@@ -398,10 +398,11 @@ public class Life extends Poly
   {    
 
     v.camera(0, 0, -1000, 0, 0, 0f, 0f, 0.001f, 0f);
-    
-    v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
+    v.lights();
     v.rotateX(v.pit);
     v.rotateY(v.yaw - 0.6f);
+    
+    v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
     
     int toPass = (int) v.map(v.spe, 0, 3, 120, 2);  
 
