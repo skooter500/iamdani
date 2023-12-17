@@ -390,6 +390,7 @@ public class Life extends Poly
     v.noLights();
   }
 
+  float ellapsed = 0;
   public void render()
   {    
 
@@ -401,11 +402,12 @@ public class Life extends Poly
     
     v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
     
-    int toPass = (int) v.map(v.spe, 0, 3, 120, 2);  
-
-    if (v.frameCount % toPass == 0)
+    float toPass = v.map(v.spe, 0, 3.18f, 1.0f, 0.01f);  
+    ellapsed += v.timeDelta;
+    if (ellapsed > toPass)
     {
       updateBoard();
+      ellapsed = 0;
     }
     
 

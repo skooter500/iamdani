@@ -45,7 +45,7 @@ public class Cubes extends Poly
             float c = PApplet.map(count, 0, v.getAudioBuffer().size() , 100, 400);
 
             v.stroke(v.hueShift(c),255,255, v.alp);
-            v.strokeWeight(2);
+            v.strokeWeight(1);
             v.noFill();
             //background circles
             //+i causes circles to move outwards up to 400

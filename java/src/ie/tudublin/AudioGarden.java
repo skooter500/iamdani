@@ -93,7 +93,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         {
             MidiBus.list();        
             int daniMidi = -1;
-            for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
+            /*for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
             {
                 String curr = MidiBus.availableInputs()[i];
                 if (curr.equals("iamdani"))
@@ -101,7 +101,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     daniMidi = i;
                     println("iamdani in port: " + daniMidi);
                 }
-            }
+            }*/
 
             if (daniMidi == -1)
             {
@@ -282,7 +282,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println("DEF");  
         targetPit = 0.05f;
         targetYaw = 0.58f;
-        targetSpe = 1.0f;
         targetHue = 0;
         targetAlp = 75;
         targetAld = 4;
@@ -374,7 +373,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (pitch == 42)
         {             
-            resetMessage();
+            //resetMessage();
             visions.get(whichVisual).enter();
             return;
         }
@@ -424,7 +423,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         boolean clockWise = (value < 100);
 
         if (number == 7) {
-            targetSpe = min(max(clockWise ? targetSpe + 0.05f : targetSpe - 0.05f, 0.0f), 3);
+            targetSpe = min(max(clockWise ? targetSpe + 0.05f : targetSpe - 0.05f, 0.0f), 3.18f);
             println("SPE: " + targetSpe + " MHZ");
         }
 
@@ -470,11 +469,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             println("ALP: " + targetAlp);
         }
          if (number == 77) {
-             targetYaw = clockWise ? targetYaw + 0.003f : targetYaw - 0.003f;
+             targetYaw = clockWise ? targetYaw + 0.03f : targetYaw - 0.03f;
              println("yaw: " + targetYaw);
          }
         if (number == 17) {
-            targetPit = clockWise ? targetPit + 0.003f : targetPit - 0.003f;
+            targetPit = clockWise ? targetPit + 0.03f : targetPit - 0.03f;
              println("pit: " + targetPit);
         }
         // int newVisual = whichVisual;
@@ -575,8 +574,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     boolean showConsole = true;
 
-    public void draw() {        
+    public static float timeDelta = 0;
+    long last = 0;
 
+    public void draw() {        
         colorMode(RGB);
         blendMode(SUBTRACT);
         fill(255, ald);
@@ -594,6 +595,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         alp = lerp(alp, targetAlp, 0.1f);
         bas = lerp(bas, targetBas, 0.1f);
         mul = lerp(mul, targetMul, 0.1f);
+        hue = lerp(hue, targetHue, 0.1f);
 
         if (showConsole)
         {
@@ -634,6 +636,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             takeScreenshot = false;
         }
         //hueShift();
+
+        int now = millis();
+        timeDelta = (now - last) / 1000.0f;
+        last = now;
     }
     
 
