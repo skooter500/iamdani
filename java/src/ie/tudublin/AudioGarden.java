@@ -38,8 +38,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        //fullScreen(P3D, 3);
-        size(1000, 1000, P3D);
+        fullScreen(P3D, 1);
+        //size(1000, 1000, P3D);
     }
 
     PShape sphere;
@@ -89,44 +89,51 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void midiConnect()
     {
-        MidiBus.list();
-        int daniMidi = -1;
-        for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
+        try
         {
-            String curr = MidiBus.availableInputs()[i];
-            if (curr.equals("iamdani"))
-            {
-                daniMidi = i;
-                println("iamdani in port: " + daniMidi);
-            }
-        }
-
-        if (daniMidi == -1)
-        {
+            MidiBus.list();        
+            int daniMidi = -1;
             for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
             {
                 String curr = MidiBus.availableInputs()[i];
-                if (curr.equals("Arturia BeatStep"))
+                if (curr.equals("iamdani"))
                 {
                     daniMidi = i;
-                    println("Arturia BeatStep in port: " + daniMidi);
+                    println("iamdani in port: " + daniMidi);
                 }
             }
-        }
-        
-        if (daniMidi == -1)
-        {
-            println("Insert joystick and press enter");
-        }
-        else
-        {
-            if (myBus != null)
+
+            if (daniMidi == -1)
             {
-                myBus.close();
+                for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
+                {
+                    String curr = MidiBus.availableInputs()[i];
+                    if (curr.equals("Arturia BeatStep"))
+                    {
+                        daniMidi = i;
+                        println("Arturia BeatStep in port: " + daniMidi);
+                    }
+                }
             }
-            
-            myBus = new MidiBus(this, daniMidi, 0);
-        }        
+        
+            if (daniMidi == -1)
+            {
+                println("Insert joystick and press enter");
+            }
+            else
+            {
+                if (myBus != null)
+                {
+                    myBus.close();
+                }
+                
+                myBus = new MidiBus(this, daniMidi, 0);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }     
     }
 
     // public void sphere(float size)
@@ -164,17 +171,19 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        //visions.add(new Basic(this, "DANI.BAS"));
+        visions.add(new Cubesquared2(this));
+        visions.add(new Life(this, 2, 10000, 100));
+        
+        visions.add(new Life(this, 3, 10000, 200));
         
         visions.add(new MSXLogos(this, "msx.obj"));
-        visions.add(new MSXLogos(this, "chip.obj"));
+        visions.add(new MSXLogos(this, "chip.obj"));        
+        visions.add(new Basic(this, "DANI.BAS"));
         
         visions.add(new infiniteforms.Cube(this));
         visions.add(new IFCubes(this,7, 150, -600));
         visions.add(new IFCubes(this,30, 150, -400)); 
         visions.add(new DANI(this, "captainb.txt"));
-        visions.add(new Cubesquared2(this));
-        visions.add(new Life(this, 3, 10000, 200));
         visions.add(new Life(this, 2, 10000, 100));
         visions.add(new paris(this));  
         visions.add(new Life(this, 0, 10000, 100));        
@@ -271,19 +280,25 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     void defaults()
     {
         println("DEF");  
-        mul = 1.0f;
-        bas = 0.3f;
-        
-        // spe = 1.0f;
-        hue = 0;
-        
-        alp = 75;
-        ald = 4;
-        
-        pit = 0.05f;
-        yaw = 0.58f;
+        targetPit = 0.05f;
+        targetYaw = 0.58f;
+        targetSpe = 1.0f;
+        targetHue = 0;
+        targetAlp = 75;
+        targetAld = 4;
+        targetMul = 1.0f;
+        targetBas = 0.3f;
 
     }
+
+    float targetPit = 0.05f;
+    float targetYaw = 0.58f;
+    float targetSpe = 1.0f;
+    float targetHue = 0;
+    float targetAlp = 75;
+    float targetAld = 4;
+    float targetMul = 1.0f;
+    float targetBas = 0.3f;
 
     public AudioGarden() {
         super(1024, 44100, 0.5f);
@@ -409,58 +424,58 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         boolean clockWise = (value < 100);
 
         if (number == 7) {
-            spe = min(max(clockWise ? spe + 0.05f : spe - 0.05f, 0.0f), 3);
-            println("SPE: " + spe);
+            targetSpe = min(max(clockWise ? targetSpe + 0.05f : targetSpe - 0.05f, 0.0f), 3);
+            println("SPE: " + targetSpe + " MHZ");
         }
 
         if (number == 10) {
-            bas = max(clockWise ? bas + 0.01f : bas - 0.01f, 0.01f);
-            println("BAS: " + bas);
+            targetBas = max(clockWise ? targetBas + 0.01f : targetBas - 0.01f, 0.01f);
+            println("BAS: " + targetBas);
         }
 
         if (number == 114) {
-            mul = max(clockWise ? mul + 0.1f : mul - 0.1f, 0);
-            println("MUL: " + mul);
+            targetMul = max(clockWise ? targetMul + 0.1f : targetMul - 0.1f, 0);
+            println("MUL: " + targetMul);
         }
         if (number == 74) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
-            hue = clockWise ? hue + 1f : hue - 1f;
-            println("HUE: " + hue);
+            targetHue = clockWise ? targetHue + 1f : targetHue - 1f;
+            println("HUE: " + targetHue);
         }
 
         if (number == 18) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
-            hue = clockWise ? hue + 5f : hue - 5f;
-            println("HUE: " + hue);
+            targetHue = clockWise ? targetHue + 5f : targetHue - 5f;
+            println("HUE: " + targetHue);
         }
 
         if (number == 76) {
-            ald = min(max(clockWise ? ald + .1f : ald - .1f, 0), 50);
-            println("ALD: " + ald);
+            targetAld = min(max(clockWise ? targetAld + .1f : targetAld - .1f, 0), 50);
+            println("ALD: " + targetAld);
         }
 
         if (number == 16) {
-            ald = min(max(clockWise ? ald + 1f : ald - 1f, 0), 50);
-            println("ALD: " + ald);
+            targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 0), 50);
+            println("ALD: " + targetAld);
         }
 
         if (number == 19) {
-            alp = min(max(clockWise ? alp + 1f : alp - 1f, 1), 255);
-            println("ALP: " + alp);
+            targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 1), 255);
+            println("ALP: " + targetAlp);
         }
 
 
         if (number == 71) {
-            alp = min(max(clockWise ? alp + 0.1f : alp - 0.1f, 2f), 255);
-            println("ALP: " + alp);
+            targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 2f), 255);
+            println("ALP: " + targetAlp);
         }
          if (number == 77) {
-             yaw = clockWise ? yaw + 0.003f : yaw - 0.003f;
-             println("yaw: " + yaw);
+             targetYaw = clockWise ? targetYaw + 0.003f : targetYaw - 0.003f;
+             println("yaw: " + targetYaw);
          }
         if (number == 17) {
-             pit = clockWise ? pit + 0.003f : pit - 0.003f;
-             println("pit: " + pit);
+            targetPit = clockWise ? targetPit + 0.003f : targetPit - 0.003f;
+             println("pit: " + targetPit);
         }
         // int newVisual = whichVisual;
         //     if (clockWise)
@@ -571,7 +586,15 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         popMatrix();
         blendMode(BLEND);
         colorMode(HSB);
-    
+
+        yaw = lerp(yaw, targetYaw, 0.1f);
+        pit = lerp(pit, targetPit, 0.1f);
+        spe = lerp(spe, targetSpe, 0.1f);
+        ald = lerp(ald, targetAld, 0.1f);
+        alp = lerp(alp, targetAlp, 0.1f);
+        bas = lerp(bas, targetBas, 0.1f);
+        mul = lerp(mul, targetMul, 0.1f);
+
         if (showConsole)
         {
             consoleSize = lerp(consoleSize, targetSize, 0.1f);
@@ -663,7 +686,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "This is your MSX speaking",
         "I will learn what you say",
         "Z80A CPU detected",
-        "speed: 3.58 MHz",
         "YM2413 detected"
     };
     

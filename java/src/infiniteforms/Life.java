@@ -365,27 +365,23 @@ public class Life extends Poly
 
   void drawBoard()
   {
-    /*colorMode(RGB);
-    fill(0, 10);
-    rectMode(CORNER);
-    rect(0, 0, width, height);
-    colorMode(HSB);
-    */  
     
-    v.noStroke();
-    v.lights();
     for (int row = 0; row < boardHeight; row ++) {
       for (int col = 0; col < boardWidth; col ++) {
         if (board[row][col] != -1)
         {
             float newC = v.hueShift(board[row][col] + ((v.pit + v.yaw) * 10000.0f));
-          v.fill(newC, 255, 255, v.alp);
-          v.stroke(v.hueShift(newC + 127), 255, 255, v.alp);
-          v.strokeWeight(2);
-          v.pushMatrix();
-          v.translate(col * cellWidth, row * cellWidth, 0);
-          v.box(cellWidth);
-          v.popMatrix();
+            v.fill(newC, 255, 255, v.alp);
+            v.strokeWeight(1);
+            v.stroke(v.hueShift(90), 255, 255, v.alp);
+            // v.fill(v.hueShift(newC),(255+v.frameCount)%255,(255+v.frameCount)%255, v.alp);
+                
+            // v.stroke(v.hueShift(newC + 127), 255, 255, v.alp);
+            // v.strokeWeight(2);
+            v.pushMatrix();
+            v.translate(col * cellWidth, row * cellWidth, 0);
+            v.box(cellWidth);
+            v.popMatrix();
           //rect(col * cellWidth, row * cellWidth, cellWidth, cellWidth);
           //v.rect(col * cellWidth, row * cellWidth, cellWidth, cellWidth);
         }
@@ -399,6 +395,7 @@ public class Life extends Poly
 
     v.camera(0, 0, -1000, 0, 0, 0f, 0f, 0.001f, 0f);
     v.lights();
+    v.translate(0, 0, 1000);
     v.rotateX(v.pit);
     v.rotateY(v.yaw - 0.6f);
     

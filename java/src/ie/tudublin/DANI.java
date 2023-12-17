@@ -167,6 +167,9 @@ public class DANI extends Poly {
 
 	public void render()     
     {
+        v.rotateX(v.pit);
+        v.rotateY(v.yaw);
+    
         reset ++;
         v.textAlign(v.LEFT, v.CENTER);
 
