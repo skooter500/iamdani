@@ -93,7 +93,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         {
             MidiBus.list();        
             int daniMidi = -1;
-            /*for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
+            for (int i = 0 ; i < MidiBus.availableInputs().length ; i ++)
             {
                 String curr = MidiBus.availableInputs()[i];
                 if (curr.equals("iamdani"))
@@ -101,7 +101,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     daniMidi = i;
                     println("iamdani in port: " + daniMidi);
                 }
-            }*/
+            }
 
             if (daniMidi == -1)
             {
@@ -690,7 +690,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "god is playing hide and seek within us",
         "Greetings Human!",
         "This is your MSX speaking",
-        "I will learn what you say",
+        "color auto goto list run",
         "Z80A CPU detected",
         "YM2413 detected"
     };
