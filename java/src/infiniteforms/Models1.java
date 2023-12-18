@@ -33,6 +33,8 @@ public class Models1 extends Poly
     v.noFill();           
     v.pushMatrix();    
     v.camera(0, 150, -300, 20, 20, 0, 0, 1, 0);
+    v.rotateX(v.pit);
+    v.rotateZ( v.yaw);
     model.render();
     v.popMatrix();
     v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0, 0, 1, 0);

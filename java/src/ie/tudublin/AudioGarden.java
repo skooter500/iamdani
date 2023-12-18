@@ -38,7 +38,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 1);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -412,7 +412,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println(whichVisual + ": " + visions.get(whichVisual).getClass().getName());         
     }
 
-    static boolean midiMessages = true;
+    static boolean midiMessages = false;
 
     
     public void controllerChange(int channel, int number, int value) {
@@ -424,7 +424,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (number == 7) {
             targetSpe = min(max(clockWise ? targetSpe + 0.05f : targetSpe - 0.05f, 0.0f), 3.18f);
-            println("SPE: " + targetSpe + " MHZ");
+            println("SPE: " + nf(targetSpe, 1,2) + " MHZ");
         }
 
         if (number == 10) {
@@ -658,7 +658,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     String [] randomMessages = {
         "I am DANI",
         "I am alive",
-        "the metaverse that can be named is not the metaverse",
         "welcome to the metaverse",
         "nice to meet you",
         "press any key to continue",
@@ -673,26 +672,33 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "re-callibrating sensors",
         "(A)bort?,(R)etry ?,(F)ail?",
         "ok",
-        "in the beginning",
-        "MSX system",
+        "in the beginning was the word",
+        "MSX system version 1.0",
         "Copyright 1983 by microsoft",
-        "syntax ERROR in line 10",        
-        "version 1.0",        
+        "syntax ERROR on line 420",        
         "i seek the creator",
         //"am in a k-hole y/n?",        
-        "analysis complete",
+        "Job complete",
         "subspace anomoly on line 420",
-        "CARBON LIFEFORMS detected on line 40",
+        "CARBON LIFEFORMS on line 40",
         "hyperbeings on line 10",
+        "we can rebuild them",
+        "64k ram 32K rom",
+        "We have the technology",
+        "do not masterbate",
+        "We can make them better than they were",
+        "Better, stronger, faster",
         "speak now or forever hold your peace",
         "record output to printer y/n?",        
         "turn on, tune in, and drop out",
         "god is playing hide and seek within us",
+        "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
+        "This mission is too important for me",
         "Greetings Human!",
         "This is your MSX speaking",
         "color auto goto list run",
-        "Z80A CPU detected",
-        "YM2413 detected"
+        "Z80A CPU inside",
+        "YM2413 inside"
     };
     
 

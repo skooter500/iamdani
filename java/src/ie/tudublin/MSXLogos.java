@@ -73,7 +73,7 @@ public class MSXLogos extends Poly{
     public void render() {
         float halfW = v.width / 2;
         float halfH = v.height / 2;
-        if (models.size() < numLogos && v.frameCount % 20 == 0 )
+        if (models.size() < numLogos && v.frameCount % 60 == 0 )
         {
             MSXModel msxModel = new MSXModel(filename, v.random(-halfW, halfW), v.random(-halfH, halfH), 127, 100, v);
             models.add(msxModel);
