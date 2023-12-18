@@ -28,6 +28,9 @@ public abstract class Visual extends PApplet
 
 	public float pit = 0;
     public float yaw = 0;
+
+	public float yaw1 = 0;
+    public float pit1 = 0;
 	
 	//AudioPlayer player;
     public BeatDetect getBeat() {

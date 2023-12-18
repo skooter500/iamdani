@@ -87,7 +87,7 @@ public class HoldTheLine extends Visual {
     }
 
     public void setup() {
-        colorMode(HSB, 360, 100, 100);
+        //colorMode(HSB, 360, 100, 100);
 
         // Load song and lyrics file and pause it
         beginAudio("Toto - Hold The Line.wav", "Toto - Hold The Line.txt");
@@ -114,7 +114,7 @@ public class HoldTheLine extends Visual {
         // Resets
         noLights();
         blendMode(BLEND);
-        colorMode(HSB, 360, 100, 100);
+        // colorMode(HSB, 360, 100, 100);
 
         if (startScreen) {
             pressStart.render();

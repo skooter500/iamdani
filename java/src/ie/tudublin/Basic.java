@@ -115,8 +115,10 @@ public class Basic extends Poly {
 
 	public void render()     
     {
-        v.rotateX(v.pit);
-        v.rotateY(v.yaw);
+        
+        v.rotateX(v.pit1);
+        v.rotateY(v.yaw1);
+    
     
         v.textAlign(v.LEFT, v.CENTER);
 
@@ -127,6 +129,8 @@ public class Basic extends Poly {
         float cy = v.height / 2;
 
         v.translate(cx * .4f, cy/3);
+        v.rotateX(v.pit);
+        v.rotateY(v.yaw);
 
 		for(int i = 0 ; i <= line ; i ++)
         { 

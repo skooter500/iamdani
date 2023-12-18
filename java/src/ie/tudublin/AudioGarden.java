@@ -38,7 +38,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 3);
         //size(1000, 1000, P3D);
     }
 
@@ -280,18 +280,23 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     void defaults()
     {
         println("DEF");  
-        targetPit = 0.05f;
-        targetYaw = 0.58f;
+        targetPit1 = 0f;
+        targetYaw1 = 0f;
+        targetPit = 0f;
+        targetYaw = 0f;
         targetHue = 0;
-        targetAlp = 75;
+        targetAlp = 40;
         targetAld = 4;
         targetMul = 1.0f;
-        targetBas = 0.3f;
+        targetBas = 0.5f;
 
     }
 
-    float targetPit = 0.05f;
-    float targetYaw = 0.58f;
+    float targetPit = 0f;
+    float targetYaw = 0f;
+
+    float targetPit1 = 0f;
+    float targetYaw1 = 0f;
     float targetSpe = 1.0f;
     float targetHue = 0;
     float targetAlp = 75;
@@ -373,7 +378,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (pitch == 42)
         {             
-            //resetMessage();
+            println("RST");
             visions.get(whichVisual).enter();
             return;
         }
@@ -386,8 +391,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
         
         if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
-        
-               
         
         
     }
@@ -413,6 +416,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     }
 
     static boolean midiMessages = false;
+    static boolean controlMessages = false;
 
     
     public void controllerChange(int channel, int number, int value) {
@@ -424,57 +428,68 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (number == 7) {
             targetSpe = min(max(clockWise ? targetSpe + 0.05f : targetSpe - 0.05f, 0.0f), 3.18f);
-            println("SPE: " + nf(targetSpe, 1,2) + " MHZ");
+            if (controlMessages) println("SPE: " + nf(targetSpe, 1,2) + " MHZ");
         }
 
         if (number == 10) {
             targetBas = max(clockWise ? targetBas + 0.01f : targetBas - 0.01f, 0.01f);
-            println("BAS: " + targetBas);
+            if (controlMessages) println("BAS: " + nf(targetBas, 1,2));
         }
 
         if (number == 114) {
             targetMul = max(clockWise ? targetMul + 0.1f : targetMul - 0.1f, 0);
-            println("MUL: " + targetMul);
+            if (controlMessages) println("MUL: " + nf(targetMul, 1,2));
         }
         if (number == 74) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             targetHue = clockWise ? targetHue + 1f : targetHue - 1f;
-            println("HUE: " + targetHue);
+            if (controlMessages) println("HUE: " + nf(targetHue, 1,2));
         }
 
         if (number == 18) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             targetHue = clockWise ? targetHue + 5f : targetHue - 5f;
-            println("HUE: " + targetHue);
+            if (controlMessages) println("HUE: " + nf(targetHue, 1,2));
         }
 
         if (number == 76) {
             targetAld = min(max(clockWise ? targetAld + .1f : targetAld - .1f, 0), 50);
-            println("ALD: " + targetAld);
+            if (controlMessages) println("ALD: " + nf(targetAld, 1,2));
         }
 
         if (number == 16) {
             targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 0), 50);
-            println("ALD: " + targetAld);
+            if (controlMessages) println("ALD: " + nf(targetAld, 1,2));
         }
 
         if (number == 19) {
             targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 1), 255);
-            println("ALP: " + targetAlp);
+            if (controlMessages) println("ALP: " + nf(targetAlp, 1,2));
         }
 
 
         if (number == 71) {
             targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 2f), 255);
-            println("ALP: " + targetAlp);
+            if (controlMessages) println("ALP: " + nf(targetAlp, 1,2));
         }
          if (number == 77) {
              targetYaw = clockWise ? targetYaw + 0.03f : targetYaw - 0.03f;
-             println("yaw: " + targetYaw);
+             if (controlMessages) println("yaw: " + nf(targetYaw, 1,2));
          }
+         /*
+         if (number == 93) {
+            targetYaw1 = clockWise ? targetYaw1 + 0.03f : targetYaw1 - 0.03f;
+            if (controlMessages) println("yaw1: " + nf(targetYaw1, 1,2));
+        }
+
+        if (number == 91) {
+            targetPit1 = clockWise ? targetPit1 + 0.03f : targetPit1 - 0.03f;
+            if (controlMessages) println("pit1: " + nf(targetPit1, 1,2));
+        }
+        */
         if (number == 17) {
             targetPit = clockWise ? targetPit + 0.03f : targetPit - 0.03f;
-             println("pit: " + targetPit);
+            if (controlMessages) println("pit: " + nf(targetPit, 1,2));
         }
         // int newVisual = whichVisual;
         //     if (clockWise)
@@ -508,6 +523,18 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             else
             {
                 println("TROFF");
+            }
+        }
+        if (key == 'c')
+        {
+            controlMessages = ! controlMessages;
+            if (controlMessages)
+            {
+                println("CTRON");
+            }
+            else
+            {
+                println("CTROFF");
             }
         }
 
@@ -590,6 +617,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         yaw = lerp(yaw, targetYaw, 0.1f);
         pit = lerp(pit, targetPit, 0.1f);
+        yaw1 = lerp(yaw1, targetYaw1, 0.1f);
+        pit1 = lerp(pit1, targetPit1, 0.1f);
         spe = lerp(spe, targetSpe, 0.1f);
         ald = lerp(ald, targetAld, 0.1f);
         alp = lerp(alp, targetAlp, 0.1f);

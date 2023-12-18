@@ -81,6 +81,9 @@ public class MSXLogos extends Poly{
 
         v.lights();
         v.strokeWeight(2);
+        v.rotateX(v.pit1);
+        v.rotateY(v.yaw1);
+
         v.translate(v.width / 2, v.height / 2, -500);
         for (MSXModel model:models)
         {

@@ -186,7 +186,7 @@ public class AdriansVisual extends VScene {
 
         @Override
         public void render(int elapsed) {
-            v.colorMode(PApplet.HSB, 360, 100, 100, 100);
+            v.colorMode(PApplet.HSB);
             float lerpedAmplitude = aa.mix().lerpedAmplitude;
             float[] lerpedSpectrum = aa.mix().lerpedSpectrum;
             // 1000 / 60

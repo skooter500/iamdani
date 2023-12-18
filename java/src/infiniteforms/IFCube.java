@@ -33,6 +33,9 @@ public class IFCube
     
     v.rotateY(angle);
     v.rotateX(angle);
+    v.rotateZ(v.pit);
+    v.rotateY(v.yaw);
+
     v.strokeWeight(weight);
     if (useAmplitude)
     {

@@ -37,6 +37,9 @@ public class Cube extends Poly
         v.pushMatrix();
         //v.rotateZ(v.PI + v.yaw);
         //v.translate(v.width / 2, v.height / 2, 0); 
+        v.rotateX(v.pit1);
+        v.rotateY(v.yaw1);
+
         v.rotateX(v.pit);
         v.rotateY(v.yaw);
         v.strokeWeight(2);

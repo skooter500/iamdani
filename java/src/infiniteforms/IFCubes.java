@@ -45,6 +45,9 @@ public class IFCubes extends Poly {
         
     v.stroke(col, 255, 255);
     v.pushMatrix();    
+    v.rotateX(v.pit1);
+    v.rotateZ(v.yaw1);
+
     //v.camera(0, 0, -z, 0, 0, -1, 0, 1, 0);
     //rotateY(theta);   
     //rotateX(theta);    
