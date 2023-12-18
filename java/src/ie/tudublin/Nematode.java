@@ -172,7 +172,7 @@ public class Nematode extends Poly
         v.println(w);
         float half = w * length * 0.5f; 
 
-        v.strokeWeight(2);
+        v.strokeWeight(1);
         v.pushMatrix();
         v.translate(cx, cy);
         v.translate(0, - half);

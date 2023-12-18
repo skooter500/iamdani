@@ -17,7 +17,9 @@ public class Bloom extends Poly{
         float cRange;//colour range
         v.noStroke();
         v.translate(v.width/2, v.height/2); //draws at the centre of the screen
-
+        v.rotateX(v.pit);
+        v.rotateY(v.yaw);
+        v.rotateZ(v.yaw1);
         v.pushMatrix();
         for(int i = 0; i < 400; i++){ //400 is number of squares on screen at any moment
             // if(v.beat.isKick()){// changes the range of colours being mapped based on if there is a kick in the song

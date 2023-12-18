@@ -40,7 +40,9 @@ public class ManarBrain extends Poly
         p.strokeWeight(8);
         p.stroke(p.hueShift(30), 255, 255, v.alp);//color + weight of the line
         p.translate(p.width/2 , brainHeight, 0);//position of the brain on the screen
-       
+        v.rotateX(v.pit);
+        v.rotateY(v.yaw);
+        v.rotateZ(v.yaw1);
         p.beginShape();
  
         p.rotateY(p.frameCount * rotationSpeed);//makes the brain drawing rotate on the Y axis

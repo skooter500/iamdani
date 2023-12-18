@@ -172,13 +172,14 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
         visions.add(new Cubesquared2(this));
+        visions.add(new Basic(this, "DANI.BAS"));
+        
         visions.add(new Life(this, 2, 10000, 100));
         
         visions.add(new Life(this, 3, 10000, 200));
         
         visions.add(new MSXLogos(this, "msx.obj"));
         visions.add(new MSXLogos(this, "chip.obj"));        
-        visions.add(new Basic(this, "DANI.BAS"));
         
         visions.add(new infiniteforms.Cube(this));
         visions.add(new IFCubes(this,7, 150, -600));
@@ -312,6 +313,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     public void noteOn(int channel, int pitch, int velocity) {
 
+        if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
+        
         switch(mode)
         {
             case Auto:
@@ -321,7 +324,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     takeScreenshot = true;            
                     return;
                 }
-                if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = pitch % visions.size();
                 change(newVisual);
                 return;
@@ -333,7 +335,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     takeScreenshot = true;            
                     return;
                 }
-                if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
                 int newVisual = (int) random(0, visions.size());
                 change(newVisual);
                 return;
@@ -361,9 +362,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
 
-        
-
-
         if (pitch == 51)
         {
             showConsole = !showConsole;
@@ -390,7 +388,6 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
         
-        if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
         
         
     }
@@ -476,17 +473,17 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
              targetYaw = clockWise ? targetYaw + 0.03f : targetYaw - 0.03f;
              if (controlMessages) println("yaw: " + nf(targetYaw, 1,2));
          }
-         /*
+         
          if (number == 93) {
             targetYaw1 = clockWise ? targetYaw1 + 0.03f : targetYaw1 - 0.03f;
-            if (controlMessages) println("yaw1: " + nf(targetYaw1, 1,2));
+            if (controlMessages) println("ROL: " + nf(targetYaw1, 1,2));
         }
 
         if (number == 91) {
             targetPit1 = clockWise ? targetPit1 + 0.03f : targetPit1 - 0.03f;
             if (controlMessages) println("pit1: " + nf(targetPit1, 1,2));
         }
-        */
+        
         if (number == 17) {
             targetPit = clockWise ? targetPit + 0.03f : targetPit - 0.03f;
             if (controlMessages) println("pit: " + nf(targetPit, 1,2));

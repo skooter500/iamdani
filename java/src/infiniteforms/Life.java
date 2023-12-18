@@ -248,8 +248,8 @@ public class Life extends Poly
 
   void initialize()
   {
-    cellWidth = v.width * 2.0f / (float) boardWidth;
-    boardHeight = v.round(v.height * 2.0f / cellWidth);
+    cellWidth = v.width * 4.0f / (float) boardWidth;
+    boardHeight = boardWidth;
     board = new float[boardHeight][boardWidth];
     nextBoard  = new float[boardHeight][boardWidth];
     enter();
@@ -370,7 +370,7 @@ public class Life extends Poly
       for (int col = 0; col < boardWidth; col ++) {
         if (board[row][col] != -1)
         {
-            float newC = v.hueShift(board[row][col] + ((v.pit + v.yaw) * 10000.0f));
+            float newC = v.hueShift(board[row][col]);
             v.fill(newC, 255, 255, v.alp);
             v.strokeWeight(1);
             v.stroke(v.hueShift(90), 255, 255, v.alp);
@@ -397,10 +397,10 @@ public class Life extends Poly
     v.camera(0, 0, -1000, 0, 0, 0f, 0f, 0.001f, 0f);
     v.lights();
     v.rotateX(v.pit1);
-    v.rotateY(v.yaw1);
     v.translate(0, 0, 1000);
     v.rotateX(v.pit);
     v.rotateY(v.yaw);
+    v.rotateZ(v.yaw1);
     
     v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
     

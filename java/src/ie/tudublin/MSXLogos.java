@@ -13,11 +13,11 @@ class MSXModel {
         float theta;
         AudioGarden v;
 
-        MSXModel(String fileName, float x, float y, float z, float h, AudioGarden v) {
+        MSXModel(PShape fileName, float x, float y, float z, float h, AudioGarden v) {
             pos = new PVector(x, y, z);
             this.h = h;
             this.v = v;
-            sh = v.loadShape(fileName);
+            sh = fileName;
             sh.disableStyle();
             theta = v.random(v.TWO_PI);
         }
@@ -28,13 +28,16 @@ class MSXModel {
             v.pushMatrix();
             v.translate(pos.x, pos.y, pos.z);
             v.rotateX(-v.HALF_PI);
-            v.rotateY(-v.yaw);
-            v.rotateZ(v.pit);
-            float s = 1.0f + v.noise(theta * 3) * 350;
+            v.rotateX(v.pit);
+            v.rotateZ(v.yaw);
+            v.rotateY(v.yaw1);
+            
+            float s = 1.0f + v.noise(theta) * 350;
             lerpedS = v.lerp(lerpedS, s, 0.01f);
             v.scale(s);
             v.stroke(v.hueShift(h + lerpedS), 255, 255, v.alp);
-            v.noFill();
+            float newC = v.hueShift(h + 127 + lerpedS);
+            v.fill(newC, 255, 255, v.alp);            
             v.shape(sh);
             v.popMatrix();
             theta += v.spe * 0.03f * v.getSmoothedAmplitude();
@@ -64,27 +67,28 @@ public class MSXLogos extends Poly{
     public MSXLogos(AudioGarden v, String filename) {
         super(v);
         this.filename = filename;
-        
+        s = v.loadShape(filename);
         
         //
     }
+
+    PShape s;
 
     @Override
     public void render() {
         float halfW = v.width / 2;
         float halfH = v.height / 2;
+        
         if (models.size() < numLogos && v.frameCount % 60 == 0 )
         {
-            MSXModel msxModel = new MSXModel(filename, v.random(-halfW, halfW), v.random(-halfH, halfH), 127, 100, v);
+            MSXModel msxModel = new MSXModel(s, v.random(-halfW, halfW), v.random(-halfH, halfH), 127, 100, v);
             models.add(msxModel);
         }
 
         v.lights();
         v.strokeWeight(2);
-        v.rotateX(v.pit1);
-        v.rotateY(v.yaw1);
 
-        v.translate(v.width / 2, v.height / 2, -500);
+        v.translate(v.width / 2, v.height / 2, -1000);
         for (MSXModel model:models)
         {
             model.render();

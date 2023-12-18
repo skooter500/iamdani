@@ -128,9 +128,10 @@ public class Basic extends Poly {
         float cx = v.width;
         float cy = v.height / 2;
 
-        v.translate(cx * .4f, cy/3);
         v.rotateX(v.pit);
         v.rotateY(v.yaw);
+        v.translate(cx * .4f, cy/3);
+        
 
 		for(int i = 0 ; i <= line ; i ++)
         { 
