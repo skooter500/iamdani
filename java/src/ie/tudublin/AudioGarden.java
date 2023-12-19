@@ -311,6 +311,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         
     }
 
+
     public void noteOn(int channel, int pitch, int velocity) {
 
         if (midiMessages) println("N+ CH: " + channel +  " PI: " + pitch + " VE: " + velocity); 
