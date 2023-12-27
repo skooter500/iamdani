@@ -400,11 +400,11 @@ public class Life extends Poly
     v.translate(0, 0, 1000);
     v.rotateX(v.pit);
     v.rotateY(v.yaw);
-    v.rotateZ(v.yaw1);
+    v.rotateZ(v.rol);
     
     v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
     
-    float toPass = v.map(v.spe, 0, 3.18f, 1.0f, 0.01f);  
+    float toPass = v.map(v.spe, 0, 3.58f, 2.0f, 0.0f);  
     ellapsed += v.timeDelta;
     if (ellapsed > toPass)
     {

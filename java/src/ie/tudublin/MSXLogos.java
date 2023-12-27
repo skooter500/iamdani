@@ -30,9 +30,9 @@ class MSXModel {
             v.rotateX(-v.HALF_PI);
             v.rotateX(v.pit);
             v.rotateZ(v.yaw);
-            v.rotateY(v.yaw1);
+            v.rotateY(v.rol);
             
-            float s = 1.0f + v.noise(theta) * 350;
+            float s = 1.0f + v.noise(theta) * 300;
             lerpedS = v.lerp(lerpedS, s, 0.01f);
             v.scale(s);
             v.stroke(v.hueShift(h + lerpedS), 255, 255, v.alp);
@@ -40,8 +40,8 @@ class MSXModel {
             v.fill(newC, 255, 255, v.alp);            
             v.shape(sh);
             v.popMatrix();
-            theta += v.spe * 0.03f * v.getSmoothedAmplitude();
-            pos.z += v.spe * v.getSmoothedAmplitude() * 40.0f;
+            theta += v.spe * 0.001f * v.getSmoothedAmplitude();
+            pos.z += v.spe * v.getSmoothedAmplitude() * 10.0f;
 
             if (pos.z > 2000) {
                 pos.z = -1000 ;

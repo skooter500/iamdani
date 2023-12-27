@@ -392,6 +392,27 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                 return;
             }
         }
+        if (pitch >= 44 && pitch <= 47)
+        {
+            int g = pitch - 44;
+            if (groups.containsKey(g))
+            {
+                int v = groups.get(g).get(0);
+                change(v);
+                return;
+            }
+        }
+        if (pitch >= 36 && pitch <= 39)
+        {
+            int g = pitch - 36;
+            g += 4;
+            if (groups.containsKey(g))
+            {
+                int v = groups.get(g).get(0);
+                change(v);
+                return;
+            }
+        }
         
         if (pitch == 41)
         {
@@ -654,7 +675,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         yaw = lerp(yaw, targetYaw, 0.01f);
         pit = lerp(pit, targetPit, 0.01f);
-        yaw1 = lerp(yaw1, targetYaw1, 0.01f);
+        rol = lerp(rol, targetYaw1, 0.01f);
         pit1 = lerp(pit1, targetPit1, 0.01f);
         spe = lerp(spe, targetSpe, 0.01f);
         ald = lerp(ald, targetAld, 0.01f);

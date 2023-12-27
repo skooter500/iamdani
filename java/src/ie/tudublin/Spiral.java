@@ -27,7 +27,7 @@ public class Spiral extends Poly{
 
     v.rotateX(v.pit);
     v.rotateY(v.yaw);
-    v.rotateZ(v.yaw1);
+    v.rotateZ(v.rol);
     
     for(float a = 0; a<360; a+=22.5f){ //used to create circular rotation lower value for 'a' means more cirles and tighter rotation can also cause lag if too low
       v.rotate(-AudioGarden.radians(a));

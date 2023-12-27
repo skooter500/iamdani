@@ -117,8 +117,7 @@ public class Basic extends Poly {
 	public void render()     
     {
         
-        v.rotateX(v.pit1);
-        v.rotateY(v.yaw1);
+        v.rotateZ(v.rol);
     
     
         v.textAlign(v.LEFT, v.CENTER);
