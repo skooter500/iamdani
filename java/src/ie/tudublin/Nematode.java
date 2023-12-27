@@ -204,6 +204,7 @@ public class Nematode extends Poly
         drawGenitals();
         
         v.popMatrix();
+        theta += v.spe;
     }
 
     private void drawGenitals()

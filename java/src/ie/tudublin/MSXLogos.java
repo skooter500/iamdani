@@ -40,7 +40,7 @@ class MSXModel {
             v.fill(newC, 255, 255, v.alp);            
             v.shape(sh);
             v.popMatrix();
-            theta += v.spe * 0.001f * v.getSmoothedAmplitude();
+            theta += v.spe * 0.01f * v.getSmoothedAmplitude();
             pos.z += v.spe * v.getSmoothedAmplitude() * 10.0f;
 
             if (pos.z > 2000) {

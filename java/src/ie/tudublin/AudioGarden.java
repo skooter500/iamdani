@@ -3,6 +3,7 @@ package ie.tudublin;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 1);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -307,6 +308,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     void defaults()
     {
         println("DEF");  
+        consoleColor = random(256);
         targetPit1 = 0f;
         targetYaw1 = 0f;
         targetPit = 0f;
@@ -316,6 +318,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         targetAld = 4;
         targetMul = 1.0f;
         targetBas = 0.5f;
+        consoleColor = random(256);
 
     }
 
@@ -397,8 +400,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             int g = pitch - 44;
             if (groups.containsKey(g))
             {
-                int v = groups.get(g).get(0);
-                change(v);
+                int i = (int) random(groups.get(g).size());
+                int v = groups.get(g).get(i);
+                change(v + i);
                 return;
             }
         }
@@ -408,8 +412,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             g += 4;
             if (groups.containsKey(g))
             {
-                int v = groups.get(g).get(0);
-                change(v);
+                int i = (int) random(groups.get(g).size());
+                int v = groups.get(g).get(i);
+                change(v + i);
                 return;
             }
         }
@@ -435,13 +440,14 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         if (pitch == 42)
         {             
             println("RST");
+            consoleColor = random(256);
             visions.get(whichVisual).enter();
             return;
         }
 
         if (pitch == 50)
         {
-             
+            
             defaults();
             return;
         }
@@ -497,6 +503,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             targetHue = clockWise ? targetHue + 1f : targetHue - 1f;
             if (midiMessages) println("HUE: " + nf(targetHue, 1,2));
+        }
+        if (number == 75) {
+            ArrayList<Integer> group = groups.get(findGroup(whichVisual));
+            whichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)), group.get(group.size() - 1));
+            return;
         }
 
         if (number == 18) {
@@ -557,6 +568,26 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     }
 
     
+
+    private int findGroup(int g) {
+        int currentG = 0;
+        Iterator<Integer> it = groups.keySet().iterator();
+        while(it.hasNext())
+        {
+            int groupKey = it.next();       
+            ArrayList<Integer> group = groups.get(groupKey);
+            for(int i = 0 ; i < group.size() ; i ++)
+            {
+                int v = group.get(i);
+                if (g == v)
+                {
+                    return currentG;
+                }
+            }
+            currentG ++;
+        }
+        return -1;
+    }
 
     public void keyPressed() {
 
@@ -686,10 +717,14 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (showConsole)
         {
-            consoleSize = lerp(consoleSize, targetSize, 0.01f);
+            consoleSize = lerp(consoleSize, targetSize, 0.005f);
             myTextarea.setSize(600, (int) consoleSize);
             myTextarea.setVisible(true);
             myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
+        }
+        else
+        {
+            consoleSize = 0;
         }
 
 

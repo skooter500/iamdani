@@ -110,7 +110,7 @@ public class Nematode extends Poly
     v.pushMatrix();
     //v.camera(0, 0, -5000, 0, 0, 0f, 0f, 0.001f, 0f);
     v.translate(cx, cy);
-    v.translate(220, - half * 0.2f);
+    v.translate(0, - half * 0.2f);
 
     //v.rotateX(v.pit);
     //v.rotateZ(v.PI + v.yaw);
@@ -157,7 +157,10 @@ public class Nematode extends Poly
     
     drawGenitals();
     theta += v.spe * 0.03f * v.getSmoothedAmplitude();
+    v.translate(200, -v.height / 2);
+    dani.render();
     v.popMatrix();
+    
   }
 
   private void drawGenitals()
