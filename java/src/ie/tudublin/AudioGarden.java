@@ -139,22 +139,22 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }     
     }
 
-    HashMap<Integer, ArrayList<Poly>> groups = new HashMap<Integer, ArrayList<Poly>>();
+    HashMap<Integer, ArrayList<Integer>> groups = new HashMap<Integer, ArrayList<Integer>>();
     
     void addVision(int g, Poly p)
-    {
-        visions.add(p);
-        ArrayList<Poly> group = null;
+    {        
+        ArrayList<Integer> group = null;
         if (groups.containsKey(g))
         {
             group = groups.get(g);
         }
         else
         {
-            group = new ArrayList<Poly>(); 
+            group = new ArrayList<Integer>(); 
             groups.put(g, group);
         }
-        group.add(p);
+        group.add(visions.size());
+        visions.add(p);
     }
 
     // public void sphere(float size)
@@ -388,9 +388,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             if (groups.containsKey(g))
             {
                 int v = groups.get(g).get(0);
-
+                change(v);
+                return;
+            }
         }
-
         
         if (pitch == 41)
         {
