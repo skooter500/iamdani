@@ -38,7 +38,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 3);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -413,9 +413,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println(whichVisual + ": " + visions.get(whichVisual).getClass().getName());         
     }
 
-    static boolean midiMessages = false;
-    static boolean controlMessages = false;
-
+    static boolean midiMessages = true;
     
     public void controllerChange(int channel, int number, int value) {
 
@@ -426,68 +424,68 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         if (number == 7) {
             targetSpe = min(max(clockWise ? targetSpe + 0.05f : targetSpe - 0.05f, 0.0f), 3.18f);
-            if (controlMessages) println("SPE: " + nf(targetSpe, 1,2) + " MHZ");
+            if (midiMessages) println("SPE: " + nf(targetSpe, 1,2) + " MHZ");
         }
 
         if (number == 10) {
             targetBas = max(clockWise ? targetBas + 0.01f : targetBas - 0.01f, 0.01f);
-            if (controlMessages) println("BAS: " + nf(targetBas, 1,2));
+            if (midiMessages) println("BAS: " + nf(targetBas, 1,2));
         }
 
         if (number == 114) {
             targetMul = max(clockWise ? targetMul + 0.1f : targetMul - 0.1f, 0);
-            if (controlMessages) println("MUL: " + nf(targetMul, 1,2));
+            if (midiMessages) println("MUL: " + nf(targetMul, 1,2));
         }
         if (number == 74) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             targetHue = clockWise ? targetHue + 1f : targetHue - 1f;
-            if (controlMessages) println("HUE: " + nf(targetHue, 1,2));
+            if (midiMessages) println("HUE: " + nf(targetHue, 1,2));
         }
 
         if (number == 18) {
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             targetHue = clockWise ? targetHue + 5f : targetHue - 5f;
-            if (controlMessages) println("HUE: " + nf(targetHue, 1,2));
+            if (midiMessages) println("HUE: " + nf(targetHue, 1,2));
         }
 
         if (number == 76) {
             targetAld = min(max(clockWise ? targetAld + .1f : targetAld - .1f, 0), 50);
-            if (controlMessages) println("ALD: " + nf(targetAld, 1,2));
+            if (midiMessages) println("ALD: " + nf(targetAld, 1,2));
         }
 
         if (number == 16) {
             targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 0), 50);
-            if (controlMessages) println("ALD: " + nf(targetAld, 1,2));
+            if (midiMessages) println("ALD: " + nf(targetAld, 1,2));
         }
 
         if (number == 19) {
             targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 1), 255);
-            if (controlMessages) println("ALP: " + nf(targetAlp, 1,2));
+            if (midiMessages) println("ALP: " + nf(targetAlp, 1,2));
         }
 
 
         if (number == 71) {
             targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 2f), 255);
-            if (controlMessages) println("ALP: " + nf(targetAlp, 1,2));
+            if (midiMessages) println("ALP: " + nf(targetAlp, 1,2));
         }
          if (number == 77) {
              targetYaw = clockWise ? targetYaw + 0.03f : targetYaw - 0.03f;
-             if (controlMessages) println("yaw: " + nf(targetYaw, 1,2));
+             if (midiMessages) println("yaw: " + nf(targetYaw, 1,2));
          }
          
          if (number == 93) {
             targetYaw1 = clockWise ? targetYaw1 + 0.03f : targetYaw1 - 0.03f;
-            if (controlMessages) println("ROL: " + nf(targetYaw1, 1,2));
+            if (midiMessages) println("ROL: " + nf(targetYaw1, 1,2));
         }
 
         if (number == 91) {
             targetPit1 = clockWise ? targetPit1 + 0.03f : targetPit1 - 0.03f;
-            if (controlMessages) println("pit1: " + nf(targetPit1, 1,2));
+            if (midiMessages) println("pit1: " + nf(targetPit1, 1,2));
         }
         
         if (number == 17) {
             targetPit = clockWise ? targetPit + 0.03f : targetPit - 0.03f;
-            if (controlMessages) println("pit: " + nf(targetPit, 1,2));
+            if (midiMessages) println("pit: " + nf(targetPit, 1,2));
         }
         // int newVisual = whichVisual;
         //     if (clockWise)
@@ -517,16 +515,19 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             if (midiMessages)
             {
                 println("TRON");
+                return;
             }
             else
             {
+
                 println("TROFF");
+                return;
             }
         }
         if (key == 'c')
         {
-            controlMessages = ! controlMessages;
-            if (controlMessages)
+            midiMessages = ! midiMessages;
+            if (midiMessages)
             {
                 println("CTRON");
             }
