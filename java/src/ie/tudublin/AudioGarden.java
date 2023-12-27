@@ -202,11 +202,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         // groups.add(g);
 
         
-        addVision(1,new Life(this, 2, 10000, 100));
+        addVision(1,new Life(this, 2, 60, 100));
         addVision(1,new Life(this, 3, 10000, 200));
-        addVision(1, new Life(this, 0, 10000, 100));        
-        addVision(1, new Life(this, 1, 10000, 100));                    
-        addVision(1, new Life(this, 2, 10000, 100));
+        addVision(1, new Life(this, 0, 1000, 100));        
+        addVision(1, new Life(this, 1, 1000, 100));                    
+        addVision(1, new Life(this, 2, 100, 100));
         addVision(1, new Life(this, 4, 10000, 100));        
         
         
@@ -652,20 +652,20 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         blendMode(BLEND);
         colorMode(HSB);
 
-        yaw = lerp(yaw, targetYaw, 0.1f);
-        pit = lerp(pit, targetPit, 0.1f);
-        yaw1 = lerp(yaw1, targetYaw1, 0.1f);
-        pit1 = lerp(pit1, targetPit1, 0.1f);
-        spe = lerp(spe, targetSpe, 0.1f);
-        ald = lerp(ald, targetAld, 0.1f);
-        alp = lerp(alp, targetAlp, 0.1f);
-        bas = lerp(bas, targetBas, 0.1f);
-        mul = lerp(mul, targetMul, 0.1f);
-        hue = lerp(hue, targetHue, 0.1f);
+        yaw = lerp(yaw, targetYaw, 0.01f);
+        pit = lerp(pit, targetPit, 0.01f);
+        yaw1 = lerp(yaw1, targetYaw1, 0.01f);
+        pit1 = lerp(pit1, targetPit1, 0.01f);
+        spe = lerp(spe, targetSpe, 0.01f);
+        ald = lerp(ald, targetAld, 0.01f);
+        alp = lerp(alp, targetAlp, 0.01f);
+        bas = lerp(bas, targetBas, 0.01f);
+        mul = lerp(mul, targetMul, 0.01f);
+        hue = lerp(hue, targetHue, 0.01f);
 
         if (showConsole)
         {
-            consoleSize = lerp(consoleSize, targetSize, 0.1f);
+            consoleSize = lerp(consoleSize, targetSize, 0.01f);
             myTextarea.setSize(600, (int) consoleSize);
             myTextarea.setVisible(true);
             myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
