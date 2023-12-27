@@ -171,24 +171,24 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new Cubesquared2(this));
         visions.add(new Basic(this, "DANI.BAS"));
+        visions.add(new DANI(this, "captainb.txt"));
         
         visions.add(new Life(this, 2, 10000, 100));
-        
         visions.add(new Life(this, 3, 10000, 200));
+        visions.add(new Life(this, 0, 10000, 100));        
+        visions.add(new Life(this, 1, 10000, 100));                    
+        
         
         visions.add(new MSXLogos(this, "msx.obj"));
         visions.add(new MSXLogos(this, "chip.obj"));        
+        visions.add(new Cubesquared2(this));
         
         visions.add(new infiniteforms.Cube(this));
         visions.add(new IFCubes(this,7, 150, -600));
         visions.add(new IFCubes(this,30, 150, -400)); 
-        visions.add(new DANI(this, "captainb.txt"));
         visions.add(new Life(this, 2, 10000, 100));
         visions.add(new paris(this));  
-        visions.add(new Life(this, 0, 10000, 100));        
-        visions.add(new Life(this, 1, 10000, 100));                    
         visions.add(new Nematode(this));        
         
         //YM2413
