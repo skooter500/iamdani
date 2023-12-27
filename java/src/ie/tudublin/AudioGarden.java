@@ -379,12 +379,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         // Receive a noteOn
         // SPecial codes
-        if (pitch == 49)
-        {
-            change(whichVisual + 1);
-            return;
-        }
-
+        
         if (pitch >= 44 && pitch <= 47)
         {
             int g = pitch - 44;
@@ -419,11 +414,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             }
         }
         
-        if (pitch == 41)
-        {
-            change(whichVisual - 1);
-            return;
-        }
+       
 
         if (pitch == 51)
         {
@@ -507,6 +498,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         if (number == 75) {
             ArrayList<Integer> group = groups.get(findGroup(whichVisual));
             whichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)), group.get(group.size() - 1));
+            return;
+        }
+        if (number == 72) {
+            ArrayList<Integer> group = groups.get(findGroup(whichVisual));
             return;
         }
 

@@ -25,6 +25,7 @@ public class DANI extends Poly {
         super(v);
         this.v = v;
         this.fileName = fileName;
+        f = (int) v.random(256);
         loadFile();
     }
 
@@ -165,7 +166,13 @@ public class DANI extends Poly {
 
     int reset = 0;
 
-	public void render()     
+	public void render()
+    {
+        render(true);
+    }     
+
+
+	public void render(boolean transform)     
     {
         
     
@@ -180,10 +187,11 @@ public class DANI extends Poly {
         float cy = v.height / 2;
 
         v.translate(cx * .4f, cy/3);
-        v.rotateX(v.pit);
+        if (transform)
+        {v.rotateX(v.pit);
         v.rotateY(v.yaw);
         v.rotateZ(v.rol);
-
+        }
 		for(int i = 0 ; i <= line ; i ++)
         { 
             float h = 50;
