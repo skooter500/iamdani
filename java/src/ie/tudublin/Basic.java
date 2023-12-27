@@ -112,6 +112,7 @@ public class Basic extends Poly {
 	float off = 0;
 
     int reset = 0;
+    int toPass = 100;
 
 	public void render()     
     {

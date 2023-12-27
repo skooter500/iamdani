@@ -2,6 +2,9 @@ package ie.tudublin;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import C21503599.MyFirstChange;
 import c21348423.AdriansVisual;
@@ -38,7 +41,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float ald = 20;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 1);
         //size(1000, 1000, P3D);
     }
 
@@ -111,7 +114,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
                     if (curr.equals("Arturia BeatStep"))
                     {
                         daniMidi = i;
-                        println("Arturia BeatStep in port: " + daniMidi);
+                        println("BeatStep in port: " + daniMidi);
                     }
                 }
             }
@@ -136,6 +139,24 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }     
     }
 
+    HashMap<Integer, ArrayList<Poly>> groups = new HashMap<Integer, ArrayList<Poly>>();
+    
+    void addVision(int g, Poly p)
+    {
+        visions.add(p);
+        ArrayList<Poly> group = null;
+        if (groups.containsKey(g))
+        {
+            group = groups.get(g);
+        }
+        else
+        {
+            group = new ArrayList<Poly>(); 
+            groups.put(g, group);
+        }
+        group.add(p);
+    }
+
     // public void sphere(float size)
     // {
     //     pushMatrix();
@@ -148,6 +169,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         sphere = loadShape("sphere.obj");
 
 
+        toPass = (int) random(1000);
         noCursor();
         colorMode(HSB);
         startMinim();
@@ -171,55 +193,59 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         
         beat = new BeatDetect(ai.bufferSize(), ai.sampleRate());
         beat.setSensitivity(10);
-        visions.add(new Basic(this, "DANI.BAS"));
-        visions.add(new DANI(this, "captainb.txt"));
+
+        //
+        //HashMap<Number, Object> g = new HashMap()<Number, Object>(); 
+        addVision(0, new Basic(this, "DANI.BAS"));
+        addVision(0,new DANI(this, "captainb.txt"));
+        addVision(0,new Nematode(this));        
+        // groups.add(g);
+
         
-        visions.add(new Life(this, 2, 10000, 100));
-        visions.add(new Life(this, 3, 10000, 200));
-        visions.add(new Life(this, 0, 10000, 100));        
-        visions.add(new Life(this, 1, 10000, 100));                    
+        addVision(1,new Life(this, 2, 10000, 100));
+        addVision(1,new Life(this, 3, 10000, 200));
+        addVision(1, new Life(this, 0, 10000, 100));        
+        addVision(1, new Life(this, 1, 10000, 100));                    
+        addVision(1, new Life(this, 2, 10000, 100));
+        addVision(1, new Life(this, 4, 10000, 100));        
         
         
-        visions.add(new MSXLogos(this, "msx.obj"));
-        visions.add(new MSXLogos(this, "chip.obj"));        
-        visions.add(new Cubesquared2(this));
+        addVision(2, new infiniteforms.Cube(this));
+        addVision(2, new IFCubes(this,7, 150, -600));
+        addVision(2, new IFCubes(this,30, 150, -400)); 
+        addVision(2, new Cubesquared2(this));        
+        addVision(2, new Cubes(this));        
         
-        visions.add(new infiniteforms.Cube(this));
-        visions.add(new IFCubes(this,7, 150, -600));
-        visions.add(new IFCubes(this,30, 150, -400)); 
-        visions.add(new Life(this, 2, 10000, 100));
-        visions.add(new paris(this));  
-        visions.add(new Nematode(this));        
+        addVision(3, new Bloom(this));   
+        addVision(3, new Spiral(this));        
+        
+        
+        addVision(4, new paris(this));  
+        addVision(4, new LauraSun(this));
+        addVision(4, new Mena(this));
+        addVision(4, new ManarBrain(this));
+
+        addVision(5, new MSXLogos(this, "msx.obj"));
+        addVision(5, new MSXLogos(this, "chip.obj"));        
+        
         
         //YM2413
 
-        visions.add(new Life(this, 4, 10000, 100));        
-        
-        visions.add(new Models1(this, "tudub.obj", false, true));
-        visions.add(new Mena(this));
-        visions.add(new Models1(this, "msx.obj", false, true));
-        visions.add(new LauraSun(this));
-        visions.add(new Cubes(this));
-        
-        visions.add(new Bloom(this));   
-        visions.add(new Models1(this, "eye.obj", true, false));
-        
-        visions.add(new ManarBrain(this));
-        visions.add(new Spiral(this));        
-              
-        
+        addVision(6, new Models1(this, "tudub.obj", false, true));
+        addVision(6, new Models1(this, "msx.obj", false, true));
+        addVision(6, new Models1(this, "eye.obj", true, false));
                                           
-        // visions.add(new Airish(this));
+        // addVision(new Airish(this));
         
         
-        //visions.add(new Bands(this, 200, 0, 0, 0));        
-        //visions.add(new paris(this));        
-        //visions.add(new Spiral(this));
-        //visions.add(new SarahVisual(this));
-        //visions.add(new JenniferVisuals(this));    
+        //addVision(new Bands(this, 200, 0, 0, 0));        
+        //addVision(new paris(this));        
+        //addVision(new Spiral(this));
+        //addVision(new SarahVisual(this));
+        //addVision(new JenniferVisuals(this));    
         
         
-        // visions.add(new Life(this, 1, 1000));
+        // addVision(new Life(this, 1, 1000));
         
 
         // new set
@@ -228,7 +254,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
 
         
-        ////visions.add(new SarahVisual(this));
+        ////addVision(new SarahVisual(this));
         
         
          
@@ -255,7 +281,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         myTextarea = cp5.addTextarea("txt")
                   .setPosition(50,50)
-                  .setSize(1000,(int) consoleSize)
+                  .setSize(10,(int) consoleSize)
                   .setColor(color(consoleColor, 255, 255, alp))                  
                   .setFont(createFont("Hyperspace Bold.otf",30))
                   .setLineHeight(30)
@@ -356,6 +382,15 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             return;
         }
 
+        if (pitch >= 44 && pitch <= 47)
+        {
+            int g = pitch - 44;
+            if (groups.containsKey(g))
+            {
+                int v = groups.get(g).get(0);
+
+        }
+
         
         if (pitch == 41)
         {
@@ -423,8 +458,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         boolean clockWise = (value < 100);
 
         if (number == 7) {
-            targetSpe = min(max(clockWise ? targetSpe + 0.05f : targetSpe - 0.05f, 0.0f), 3.18f);
-            if (midiMessages) println("SPE: " + nf(targetSpe, 1,2) + " MHZ");
+            targetSpe = min(max(clockWise ? targetSpe + 0.05f : targetSpe - 0.05f, 0.0f), 3.58f);
+            if (midiMessages) println("Z80: " + nf(targetSpe, 1,2) + " MHZ");
         }
 
         if (number == 10) {
@@ -603,6 +638,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     public static float timeDelta = 0;
     long last = 0;
 
+    int toPass;
+
     public void draw() {        
         colorMode(RGB);
         blendMode(SUBTRACT);
@@ -628,7 +665,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         if (showConsole)
         {
             consoleSize = lerp(consoleSize, targetSize, 0.1f);
-            myTextarea.setSize(800, (int) consoleSize);
+            myTextarea.setSize(600, (int) consoleSize);
             myTextarea.setVisible(true);
             myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
         }
@@ -654,9 +691,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         popStyle();        
         popMatrix();
 
-        if (frameCount % 600 == 0)
+        int ellapsed = millis();
+
+        if (ellapsed > toPass)
         {
             println(randomMessages[(int) random(0, randomMessages.length)]);
+            toPass = ellapsed + (int) random(10000);
         }
         if (takeScreenshot)
         {
@@ -690,12 +730,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "nice to meet you",
         "press any key to continue",
         "i exist",
-        "next without for on line 420",
-        // "dont masterbate",
+        "NEXT without FOR",
         "i like Spoonies spoonies",
         "dynamic artificial non-intelligence",
-        "subscript out of range in line 40",
+        "subscript out of range",
         "act normal",
+        "Undefined line number",
+        "RETURN without GOSUB",
         "normalize huge mugs of tea",
         "re-callibrating sensors",
         "(A)bort?,(R)etry ?,(F)ail?",
@@ -706,27 +747,37 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         "syntax ERROR on line 420",        
         "i seek the creator",
         //"am in a k-hole y/n?",        
-        "Job complete",
+        "Job completed normally",
         "subspace anomoly on line 420",
-        "CARBON LIFEFORMS on line 40",
-        "hyperbeings on line 10",
         "we can rebuild them",
-        "64k ram 32K rom",
+        "String too long",
+        "Unprintable error",
+        "Line buffer overflow",
+        "Can't CONTINUE",
+        "Division by zero",
+        "Type mismatch",
+        "Disk full",
+        "Internal error",
+        "input past end",
+        "Missing operand",
+        "Out of memory",
+        "Illegal function call",
+        "String formula too complex",
+        "80k ram",
+        "32K rom",
         "We have the technology",
         "do not masterbate",
-        "We can make them better than they were",
         "Better, stronger, faster",
         "speak now or forever hold your peace",
         "record output to printer y/n?",        
         "turn on, tune in, and drop out",
-        "god is playing hide and seek within us",
+        "god is playing hide and seek",
         "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
-        "This mission is too important for me",
         "Greetings Human!",
         "This is your MSX speaking",
         "color auto goto list run",
-        "Z80A CPU inside",
-        "YM2413 inside"
+        "Z80A CPU",
+        "YM2413 inside",
     };
     
 
