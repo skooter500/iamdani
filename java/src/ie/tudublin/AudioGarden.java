@@ -314,8 +314,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         targetPit = 0f;
         targetYaw = 0f;
         targetHue = 0;
-        targetAlp = 40;
-        targetAld = 4;
+        //targetAlp = 40;
+        //targetAld = 4;
         targetMul = 1.0f;
         targetBas = 0.5f;
         consoleColor = random(256);
@@ -385,22 +385,12 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             int g = pitch - 44;
             if (groups.containsKey(g))
             {
-                int v = groups.get(g).get(0);
+                int v = groups.get(g).get((int) random(groups.size()));
                 change(v);
                 return;
             }
         }
-        if (pitch >= 44 && pitch <= 47)
-        {
-            int g = pitch - 44;
-            if (groups.containsKey(g))
-            {
-                int i = (int) random(groups.get(g).size());
-                int v = groups.get(g).get(i);
-                change(v + i);
-                return;
-            }
-        }
+        
         if (pitch >= 36 && pitch <= 39)
         {
             int g = pitch - 36;
@@ -467,7 +457,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         println(whichVisual + ": " + visions.get(whichVisual).getClass().getName());         
     }
 
-    static boolean midiMessages = true;
+    static public boolean midiMessages = true;
     
     public void controllerChange(int channel, int number, int value) {
 
@@ -497,11 +487,21 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         }
         if (number == 75) {
             ArrayList<Integer> group = groups.get(findGroup(whichVisual));
-            whichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)), group.get(group.size() - 1));
+            int newWhichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)), group.get(group.size() - 1));
+            if (newWhichVisual != whichVisual)
+            {
+                whichVisual = newWhichVisual;
+                change(whichVisual);
+            }
             return;
         }
         if (number == 72) {
-            ArrayList<Integer> group = groups.get(findGroup(whichVisual));
+            int newWhichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, 0), visions.size()-1);
+            if (newWhichVisual != whichVisual)
+            {
+                whichVisual = newWhichVisual;
+                change(whichVisual);
+            }
             return;
         }
 

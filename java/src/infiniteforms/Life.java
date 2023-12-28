@@ -289,7 +289,7 @@ public class Life extends Poly
     float[][] temp = board;
     board = nextBoard;
     nextBoard = temp;
-    v.println("Generation: " + generation + " ALIVE: " + numAlive);
+    if (v.frameCount % 60 == 0) v.println("Generation: " + generation + " ALIVE: " + numAlive);
     generation ++;
   }
 
@@ -404,7 +404,7 @@ public class Life extends Poly
     
     v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
     
-    float toPass = v.map(v.spe, 0, 3.58f, 2.0f, 0.0f);  
+    float toPass = v.map(v.spe, 0, 3.58f, 1.0f, 0.01f);  
     ellapsed += v.timeDelta;
     if (ellapsed > toPass)
     {
