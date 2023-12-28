@@ -19,6 +19,7 @@ import infiniteforms.IFCubes;
 import infiniteforms.Life;
 import infiniteforms.Models1;
 import infiniteforms.Nematode;
+import infiniteforms.Terrain;
 import oopBaddies.Airish;
 import oopBaddies.Anne;
 import oopBaddies.Mena;
@@ -199,6 +200,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //
         //HashMap<Number, Object> g = new HashMap()<Number, Object>(); 
+        addVision(0, new Terrain(this));
+        
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0,new DANI(this, "captainb.txt"));
         addVision(0,new Nematode(this));        
