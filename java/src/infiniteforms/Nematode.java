@@ -137,10 +137,12 @@ public class Nematode extends Poly
       //w = w1;
       //w = w1;
       v.ellipse(0, y, w, w);
+      float haw = w * 0.5f;
       if (limbs > 0 && i > 0)
       {
-        v.line(-w, y, - w - w, y);
-        v.line(w, y, w * 2, y);
+        float er = eyeRadius * 5;
+        v.line(-haw, y, - w - w + (er), y);
+        v.line(haw, y, w * 2 - (er), y);
         v.circle((-w * 2.0f) - eyeRadius, y, eyeRadius * 10);
         v.circle((w * 2.0f) + eyeRadius, y, eyeRadius * 10);
       }      
