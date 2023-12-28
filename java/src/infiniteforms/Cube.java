@@ -1,6 +1,6 @@
 package infiniteforms;
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.Poly;
 import processing.core.PVector;
 
@@ -23,7 +23,7 @@ public class Cube extends Poly
         colorOffset = (int) v.random(0, 256);
     }
 
-    public Cube(AudioGarden v)
+    public Cube(IAMDANI v)
     {
         super(v);
 

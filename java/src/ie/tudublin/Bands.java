@@ -9,7 +9,7 @@ public class Bands extends Poly {
   
   float radius;
   
-  Bands(AudioGarden v, float radius, float x, float y, float z)
+  Bands(IAMDANI v, float radius, float x, float y, float z)
   {
     super(v);
     this.radius = radius;

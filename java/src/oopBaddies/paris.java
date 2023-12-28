@@ -1,14 +1,14 @@
 package oopBaddies;
 
 import processing.core.PApplet;
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.Poly;
 import ie.tudublin.Visual;
 
 public class paris extends Poly {
 
 
-  public paris(AudioGarden v) {
+  public paris(IAMDANI v) {
 
     super(v);
   }

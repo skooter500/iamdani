@@ -11,9 +11,9 @@ class MSXModel {
         float h;
         PShape sh;
         float theta;
-        AudioGarden v;
+        IAMDANI v;
 
-        MSXModel(PShape fileName, float x, float y, float z, float h, AudioGarden v) {
+        MSXModel(PShape fileName, float x, float y, float z, float h, IAMDANI v) {
             pos = new PVector(x, y, z);
             this.h = h;
             this.v = v;
@@ -64,7 +64,7 @@ public class MSXLogos extends Poly{
 
     String filename;
 
-    public MSXLogos(AudioGarden v, String filename) {
+    public MSXLogos(IAMDANI v, String filename) {
         super(v);
         this.filename = filename;
         s = v.loadShape(filename);

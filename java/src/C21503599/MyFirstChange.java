@@ -2,7 +2,7 @@ package C21503599;
 
 import ddf.minim.*;
 import ddf.minim.analysis.BeatDetect;
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.Poly;
 import ie.tudublin.Visual;
 import processing.core.PVector;
@@ -10,7 +10,7 @@ import processing.core.PVector;
 
 public class MyFirstChange extends Poly {
 
-    public MyFirstChange(AudioGarden v)
+    public MyFirstChange(IAMDANI v)
     {
         super(v);
     }

@@ -2,7 +2,7 @@ package ie.tudublin;
 
 public class Grave extends Poly {
 
-    public Grave (AudioGarden v){
+    public Grave (IAMDANI v){
         super(v);
     }
 

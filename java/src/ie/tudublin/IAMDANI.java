@@ -29,7 +29,7 @@ import themidibus.*; //Import the library
 
 
 
-public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListener {
+public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     ArrayList<Poly> visions = new ArrayList<Poly>();
 
@@ -40,6 +40,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     MidiBus myBus = null; // The MidiBus
 
     float ald = 20;
+    float colorRange = 255;
 
     public void settings() {
         fullScreen(P3D, 2);
@@ -48,7 +49,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
     PShape sphere;
 
-    public static AudioGarden instance;
+    public static IAMDANI instance;
 
     public StringBuilder console = new StringBuilder();
 
@@ -172,6 +173,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
 
         toPass = (int) random(1000);
         noCursor();
+        smooth();
         colorMode(HSB);
         startMinim();
         //rectMode(CENTER);
@@ -214,11 +216,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         addVision(2, new infiniteforms.Cube(this));
         addVision(2, new IFCubes(this,7, 150, -600));
         addVision(2, new IFCubes(this,30, 150, -400)); 
-        addVision(2, new Cubesquared2(this));        
-        addVision(2, new Cubes(this));        
         
         addVision(3, new Bloom(this));   
         addVision(3, new Spiral(this));        
+        addVision(3, new Cubesquared2(this));        
+        addVision(3, new Cubes(this));        
         
         
         addVision(4, new paris(this));  
@@ -314,10 +316,11 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         targetPit = 0f;
         targetYaw = 0f;
         targetHue = 0;
-        //targetAlp = 40;
-        //targetAld = 4;
+        targetAlp = 20;
+        targetAld = 4;
         targetMul = 1.0f;
         targetBas = 0.5f;
+        targetColorRange = 255;
         consoleColor = random(256);
 
     }
@@ -333,8 +336,9 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
     float targetAld = 4;
     float targetMul = 1.0f;
     float targetBas = 0.3f;
+    float targetColorRange = 255;
 
-    public AudioGarden() {
+    public IAMDANI() {
         super(1024, 44100, 0.5f);
         instance = this;
         
@@ -483,6 +487,10 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             //hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             targetHue = clockWise ? targetHue + 1f : targetHue - 1f;
             if (midiMessages) println("HUE: " + nf(targetHue, 1,2));
+        }
+        if (number == 73) {
+            targetColorRange = max(clockWise ? targetColorRange + 1f : targetColorRange - 1f, 1);
+            if (midiMessages) println("PAL: " + nf(targetColorRange, 1,2));
         }
         if (number == 75) {
             ArrayList<Integer> group = groups.get(findGroup(whichVisual));
@@ -702,12 +710,13 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
         pit = lerp(pit, targetPit, 0.01f);
         rol = lerp(rol, targetYaw1, 0.01f);
         pit1 = lerp(pit1, targetPit1, 0.01f);
-        spe = lerp(spe, targetSpe, 0.01f);
+        spe = lerp(spe, targetSpe, 0.1f);
         ald = lerp(ald, targetAld, 0.01f);
         alp = lerp(alp, targetAlp, 0.01f);
-        bas = lerp(bas, targetBas, 0.01f);
-        mul = lerp(mul, targetMul, 0.01f);
+        bas = lerp(bas, targetBas, 0.1f);
+        mul = lerp(mul, targetMul, 0.1f);
         hue = lerp(hue, targetHue, 0.01f);
+        colorRange = lerp(colorRange, targetColorRange, 0.1f);
 
         if (showConsole)
         {

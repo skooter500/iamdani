@@ -8,7 +8,7 @@ public class RightHeart extends Poly
     Visual p;
     BeatDetect beat;
  
-    public RightHeart(AudioGarden v)
+    public RightHeart(IAMDANI v)
     {
         super(v);
         p = v;

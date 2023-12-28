@@ -3,7 +3,7 @@ import processing.core.PApplet;
 
 public class kalidascope extends Poly
 {
-    public kalidascope(AudioGarden v) {
+    public kalidascope(IAMDANI v) {
         super(v);
     }
 

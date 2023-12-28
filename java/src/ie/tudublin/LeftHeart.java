@@ -9,7 +9,7 @@ public class LeftHeart extends Poly
 {
     BeatDetect beat;
  
-    public LeftHeart(AudioGarden v)
+    public LeftHeart(IAMDANI v)
     {
         super(v);
         this.beat = v.beat;

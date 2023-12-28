@@ -5,7 +5,7 @@ import example.MyVisual;
  
 public class LauraSun extends Poly
 {
-    AudioGarden p;
+    IAMDANI p;
  
     //int mode = 0;
     int numDrops = 100; // set the number of drops to 25
@@ -13,7 +13,7 @@ public class LauraSun extends Poly
     float[] dropY = new float[numDrops];
     float lightningProbability = 0.05f; // set the probability of lightning occurring
  
-    public LauraSun(AudioGarden v)
+    public LauraSun(IAMDANI v)
     {
         super(v);
         p = v;

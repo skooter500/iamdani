@@ -1,7 +1,7 @@
 package infiniteforms;
 
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.Poly;
 import processing.core.PVector;
 
@@ -12,12 +12,12 @@ public class City extends Poly
     //Street[] streets;
     PVector pos;
     
-    public City(AudioGarden v)
+    public City(IAMDANI v)
     {
         this(v, 0, 0, -250, 20, 100);
     }
 
-    City(AudioGarden v, float x, float y, float z, int rows, float gap)
+    City(IAMDANI v, float x, float y, float z, int rows, float gap)
     {
         super(v);
         pos = new PVector(x, y, z);

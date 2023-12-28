@@ -1,6 +1,6 @@
 package infiniteforms;
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.DANI;
 import ie.tudublin.Poly;
 import processing.core.PFont;
@@ -25,11 +25,11 @@ public class Nematode extends Poly
   
     float cw = 50;
 
-    String[] nameCombos = {"Safe", "Milk", "Strictly", "Personal", "Trout", "Mask", "Replica", "Lick", "My", "Decals", "Off", "Baby", "Mirror", "Man", "Spotlight", "Kid", "Clear", "Spot", "Unconditionally", "Guaranteed", "Bluejeans", "Moonbeams", "Shiny", "Beast", "Bat", "Chain", "Puller", "Doc", "Radar", "Station", "Ice", "Cream", "Crow", "Bat", "Chain", "Puller"};
-
+    String[] nameCombos = {"Veridixalus", "Obscuronema", "Cryptodermis", "Abyssolidae", "Luminentia", "Mythiloricus", "Xenoplaga", "Silentusis", "Nebulatus", "Crepituspora", "Vorticella", "Aureolux", "Serpentifex", "Mystinaria", "Venomorpha", "Chiaroscarabia", "Necrobyssia", "Aquiluxidae", "Umbraquillia", "Astraflora", "Igniscens", "Caelumbricus", "Quasariana", "Phantomalis", "Cognitara", "Aetherworm", "Luminentis", "Astrovermis", "Spectraquill", "Mysterionema", "Veritasquama", "Nebulifera", "Cryptonecta", "Cirrhaedis", "Luminaridae", "Astralisia", "Venomiridia", "Mystiqua", "Vorpalis", "Cryptotilla", "Abyssogloea", "Luminarix", "Caelumnex", "Praeternix", "Aquiluxa", "Phasmidrillus", "Venomorium", "Cirruscula", "Veridixia", "Mystikonema", "Obscuraquill", "Xenocrypta", "Astraflorum", "Ignisvermis", "Caelumbra", "Quasarix", "Phantomnema", "Cognitarum", "Aetherianus", "Luminara", "Astroverma", "Spectrillus", "Mysteriosa", "Veritara", "Nebularum", "Cryptoforma", "Cirrhaedon", "Luminaris", "Astralisus", "Venomoria", "Mystara", "Vorpalisus", "Cryptotillus", "Abyssogloia", "Luminarixus", "Caelumnexus", "Praeternixis", "Aquiluxus", "Phasmidrilia", "Venomoriana", "Cirrusculis", "Veridixus", "Mysticus", "Obscuronia", "Cryptodermus", "Abyssolus", "Luminensis", "Mythoricus", "Xenoplaga", "Silentisus", "Nebulus", "Crepitum", "Vorticellus", "Aureoluxus", "Serpentifexis", "Mystinariusus", "Venomorphaeus", "Chiaroscarabus", "Necrobyssian", "Aquiluxidaeus"};
+    
     DANI dani;
 
-  public Nematode(AudioGarden v, int length, String name, int limbs, int eyes, char gender) {
+  public Nematode(IAMDANI v, int length, String name, int limbs, int eyes, char gender) {
     super(v);
     this.length = length;
     this.name = name;
@@ -39,12 +39,12 @@ public class Nematode extends Poly
     
   }
 
-  public Nematode(AudioGarden v)
+  public Nematode(IAMDANI v)
   {
     super(v);
     font = v.createFont("Hyperspace Bold.otf", 24);
 
-    dani = new DANI(v, "captainb.txt");
+    dani = new DANI(v, "nematodes.txt");
     
   }
 
@@ -65,7 +65,7 @@ public class Nematode extends Poly
 
     fatness = v.random(50, 200);
     
-    int nameLength = (int)v.random(1,5);
+    int nameLength = 1;
     name = "";
     for(int i = 0 ; i < nameLength ; i ++)
     {
@@ -96,7 +96,7 @@ public class Nematode extends Poly
 
     w = 80;
     float half = w * length * 0.5f;
-    v.strokeWeight(2);
+    v.strokeWeight(1);
 
     v.rotateX(v.pit);
     v.rotateY(v.yaw);
@@ -136,17 +136,17 @@ public class Nematode extends Poly
       float w1 = v.sin(v.map(i, 0, length, f + f, v.PI)) * w;
       //w = w1;
       //w = w1;
-      v.ellipse(0, y, w1  * 2f, w);
+      v.ellipse(0, y, w, w);
       if (limbs > 0 && i > 0)
       {
-        v.line(-w1, y, - w1 - w1, y);
-        v.line(w1, y, w1 * 2, y);
-        v.circle((-w1 * 2.0f) - eyeRadius, y, eyeRadius * 10);
-        v.circle((w1 * 2.0f) + eyeRadius, y, eyeRadius * 10);
+        v.line(-w, y, - w - w, y);
+        v.line(w, y, w * 2, y);
+        v.circle((-w * 2.0f) - eyeRadius, y, eyeRadius * 10);
+        v.circle((w * 2.0f) + eyeRadius, y, eyeRadius * 10);
       }      
       if (i == 0)
       {
-        drawEyes(eyes, w1, w * 0.5f);
+        drawEyes(eyes, w * 0.5f, w * 0.5f);
       }
     }
     

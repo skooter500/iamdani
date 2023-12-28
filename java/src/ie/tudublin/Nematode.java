@@ -89,7 +89,7 @@ public class Nematode extends Poly
     float r = w * 0.5f;
     float eyeRadius = w * 0.1f;
 
-    public Nematode(AudioGarden v, int length, String name, int limbs, boolean eyes, char gender) {
+    public Nematode(IAMDANI v, int length, String name, int limbs, boolean eyes, char gender) {
         super(v);
         this.v = v;
         this.length = length;
@@ -151,7 +151,7 @@ public class Nematode extends Poly
 
 
     
-    public Nematode(AudioGarden v)
+    public Nematode(IAMDANI v)
     {
         super(v);
     }

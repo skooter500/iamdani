@@ -13,14 +13,14 @@ public class Basic extends Poly {
 	int mode = 0;
 
     ArrayList<Word> model;
-    AudioGarden v;
+    IAMDANI v;
     String fileName;
 
     int line = 0;
     int ch = 0;
     public Nematode t;
 
-    public Basic(AudioGarden v, String fileName)
+    public Basic(IAMDANI v, String fileName)
     {
         super(v);
         this.v = v;

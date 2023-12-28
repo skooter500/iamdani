@@ -1,6 +1,6 @@
 package oopBaddies;
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.Poly;
 import ie.tudublin.Visual;
 
@@ -8,7 +8,7 @@ import ie.tudublin.Visual;
 public class Mena extends Poly {
 
     //constructor
-    public Mena(AudioGarden v)
+    public Mena(IAMDANI v)
     {
         super(v);
 

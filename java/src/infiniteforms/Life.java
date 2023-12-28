@@ -1,6 +1,6 @@
 package infiniteforms;
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.Poly;
 
 public class Life extends Poly
@@ -18,7 +18,7 @@ public class Life extends Poly
   int generation = 0;
   int generationMax = 10000;
 
-  public Life(AudioGarden v,  int pattern, int generationMax, int boardSize)
+  public Life(IAMDANI v,  int pattern, int generationMax, int boardSize)
   {
     super(v);
     this.boardWidth = boardSize;

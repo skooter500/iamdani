@@ -8,7 +8,7 @@ public class Cubes extends Poly
     float sizeBox = 800;
     float sizeRect = 10;
 
-    public Cubes(AudioGarden v)
+    public Cubes(IAMDANI v)
     {
         super(v);
     }

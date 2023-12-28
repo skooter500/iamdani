@@ -8,7 +8,7 @@ public class JiaHeart extends Poly
     Visual p;
     BeatDetect beat;
  
-    public JiaHeart(AudioGarden v)
+    public JiaHeart(IAMDANI v)
     {
         super(v);
         p = v;

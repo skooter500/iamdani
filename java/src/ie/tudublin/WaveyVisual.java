@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 public class WaveyVisual extends Poly{
 
-    public WaveyVisual(AudioGarden v) {
+    public WaveyVisual(IAMDANI v) {
         super(v);
     }
 

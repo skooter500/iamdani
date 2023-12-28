@@ -5,11 +5,11 @@ import processing.core.PShape;
 import processing.core.PVector;
 
 public abstract class Poly {
-    public AudioGarden v;
+    public IAMDANI v;
 
 
     public Poly(Visual v){
-        this.v = (AudioGarden) v;
+        this.v = (IAMDANI) v;
     }
 
     public void render(int ellapsed)

@@ -1,6 +1,6 @@
 package oopBaddies;
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.Poly;
 import ie.tudublin.Visual;
 //import processing.core.PVector;
@@ -11,7 +11,7 @@ public class Airish extends Poly {
 
     // constructor
 
-    public Airish(AudioGarden v) {
+    public Airish(IAMDANI v) {
         super(v);
     }
 

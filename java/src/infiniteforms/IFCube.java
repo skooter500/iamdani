@@ -1,6 +1,6 @@
 package infiniteforms;
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import processing.core.PVector;
 
 public class IFCube
@@ -13,9 +13,9 @@ public class IFCube
   float size = 50;
   
   boolean useAmplitude = true;
-  AudioGarden v;
+  IAMDANI v;
   
-  public IFCube(AudioGarden v, float x, float y, float z)
+  public IFCube(IAMDANI v, float x, float y, float z)
   {
     this.v = v;
     position = new PVector(x, y, z);

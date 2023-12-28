@@ -6,7 +6,7 @@ public class Spiral extends Poly{
 
   float angle;
   
-  public Spiral(AudioGarden v){
+  public Spiral(IAMDANI v){
     super(v);
     
   }
@@ -30,7 +30,7 @@ public class Spiral extends Poly{
     v.rotateZ(v.rol);
     
     for(float a = 0; a<360; a+=22.5f){ //used to create circular rotation lower value for 'a' means more cirles and tighter rotation can also cause lag if too low
-      v.rotate(-AudioGarden.radians(a));
+      v.rotate(-IAMDANI.radians(a));
       v.noStroke();
       v.pushMatrix();
       
@@ -48,7 +48,7 @@ public class Spiral extends Poly{
 
         v.fill(c,255,255, v.alp);
         v.scale(0.95f); //0.95-og //0.98 // 0.5 //0.8
-        v.rotate(AudioGarden.radians(angle)/2);// /2
+        v.rotate(IAMDANI.radians(angle)/2);// /2
         v.ellipse(x, 0, diameter, diameter); //first two x,y second width height
         
       }
@@ -67,7 +67,7 @@ public class Spiral extends Poly{
           float c = PApplet.map(i, 0, v.getAudioBuffer().size() , 0, cRange);
           v.fill(v.hueShift(c),255,255, v.alp);
           v.scale(0.95f); //0.95-og //.98 // 0.5f //0.8
-          v.rotate(-AudioGarden.radians(angle)/2); //reverses angle of rotation
+          v.rotate(-IAMDANI.radians(angle)/2); //reverses angle of rotation
           v.ellipse(x, 0, diameter, diameter); //first two x,y second width height
         
       }

@@ -1,6 +1,6 @@
 package infiniteforms;
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.Poly;
 
 public class Models1 extends Poly
@@ -9,7 +9,7 @@ public class Models1 extends Poly
 
   int colorOffset = 0;
   
-  public Models1(AudioGarden v, String fileName, boolean rotate, boolean rotateX)
+  public Models1(IAMDANI v, String fileName, boolean rotate, boolean rotateX)
   {
     super(v);
     model = new Model(fileName, 0, 0, 0, v);    

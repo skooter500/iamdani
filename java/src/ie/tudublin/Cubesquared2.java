@@ -4,7 +4,7 @@ package ie.tudublin;
 import processing.core.PApplet;
 
 public class Cubesquared2 extends Poly{
-    public Cubesquared2 (AudioGarden v){
+    public Cubesquared2 (IAMDANI v){
         super(v);
     }
 

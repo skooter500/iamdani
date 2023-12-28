@@ -1,6 +1,6 @@
 package oopBaddies;
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.Poly;
 import ie.tudublin.Visual;
 
@@ -12,7 +12,7 @@ public class Anne extends Poly
     int flowerX;
     int flowerY;
 
-    public Anne(AudioGarden anne)
+    public Anne(IAMDANI anne)
     // start of public Anne
     {
         super(anne);

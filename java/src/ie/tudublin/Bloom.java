@@ -6,7 +6,7 @@ public class Bloom extends Poly{
 
     float angle;
 
-    public Bloom(AudioGarden v){
+    public Bloom(IAMDANI v){
         super(v);
     }
 

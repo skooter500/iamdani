@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 public class SinWaves extends Poly{
 
-    public SinWaves(AudioGarden v) {
+    public SinWaves(IAMDANI v) {
         super(v);
        
     }

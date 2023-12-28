@@ -8,7 +8,7 @@ public class Spiral2 extends Poly{
     float theta;
     float radius;
 
-    public Spiral2(AudioGarden v){
+    public Spiral2(IAMDANI v){
         super(v);
     }
 

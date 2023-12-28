@@ -1,6 +1,6 @@
 package infiniteforms;
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import processing.core.*;
 
 public class Model
@@ -14,11 +14,11 @@ public class Model
   //myObject obj;
   float theta = 0;
 
-  AudioGarden v;
+  IAMDANI v;
 
   
 
-  Model(String fileName, float x, float y, float z, AudioGarden v)
+  Model(String fileName, float x, float y, float z, IAMDANI v)
   {
     //obj = new myObject(fileName);
     s = v.loadShape(fileName);

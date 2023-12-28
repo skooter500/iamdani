@@ -1,6 +1,6 @@
 package infiniteforms;
 
-import ie.tudublin.AudioGarden;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.Poly;
 
 public class IFCubes extends Poly {
@@ -19,7 +19,7 @@ public class IFCubes extends Poly {
     }
   }
   
-  public IFCubes(AudioGarden v, int numCubes, float radius, float z)
+  public IFCubes(IAMDANI v, int numCubes, float radius, float z)
   {
     super(v);
     cubes = new IFCube[numCubes];
