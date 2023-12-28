@@ -385,7 +385,7 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             int g = pitch - 44;
             if (groups.containsKey(g))
             {
-                int v = groups.get(g).get((int) random(groups.size()));
+                int v = groups.get(g).get((int) random(groups.get(g).size()));
                 change(v);
                 return;
             }
@@ -397,9 +397,8 @@ public class AudioGarden extends ie.tudublin.visual.Visual implements MidiListen
             g += 4;
             if (groups.containsKey(g))
             {
-                int i = (int) random(groups.get(g).size());
-                int v = groups.get(g).get(i);
-                change(v + i);
+                int v = groups.get(g).get((int) random(groups.get(g).size()));
+                change(v);
                 return;
             }
         }
