@@ -200,7 +200,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //
         //HashMap<Number, Object> g = new HashMap()<Number, Object>(); 
-        addVision(0, new Terrain(this));
         
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0,new DANI(this, "captainb.txt"));
@@ -224,6 +223,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(3, new Spiral(this));        
         addVision(3, new Cubesquared2(this));        
         addVision(3, new Cubes(this));        
+        addVision(3, new Terrain(this));
         
         
         addVision(4, new paris(this));  
