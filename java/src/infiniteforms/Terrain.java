@@ -24,11 +24,11 @@ public class Terrain extends Poly {
 
     public void render() {
 
-        flying -= v.spe * 0.01f;
+        flying -= v.spe * 0.005f;
 
         float yoff = flying;
         //float a = (v.getSmoothedAmplitude() * (v.map(v.mul, 0, 100, 0, 1)  + v.bas)) * 200;
-        float a = 200 * v.bas;
+        float a = 200 * v.getSmoothedAmplitude();
         for (int y = 0; y < rows; y++) {
             float xoff = 0;
             for (int x = 0; x < cols; x++) {

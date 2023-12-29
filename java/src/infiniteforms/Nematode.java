@@ -54,9 +54,9 @@ public class Nematode extends Poly
   
   public void enter()
   {
-    length = (int) v.random(1, 10); 
+    length = (int) v.random(1, 5); 
     limbs = (int) v.random(0, 2);
-    eyes = (int) v.random(0, 9);
+    eyes = (int) v.random(1, 9);
     
     char[] genders = {'m','f', 'h', 'n'};    
     gender = genders[(int)v.random(0, genders.length)];
@@ -100,6 +100,7 @@ public class Nematode extends Poly
 
     v.rotateX(v.pit);
     v.rotateY(v.yaw);
+    v.rotateZ(v.rol);
     
     v.pushMatrix();
     //v.camera(0, 0, -5000, 0, 0, 0f, 0f, 0.001f, 0f);
@@ -140,11 +141,11 @@ public class Nematode extends Poly
       float haw = w * 0.5f;
       if (limbs > 0 && i > 0)
       {
-        float er = eyeRadius * 5;
+        float er = eyeRadius * 5.0f;
         v.line(-haw, y, - w - w + (er), y);
         v.line(haw, y, w * 2 - (er), y);
-        v.circle((-w * 2.0f) - eyeRadius, y, eyeRadius * 10);
-        v.circle((w * 2.0f) + eyeRadius, y, eyeRadius * 10);
+        v.circle((-w * 1.0f) - eyeRadius, y, eyeRadius * 10.0f);
+        v.circle((w * 1f) + eyeRadius, y, eyeRadius * 10.0f);
       }      
       if (i == 0)
       {
