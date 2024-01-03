@@ -151,7 +151,7 @@ public class DANI extends Poly {
         sonnet[12] = " ";
         sonnet[13] = "i am DANI ";
         sonnet[14] = " ";        
-        sonnet[15] = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(Calendar.getInstance().getTime());
+        sonnet[15] = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(Calendar.getInstance().getTime()) + " ";
 
         for(String line:sonnet)
         {
@@ -188,9 +188,10 @@ public class DANI extends Poly {
 
         v.translate(cx * .4f, cy/3);
         if (transform)
-        {v.rotateX(v.pit);
-        v.rotateY(v.yaw);
-        v.rotateZ(v.rol);
+        {v.rotateZ(v.rol);
+        v.rotateX(v.pit);
+        v.rotateY(-v.yaw);
+        
         }
 		for(int i = 0 ; i <= line ; i ++)
         { 

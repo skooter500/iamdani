@@ -387,7 +387,6 @@ public class Life extends Poly
         }
       }
     }
-    v.noLights();
   }
 
   float ellapsed = 0;

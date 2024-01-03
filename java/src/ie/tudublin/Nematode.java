@@ -185,7 +185,7 @@ public class Nematode extends Poly
         
         for(int i = 0 ; i < length ; i ++)
         {
-            float c = v.pingpongmap(i, 0, (length-1) * 0.5f, 0, 255) % 255;
+            float c = v.map(i, 0, (length-1) * 0.5f, 0, 255) % 255;
             c = v.hueShift(c + colorOffset);
             v.stroke(c, 255, 255);
             float y = i * w;

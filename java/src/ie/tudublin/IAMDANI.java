@@ -44,7 +44,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float colorRange = 255;
 
     public void settings() {
-        fullScreen(P3D, 1);
+        fullScreen(P3D);
         //size(1000, 1000, P3D);
     }
 
@@ -306,7 +306,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     ControlP5 cp5;
     Textarea myTextarea;
-    float consoleColor = 128;
+    float consoleColor = 100;
 
     private boolean takeScreenshot = false;
 
@@ -315,7 +315,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println("DEF");  
         consoleColor = random(256);
         targetPit1 = 0f;
-        targetYaw1 = 0f;
+        targetRol = 0f;
         targetPit = 0f;
         targetYaw = 0f;
         targetHue = 0;
@@ -332,7 +332,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float targetYaw = 0f;
 
     float targetPit1 = 0f;
-    float targetYaw1 = 0f;
+    float targetRol = 0f;
     float targetSpe = 1.0f;
     float targetHue = 0;
     float targetAlp = 75;
@@ -393,6 +393,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             if (groups.containsKey(g))
             {
                 int v = groups.get(g).get((int) random(groups.get(g).size()));
+                if (g == 0)
+                {
+                    targetYaw = 0;
+                    targetPit = 0;
+                    targetRol = 0;                    
+                }
                 change(v);
                 return;
             }
@@ -547,8 +553,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
          }
          
          if (number == 93) {
-            targetYaw1 = clockWise ? targetYaw1 + 0.03f : targetYaw1 - 0.03f;
-            if (midiMessages) println("ROL: " + nf(targetYaw1, 1,2));
+            targetRol = clockWise ? targetRol + 0.03f : targetRol - 0.03f;
+            if (midiMessages) println("ROL: " + nf(targetRol, 1,2));
         }
 
         if (number == 91) {
@@ -711,7 +717,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         yaw = lerp(yaw, targetYaw, 0.01f);
         pit = lerp(pit, targetPit, 0.01f);
-        rol = lerp(rol, targetYaw1, 0.01f);
+        rol = lerp(rol, targetRol, 0.01f);
         pit1 = lerp(pit1, targetPit1, 0.01f);
         spe = lerp(spe, targetSpe, 0.1f);
         ald = lerp(ald, targetAld, 0.01f);
@@ -726,7 +732,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             consoleSize = lerp(consoleSize, targetSize, 0.005f);
             myTextarea.setSize(600, (int) consoleSize);
             myTextarea.setVisible(true);
-            myTextarea.setColor(color(hueShift(consoleColor), 255, 255));
+            myTextarea.setColor(color(consoleColor, 255, 255));
         }
         else
         {
@@ -809,8 +815,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         "Copyright 1983 by microsoft",
         "syntax ERROR on line 420",        
         "i seek the creator",
+        "© Microcabin",
         //"am in a k-hole y/n?",        
         "Job completed normally",
+        "28815 bytes free",
         "subspace anomoly on line 420",
         "we can rebuild them",
         "String too long",

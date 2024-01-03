@@ -77,7 +77,8 @@ public class Basic extends Poly {
         sonnet[12] = " ";
         sonnet[13] = "i am DANI ";
         sonnet[14] = " ";        
-        sonnet[15] = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(Calendar.getInstance().getTime());
+
+        sonnet[15] = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss").format(Calendar.getInstance().getTime()) + " ";
 
         for(String line:sonnet)
         {
@@ -128,8 +129,9 @@ public class Basic extends Poly {
         float cx = v.width;
         float cy = v.height / 2;
 
+        v.rotateZ(v.rol);
         v.rotateX(v.pit);
-        v.rotateY(v.yaw);
+        v.rotateY(-v.yaw);
         v.translate(cx * .4f, cy/3);
         
 

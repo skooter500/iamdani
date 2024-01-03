@@ -42,7 +42,7 @@ public class Terrain extends Poly {
 
         v.translate(v.width / 2, v.height / 2 - 200, -500);
         v.rotateX(v.pit);
-        v.rotateY(v.yaw);
+        v.rotateY(-v.yaw);
         v.rotateZ(v.rol);
 
         v.rotateX(v.PI / 3);

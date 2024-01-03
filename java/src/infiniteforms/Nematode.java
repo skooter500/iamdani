@@ -99,7 +99,7 @@ public class Nematode extends Poly
     v.strokeWeight(1);
 
     v.rotateX(v.pit);
-    v.rotateY(v.yaw);
+    v.rotateY(-v.yaw);
     v.rotateZ(v.rol);
     
     v.pushMatrix();
@@ -116,7 +116,7 @@ public class Nematode extends Poly
     v.textFont(font);
     v.textSize(36);
     
-    float c3 = v.pingpongmap(0, 0, (length-1) * 0.5f, 0, 255) % 255;
+    float c3 = v.map(0, 0, (length), 0, 127);
     c3 = v.hueShift(c3 + colorOffset); 
       
     v.fill(c3 % 255, 255, 255, v.alp);
@@ -141,11 +141,11 @@ public class Nematode extends Poly
       float haw = w * 0.5f;
       if (limbs > 0 && i > 0)
       {
-        float er = eyeRadius * 5.0f;
-        v.line(-haw, y, - w - w + (er), y);
-        v.line(haw, y, w * 2 - (er), y);
-        v.circle((-w * 1.0f) - eyeRadius, y, eyeRadius * 10.0f);
-        v.circle((w * 1f) + eyeRadius, y, eyeRadius * 10.0f);
+        float er = (w * 1.0f) - eyeRadius;
+        v.line(-haw, y, -er + (eyeRadius * 2.5f), y);
+        v.line(haw, y, er - (eyeRadius * 2.5f), y);
+        v.circle(er, y, eyeRadius * 5.0f);
+        v.circle(-er, y, eyeRadius * 5.0f);
       }      
       if (i == 0)
       {
