@@ -85,7 +85,7 @@ public class Model
     v.shape(s);
     v.popMatrix();
 
-    angle+=0.01f * v.spe;
+    angle+=0.05f * v.spe;
 
 
     /*

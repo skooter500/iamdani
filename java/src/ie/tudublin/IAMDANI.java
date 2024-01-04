@@ -195,11 +195,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(2, new IFCubes(this, 7, 150, -600));
         addVision(2, new IFCubes(this, 30, 150, -400));
 
-        addVision(3, new Bloom(this));
         addVision(3, new Spiral(this));
         addVision(3, new Cubesquared2(this));
         addVision(3, new Cubes(this));
-        addVision(3, new Terrain(this));
 
         addVision(4, new paris(this));
         addVision(4, new LauraSun(this));
@@ -214,6 +212,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(6, new Models1(this, "tudub.obj", false, true));
         addVision(6, new Models1(this, "msx.obj", false, true));
         addVision(6, new Models1(this, "eye.obj", true, false));
+
+        addVision(7, new Bloom(this));
+        addVision(7, new Terrain(this));
 
         // addVision(new Airish(this));
 
@@ -348,7 +349,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             int g = pitch - 36;
             g += 4;
             if (groups.containsKey(g)) {
-                int v = groups.get(g).get((int) random(groups.get(g).size()));
+                int v = groups.get(g).get(0);
                 change(v);
                 return;
             }
