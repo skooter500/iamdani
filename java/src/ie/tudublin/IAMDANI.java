@@ -274,7 +274,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetRol = 0f;
         targetPit = 0f;
         targetYaw = 0f;
-        targetBas = 0.5f;
+        targetBas = 2.5f;
         targetColorRange = 255;
     }
 
@@ -509,7 +509,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
 
         if (number == 19) {
-            targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 1), 255);
+            targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 10), 255);
             if (midiMessages)
                 println("ALP: " + nf(targetAlp, 1, 2));
         }
@@ -517,7 +517,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         float rotSpeed = 0.01f;
 
         if (number == 71) {
-            targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 2f), 255);
+            targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 10f), 255);
             if (midiMessages)
                 println("ALP: " + nf(targetAlp, 1, 2));
         }
@@ -743,7 +743,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "I am alive",
             "welcome to the metaverse",
             "nice to meet you",
-            "press any key to continue",
+            "strike any key to continue",
             "i exist",
             "NEXT without FOR",
             "i like Spoonies spoonies",

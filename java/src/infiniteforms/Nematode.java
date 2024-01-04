@@ -139,7 +139,7 @@ public class Nematode extends Poly
         float er = (w * 1.0f) - eyeRadius;
         v.line(-haw, y, -er + (eyeRadius * 2.5f), y);
         v.line(haw, y, er - (eyeRadius * 2.5f), y);
-        v.stroke(v.hueShift(c2), 255, 255);
+        v.stroke(v.hueShift(c2), 255, 255, v.alp);
         v.circle(er, y, eyeRadius * 5.0f);
         v.circle(-er, y, eyeRadius * 5.0f);
       }      
@@ -165,28 +165,28 @@ public class Nematode extends Poly
     case 'm':
       { 
         float y =  ((length-1) * w) + (w * 0.5f);   
-        v.stroke(v.hueShift(c1), 255, 255);
+        v.stroke(v.hueShift(c1), 255, 255, v.alp);
         v.line(0, y, 0, y + r);
-        v.stroke(v.hueShift(c2), 255, 255);
+        v.stroke(v.hueShift(c2), 255, 255, v.alp);
         v.circle(0, y + r + eyeRadius, eyeRadius * 2.0f);
       }
       break; 
     case 'f':  
       { 
         float y =  ((length-1) * w);  
-        v.stroke(v.hueShift(c2), 255, 255);
+        v.stroke(v.hueShift(c2), 255, 255, v.alp);
         v.circle(0, y, eyeRadius * 4.0f);
       }
       break;
     case 'h':
       {
         float y =  ((length-1) * w);  
-        v.stroke(v.hueShift(c2), 255, 255);
+        v.stroke(v.hueShift(c2), 255, 255, v.alp);
         v.circle(0, y, eyeRadius * 4.0f);
         y =  ((length-1) * w) + (w * 0.5f);   
-        v.stroke(v.hueShift(c1), 255, 255);
+        v.stroke(v.hueShift(c1), 255, 255, v.alp);
         v.line(0, y, 0, y + r);
-        v.stroke(v.hueShift(c2), 255, 255);        
+        v.stroke(v.hueShift(c2), 255, 255, v.alp);        
         v.circle(0, y + r + eyeRadius, eyeRadius * 2.0f);
       }
       break;
@@ -219,10 +219,10 @@ public class Nematode extends Poly
     float y2 = - v.cos(v.radians(angle)) * (headH + stalkLength);
     float ex = v.sin(v.radians(angle)) * (headW + stalkLength + eyeRadius);
     float ey = - v.cos(v.radians(angle)) * (headH + stalkLength + eyeRadius);
-    v.stroke(v.hueShift(c2), 255, 255);        
+    v.stroke(v.hueShift(c2), 255, 255, v.alp);        
     v.circle(ex, ey, eyeRadius * 2.0f);
 
-    v.stroke(v.hueShift(c1), 255, 255);
+    v.stroke(v.hueShift(c1), 255, 255, v.alp);
     v.line(x1, y1, x2, y2);
   }
 }
