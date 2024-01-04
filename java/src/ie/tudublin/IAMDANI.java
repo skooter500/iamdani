@@ -647,7 +647,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     }
 
     public void takeScreenshot() {
-        println("insert disk in drive A:");
         saveFrame("../screenshots/i.am.dani-######.png");
     }
 
