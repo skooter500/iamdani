@@ -37,7 +37,8 @@ class MSXModel {
             v.scale(s);
             v.stroke(v.hueShift(h + lerpedS), 255, 255, v.alp);
             float newC = v.hueShift(h + 127 + lerpedS);
-            v.fill(newC, 255, 255, v.alp);            
+            // v.fill(newC, 255, 255, v.alp);       
+            v.noFill();     
             v.shape(sh);
             v.popMatrix();
             theta += v.spe * 0.01f * v.getSmoothedAmplitude();

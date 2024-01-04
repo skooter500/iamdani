@@ -99,7 +99,7 @@ public class Nematode extends Poly
     v.strokeWeight(1);
 
     v.rotateX(v.pit);
-    v.rotateY(-v.yaw);
+    v.rotateY(-v.yaw + 0.15f);
     v.rotateZ(v.rol);
     
     v.pushMatrix();

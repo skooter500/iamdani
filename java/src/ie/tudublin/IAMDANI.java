@@ -42,9 +42,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     float ald = 20;
     float colorRange = 255;
+    float camDistance = 0.5f;
+    float strokeWeight = 1;
 
     public void settings() {
-        fullScreen(P3D);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -291,7 +293,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                   .setColor(color(consoleColor, 255, 255, alp))                  
                   .setFont(createFont("Hyperspace Bold.otf",30))
                   .setLineHeight(30)
-                  .hideScrollbar()
+                  .showScrollbar()
                   .setText(console.toString())
                   .setVisible(true);
                   ;
@@ -319,7 +321,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetPit = 0f;
         targetYaw = 0f;
         targetHue = 0;
-        targetAlp = 20;
+        targetAlp = 255;
         targetAld = 4;
         targetMul = 1.0f;
         targetBas = 0.5f;
@@ -542,28 +544,29 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             if (midiMessages) println("ALP: " + nf(targetAlp, 1,2));
         }
 
+        float rotSpeed = 0.001f;
 
         if (number == 71) {
             targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 2f), 255);
             if (midiMessages) println("ALP: " + nf(targetAlp, 1,2));
         }
          if (number == 77) {
-             targetYaw = clockWise ? targetYaw + 0.03f : targetYaw - 0.03f;
+             targetYaw = clockWise ? targetYaw + rotSpeed : targetYaw - rotSpeed;
              if (midiMessages) println("yaw: " + nf(targetYaw, 1,2));
          }
          
          if (number == 93) {
-            targetRol = clockWise ? targetRol + 0.03f : targetRol - 0.03f;
+            targetRol = clockWise ? targetRol + rotSpeed : targetRol - rotSpeed;
             if (midiMessages) println("ROL: " + nf(targetRol, 1,2));
         }
 
         if (number == 91) {
-            targetPit1 = clockWise ? targetPit1 + 0.03f : targetPit1 - 0.03f;
+            targetPit1 = clockWise ? targetPit1 + 0.001f : targetPit1 - 0.001f;
             if (midiMessages) println("pit1: " + nf(targetPit1, 1,2));
         }
         
         if (number == 17) {
-            targetPit = clockWise ? targetPit + 0.03f : targetPit - 0.03f;
+            targetPit = clockWise ? targetPit + 0.001f : targetPit - 0.001f;
             if (midiMessages) println("pit: " + nf(targetPit, 1,2));
         }
         // int newVisual = whichVisual;
@@ -720,16 +723,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         rol = lerp(rol, targetRol, 0.01f);
         pit1 = lerp(pit1, targetPit1, 0.01f);
         spe = lerp(spe, targetSpe, 0.1f);
-        ald = lerp(ald, targetAld, 0.01f);
-        alp = lerp(alp, targetAlp, 0.01f);
+        ald = lerp(ald, targetAld, 0.1f);
+        alp = lerp(alp, targetAlp, 0.1f);
         bas = lerp(bas, targetBas, 0.1f);
         mul = lerp(mul, targetMul, 0.1f);
-        hue = lerp(hue, targetHue, 0.01f);
+        hue = lerp(hue, targetHue, 0.1f);
         colorRange = lerp(colorRange, targetColorRange, 0.1f);
 
         if (showConsole)
         {
-            consoleSize = lerp(consoleSize, targetSize, 0.005f);
+            consoleSize = lerp(consoleSize, targetSize, 0.05f);
             myTextarea.setSize(600, (int) consoleSize);
             myTextarea.setVisible(true);
             myTextarea.setColor(color(consoleColor, 255, 255));
