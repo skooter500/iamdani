@@ -273,10 +273,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetRol = 0f;
         targetPit = 0f;
         targetYaw = 0f;
-        targetHue = 0;
-        targetAlp = 255;
-        targetAld = 4;
-        targetMul = 1.0f;
         targetBas = 0.5f;
         targetColorRange = 255;
     }
