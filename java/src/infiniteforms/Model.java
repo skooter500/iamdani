@@ -53,6 +53,8 @@ public class Model
     v.fill(
       col1
       , 255, 255, v.alp);
+      v.noFill();
+    
     v.stroke(
       col2
       , 255, 255, v.alp);

@@ -395,7 +395,6 @@ public class Life extends Poly
 
     v.camera(0, 0, -1000, 0, 0, 0f, 0f, 0.001f, 0f);
     v.lights();
-    v.rotateX(v.pit1);
     v.translate(0, 0, 1000);
     v.rotateX(v.pit);
     v.rotateY(v.yaw);

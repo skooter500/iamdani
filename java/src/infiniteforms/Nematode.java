@@ -15,7 +15,7 @@ public class Nematode extends Poly
   float eyes = 2;
   char gender = 'h';
   float r = w * 0.5f;
-  float eyeRadius = w * 0.1f;
+  float eyeRadius = w * 0.2f;
   float  c1, c2;
   float fatness = 1.0f;
   
@@ -54,6 +54,8 @@ public class Nematode extends Poly
   
   public void enter()
   {
+    c1 = v.random(0, 256);
+    c2 = c1 + 127;
     length = (int) v.random(1, 5); 
     limbs = (int) v.random(0, 2);
     eyes = (int) v.random(1, 9);
@@ -61,8 +63,6 @@ public class Nematode extends Poly
     char[] genders = {'m','f', 'h', 'n'};    
     gender = genders[(int)v.random(0, genders.length)];
     
-    //c1 = random(0, 255);
-
     fatness = v.random(50, 200);
     
     int nameLength = 1;
@@ -92,14 +92,12 @@ public class Nematode extends Poly
   public void render(float cx, float cy, float offs)
   {
     
-    c2 = c1 + cw;
-
     w = 80;
     float half = w * length * 0.5f;
     v.strokeWeight(1);
 
     v.rotateX(v.pit);
-    v.rotateY(-v.yaw + 0.15f);
+    v.rotateY(-v.yaw + 0.13f);
     v.rotateZ(v.rol);
     
     v.pushMatrix();
@@ -116,8 +114,7 @@ public class Nematode extends Poly
     v.textFont(font);
     v.textSize(36);
     
-    float c3 = v.map(0, 0, (length), 0, 127);
-    c3 = v.hueShift(c3 + colorOffset); 
+    float c3 = v.hueShift(c2); 
       
     v.fill(c3 % 255, 255, 255, v.alp);
     v.textAlign(v.CENTER, v.CENTER);
@@ -128,9 +125,7 @@ public class Nematode extends Poly
     for (int i = 0; i < length; i ++)
     { 
       //println(c1, c2);
-      float c = v.pingpongmap(i, 0, (length-1) * 0.5f, 0, 255) % 255;
-      c = v.hueShift(c + colorOffset); 
-      v.stroke(c, 255, 255, v.alp);
+      v.stroke(c3, 255, 255, v.alp);
     
       float y = i * w;
       float f = 0.5f;
@@ -144,6 +139,7 @@ public class Nematode extends Poly
         float er = (w * 1.0f) - eyeRadius;
         v.line(-haw, y, -er + (eyeRadius * 2.5f), y);
         v.line(haw, y, er - (eyeRadius * 2.5f), y);
+        v.stroke(v.hueShift(c2), 255, 255);
         v.circle(er, y, eyeRadius * 5.0f);
         v.circle(-er, y, eyeRadius * 5.0f);
       }      
@@ -155,7 +151,7 @@ public class Nematode extends Poly
     
     drawGenitals();
     theta += v.spe * 0.03f * v.getSmoothedAmplitude();
-    v.translate(-550, -500); 
+    v.translate(-450, -500); 
     dani.render(false);
        
     v.popMatrix();
@@ -169,22 +165,28 @@ public class Nematode extends Poly
     case 'm':
       { 
         float y =  ((length-1) * w) + (w * 0.5f);   
+        v.stroke(v.hueShift(c1), 255, 255);
         v.line(0, y, 0, y + r);
+        v.stroke(v.hueShift(c2), 255, 255);
         v.circle(0, y + r + eyeRadius, eyeRadius * 2.0f);
       }
       break; 
     case 'f':  
       { 
         float y =  ((length-1) * w);  
+        v.stroke(v.hueShift(c2), 255, 255);
         v.circle(0, y, eyeRadius * 4.0f);
       }
       break;
     case 'h':
       {
         float y =  ((length-1) * w);  
+        v.stroke(v.hueShift(c2), 255, 255);
         v.circle(0, y, eyeRadius * 4.0f);
         y =  ((length-1) * w) + (w * 0.5f);   
+        v.stroke(v.hueShift(c1), 255, 255);
         v.line(0, y, 0, y + r);
+        v.stroke(v.hueShift(c2), 255, 255);        
         v.circle(0, y + r + eyeRadius, eyeRadius * 2.0f);
       }
       break;
@@ -217,7 +219,10 @@ public class Nematode extends Poly
     float y2 = - v.cos(v.radians(angle)) * (headH + stalkLength);
     float ex = v.sin(v.radians(angle)) * (headW + stalkLength + eyeRadius);
     float ey = - v.cos(v.radians(angle)) * (headH + stalkLength + eyeRadius);
+    v.stroke(v.hueShift(c2), 255, 255);        
     v.circle(ex, ey, eyeRadius * 2.0f);
+
+    v.stroke(v.hueShift(c1), 255, 255);
     v.line(x1, y1, x2, y2);
   }
 }

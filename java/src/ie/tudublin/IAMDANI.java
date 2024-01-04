@@ -269,8 +269,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     void defaults() {
         println("DEF");
-        consoleColor = random(256);
-        targetPit1 = pit1 = 50f;
+        targetCCo = cco = 76f;
         targetRol = 0f;
         targetPit = 0f;
         targetYaw = 0f;
@@ -280,14 +279,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetMul = 1.0f;
         targetBas = 0.5f;
         targetColorRange = 255;
-        consoleColor = random(256);
-
     }
 
     float targetPit = 0f;
     float targetYaw = 0f;
 
-    float targetPit1 = 0f;
+    float targetCCo = 0f;
     float targetRol = 0f;
     float targetSpe = 1.0f;
     float targetHue = 0;
@@ -408,7 +405,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (pitch == 42) {
             println("RST");
-            consoleColor = random(256);
             visions.get(whichVisual).enter();
             return;
         }
@@ -521,7 +517,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 println("ALP: " + nf(targetAlp, 1, 2));
         }
 
-        float rotSpeed = 0.001f;
+        float rotSpeed = 0.01f;
 
         if (number == 71) {
             targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 2f), 255);
@@ -541,13 +537,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
 
         if (number == 91) {
-            targetPit1 = clockWise ? rotSpeed + 0.001f : targetPit1 - rotSpeed;
+            targetCCo = clockWise ? targetCCo + 1f : targetCCo - 1f;
             if (midiMessages)
-                println("pit1: " + nf(targetPit1, 1, 2));
+                println("CCO: " + nf(targetCCo, 1, 2));
+
         }
 
         if (number == 17) {
-            targetPit = clockWise ? targetPit + 0.001f : targetPit - 0.001f;
+            targetPit = clockWise ? targetPit + rotSpeed : targetPit - rotSpeed;
             if (midiMessages)
                 println("pit: " + nf(targetPit, 1, 2));
         }
@@ -678,7 +675,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         yaw = lerp(yaw, targetYaw, 0.01f);
         pit = lerp(pit, targetPit, 0.01f);
         rol = lerp(rol, targetRol, 0.01f);
-        pit1 = lerp(pit1, targetPit1, 0.01f);
+        cco = targetCCo;
         spe = lerp(spe, targetSpe, 0.1f);
         ald = lerp(ald, targetAld, 0.1f);
         alp = lerp(alp, targetAlp, 0.1f);
@@ -691,7 +688,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             consoleSize = lerp(consoleSize, targetSize, 0.05f);
             myTextarea.setSize(600, (int) consoleSize);
             myTextarea.setVisible(true);
-            myTextarea.setColor(color(pit1, 255, 255));
+            myTextarea.setColor(color(cco, 255, 255));
         } else {
             consoleSize = 0;
         }
