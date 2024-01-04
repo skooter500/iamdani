@@ -396,7 +396,7 @@ public class Life extends Poly
     v.camera(0, 0, -1000, 0, 0, 0f, 0f, 0.001f, 0f);
     v.translate(0, 0, 1000);
     v.rotateX(v.pit);
-    v.rotateY(v.yaw);
+    v.rotateY(-v.yaw);
     v.rotateZ(v.rol);
     
     v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
