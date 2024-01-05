@@ -795,7 +795,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "speak now or forever hold your peace",
             "record output to printer",
             "turn on, tune in, and drop out",
-            "God is playing hide and seek with himself",
+            "God is playing hide and seek",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings Human",
             "This is your MSX speaking",
