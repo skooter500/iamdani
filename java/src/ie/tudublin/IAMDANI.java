@@ -756,7 +756,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "RETURN without GOSUB",
             "normalize huge mugs of tea",
             "re-callibrating sensors",
-            "Abort?,Retry?,Succeed?",
+            "Abort, Retry, Succeed",
             "ok",
             "in the beginning was the word",
             "MSX system version 1.0",
