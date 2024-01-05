@@ -44,7 +44,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float strokeWeight = 1;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 1);
         // size(1000, 1000, P3D);
     }
 
@@ -254,6 +254,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setText(console.toString())
                 .setVisible(true);
         ;
+
+
 
     }
 
@@ -743,7 +745,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "I am alive",
             "welcome to the metaverse",
             "nice to meet you",
-            "strike any key to continue",
+            "strike any key",
             "i exist",
             "NEXT without FOR",
             "i like Spoonies spoonies",
@@ -754,7 +756,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "RETURN without GOSUB",
             "normalize huge mugs of tea",
             "re-callibrating sensors",
-            "(A)bort?,(R)etry ?,(F)ail?",
+            "Abort?,Retry?,Succeed?",
             "ok",
             "in the beginning was the word",
             "MSX system version 1.0",
@@ -770,18 +772,20 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "String too long",
             "Unprintable error",
             "Line buffer overflow",
-            "Can't CONTINUE",
+            "CONTINUE",
             "Division by zero",
             "Type mismatch",
-            "Disk full",
-            "Internal error",
+            "Disk empty",
+            "External error",
             "input past end",
             "Missing operand",
             "Out of memory",
             "commence 5meodmt inhalation",
             "420 DETECTED",
-            "LSD synthesis complete. remove sample",
+            "LSD synthesis complete",
             "Illegal function call",
+            "REMOVE SAMPLE",
+            "INSERT SAMPLE",
             "String formula too complex",
             "80k ram",
             "32K rom",
@@ -789,11 +793,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "do not masterbate",
             "Better, stronger, faster",
             "speak now or forever hold your peace",
-            "record output to printer y/n?",
+            "record output to printer",
             "turn on, tune in, and drop out",
-            "god is playing hide and seek",
+            "God is playing hide and seek with himself",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
-            "Greetings Human!",
+            "Greetings Human",
             "This is your MSX speaking",
             "color auto goto list run",
             "Z80A CPU",
