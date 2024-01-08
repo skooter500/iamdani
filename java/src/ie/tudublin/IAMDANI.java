@@ -44,7 +44,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float strokeWeight = 1;
 
     public void settings() {
-        fullScreen(P3D, 1);
+        fullScreen(P3D, 2);
         // size(1000, 1000, P3D);
     }
 
@@ -82,7 +82,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println("load \"DANI.BAS\"");
         println("ok");
         println("RUN");
-        println("Greetings Human!");
+        println("Greetings Human");
         println("This is your MSX speaking");
         println("I AM DANI");
         println("dynamic articicial non-intelligence");
@@ -95,13 +95,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         try {
             MidiBus.list();
             int daniMidi = -1;
-            for (int i = 0; i < MidiBus.availableInputs().length; i++) {
-                String curr = MidiBus.availableInputs()[i];
-                if (curr.equals("iamdani")) {
-                    daniMidi = i;
-                    println("iamdani in port: " + daniMidi);
-                }
-            }
 
             if (daniMidi == -1) {
                 for (int i = 0; i < MidiBus.availableInputs().length; i++) {
@@ -114,7 +107,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             }
 
             if (daniMidi == -1) {
-                println("Insert joystick and press enter");
+                println("Insert joystick and strike enter");
             } else {
                 if (myBus != null) {
                     myBus.close();
@@ -250,7 +243,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setColor(color(consoleColor, 255, 255, alp))
                 .setFont(createFont("Hyperspace Bold.otf", 30))
                 .setLineHeight(30)
-                .showScrollbar()
+                .hideScrollbar()
                 .setText(console.toString())
                 .setVisible(true);
         ;
@@ -404,6 +397,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (pitch == 42) {
             println("RST");
+            resetMessage();
             visions.get(whichVisual).enter();
             return;
         }
@@ -435,7 +429,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println(whichVisual + ": " + visions.get(whichVisual).getClass().getName());
     }
 
-    static public boolean midiMessages = true;
+    static public boolean midiMessages = false;
 
     public void controllerChange(int channel, int number, int value) {
 
@@ -684,9 +678,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (showConsole) {
             consoleSize = lerp(consoleSize, targetSize, 0.05f);
-            myTextarea.setSize(600, (int) consoleSize);
-            myTextarea.setVisible(true);
-            myTextarea.setColor(color(cco, 255, 255));
+            myTextarea.setSize(600, (int) consoleSize)
+            .setVisible(true)
+            .setColor(color(cco, 255, 255));
+            
         } else {
             consoleSize = 0;
         }
@@ -763,7 +758,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Copyright 1983 by microsoft",
             "syntax ERROR on line 420",
             "i seek the creator",
-            "© Microcabin",
+            // "© Microcabin",
             // "am in a k-hole y/n?",
             "Job completed normally",
             "28815 bytes free",
@@ -775,7 +770,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "CONTINUE",
             "Division by zero",
             "Type mismatch",
-            "Disk empty",
+            "Disk full",
             "External error",
             "input past end",
             "Missing operand",

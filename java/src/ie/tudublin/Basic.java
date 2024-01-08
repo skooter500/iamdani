@@ -63,23 +63,13 @@ public class Basic extends Poly {
     
     public String[] writeSonnet()
     {
-        String[] sonnet = new String[16];
-
-        sonnet[0] = generateName();
-        sonnet[1] = "OK";
-        int startAt = (int) v.random(lines.length - 20);
-        for(int i = 2 ; i < 12 ; i ++)
+        int sl = 25;
+        String[] sonnet = new String[sl];        
+        int startAt = (int) v.random(lines.length - 25);
+        for(int i = 0 ; i < 25 ; i ++)
         {
-            String line = " HELLO";
-            sonnet[i] = lines[startAt + i];
-                        
+            sonnet[i] = lines[startAt + i];                                            
         }
-        sonnet[12] = " ";
-        sonnet[13] = "i am DANI ";
-        sonnet[14] = " ";        
-
-        sonnet[15] = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss").format(Calendar.getInstance().getTime()) + " ";
-
         for(String line:sonnet)
         {
             System.out.println(line);
@@ -132,7 +122,7 @@ public class Basic extends Poly {
         v.rotateZ(v.rol);
         v.rotateX(v.pit);
         v.rotateY(-v.yaw);
-        v.translate(cx * .35f, cy/3);
+        v.translate(cx * .35f, cy*.1f);
         
 
 		for(int i = 0 ; i <= line ; i ++)
