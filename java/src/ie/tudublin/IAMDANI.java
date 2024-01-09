@@ -176,13 +176,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(0, new DANI(this, "captainb.txt"));
         addVision(0, new Nematode(this));
         // groups.add(g);
-
-        addVision(1, new Life(this, 2, 60, 50));
-        addVision(1, new Life(this, 3, 10000, 50));
-        addVision(1, new Life(this, 0, 1000, 50));
-        addVision(1, new Life(this, 1, 1000, 50));
-        addVision(1, new Life(this, 2, 100, 50));
-        addVision(1, new Life(this, 4, 10000, 50));
+        addVision(1, new Life(this, 2, 60, 100));
+        addVision(1, new Life(this, 3, 10000, 200));
+        addVision(1, new Life(this, 0, 1000, 100));
+        addVision(1, new Life(this, 1, 1000, 100));
+        addVision(1, new Life(this, 2, 100, 100));
+        addVision(1, new Life(this, 4, 10000, 100));
 
         addVision(2, new infiniteforms.Cube(this));
         addVision(2, new IFCubes(this, 7, 150, -600));
