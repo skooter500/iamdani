@@ -215,6 +215,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(6, new Models1(this, "tudub.obj", false, true));
         addVision(6, new Models1(this, "msx.obj", false, true));
         addVision(6, new Models1(this, "eye.obj", true, false));
+        addVision(6, new Models1(this, "horse.obj", true, false));
+        addVision(6, new Models1(this, "marijuanna.obj", true, false));
+        addVision(6, new Models1(this, "thc_molecule.obj", true, false));
+        addVision(6, new Models1(this, "chip.obj", true, false));
+        addVision(6, new Models1(this, "eye.obj", true, false));
 
         addVision(7, new Bloom(this));
         addVision(7, new Terrain(this));
