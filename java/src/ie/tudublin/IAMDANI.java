@@ -50,6 +50,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     PShape sphere;
 
+    public int lea = 0;
+
     public static IAMDANI instance;
 
     public StringBuilder console = new StringBuilder();
@@ -122,6 +124,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     HashMap<Integer, ArrayList<Integer>> groups = new HashMap<Integer, ArrayList<Integer>>();
 
+    public float moveTowards(float current, float target, float maxDistanceDelta) {
+        float delta = target - current;
+
+        if (abs(delta) <= maxDistanceDelta || delta == 0.0f) {
+            return target;
+        }
+
+        return current + (delta > 0 ? 1 : -1) * maxDistanceDelta;
+    }
+
     void addVision(int g, Poly p) {
         ArrayList<Integer> group = null;
         if (groups.containsKey(g)) {
@@ -176,12 +188,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(0, new DANI(this, "captainb.txt"));
         addVision(0, new Nematode(this));
         // groups.add(g);
-        addVision(1, new Life(this, 2, 60, 100));
+        addVision(1, new Life(this, 2, 280, 100));
         addVision(1, new Life(this, 3, 10000, 200));
         addVision(1, new Life(this, 0, 1000, 100));
         addVision(1, new Life(this, 1, 1000, 100));
-        addVision(1, new Life(this, 2, 100, 100));
-        addVision(1, new Life(this, 4, 10000, 100));
+        // addVision(1, new Life(this, 4, 10000, 100));
 
         addVision(2, new infiniteforms.Cube(this));
         addVision(2, new IFCubes(this, 7, 150, -600));
@@ -246,8 +257,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setText(console.toString())
                 .setVisible(true);
         ;
-
-
 
     }
 
@@ -327,26 +336,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (pitch >= 44 && pitch <= 47) {
             int g = pitch - 44;
-            if (groups.containsKey(g)) {
-                int v = groups.get(g).get(0);
-                if (g == 0) {
-                    targetYaw = 0;
-                    targetPit = 0;
-                    targetRol = 0;
-                }
-                change(v);
-                return;
-            }
+            changeToGroupVisual(g);
+            return;
         }
 
         if (pitch >= 36 && pitch <= 39) {
             int g = pitch - 36;
             g += 4;
-            if (groups.containsKey(g)) {
-                int v = groups.get(g).get(0);
-                change(v);
-                return;
-            }
+            changeToGroupVisual(g);            
         }
 
         if (pitch == 40) {
@@ -373,9 +370,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (pitch == 49) {
             boolean clockWise = true;
             ArrayList<Integer> group = groups.get(findGroup(whichVisual));
-            int newWhichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)), group.get(group.size() - 1));
-            if (newWhichVisual != whichVisual)
-            {
+            int newWhichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)),
+                    group.get(group.size() - 1));
+            if (newWhichVisual != whichVisual) {
                 whichVisual = newWhichVisual;
                 change(whichVisual);
             }
@@ -385,9 +382,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (pitch == 41) {
             boolean clockWise = false;
             ArrayList<Integer> group = groups.get(findGroup(whichVisual));
-            int newWhichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)), group.get(group.size() - 1));
-            if (newWhichVisual != whichVisual)
-            {
+            int newWhichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)),
+                    group.get(group.size() - 1));
+            if (newWhichVisual != whichVisual) {
                 whichVisual = newWhichVisual;
                 change(whichVisual);
             }
@@ -409,6 +406,29 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     }
 
+    private void changeToGroupVisual(int g)
+    {
+        int v = 0;
+        if (groups.containsKey(g)) {
+            ArrayList<Integer> group = groups.get(g);
+            if (group.contains(whichVisual)) {
+                int inGroup = group.indexOf(whichVisual);
+                v = group.get((inGroup + 1) % group.size());
+            }
+            else {
+                v = groups.get(g).get(0);
+            }
+        }
+        
+        if (g == 0) {
+            targetYaw = 0;
+            targetPit = 0;
+            targetRol = 0;
+        }
+
+        change(v);
+    }
+
     public void noteOff(int channel, int pitch, int velocity) {
         // Receive a noteOff
         if (exp)
@@ -424,6 +444,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             visions.get(whichVisual).exit();
         }
         whichVisual = into;
+        alp = 0;
         visions.get(whichVisual).enter();
         println(whichVisual + ": " + visions.get(whichVisual).getClass().getName());
     }
@@ -663,13 +684,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         blendMode(BLEND);
         colorMode(HSB);
 
-        yaw = lerp(yaw, targetYaw, 0.01f);
-        pit = lerp(pit, targetPit, 0.01f);
-        rol = lerp(rol, targetRol, 0.01f);
+        yaw = moveTowards(yaw, targetYaw, 0.005f);
+        pit = moveTowards(pit, targetPit, 0.005f);
+        rol = moveTowards(rol, targetRol, 0.005f);
         cco = targetCCo;
         spe = lerp(spe, targetSpe, 0.1f);
         ald = lerp(ald, targetAld, 0.1f);
-        alp = lerp(alp, targetAlp, 0.1f);
+        alp = moveTowards(alp, targetAlp, 0.1f);
         bas = lerp(bas, targetBas, 0.1f);
         mul = lerp(mul, targetMul, 0.1f);
         hue = targetHue;
@@ -678,9 +699,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (showConsole) {
             consoleSize = lerp(consoleSize, targetSize, 0.05f);
             myTextarea.setSize(600, (int) consoleSize)
-            .setVisible(true)
-            .setColor(color(cco, 255, 255));
-            
+                    .setVisible(true)
+                    .setColor(color(cco, 255, 255));
+
         } else {
             consoleSize = 0;
         }

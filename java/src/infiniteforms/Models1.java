@@ -19,7 +19,7 @@ public class Models1 extends Poly
   
   public void enter()
   {
-    model.smoothedBoxSize = 0;
+    model.smoothedBoxSize = 100;
     model.colorOffset = (int) v.random(0, 256);
   }
   
@@ -27,7 +27,7 @@ public class Models1 extends Poly
   {
 
     v.noFill();
-    v.lights();
+    //v.lights();
     v.strokeWeight(2);
     v.stroke(255, 255, 255, 240);
     v.noFill();           

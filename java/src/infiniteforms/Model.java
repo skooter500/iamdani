@@ -35,7 +35,6 @@ public class Model
 
   void render()
   {
-    v.println(smoothedBoxSize);
     v.pushMatrix();
     //strokeWeight(2);    
     //s.setStroke(0, 0);
@@ -65,7 +64,7 @@ public class Model
     
     //strokeWeight(weight);
     float boxSize = size + (v.getAmplitude() * 10); 
-    //smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
+    smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
     //scale(1);
 
     
