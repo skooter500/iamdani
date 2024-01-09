@@ -32,7 +32,7 @@ class MSXModel {
             v.rotateZ(v.yaw);
             v.rotateY(v.rol);
             
-            float s = 1.0f + v.noise(theta) * 100;
+            float s = 1.0f + v.noise(theta) * 500;
             lerpedS = v.lerp(lerpedS, s, 0.01f);
             v.scale(s);
             v.stroke(v.hueShift(h + lerpedS), 255, 255, v.alp);
