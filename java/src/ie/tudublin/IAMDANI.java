@@ -44,7 +44,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float strokeWeight = 1;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 1);
         // size(1000, 1000, P3D);
     }
 
@@ -525,7 +525,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
 
         if (number == 19) {
-            targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 10), 255);
+            targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 1), 255);
             if (exp)
                 println("ALP: " + nf(targetAlp, 1, 2));
         }
@@ -533,7 +533,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         float rotSpeed = 0.01f;
 
         if (number == 71) {
-            targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 10f), 255);
+            targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 1f), 255);
             if (exp)
                 println("ALP: " + nf(targetAlp, 1, 2));
         }
@@ -690,7 +690,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         cco = targetCCo;
         spe = lerp(spe, targetSpe, 0.1f);
         ald = lerp(ald, targetAld, 0.1f);
-        alp = moveTowards(alp, targetAlp, 0.1f);
+        alp = lerp(alp, targetAlp, 0.001f);
         bas = lerp(bas, targetBas, 0.1f);
         mul = lerp(mul, targetMul, 0.1f);
         hue = targetHue;
