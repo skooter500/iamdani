@@ -315,7 +315,7 @@ public class Life extends Poly {
 
   void drawBoard() {
 
-    int r = 1;
+    int r = 2;
 
     for (int tr = -r; tr <= r; tr++)
       for (int tc = -r; tc <= r; tc++)

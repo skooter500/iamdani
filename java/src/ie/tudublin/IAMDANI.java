@@ -270,7 +270,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetPit = 0f;
         targetYaw = 0f;
         targetBas = 2.5f;
-        pal = -0;
+        pal = -100;
     }
 
     float targetPit = 0f;
@@ -429,7 +429,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println(whichVisual + ": " + visions.get(whichVisual).getClass().getName());
     }
 
-    static public boolean exp = false;
+    static public boolean exp = true;
 
     public void controllerChange(int channel, int number, int value) {
 
