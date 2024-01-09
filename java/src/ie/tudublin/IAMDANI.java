@@ -520,13 +520,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
 
         if (number == 16) {
-            targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 0), 50);
+            targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 10), 50);
             if (exp)
                 println("ALD: " + nf(targetAld, 1, 2));
         }
 
         if (number == 19) {
-            targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 1), 255);
+            targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 10), 255);
             if (exp)
                 println("ALP: " + nf(targetAlp, 1, 2));
         }
