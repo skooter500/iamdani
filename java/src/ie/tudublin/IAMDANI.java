@@ -394,6 +394,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (pitch == 42) {
             println("RST");
             resetMessage();
+            alp = 0;
             visions.get(whichVisual).enter();
             return;
         }
@@ -684,16 +685,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         blendMode(BLEND);
         colorMode(HSB);
 
-        yaw = moveTowards(yaw, targetYaw, 0.005f);
-        pit = moveTowards(pit, targetPit, 0.005f);
-        rol = moveTowards(rol, targetRol, 0.005f);
+        yaw = lerp(yaw, targetYaw, 0.01f);
+        pit = lerp(pit, targetPit, 0.01f);
+        rol = lerp(rol, targetRol, 0.01f);
         cco = targetCCo;
         spe = lerp(spe, targetSpe, 0.1f);
         ald = lerp(ald, targetAld, 0.1f);
-        alp = lerp(alp, targetAlp, 0.001f);
+        alp = lerp(alp, targetAlp, 0.005f);
         bas = lerp(bas, targetBas, 0.1f);
         mul = lerp(mul, targetMul, 0.1f);
-        hue = targetHue;
+        hue = moveTowards(hue, targetHue, 1);
         colorRange = lerp(colorRange, pal, 0.1f);
 
         if (showConsole) {

@@ -7,7 +7,6 @@ import ie.tudublin.Visual;
 
 public class paris extends Poly {
 
-
   public paris(IAMDANI v) {
 
     super(v);
@@ -25,8 +24,8 @@ public class paris extends Poly {
 
   // declare the plane variable
 
-  int planeX = 0; 
-  int planeY = v.height / 5; 
+  int planeX = 0;
+  int planeY = v.height / 5;
 
   // this is the start of the draw render
 
@@ -35,10 +34,9 @@ public class paris extends Poly {
     // calulate average
 
     float avg = v.getAmplitude();
-       
+
     float smoothedavg = 0;
     smoothedavg = v.lerp(smoothedavg, avg, 0.1f);
-
 
     // variable for the ocean wave
 
@@ -80,7 +78,7 @@ public class paris extends Poly {
 
     v.noStroke();
     v.fill(v.hueShift(180), 255, 255, v.alp);
-    //v.frameRate(15);
+    // v.frameRate(15);
 
     // wave movement setting
 
@@ -143,7 +141,7 @@ public class paris extends Poly {
 
     v.pushMatrix();
     v.translate(0, 160);
-    v.fill(200);
+    v.fill(v.hueShift(180), 255, 255, v.alp);
     v.stroke(v.hueShift(90), 255, 255, v.alp);
     v.strokeWeight(2);
     v.beginShape();
@@ -152,16 +150,16 @@ public class paris extends Poly {
     v.vertex(planeX + 120, planeY);
     v.vertex(planeX + 40, planeY + 20);
     v.endShape(v.CLOSE);
-    v.fill(v.hueShift(120), 255, 255, v.alp);
-    v.stroke(v.hueShift(30), 255, 255, v.alp);
+    v.fill(v.hueShift(200), 255, 255, v.alp);
+    v.stroke(v.hueShift(80), 255, 255, v.alp);
     v.ellipse(planeX + 50, planeY - 5, 55, 25);
     v.popMatrix();
 
     // update plane's position
-    
-    planeX += 3;
-    if (planeX > v.width + 1800) { // reset plane's position when it goes off screen
-      planeX = -1000;
+
+    planeX += v.spe;
+    if (planeX > v.width + 200) { // reset plane's position when it goes off screen
+      planeX = -200;
 
     }
 

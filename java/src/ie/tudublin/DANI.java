@@ -188,9 +188,10 @@ public class DANI extends Poly {
 
         v.translate(cx * .35f, cy/3);
         if (transform)
-        {v.rotateZ(v.rol);
-        v.rotateX(v.pit);
-        v.rotateY(-v.yaw);
+        {
+            v.rotateX(v.pit);
+    v.rotateY(-v.yaw + 0.13f);
+    v.rotateZ(v.rol);
         
         }
 		for(int i = 0 ; i <= line ; i ++)
