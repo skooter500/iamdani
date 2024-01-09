@@ -450,7 +450,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println(whichVisual + ": " + visions.get(whichVisual).getClass().getName());
     }
 
-    static public boolean exp = true;
+    static public boolean exp = false;
 
     public void controllerChange(int channel, int number, int value) {
 
