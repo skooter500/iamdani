@@ -93,7 +93,7 @@ public class Model {
     v.shape(s);
     v.popMatrix();
 
-    angle += 0.04f * v.spe;
+    angle += 0.02f * v.spe;
 
     /*
      * ArrayList<Quad> quads = obj.getQuads();

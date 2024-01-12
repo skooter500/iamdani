@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import C21503599.MyFirstChange;
 import c21348423.AdriansVisual;
@@ -26,6 +27,7 @@ import oopBaddies.Mena;
 import oopBaddies.paris;
 import processing.core.PFont;
 import processing.core.PShape;
+import processing.core.PShapeSVG.Font;
 import themidibus.*; //Import the library
 
 public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
@@ -42,9 +44,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float colorRange = 255;
     float camDistance = 0.5f;
     float strokeWeight = 1;
+    
+    PFont f;
 
     public void settings() {
-        fullScreen(P3D, 1);
+        fullScreen(P3D, 2);
         // size(1000, 1000, P3D);
     }
 
@@ -155,6 +159,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     // }
 
     public void setup() {
+
+        f = createFont("Hyperspace Bold.otf", 30);
+
+        textFont(f);
+
         sphere = loadShape("sphere.obj");
 
         toPass = (int) random(1000);
@@ -280,7 +289,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetPit = 0f;
         targetYaw = 0f;
         targetBas = 2.5f;
-        pal = -100;
+        bhu = 255;
+        bri = 255;
+        sat = 255;        
+        ;
     }
 
     float targetPit = 0f;
@@ -294,7 +306,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float targetAld = 4;
     float targetMul = 1.0f;
     float targetBas = 0.3f;
-    public float pal = 500;
+    public float bhu = 0;
+    public float bri = 0;
+    public float sat = 0;
 
     public IAMDANI() {
         super(1024, 44100, 0.5f);
@@ -485,9 +499,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 println("HUE: " + nf(targetHue, 1, 2));
         }
         if (number == 73) {
-            pal = (clockWise ? pal + 0.1f : pal - 0.1f);
+            bhu = (clockWise ? bhu + 1f : bhu - 1f);
             if (exp)
-                println("PAL: " + nf(pal, 1, 2));
+                println("BHU: " + nf(bhu, 1, 2));
+        }
+        if (number == 79) {
+            bri = (clockWise ? bri + 1f : bhu - 1f);
+            if (exp)
+                println("bri: " + nf(bri, 1, 2));
         }
         if (number == 75) {
             ArrayList<Integer> group = groups.get(findGroup(whichVisual));
@@ -665,6 +684,49 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
     }
 
+    void showStats()
+    {
+        HashMap<String, Float> stats = new HashMap<String, Float>();
+
+        
+        stats.put("Z80", spe);
+        stats.put("AMP", getSmoothedAmplitude());
+        stats.put("ALD", ald);
+        stats.put("ALP", alp);
+        stats.put("YAW", yaw);
+        stats.put("PIT", pit);
+        stats.put("ROL", rol);
+        stats.put("HUE", hue);
+        stats.put("III", (float) whichVisual);
+        stats.put("BAS", bas);
+        stats.put("MUL", mul);
+
+        float rh = 30;
+
+        float h = rh * stats.size();
+        float y = height - h;
+        
+        for(String key:stats.keySet())
+        {
+            fill(color((cco+60) % 256, 255, 255));
+            float x = width - 220;
+            
+            float f = stats.get(key);
+
+            if (f < 0)
+            {
+                fill(color((cco + 90) % 256, 255, 255));
+                f = - f;
+            }
+            text(nf(f, 3, 2), x + 90, y);
+            text(key, x, y);
+
+            y += rh;            
+        }
+
+
+    }
+
     public void takeScreenshot() {
         saveFrame("../screenshots/i.am.dani-######.png");
     }
@@ -679,7 +741,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public void draw() {
         colorMode(RGB);
         blendMode(SUBTRACT);
-        fill(255, ald);
+        fill(bhu, 255, bri, ald);
+
         pushMatrix();
         translate(0, 0, -5000);
         rect(-width * 5, -height * 5, width * 10, height * 10);
@@ -696,11 +759,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         alp = lerp(alp, targetAlp, 0.005f);
         bas = lerp(bas, targetBas, 0.1f);
         mul = lerp(mul, targetMul, 0.1f);
-        hue = moveTowards(hue, targetHue, 1);
-        colorRange = lerp(colorRange, pal, 0.1f);
+        hue = lerp(hue, targetHue, 0.1f);
+        colorRange = lerp(colorRange, bhu, 0.1f);
 
         if (showConsole) {
-            consoleSize = lerp(consoleSize, targetSize, 0.05f);
+            consoleSize = moveTowards(consoleSize, targetSize, 5);
             myTextarea.setSize(600, (int) consoleSize)
                     .setVisible(true)
                     .setColor(color(cco, 255, 255));
@@ -709,7 +772,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             consoleSize = 0;
         }
 
-        // background(0);
+        // background(bhu, 255, bri, ald);
         try {
             // Call this if you want to use FFT data
             calculateFFT();
@@ -738,6 +801,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (takeScreenshot) {
             takeScreenshot();
             takeScreenshot = false;
+        }
+
+        if (showConsole)
+        {
+            showStats();
         }
         // hueShift();
 
@@ -823,3 +891,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     };
 
 }
+
+
+
+
+
+
+
+
+
+
