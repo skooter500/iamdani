@@ -110,6 +110,7 @@ public abstract class Visual extends PApplet
 	public float bas = 0.1f;
 	public float mul = 1.0f;
 
+	public float raw = 0;
 
 	public void calculateAverageAmplitude()
 	{
@@ -119,6 +120,7 @@ public abstract class Visual extends PApplet
 			total += abs(ab.get(i));
 		}
 		amplitude = total / ab.size();
+		raw = amplitude;
 
 		amplitude = bas * 0.4f + (amplitude * mul);
 

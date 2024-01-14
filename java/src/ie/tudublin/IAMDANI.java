@@ -708,6 +708,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         stats.put("Z80", spe);
         stats.put("AMP", getSmoothedAmplitude());
         stats.put("ALD", ald);
+        stats.put("RAW", raw * 10.0f);
         stats.put("ALP", alp);
         stats.put("YAW", yaw);
         stats.put("PIT", pit);
