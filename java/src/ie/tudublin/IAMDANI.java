@@ -107,7 +107,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                     String curr = MidiBus.availableInputs()[i];
                     if (curr.equals("Arturia BeatStep")) {
                         daniMidi = i;
-                        println("BeatStep in port: " + daniMidi);
+                        println("BeatStep in port " + daniMidi);
                     }
                 }
             }
@@ -289,6 +289,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetPit = 0f;
         targetYaw = 0f;
         targetBas = 2.5f;
+        targetAlp = 75;
+        targetAld = 4;
+        targetMul = 1.0f;
+    
         bhu = 255;
         bri = 255;
         sat = 255;        
@@ -319,7 +323,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public void noteOn(int channel, int pitch, int velocity) {
 
         if (exp)
-            println("N+ CH: " + channel + " PI: " + pitch + " VE: " + velocity);
+            println("N+ CH " + channel + " PI " + pitch + " VE " + velocity);
 
         switch (mode) {
             case Auto: {
@@ -354,6 +358,17 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             int g = pitch - 44;
             changeToGroupVisual(g);
             return;
+        }
+
+        if (pitch == 48)
+        {
+            targetYaw = random(0, TWO_PI);
+            targetPit = random(0, TWO_PI);
+            targetRol = random(0, TWO_PI);
+            targetHue = random(0, 255);
+            // targetAlp = random(10, 255);
+            // targetAld = random(0, 50);
+            if (exp) println("RND");
         }
 
         if (pitch >= 36 && pitch <= 39) {
@@ -408,9 +423,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
 
         if (pitch == 42) {
-            println("RST");
-            resetMessage();
+            if (exp) println("RST");
             alp = 0;
+            ald = 0;
             visions.get(whichVisual).enter();
             return;
         }
@@ -449,7 +464,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public void noteOff(int channel, int pitch, int velocity) {
         // Receive a noteOff
         if (exp)
-            println("N- CH: " + channel, " PI: " + pitch + " VE: " + velocity);
+            println("N- CH " + channel, " PI " + pitch + " VE " + velocity);
     }
 
     public void change(int into) {
@@ -463,7 +478,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         whichVisual = into;
         alp = 0;
         visions.get(whichVisual).enter();
-        println(whichVisual + ": " + visions.get(whichVisual).getClass().getName());
+        println(whichVisual + " " + visions.get(whichVisual).getClass().getName());
     }
 
     static public boolean exp = false;
@@ -471,42 +486,42 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public void controllerChange(int channel, int number, int value) {
 
         if (exp)
-            println("CH: " + channel + " NUM: " + number + " VA: " + value);
+            println("CH " + channel + " NUM " + number + " VA " + value);
 
         boolean clockWise = (value < 100);
 
         if (number == 7) {
             targetSpe = min(max(clockWise ? targetSpe + 0.05f : targetSpe - 0.05f, 0.0f), 3.58f);
             if (exp)
-                println("Z80: " + nf(targetSpe, 1, 2) + " MHZ");
+                println("Z80 " + nf(targetSpe, 1, 2) + " MHZ");
         }
 
         if (number == 10) {
             targetBas = max(clockWise ? targetBas + 0.01f : targetBas - 0.01f, 0.01f);
             if (exp)
-                println("BAS: " + nf(targetBas, 1, 2));
+                println("BAS " + nf(targetBas, 3, 2));
         }
 
         if (number == 114) {
             targetMul = max(clockWise ? targetMul + 0.1f : targetMul - 0.1f, 0);
             if (exp)
-                println("MUL: " + nf(targetMul, 1, 2));
+                println("MUL " + nf(targetMul, 3, 2));
         }
         if (number == 74) {
             // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             targetHue = clockWise ? targetHue + 1f : targetHue - 1f;
             if (exp)
-                println("HUE: " + nf(targetHue, 1, 2));
+                println("HUE " + nf(targetHue, 3, 2));
         }
         if (number == 73) {
             bhu = (clockWise ? bhu + 1f : bhu - 1f);
             if (exp)
-                println("BHU: " + nf(bhu, 1, 2));
+                println("BHU " + nf(bhu, 3, 2));
         }
         if (number == 79) {
             bri = (clockWise ? bri + 1f : bhu - 1f);
             if (exp)
-                println("bri: " + nf(bri, 1, 2));
+                println("bri " + nf(bri, 3, 2));
         }
         if (number == 75) {
             ArrayList<Integer> group = groups.get(findGroup(whichVisual));
@@ -531,25 +546,26 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             targetHue = clockWise ? targetHue + 5f : targetHue - 5f;
             if (exp)
-                println("HUE: " + nf(targetHue, 1, 2));
+                println("HUE " + nf(targetHue, 3, 2));
         }
 
         if (number == 76) {
             targetAld = min(max(clockWise ? targetAld + .1f : targetAld - .1f, 0), 50);
+            
             if (exp)
-                println("ALD: " + nf(targetAld, 1, 2));
+                println("ALD " + nf(targetAld, 3, 2));
         }
 
         if (number == 16) {
             targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 10), 50);
             if (exp)
-                println("ALD: " + nf(targetAld, 1, 2));
+                println("ALD " + nf(targetAld, 3, 2));
         }
 
         if (number == 19) {
             targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 10), 255);
             if (exp)
-                println("ALP: " + nf(targetAlp, 1, 2));
+                println("ALP " + nf(targetAlp, 3, 2));
         }
 
         float rotSpeed = 0.01f;
@@ -557,31 +573,31 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (number == 71) {
             targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 1f), 255);
             if (exp)
-                println("ALP: " + nf(targetAlp, 1, 2));
+                println("ALP " + nf(targetAlp, 3, 2));
         }
         if (number == 77) {
             targetYaw = clockWise ? targetYaw + rotSpeed : targetYaw - rotSpeed;
             if (exp)
-                println("yaw: " + nf(targetYaw, 1, 2));
+                println("yaw " + nf(targetYaw, 3, 2));
         }
 
         if (number == 93) {
             targetRol = clockWise ? targetRol + rotSpeed : targetRol - rotSpeed;
             if (exp)
-                println("ROL: " + nf(targetRol, 1, 2));
+                println("ROL " + nf(targetRol, 3, 2));
         }
 
         if (number == 91) {
             targetCCo = clockWise ? targetCCo + 1f : targetCCo - 1f;
             if (exp)
-                println("CCO: " + nf(targetCCo, 1, 2));
+                println("CCO " + nf(targetCCo, 3, 2));
 
         }
 
         if (number == 17) {
             targetPit = clockWise ? targetPit + rotSpeed : targetPit - rotSpeed;
             if (exp)
-                println("pit: " + nf(targetPit, 1, 2));
+                println("pit " + nf(targetPit, 3, 2));
         }
         // int newVisual = whichVisual;
         // if (clockWise)
@@ -734,14 +750,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     boolean showConsole = true;
 
     public static float timeDelta = 0;
-    long last = 0;
+    long last = 0;                                                                                                                                                                                                 
 
     int toPass;
 
     public void draw() {
         colorMode(RGB);
-        blendMode(SUBTRACT);
-        fill(bhu, 255, bri, ald);
+        blendMode(SUBTRACT);////
+        fill(255, ald);
 
         pushMatrix();
         translate(0, 0, -5000);
