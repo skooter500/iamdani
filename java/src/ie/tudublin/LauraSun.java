@@ -116,7 +116,7 @@ public class LauraSun extends Poly
             float waveOffset = j * 40; // adjust the offset of each wave
        
             // Set the fill and stroke colors for the wave
-            p.fill(v.hueShift(37), 255, 255, 100); // blue
+            p.fill(v.hueShift(37), 255, 255, v.alp); // blue
             
             p.stroke(v.hueShift(77), 255, 255, v.alp); // blue
        

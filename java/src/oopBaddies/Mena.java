@@ -36,7 +36,7 @@ public class Mena extends Poly {
         int h = 900;
 
         //represent the stars
-        v.fill(v.hueShift(27), 255, 255);
+        v.fill(v.hueShift(27), 255, 255, v.alp);
         v.noStroke();
         v.ellipse(v.random(w), v.random(h), 5, 5);
 
@@ -77,16 +77,16 @@ public class Mena extends Poly {
 
          // draw a rocket
          v.translate(v.CENTER, v.CENTER);
-         v.fill(v.hueShift(1737), 255, 255);
+         v.fill(v.hueShift(1737), 255, 255, v.alp);
          v.triangle(950, y+100, 1000, y-10, 1050, y+100); // bottom of the rocket
         //an oval shape of the rocket and moving the rocket up
          v.ellipse(w/2, y,100,200);
-         v.fill(v.hueShift(1773), 255, 255);
+         v.fill(v.hueShift(1773), 255, 255, v.alp);
         // two circle windows on the rocket and moving the rocket up
         // the two cicrle also represent the beat of the music
          v.ellipse(w/2, y+10, 50+(smoothedavg*300), 50);
          v.ellipse(w/2, y-50, 40+(smoothedavg*200),40);
-         v.fill(v.hueShift(66), 255, 255);
+         v.fill(v.hueShift(66), 255, 255, v.alp);
          v.ellipse(w/2, y+10, 40,40);
          v.ellipse(w/2, y-50, 30,30);
          v.ellipse(0, 80, 40, 20); // Draw the engine of the rocket

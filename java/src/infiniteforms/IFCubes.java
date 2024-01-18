@@ -14,7 +14,7 @@ public class IFCubes extends Poly {
     float offs = v.random(0, 255);
     for(IFCube c:cubes)
     {
-      c.smoothedBoxSize = 0;
+      c.smoothedBoxSize = 200;
       c.colorOffset = offs;
     }
   }

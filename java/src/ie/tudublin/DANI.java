@@ -121,11 +121,11 @@ public class DANI extends Poly {
     
     public String[] writeSonnet()
     {
-        String[] sonnet = new String[16];
+        String[] sonnet = new String[l];
 
         sonnet[0] = generateName();
         sonnet[1] = " ";
-        for(int i = 2 ; i < 12 ; i ++)
+        for(int i = 2 ; i < l-4 ; i ++)
         {
             String line = "";
             int start = (int) v.random(0, model.size());
@@ -148,10 +148,11 @@ public class DANI extends Poly {
             sonnet[i] = line;
                         
         }
-        sonnet[12] = " ";
-        sonnet[13] = "i am DANI ";
-        sonnet[14] = " ";        
-        sonnet[15] = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(Calendar.getInstance().getTime());
+        int e = l -4;
+        sonnet[e] = " ";
+        sonnet[e+1] = "i am DANI ";
+        sonnet[e+2] = " ";        
+        sonnet[e+3] = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(Calendar.getInstance().getTime()) + " ";
 
         for(String line:sonnet)
         {
@@ -165,6 +166,8 @@ public class DANI extends Poly {
 	float off = 0;
 
     int reset = 0;
+
+    public int l = 16;
 
 	public void render()
     {
@@ -186,11 +189,13 @@ public class DANI extends Poly {
         float cx = v.width;
         float cy = v.height / 2;
 
-        v.translate(cx * .4f, cy/3);
+        v.translate(cx * .35f, cy/3);
         if (transform)
-        {v.rotateX(v.pit);
-        v.rotateY(v.yaw);
-        v.rotateZ(v.rol);
+        {
+            v.rotateX(v.pit);
+    v.rotateY(-v.yaw + 0.13f);
+    v.rotateZ(v.rol);
+        
         }
 		for(int i = 0 ; i <= line ; i ++)
         { 

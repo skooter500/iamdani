@@ -11,7 +11,6 @@ public class Cube extends Poly
   
     float smoothedBoxSize = 0;
     float angle = 0;
-    float weight = 1;
     float size = 50;
   
     boolean useAmplitude = true;
@@ -21,6 +20,7 @@ public class Cube extends Poly
     public void enter()
     {
         colorOffset = (int) v.random(0, 256);
+        smoothedBoxSize = 200;
     }
 
     public Cube(IAMDANI v)
@@ -37,7 +37,6 @@ public class Cube extends Poly
         v.pushMatrix();
         //v.rotateZ(v.PI + v.yaw);
         //v.translate(v.width / 2, v.height / 2, 0); 
-        v.rotateX(v.pit1);
         v.rotateY(v.rol);
 
         v.rotateX(v.pit);
@@ -50,7 +49,6 @@ public class Cube extends Poly
         //v.translate(position.x, position.y, position.z);       
         v.rotateY(angle);
         v.rotateX(angle);
-        v.strokeWeight(weight);
 
         float boxSize = size + (v.getAmplitude() * 200); 
         smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f);                 

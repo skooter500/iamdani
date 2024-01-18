@@ -40,8 +40,9 @@ public class Life extends Poly
         randomize();
         break;
       case 2:
-        boxShape();
-        break;
+      //boxShape(0.0f, 0.9f);
+      boxShape(0.4f, 0.6f);
+      break;
       case 3:
         MakeGosperGun((int) (boardWidth * 0.4f) , (int) (boardHeight * 0.45f));
         break;
@@ -180,26 +181,26 @@ public class Life extends Poly
         on(y + 2, x + 2) ;
     }
   
-  void boxShape()
+  void boxShape(float a, float b)
   {
     //clearBoard();
-    int x1 = (int)(boardWidth * 0.2f);
-    int x2 = (int)(boardWidth * 0.8f);
+    int x1 = (int)(boardWidth * a);
+    int x2 = (int)(boardWidth * b);
     
     for (int col = x1; col < x2; col++)
     {
-        board[(int)(boardHeight * 0.2f)][col] = v.random(255);
-        board[(int)(boardHeight * 0.8f)][col] = v.random(255);
+        board[(int)(boardHeight * a)][col] = v.random(255);
+        board[(int)(boardHeight * b)][col] = v.random(255);
     }
     
-    x1 = (int)(boardHeight * 0.2f);
-    x2 = (int)(boardHeight * 0.8f);
+    x1 = (int)(boardHeight * a);
+    x2 = (int)(boardHeight * b);
     
     
     for (int row = x1; row < x2; row++)
     {
-        board[row][(int)(boardWidth * 0.2f)] = v.random(255);
-        board[row][(int)(boardWidth * 0.8f)] = v.random(255);
+        board[row][(int)(boardWidth * a)] = v.random(255);
+        board[row][(int)(boardWidth * b)] = v.random(255);
     }
     
   }
@@ -363,6 +364,8 @@ public class Life extends Poly
     }
   }
 
+  int salp = 0;
+
   void drawBoard()
   {
     
@@ -387,16 +390,14 @@ public class Life extends Poly
         }
       }
     }
-    v.noLights();
   }
+  
 
   float ellapsed = 0;
   public void render()
   {    
 
     v.camera(0, 0, -1000, 0, 0, 0f, 0f, 0.001f, 0f);
-    v.lights();
-    v.rotateX(v.pit1);
     v.translate(0, 0, 1000);
     v.rotateX(v.pit);
     v.rotateY(v.yaw);
@@ -404,7 +405,7 @@ public class Life extends Poly
     
     v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
     
-    float toPass = v.map(v.spe, 0, 3.58f, 1.0f, 0.01f);  
+    float toPass = v.map(v.spe, 0, 3.58f, 1.0f, 0.05f);  
     ellapsed += v.timeDelta;
     if (ellapsed > toPass)
     {

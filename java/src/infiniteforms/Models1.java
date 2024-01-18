@@ -19,7 +19,7 @@ public class Models1 extends Poly
   
   public void enter()
   {
-    model.smoothedBoxSize = 0;
+    model.smoothedBoxSize = 20;
     model.colorOffset = (int) v.random(0, 256);
   }
   
@@ -27,12 +27,12 @@ public class Models1 extends Poly
   {
 
     v.noFill();
-    v.lights();
+    //v.lights();
     v.strokeWeight(2);
     v.stroke(255, 255, 255, 240);
     v.noFill();           
     v.pushMatrix();    
-    v.camera(0, 150, -300, 20, 20, 0, 0, 1, 0);
+    v.camera(0, 150, -400, 20, 20, 0, 0, 1, 0);
     v.rotateX(v.pit);
     v.rotateZ( v.yaw);
     v.rotateY(v.rol);

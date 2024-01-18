@@ -93,7 +93,7 @@ public class Cubes extends Poly
             v.rotateY(angle + pos *i*PApplet.sin(angle)+10);
             v.rotateX(angle/2 + pos*i+10);
             //rotate allows for movement
-            v.rotate(PApplet.radians(v.frameCount) * v.spe);
+            v.rotate(PApplet.radians(v.frameCount) * v.targetSpe);
 
             
 
