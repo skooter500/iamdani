@@ -38,7 +38,7 @@ public class RightHeart extends Poly
         beat.detect(p.getAudioBuffer()); // detect beats and updates
         if (beat.isOnset()) // if statement to check if a beat has been detected
         {
-            heartColor = p.color(p.random(255), p.random(255), p.random(255)); // set heart colour to random of 255
+            heartColor = p.color(p.random(255), p.random(255), p.random(255)); // setr heart colour to random of 255
             beatSize = beatMaxSize; // sets the size of the heart beat to the maximum size
         }
         beatSize *= beatDecay; // update size of heart by multiplying beatDecay to reduce size

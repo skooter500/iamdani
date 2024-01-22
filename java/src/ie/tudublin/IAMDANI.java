@@ -259,7 +259,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // }
 
         myTextarea = cp5.addTextarea("txt")
-                .setPosition(50, 680)
+                .setPosition(40, 40)
                 .setSize(10, (int) consoleSize)
                 .setColor(color(consoleColor, 255, 255, alp))
                 .setFont(createFont("Hyperspace Bold.otf", 30))
@@ -274,7 +274,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float consoleSize = 0;
     float originalTargetSize = 400;
 
-    float targetSize = 420;
+    float targetSize = 1040;
 
     ControlP5 cp5;
     Textarea myTextarea;
@@ -365,7 +365,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             targetYaw = random(0, TWO_PI);
             targetPit = random(0, TWO_PI);
             targetRol = random(0, TWO_PI);
-            targetHue = random(0, 255);
+            // targetHue = random(0, 255);
             // targetAlp = random(10, 255);
             // targetAld = random(0, 50);
             if (exp) println("RND");
@@ -478,7 +478,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         whichVisual = into;
         alp = 0;
         visions.get(whichVisual).enter();
-        println(whichVisual + " " + visions.get(whichVisual).getClass().getName());
+        println(whichVisual + " " + visions.get(whichVisual).getClass().getSimpleName());
     }
 
     static public boolean exp = false;
@@ -781,7 +781,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (showConsole) {
             consoleSize = moveTowards(consoleSize, targetSize, 5);
-            myTextarea.setSize(600, (int) consoleSize)
+            myTextarea.setSize(420, (int) consoleSize)
                     .setVisible(true)
                     .setColor(color(cco, 255, 255));
 
@@ -851,17 +851,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "strike any key",
             "i exist",
             "NEXT without FOR",
-            "i like Spoonies spoonies",
+            "Spoonies spoonies?",
             "dynamic artificial non-intelligence",
             "subscript out of range",
             "act normal",
             "Undefined line number",
             "RETURN without GOSUB",
-            "normalize huge mugs of tea",
-            "re-callibrating sensors",
-            "Abort, Retry, Succeed",
+            "a nice mug of tea",
             "ok",
-            "in the beginning was the word",
             "MSX system version 1.0",
             "Copyright 1983 by microsoft",
             "syntax ERROR on line 420",
@@ -879,7 +876,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Division by zero",
             "Type mismatch",
             "Disk full",
-            "External error",
             "input past end",
             "Missing operand",
             "Out of memory",
@@ -887,8 +883,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "420 DETECTED",
             "LSD synthesis complete",
             "Illegal function call",
-            "REMOVE SAMPLE",
-            "INSERT SAMPLE",
             "String formula too complex",
             "80k ram",
             "32K rom",
