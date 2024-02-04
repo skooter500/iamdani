@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.jogamp.opengl.math.Quaternion;
+
 import C21503599.MyFirstChange;
 import c21348423.AdriansVisual;
 import c21383126.JenniferVisuals;
@@ -782,7 +784,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (showConsole) {
             consoleSize = moveTowards(consoleSize, targetSize, 5);
-            myTextarea.setSize(420, (int) consoleSize)
+            myTextarea.setSize(540, (int) consoleSize)
                     .setVisible(true)
                     .setColor(color(cco, 255, 255));
 
@@ -843,6 +845,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         updatePixels();
     }
+
+    Quaternion q;
 
     String[] randomMessages = {
             "I am DANI",
