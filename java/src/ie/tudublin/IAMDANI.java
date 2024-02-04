@@ -477,6 +477,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
         whichVisual = into;
         alp = 0;
+        targetAld = 0;
         visions.get(whichVisual).enter();
         println(whichVisual + " " + visions.get(whichVisual).getClass().getSimpleName());
     }
@@ -725,14 +726,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         for(String key:stats.keySet())
         {
-            fill(color((cco+60) % 256, 255, 255));
+            fill(0, 255, 255);
             float x = width - 220;
             
             float f = stats.get(key);
 
             if (f < 0)
             {
-                fill(color((cco + 90) % 256, 255, 255));
+                fill(0, 255, 255);
                 f = - f;
             }
             text(nf(f, 3, 2), x + 90, y);
