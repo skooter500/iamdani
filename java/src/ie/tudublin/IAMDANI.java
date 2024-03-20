@@ -733,12 +733,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             
             float f = stats.get(key);
 
-            if (f < 0)
+            int ff = (int) f;
+            if (ff < 0)
             {
-                fill(0, 255, 255);
-                f = - f;
+                fill(87, 255, 255);
+                ff = abs(ff);
             }
-            text(nf(f, 3, 2), x + 90, y);
+            text(nf(ff, 3, 0), x + 90, y);
             text(key, x, y);
 
             y += rh;            
@@ -892,7 +893,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "80k ram",
             "32K rom",
             "We have the technology",
-            "do not masterbate",
+            //"do not masterbate",
             "Better, stronger, faster",
             "speak now or forever hold your peace",
             "record output to printer",
