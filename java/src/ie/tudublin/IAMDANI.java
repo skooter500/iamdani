@@ -479,7 +479,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
         whichVisual = into;
         alp = 0;
-        targetAld = 0;
+        // targetAld = 0;
         visions.get(whichVisual).enter();
         println(whichVisual + " " + visions.get(whichVisual).getClass().getSimpleName());
     }
