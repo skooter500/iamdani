@@ -264,7 +264,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         myTextarea = cp5.addTextarea("txt")
                 .setPosition(40, 40)
-                .setSize(10, (int) consoleSize)
+                .setSize(10, (int) 360)
                 .setColor(color(consoleColor, 255, 255, alp))
                 .setFont(createFont("Hyperspace Bold.otf", 30))
                 .setLineHeight(30)
@@ -719,7 +719,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         stats.put("PIT", degrees(pit));
         stats.put("ROL", degrees(rol));
         stats.put("HUE", hue);
-        stats.put("III", (float) whichVisual);
+        stats.put("IDX", (float) whichVisual);
         stats.put("BAS", bas);
         stats.put("MUL", mul);
 
