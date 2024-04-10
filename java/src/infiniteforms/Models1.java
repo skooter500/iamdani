@@ -8,6 +8,7 @@ public class Models1 extends Poly
   Model model;
 
   int colorOffset = 0;
+  public float scale = 1;
   
   public Models1(IAMDANI v, String fileName, boolean rotate, boolean rotateX)
   {
@@ -19,7 +20,7 @@ public class Models1 extends Poly
   
   public void enter()
   {
-    model.smoothedBoxSize = 20;
+    model.smoothedBoxSize = 1000;
     model.colorOffset = (int) v.random(0, 256);
   }
   
@@ -36,9 +37,10 @@ public class Models1 extends Poly
     v.rotateX(v.pit);
     v.rotateZ( v.yaw);
     v.rotateY(v.rol);
+    v.scale(scale);
     model.render();
     v.popMatrix();
-    v.camera(v.width/2.0f, v.height/2.0f, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0, 0, 1, 0);
+    v.camera(v.width/2.0f, (v.height/2.0f) - 5000, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0, 0, 1, 0);
 
   }
   

@@ -226,7 +226,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(6, new Models1(this, "tudub.obj", false, true));
         addVision(6, new Models1(this, "msx.obj", false, true));
         addVision(6, new Models1(this, "eye.obj", true, false));
-        addVision(6, new Models1(this, "horse.obj", true, false));
+        Models1 horse = new Models1(this, "horse.obj", true, false);
+        horse.scale = 0.5f;
+        addVision(6, horse);
         addVision(6, new Models1(this, "chip.obj", true, false));
 
         addVision(7, new Bloom(this));
@@ -290,9 +292,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetRol = 0f;
         targetPit = 0f;
         targetYaw = 0f;
-        targetBas = 1f;
+        targetBas = 3f;
         targetAlp = 75;
-        targetAld = 4;
+        targetAld = 1;
         targetMul = 1.0f;
     
         bhu = 255;
@@ -454,11 +456,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             }
         }
         
-        if (g == 0) {
-            targetYaw = 0;
-            targetPit = 0;
-            targetRol = 0;
-        }
+        // if (g == 0) {
+        //     targetYaw = 0;
+        //     targetPit = 0;
+        //     targetRol = 0;
+        // }
 
         change(v);
     }
