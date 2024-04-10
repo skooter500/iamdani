@@ -5,16 +5,19 @@ import ie.tudublin.Poly;
 
 public class Models1 extends Poly
 {
-  Model model;
+  public Model model;
 
   int colorOffset = 0;
   public float scale = 1;
+
+  public float pitOff = 0;
   
   public Models1(IAMDANI v, String fileName, boolean rotate, boolean rotateX)
   {
     super(v);
     model = new Model(fileName, 0, 0, 0, v);    
     model.rotate = rotate;
+    model.pitOff = pitOff;
     model.rotateX = rotateX;
   }
   

@@ -40,7 +40,7 @@ public class IFCubes extends Poly {
   {
     v.noFill();
     v.lights();
-    v.camera(0, 0, -500, 0, 0, 0f, 0f, 0.001f, 0f);
+    v.camera(0, 0, -700, 0, 0, 0f, 0f, 0.001f, 0f);
     float col = v.hueShift((colorOffset + v.getAmplitude() * 255));        
         
     v.stroke(col, 255, 255);
@@ -56,7 +56,7 @@ public class IFCubes extends Poly {
     {
       c.render();       
     }    
-    v.camera(v.width/2.0f, v.height/2.0f, -1000, v.width/2.0f, v.height/2.0f, 0f, 0f, 0.001f, 0f);
+    v.camera(v.width/2.0f, v.height/2.0f, -1500, v.width/2.0f, v.height/2.0f, 0f, 0f, 0.001f, 0f);
     v.popMatrix();
     theta+=0.01f * v.spe;
     

@@ -46,6 +46,8 @@ public class Model {
 
   public boolean rotateX = false;
 
+  public float pitOff = 0;
+
   void render() {
     v.pushMatrix();
     // strokeWeight(2);
@@ -76,7 +78,7 @@ public class Model {
     smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
     // scale(1);
 
-    v.rotateX(-v.HALF_PI + v.pit);
+    v.rotateX(-v.HALF_PI + v.pit + pitOff);
     v.rotateZ(v.PI + v.yaw);
     // v.rotateX(v.xRotation);
     // /v.rotateZ(v.zRotation);
@@ -93,7 +95,7 @@ public class Model {
     v.shape(s);
     v.popMatrix();
 
-    angle += 0.01f * v.spe;
+    angle += 0.001f * v.spe;
 
     /*
      * ArrayList<Quad> quads = obj.getQuads();

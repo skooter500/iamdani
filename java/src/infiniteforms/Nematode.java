@@ -45,7 +45,7 @@ public class Nematode extends Poly
     font = v.createFont("Hyperspace Bold.otf", 24);
 
     dani = new DANI(v, "nematodes.txt");
-    dani.l = 100;
+    dani.l = 15;
     
   }
 

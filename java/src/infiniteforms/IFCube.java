@@ -9,7 +9,7 @@ public class IFCube
   
   float smoothedBoxSize = 0;
   float angle = 0;
-  float weight = 2;
+  float weight = 1;
   float size = 50;
   
   boolean useAmplitude = true;
@@ -48,7 +48,7 @@ public class IFCube
     {
         v.box(size);
     }
-    angle+=0.01f * v.spe;
+    angle+=0.001f * v.spe;
     v.popMatrix();
   }
   

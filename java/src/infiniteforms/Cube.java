@@ -33,7 +33,7 @@ public class Cube extends Poly
     public void render()
     {
 
-        v.camera(0, 0, -500, 0, 0, 0f, 0f, 0.001f, 0f);
+        v.camera(0, 0, -600, 0, 0, 0f, 0f, 0.001f, 0f);
         v.pushMatrix();
         //v.rotateZ(v.PI + v.yaw);
         //v.translate(v.width / 2, v.height / 2, 0); 
@@ -55,7 +55,7 @@ public class Cube extends Poly
         v.box(smoothedBoxSize);
         
         
-        angle+=0.01f * v.spe;
+        angle+=0.001f * v.spe;
         v.popMatrix();
         
         

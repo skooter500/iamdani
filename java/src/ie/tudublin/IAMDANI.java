@@ -42,7 +42,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     MidiBus myBus = null; // The MidiBus
 
-    float ald = 20;
+    float ald = 1;
     float colorRange = 255;
     float camDistance = 0.5f;
     float strokeWeight = 1;
@@ -228,6 +228,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(6, new Models1(this, "eye.obj", true, false));
         Models1 horse = new Models1(this, "horse.obj", true, false);
         horse.scale = 0.5f;
+        horse.model.pitOff = 1;
         addVision(6, horse);
         addVision(6, new Models1(this, "chip.obj", true, false));
 
@@ -292,7 +293,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetRol = 0f;
         targetPit = 0f;
         targetYaw = 0f;
-        targetBas = 3f;
+        targetBas = 3.6f;
         targetAlp = 75;
         targetAld = 1;
         targetMul = 1.0f;
@@ -456,11 +457,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             }
         }
         
-        // if (g == 0) {
-        //     targetYaw = 0;
-        //     targetPit = 0;
-        //     targetRol = 0;
-        // }
+        if (g == 0) {
+             targetAld = 0;
+             //targetPit = 0;
+             // targetRol = 0;
+         }
 
         change(v);
     }
@@ -486,7 +487,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println(whichVisual + " " + visions.get(whichVisual).getClass().getSimpleName());
     }
 
-    static public boolean exp = false;
+    static public boolean exp = true;
 
     public void controllerChange(int channel, int number, int value) {
 
@@ -561,11 +562,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 println("ALD " + nf(targetAld, 3, 2));
         }
 
-        if (number == 16) {
-            targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 10), 50);
-            if (exp)
-                println("ALD " + nf(targetAld, 3, 2));
-        }
+        // if (number == 16) {
+        //     targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 10), 50);
+        //     if (exp)
+        //         println("ALD " + nf(targetAld, 3, 2));
+        // }
 
         if (number == 19) {
             targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 10), 255);
@@ -787,7 +788,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (showConsole) {
             consoleSize = moveTowards(consoleSize, targetSize, 5);
-            myTextarea.setSize(540, (int) consoleSize)
+            myTextarea.setSize(1000, (int) consoleSize)
                     .setVisible(true)
                     .setColor(color(cco, 255, 255));
 
