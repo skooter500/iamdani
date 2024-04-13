@@ -109,13 +109,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                     String curr = MidiBus.availableInputs()[i];
                     if (curr.equals("Arturia BeatStep")) {
                         daniMidi = i;
-                        println("BeatStep in port " + daniMidi);
+                        println("JOYSTICK ATTACHED: " + daniMidi);
                     }
                 }
             }
 
             if (daniMidi == -1) {
-                println("Insert joystick and strike enter");
+                println("Insert joystick");
             } else {
                 if (myBus != null) {
                     myBus.close();
@@ -896,12 +896,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "80k ram",
             "32K rom",
             "We have the technology",
-            //"do not masterbate",
+            "do not masterbate",
             "Better, stronger, faster",
             "speak now or forever hold your peace",
             "record output to printer",
             "turn on, tune in, and drop out",
-            "God is playing hide and seek",
+            "God is playing hide and seek within you",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings Human",
             "This is your MSX speaking",

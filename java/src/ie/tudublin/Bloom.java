@@ -51,7 +51,7 @@ public class Bloom extends Poly{
         }
         v.popMatrix();
         
-        angle+=(PApplet.map(v.getAmplitude(), 0, 1.0f, 0, 2f) * (v.spe / 10.0f));
+        angle+=(PApplet.map(v.getAmplitude(), 0, 1.0f, 0, 1f) * (v.spe / 100.0f));
     }
     
 }

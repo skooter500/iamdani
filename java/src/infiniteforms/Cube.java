@@ -42,6 +42,8 @@ public class Cube extends Poly
         v.rotateX(v.pit);
         v.rotateY(v.yaw);
         v.strokeWeight(2);
+
+
         float c = v.hueShift((colorOffset + v.getAmplitude() * 255));        
         v.stroke(c, 255, 255, v.alp);
         v.noFill();

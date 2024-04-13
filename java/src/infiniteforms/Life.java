@@ -405,7 +405,7 @@ public class Life extends Poly
     
     v.translate(-(boardWidth * cellWidth) / 2, -(boardHeight * cellWidth) / 2, 0);
     
-    float toPass = v.map(v.spe, 0, 3.58f, 1.0f, 0.05f);  
+    float toPass = v.map(v.spe, 0, 3.58f, 2.0f, 0.2f);  
     ellapsed += v.timeDelta;
     if (ellapsed > toPass)
     {

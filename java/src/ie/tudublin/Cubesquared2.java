@@ -46,7 +46,7 @@ public class Cubesquared2 extends Poly{
                 //v.translate(xo, yo , zo+100);
 
 
-                v.translate(xo*(1.5f*v.getSmoothedAmplitude()),yo*(1.5f*v.getSmoothedAmplitude()),zo*(1.5f*v.getSmoothedAmplitude()));
+                v.translate(xo*(0.5f*v.getSmoothedAmplitude()),yo*(0.5f*v.getSmoothedAmplitude()),zo*(0.5f*v.getSmoothedAmplitude()));
 
               
                 float c = PApplet.map(zo, 0, v.getAudioBuffer().size(),0,255);
