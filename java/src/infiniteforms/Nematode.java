@@ -103,7 +103,7 @@ public class Nematode extends Poly
     
     v.pushMatrix();
     //v.camera(0, 0, -5000, 0, 0, 0f, 0f, 0.001f, 0f);
-    v.translate(cx, cy);
+    v.translate(cx *.8f, cy);
     v.translate(-200, - half * 0.2f - 100);
 
     //v.rotateX(v.pit);
@@ -121,7 +121,7 @@ public class Nematode extends Poly
     v.textAlign(v.CENTER, v.CENTER);
     v.textAlign(v.CENTER, v.CENTER);    
     v.text(name, 0, -w * 3.5f);       
-    v.translate(0, 30); 
+    v.translate(0, 130); 
     v.noFill();
     for (int i = 0; i < length; i ++)
     { 
@@ -152,7 +152,7 @@ public class Nematode extends Poly
     
     drawGenitals();
     theta += v.spe * 0.03f * v.getSmoothedAmplitude();
-    v.translate(-450, -500); 
+    v.translate(-400, -500); 
     dani.render(false);
        
     v.popMatrix();

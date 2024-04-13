@@ -327,7 +327,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void noteOn(int channel, int pitch, int velocity) {
 
-        if (exp)
+        // 43 is print screen button
+        if (exp && pitch != 43)
             println("N+ CH " + channel + " PI " + pitch + " VE " + velocity);
 
         switch (mode) {
@@ -788,7 +789,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (showConsole) {
             consoleSize = moveTowards(consoleSize, targetSize, 5);
-            myTextarea.setSize(1000, (int) consoleSize)
+            myTextarea.setSize(1920, (int) consoleSize)
                     .setVisible(true)
                     .setColor(color(cco, 255, 255));
 

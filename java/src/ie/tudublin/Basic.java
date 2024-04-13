@@ -122,7 +122,7 @@ public class Basic extends Poly {
         v.rotateX(v.pit);
         v.rotateY(-v.yaw + 0.13f);
         v.rotateZ(v.rol);
-        v.translate(cx * .35f, cy*.1f);
+        v.translate(cx * .30f, cy*.1f);
         
 
 		for(int i = 0 ; i <= line ; i ++)
