@@ -1,3 +1,15 @@
+// Author: Tommy Burke
+// Student Number: C22737179
+// Date: 19th April 2024
+
+// Description: This is the AllBalls class that extends the Poly class. It creates
+// an array of Balls and displays them on the screen. The balls rotate around the center
+// of the screen and change colour based on the amplitude of the audio. The balls can also  
+// be rotated using the pitch, yaw and roll variables controlled by a midi controller. The
+// number of balls can also be changed using a midi controller. The size of the balls can also
+// be changed.
+
+
 package ie.tudublin;
 
 import processing.core.PApplet;
