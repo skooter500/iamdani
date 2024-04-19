@@ -4,16 +4,17 @@ import processing.core.PApplet;
 
 public class AllBalls extends Poly {
     
-    Balls[] balls;
-    int numBalls = 150;
+    Balls[] balls; //This is an array of Balls
+    int numBalls = 150; //This is the number of Balls
     
 
     public AllBalls(IAMDANI v)
     {
-        super(v);
-        initialiseBalls();
+        super(v); //This is calling the constructor of the parent class
+        initialiseBalls(); //This is calling the initialiseBalls method
     }
-
+    
+    //This is the initialiseBalls method
     public void initialiseBalls() {
 
         balls = new Balls[numBalls];
@@ -23,12 +24,15 @@ public class AllBalls extends Poly {
 
     }
 
+
     @Override
     public void render(int ellapsed)
     {       
-        
+        //translate to the center of the screen
         v.translate(v.width/2, v.height/2);
         
+        //This is a for loop that goes through the balls array
+        //you could replace numBalls with a midi controlled variable here to change the number of balls
         for(int i = 0; i < numBalls; i++) {
             balls[i].display(); 
             balls[i].update(); 
@@ -38,46 +42,54 @@ public class AllBalls extends Poly {
 
     class Balls
     {   
-        float angle;
-        float angleSpeed;
-        float radius;
-        float count = 0;
+        float angle;        //This is the angle of the ball
+        float angleSpeed;   //This is the speed the angle changes
+        float radius;       //This is the radius of orbit(How far the ball is from the center of the screen)
+        float count = 0;    //This is used to change the colour of the ball in the hueShift method
 
         Balls(int n) {
+            //This is the constructor of the Balls class
+            //initialises the variables
             this.angle = 0;
-            this.angleSpeed = 0.001f + n * 0.0005f;
+            this.angleSpeed = 0.001f + (n-1) * 0.00005f;
             this.radius = 30 + n * 6;
             this.count = 0;
         }
 
+        
         void update() {
-            angle += angleSpeed;
+            //updates the angle of the ball for each frame
+            angle += (angleSpeed * v.spe);
         }
 
+        //This is the display method that gets called from the render method
         void display() {
-            //v.translate(v.width / 2, v.height / 2);
 
             v.lights();
             v.calculateAverageAmplitude();
-            //v.stroke(PApplet.map(v.getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
 
-            
+            //This variable changes the colour of the balls
             float c = PApplet.map(count, 0, v.getAudioBuffer().size() , 100, 400);
+            //This is the x and y position of the ball, based on its angle of rotation and distance from the center
             float x = radius * PApplet.cos(angle);
             float y = radius * PApplet.sin(angle);
 
-            
-
             v.noStroke();
-            //v.fill(255);
+            //This is the colour of the ball, it changes based on the c variable
             v.fill(v.hueShift(c), 255, 255, v.alp);
-            
-            v.translate(x, y);
-            v.rotateX(v.pit);
-            v.rotateZ(v.yaw);
-            float sphereSize = 25 + (v.getSmoothedAmplitude()); 
-            v.sphere(sphereSize);
 
+            // Translate and rotate to the ball's position and orientation
+            v.translate(x, y);
+
+            //This is the rotation of the entire visual using the pitch, yaw and roll variables controlled by a midi controller
+            v.rotateX(v.pit);
+            v.rotateY(v.yaw);
+            v.rotateZ(v.rol);
+            //This is the size of the ball, it changes based on the amplitude of the audio
+            float sphereSize = (v.getSmoothedAmplitude()*20);
+            //This is the sphere that gets drawn
+            v.sphere(sphereSize);
+            //this constantly changes the count variable so the colour of the ball changes but can also be changed using the midi controller
             count+=5;
         }
     }
