@@ -461,8 +461,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         if (g == 0) {
              targetAld = 0;
-             //targetPit = 0;
-             // targetRol = 0;
+             targetPit = 0;
+             targetRol = 0;
+             targetYaw = 0;
+             rol = 0;
+             pit = 0;
+             yaw = 0;
          }
 
         change(v);

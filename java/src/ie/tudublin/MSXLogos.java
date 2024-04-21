@@ -76,16 +76,21 @@ public class MSXLogos extends Poly{
 
     PShape s;
 
+    int spawnCounter = 0;
+
     @Override
     public void render() {
         float halfW = v.width / 2;
         float halfH = v.height / 2;
         
-        if (models.size() < numLogos && v.frameCount % 240 == 0 )
+        if (models.size() < numLogos && spawnCounter == 0)
         {
             MSXModel msxModel = new MSXModel(s, v.random(-halfW, halfW), v.random(-halfH, halfH), 127, 100, v);
             models.add(msxModel);
+            spawnCounter = 60;
         }
+
+        spawnCounter = v.max(0, spawnCounter - 1);
 
         v.lights();
         v.strokeWeight(5);
