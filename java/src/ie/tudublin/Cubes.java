@@ -11,7 +11,7 @@ public class Cubes extends Poly
     public Cubes(IAMDANI v)
     {
         super(v);
-    }
+    }   
 
     public void enter()
     {

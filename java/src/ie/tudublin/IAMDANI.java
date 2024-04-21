@@ -213,6 +213,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(3, new Cubesquared2(this));
         addVision(3, new Cubes(this));
 
+        addVision(4, new AllBalls(this));
         addVision(4, new paris(this));
         addVision(4, new LauraSun(this));
         addVision(4, new Mena(this));
