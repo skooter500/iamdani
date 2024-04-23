@@ -162,7 +162,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void setup() {
 
-        f = createFont("Hyperspace Bold.otf", 30);
+        f = createFont("Hyperspace Bold.otf", 24);
 
         textFont(f);
 
@@ -268,8 +268,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setPosition(40, 40)
                 .setSize(10, (int) 360)
                 .setColor(color(consoleColor, 255, 255, alp))
-                .setFont(createFont("Hyperspace Bold.otf", 30))
-                .setLineHeight(30)
+                .setFont(f)
+                .setLineHeight(36)
                 .hideScrollbar()
                 .setText(console.toString())
                 .setVisible(true);
@@ -589,12 +589,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
         if (number == 77) {
             targetYaw = clockWise ? targetYaw + rotSpeed : targetYaw - rotSpeed;
+            targetYaw = wrapAngle(targetYaw);
             if (exp)
                 println("yaw " + nf(targetYaw, 3, 2));
         }
 
         if (number == 93) {
             targetRol = clockWise ? targetRol + rotSpeed : targetRol - rotSpeed;
+            targetRol = wrapAngle(targetRol);
             if (exp)
                 println("ROL " + nf(targetRol, 3, 2));
         }
@@ -608,6 +610,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (number == 17) {
             targetPit = clockWise ? targetPit + rotSpeed : targetPit - rotSpeed;
+            targetPit = wrapAngle(targetPit);
             if (exp)
                 println("pit " + nf(targetPit, 3, 2));
         }
@@ -622,6 +625,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // }
         // change(newVisual);
     }
+
+    private float wrapAngle(float targetPit2) {
+        return targetPit2;
+            }
 
     private int findGroup(int g) {
         int currentG = 0;
@@ -718,6 +725,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         
         stats.put("Z80", spe);
+        stats.put("IDX", (float) whichVisual);        
         stats.put("AMP", getSmoothedAmplitude());
         stats.put("ALD", ald);
         stats.put("RAW", raw * 10.0f);
@@ -726,7 +734,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         stats.put("PIT", degrees(pit));
         stats.put("ROL", degrees(rol));
         stats.put("HUE", hue);
-        stats.put("IDX", (float) whichVisual);
         stats.put("BAS", bas);
         stats.put("MUL", mul);
 
@@ -738,7 +745,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         for(String key:stats.keySet())
         {
             fill(0, 255, 255);
-            float x = width - 220;
+            float x = width - 150;
             
             float f = stats.get(key);
 
@@ -748,7 +755,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 fill(87, 255, 255);
                 ff = abs(ff);
             }
-            text(nf(ff, 3, 0), x + 90, y);
+            text(nf(ff, 3, 0), x + 70, y);
             text(key, x, y);
 
             y += rh;            
@@ -880,10 +887,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "i seek the creator",
             // "© Microcabin",
             // "am in a k-hole y/n?",
-            "Job completed normally",
+            "Job completed",
             "28815 bytes free",
             "subspace anomoly on line 420",
-            "we can rebuild them",
+            "we can rebuild him",
             "String too long",
             "Unprintable error",
             "Line buffer overflow",
@@ -896,7 +903,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Out of memory",
             "commence 5meodmt inhalation",
             "420 DETECTED",
-            "LSD synthesis complete",
+            "MDMA synthesis complete",
             "Illegal function call",
             "String formula too complex",
             "80k ram",
@@ -913,7 +920,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "This is your MSX speaking",
             "color auto goto list run",
             "Z80A CPU",
-            "YM2413 inside",
     };
 
 }

@@ -199,7 +199,7 @@ public class DANI extends Poly {
         }
 		for(int i = 0 ; i <= line ; i ++)
         { 
-            float h = 50;
+            float h = 36;
             if (i != line)
             {
                 v.text(sonnet[i], 0, i * h);
