@@ -101,7 +101,7 @@ public class Nematode extends Poly
     
     v.pushMatrix();
     //v.camera(0, 0, -5000, 0, 0, 0f, 0f, 0.001f, 0f);
-    v.translate(cx, cy);
+    v.translate(cx * .8f, cy);
     v.translate(-200, - half * 0.2f - 100);
 
     //v.rotateX(v.pit);

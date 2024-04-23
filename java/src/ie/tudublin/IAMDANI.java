@@ -745,7 +745,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         for(String key:stats.keySet())
         {
             fill(0, 255, 255);
-            float x = width - 150;
+            float x = width - 140;
             
             float f = stats.get(key);
 
@@ -755,7 +755,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 fill(87, 255, 255);
                 ff = abs(ff);
             }
-            text(nf(ff, 3, 0), x + 70, y);
+            text(nf(ff, 3, 0), x + 65, y);
             text(key, x, y);
 
             y += rh;            
