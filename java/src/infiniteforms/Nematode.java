@@ -42,14 +42,12 @@ public class Nematode extends Poly
   public Nematode(IAMDANI v)
   {
     super(v);
-    font = v.createFont("Hyperspace Bold.otf", 24);
 
     dani = new DANI(v, "nematodes.txt");
     dani.l = 15;
     
   }
 
-  PFont font;
   
   int reset = 0;
   
@@ -103,7 +101,7 @@ public class Nematode extends Poly
     
     v.pushMatrix();
     //v.camera(0, 0, -5000, 0, 0, 0f, 0f, 0.001f, 0f);
-    v.translate(cx *.8f, cy);
+    v.translate(cx, cy);
     v.translate(-200, - half * 0.2f - 100);
 
     //v.rotateX(v.pit);
@@ -112,8 +110,6 @@ public class Nematode extends Poly
     v.noFill();
     float hw = w / 2;
 
-    v.textFont(font);
-    v.textSize(36);
     
     float c3 = v.hueShift(c2); 
       

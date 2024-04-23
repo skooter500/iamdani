@@ -369,9 +369,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (pitch == 48)
         {
-            targetYaw = random(0, TWO_PI);
-            targetPit = random(0, TWO_PI);
-            targetRol = random(0, TWO_PI);
+            targetYaw = random(targetYaw - HALF_PI, targetYaw + HALF_PI);
+            targetPit = random(targetPit - HALF_PI, targetPit + HALF_PI);
+            targetRol = random(targetRol - HALF_PI, targetRol + HALF_PI);
             // targetHue = random(0, 255);
             // targetAlp = random(10, 255);
             // targetAld = random(0, 50);

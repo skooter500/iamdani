@@ -189,7 +189,7 @@ public class DANI extends Poly {
         float cx = v.width;
         float cy = v.height / 2;
 
-        v.translate(cx * .3f, cy/3);
+        v.translate(cx * .35f, cy/3);
         if (transform)
         {
             v.rotateX(v.pit);
