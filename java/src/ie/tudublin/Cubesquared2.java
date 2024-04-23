@@ -41,7 +41,7 @@ public class Cubesquared2 extends Poly{
             for(zo=-off_max;zo<=off_max;zo+=50){
                 v.pushMatrix();
 
-                float scaleFactor = v.random(0.5f, 2.0f) * v.spe;// scales individual cubes by a random float between 0.5 and 2.0
+                float scaleFactor = 0.01f + (v.random(0.5f, 2.0f) * v.spe);// scales individual cubes by a random float between 0.5 and 2.0
                 
                 //v.translate(xo, yo , zo+100);
 
@@ -54,7 +54,7 @@ public class Cubesquared2 extends Poly{
                 v.rotateX(v.frameCount*0.1f);//rotates individual cubes on x axis 
                 v.rotateZ(v.frameCount*0.1f);//rotates individual cubes on z axis
 
-                v.fill(v.hueShift(c),(255+v.frameCount)%255,(255+v.frameCount)%255, v.alp);
+                v.fill(v.hueShift(c),255,255, v.alp);
                 v.scale(scaleFactor); 
                 v.box(v.getSmoothedAmplitude()*50);//box size changes by amplitude of song
                 //v.box(20);
