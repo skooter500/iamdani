@@ -209,11 +209,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(2, new IFCubes(this, 7, 150, -600));
         addVision(2, new IFCubes(this, 30, 150, -400));
 
+        addVision(3, new AllBalls(this));        
         addVision(3, new Spiral(this));
         addVision(3, new Cubesquared2(this));
         addVision(3, new Cubes(this));
+        
 
-        addVision(4, new AllBalls(this));
         addVision(4, new paris(this));
         addVision(4, new LauraSun(this));
         addVision(4, new Mena(this));
@@ -575,7 +576,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // }
 
         if (number == 19) {
-            targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 10), 255);
+            targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 5), 255);
             if (exp)
                 println("ALP " + nf(targetAlp, 3, 2));
         }

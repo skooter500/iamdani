@@ -71,7 +71,7 @@ public class AllBalls extends Poly {
         
         void update() {
             //updates the angle of the ball for each frame
-            angle += (angleSpeed * v.spe * 0.5f);
+            angle += (angleSpeed * v.spe);
         }
 
         //This is the display method that gets called from the render method
