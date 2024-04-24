@@ -17,6 +17,8 @@ public class Tomatoes extends Poly {
     int numSegments = 25; // Adjust this value to change the number of segments in the tube
     float count = 0;
 
+    float baseColour = 0.5f;
+
     // Constructor that accepts an IAMDANI object
     public Tomatoes(IAMDANI v) {
         super(v);
@@ -145,7 +147,6 @@ public class Tomatoes extends Poly {
         float colour = PApplet.map(count, 0, v.getAudioBuffer().size(), 100, 400);
 
         v.noFill();
-        v.stroke(v.hueShift(colour), 255, 255, v.alp);
 
         v.beginShape(PConstants.LINES);
         float zStart = -tubeLength / 2;
@@ -164,7 +165,8 @@ public class Tomatoes extends Poly {
                 int index = i % numSegments;
                 float amp1 = v.getFFT().getBand(index) * 50;
                 float amp2 = v.getFFT().getBand((index + 1) % numSegments) * 50;
-                v.stroke(255 - amp1, 255 - amp2, 255);
+                v.stroke((v.hueShift(colour) + baseColour + amp1) % 255, 255, 255, v.alp);
+                baseColour += 0.0005f;
                 float mappedStrokeWeight = PApplet.map(amp2, 0, 255, baseStrokeWeight, maxStrokeWeight);
                 v.strokeWeight(mappedStrokeWeight);
                 v.vertex(x1, y1, z);
