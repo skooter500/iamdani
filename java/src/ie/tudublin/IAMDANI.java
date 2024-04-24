@@ -210,7 +210,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(2, new IFCubes(this, 30, 150, -400));
 
         
-        addVision(3, new AllBalls(this));        
+        addVision(3, new AllBalls(this));   
+        //addVision(3, new GrainneHead(this)); 
         addVision(3, new Cubesquared2(this));        
         addVision(3, new Spiral(this));
         addVision(3, new Cubes(this));
@@ -223,6 +224,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         addVision(5, new MSXLogos(this, "msx.obj"));
         addVision(5, new MSXLogos(this, "chip.obj"));
+
+        addVision(5, new GrainneHead(this, "spiderman1.obj"));
 
         // YM2413
 
@@ -240,6 +243,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         addVision(7, new Particles(this));
 
+        addVision(7, new Terrain(this)); 
         // addVision(new Airish(this));
 
         // addVision(new Bands(this, 200, 0, 0, 0));
