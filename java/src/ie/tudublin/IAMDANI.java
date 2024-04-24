@@ -46,7 +46,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float colorRange = 255;
     float camDistance = 0.5f;
     float strokeWeight = 1;
-    
+
     PFont f;
 
     public void settings() {
@@ -209,12 +209,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(2, new IFCubes(this, 7, 150, -600));
         addVision(2, new IFCubes(this, 30, 150, -400));
 
-        
-        addVision(3, new AllBalls(this));        
-        addVision(3, new Cubesquared2(this));        
+        addVision(3, new AllBalls(this));
+        addVision(3, new Tomatoes(this)); // Modified line
+        addVision(3, new Cubesquared2(this));
         addVision(3, new Spiral(this));
         addVision(3, new Cubes(this));
-        
 
         addVision(4, new paris(this));
         addVision(4, new LauraSun(this));
@@ -300,10 +299,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetAlp = 75;
         targetAld = 1;
         targetMul = 1.0f;
-    
+
         bhu = 255;
         bri = 255;
-        sat = 255;        
+        sat = 255;
         ;
     }
 
@@ -369,21 +368,21 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             return;
         }
 
-        if (pitch == 48)
-        {
+        if (pitch == 48) {
             targetYaw = random(0, TWO_PI);
             targetPit = random(0, TWO_PI);
             targetRol = random(0, TWO_PI);
             // targetHue = random(0, 255);
             // targetAlp = random(10, 255);
             // targetAld = random(0, 50);
-            if (exp) println("RND");
+            if (exp)
+                println("RND");
         }
 
         if (pitch >= 36 && pitch <= 39) {
             int g = pitch - 36;
             g += 4;
-            changeToGroupVisual(g);            
+            changeToGroupVisual(g);
         }
 
         if (pitch == 40) {
@@ -432,7 +431,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
 
         if (pitch == 42) {
-            if (exp) println("RST");
+            if (exp)
+                println("RST");
             alp = 0;
             ald = 0;
             visions.get(whichVisual).enter();
@@ -447,29 +447,27 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     }
 
-    private void changeToGroupVisual(int g)
-    {
+    private void changeToGroupVisual(int g) {
         int v = 0;
         if (groups.containsKey(g)) {
             ArrayList<Integer> group = groups.get(g);
             if (group.contains(whichVisual)) {
                 int inGroup = group.indexOf(whichVisual);
                 v = group.get((inGroup + 1) % group.size());
-            }
-            else {
+            } else {
                 v = groups.get(g).get(0);
             }
         }
-        
+
         if (g == 0) {
-             targetAld = 0;
-             targetPit = 0;
-             targetRol = 0;
-             targetYaw = 0;
-             rol = 0;
-             pit = 0;
-             yaw = 0;
-         }
+            targetAld = 0;
+            targetPit = 0;
+            targetRol = 0;
+            targetYaw = 0;
+            rol = 0;
+            pit = 0;
+            yaw = 0;
+        }
 
         change(v);
     }
@@ -565,15 +563,15 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (number == 76) {
             targetAld = min(max(clockWise ? targetAld + .1f : targetAld - .1f, 0), 50);
-            
+
             if (exp)
                 println("ALD " + nf(targetAld, 3, 2));
         }
 
         // if (number == 16) {
-        //     targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 10), 50);
-        //     if (exp)
-        //         println("ALD " + nf(targetAld, 3, 2));
+        // targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 10), 50);
+        // if (exp)
+        // println("ALD " + nf(targetAld, 3, 2));
         // }
 
         if (number == 19) {
@@ -630,7 +628,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     private float wrapAngle(float targetPit2) {
         return targetPit2;
-            }
+    }
 
     private int findGroup(int g) {
         int currentG = 0;
@@ -721,13 +719,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
     }
 
-    void showStats()
-    {
+    void showStats() {
         HashMap<String, Float> stats = new HashMap<String, Float>();
 
-        
         stats.put("Z80", spe);
-        stats.put("IDX", (float) whichVisual);        
+        stats.put("IDX", (float) whichVisual);
         stats.put("AMP", getSmoothedAmplitude());
         stats.put("ALD", ald);
         stats.put("RAW", raw * 10.0f);
@@ -743,26 +739,23 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         float h = rh * stats.size();
         float y = height - h;
-        
-        for(String key:stats.keySet())
-        {
+
+        for (String key : stats.keySet()) {
             fill(0, 255, 255);
             float x = width - 140;
-            
+
             float f = stats.get(key);
 
             int ff = (int) f;
-            if (ff < 0)
-            {
+            if (ff < 0) {
                 fill(87, 255, 255);
                 ff = abs(ff);
             }
             text(nf(ff, 3, 0), x + 65, y);
             text(key, x, y);
 
-            y += rh;            
+            y += rh;
         }
-
 
     }
 
@@ -773,7 +766,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     boolean showConsole = true;
 
     public static float timeDelta = 0;
-    long last = 0;                                                                                                                                                                                                 
+    long last = 0;
 
     int toPass;
 
@@ -842,8 +835,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             takeScreenshot = false;
         }
 
-        if (showConsole)
-        {
+        if (showConsole) {
             showStats();
         }
         // hueShift();
@@ -925,13 +917,3 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     };
 
 }
-
-
-
-
-
-
-
-
-
-
