@@ -65,8 +65,8 @@ public class BasakEllipse extends Poly {
              
     
                 //v.pushMatrix();
-                //v.stroke(PApplet.map(rad, 0, 255, 0, 360), 255, 255);
-                v.stroke(v.hue,255,255,v.alp);
+                v.stroke(PApplet.map(rad, 0, 255, 0, 360), 255, 255);
+                //v.stroke(v.hue,255,255,v.alp);
                 //strokeWeightMapped = PApplet.map(v.getAmplitude(), 0, 1, 1, 5);
                 //v.strokeWeight(strokeWeightMapped * 2);
                 //v.popMatrix();
@@ -99,11 +99,11 @@ public class BasakEllipse extends Poly {
                 v.pushMatrix();
                 
                 v.rotate(PApplet.radians(angle));
-                //v.ellipse(smoothedEllipseSize * sin(radians(properties.angle)), properties.y + 150, 30, 30);
+                //v.ellipse(smoothedEllipseSize * PApplet.sin(PApplet.radians(angle)), y + 150, 30, 30);
                
                 //v.stroke(32, 255, 255);
                 v.stroke(PApplet.map(rad, 0, 360, 0, 255), 255, 255);
-                //v.fill(60, 255, 255);
+                //v.fill(v.hue, 255, 255);
                 
                 float triangleBaseX = x + 48; 
                 float triangleBaseY = y; 
