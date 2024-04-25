@@ -42,7 +42,7 @@ public class Tomatoes extends Poly {
     void initialiseTomatoes() {
         tomatoPositions = new PVector[numTomatoes];
         tomatoSpeeds = new float[numTomatoes];
-        float buffer = tubeRadius * 0.25f; // Define a buffer size as half of the tube radius
+        float buffer = tubeRadius * 0.1f; // Define a buffer size as half of the tube radius
         float minX = -tubeRadius + buffer;
         float maxX = tubeRadius - buffer;
         float minY = -tubeRadius + buffer;
@@ -97,7 +97,6 @@ public class Tomatoes extends Poly {
             }
         }
         generateNewTomatoes();
-
     }
 
     void generateNewTomatoes() {
@@ -166,14 +165,13 @@ public class Tomatoes extends Poly {
                 float amp1 = v.getFFT().getBand(index) * 50;
                 float amp2 = v.getFFT().getBand((index + 1) % numSegments) * 50;
                 v.stroke((v.hueShift(colour) + baseColour + amp1) % 255, 255, 255, v.alp);
-                baseColour += 0.0005f;
+                baseColour += 0.0003;
                 float mappedStrokeWeight = PApplet.map(amp2, 0, 255, baseStrokeWeight, maxStrokeWeight);
                 v.strokeWeight(mappedStrokeWeight);
                 v.vertex(x1, y1, z);
                 v.vertex(x2, y2, z);
             }
         }
-
         v.endShape();
     }
 
