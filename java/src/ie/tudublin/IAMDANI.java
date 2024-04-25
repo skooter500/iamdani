@@ -14,6 +14,7 @@ import C21503599.MyFirstChange;
 import c21348423.AdriansVisual;
 import c21383126.JenniferVisuals;
 import c21415904.SarahVisual;
+import c22337521.trimatrix;
 import controlP5.ControlP5;
 import controlP5.Textarea;
 import ddf.minim.analysis.BeatDetect;
@@ -210,7 +211,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(2, new IFCubes(this, 30, 150, -400));
 
         
-        addVision(3, new AllBalls(this));        
+        addVision(3, new AllBalls(this));
+        addVision(3, new trimatrix(this));       
         addVision(3, new Cubesquared2(this));        
         addVision(3, new Spiral(this));
         addVision(3, new Cubes(this));
