@@ -11,6 +11,7 @@ import java.util.Set;
 import com.jogamp.opengl.math.Quaternion;
 
 import C21503599.MyFirstChange;
+import C22398106.circles;
 import c21348423.AdriansVisual;
 import c21383126.JenniferVisuals;
 import c21415904.SarahVisual;
@@ -241,6 +242,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(7, new Bloom(this));
         addVision(7, new Terrain(this));
 
+
+        addVision(8, new circles(this));
         addVision(7, new Particles(this));
 
         addVision(7, new Terrain(this)); 
