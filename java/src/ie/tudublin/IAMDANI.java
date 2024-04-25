@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.jogamp.opengl.math.Quaternion;
 
+import c22375341.SebsVisual;
 import C21503599.MyFirstChange;
 import C22398106.circles;
 import c21348423.AdriansVisual;
@@ -256,6 +257,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //addVision(new JenniferVisuals(this));
 
         // addVision(new Life(this, 1, 1000));
+
+        addVision(8, new SebsVisual(this));
 
         // new set
 
