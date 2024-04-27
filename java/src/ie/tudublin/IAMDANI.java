@@ -109,13 +109,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                     String curr = MidiBus.availableInputs()[i];
                     if (curr.equals("Arturia BeatStep")) {
                         daniMidi = i;
-                        println("JOYSTICK ATTACHED: " + daniMidi);
+                        println("joy detected");
                     }
                 }
             }
 
             if (daniMidi == -1) {
-                println("Insert joystick");
+                println("joy not detected");
             } else {
                 if (myBus != null) {
                     myBus.close();
@@ -298,7 +298,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetYaw = 0f;
         targetBas = 3.6f;
         targetAlp = 75;
-        targetAld = 1;
+        targetAld = 10;
         targetMul = 1.0f;
     
         bhu = 255;
@@ -492,7 +492,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         alp = 0;
         // targetAld = 0;
         visions.get(whichVisual).enter();
-        println(whichVisual + " " + visions.get(whichVisual).getClass().getSimpleName());
+        println("BLOAD \"" + visions.get(whichVisual).getClass().getSimpleName() + ".COM\"");
     }
 
     static public boolean exp = true;
@@ -511,7 +511,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
 
         if (number == 10) {
-            targetBas = max(clockWise ? targetBas + 0.01f : targetBas - 0.01f, 0.01f);
+            targetBas = max(clockWise ? targetBas + 0.1f : targetBas - 0.1f, 0.01f);
             if (exp)
                 println("BAS " + nf(targetBas, 3, 2));
         }
@@ -844,7 +844,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (showConsole)
         {
-            showStats();
+            // showStats();
         }
         // hueShift();
 
@@ -872,16 +872,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "I am alive",
             "welcome to the metaverse",
             "nice to meet you",
-            "strike any key",
             "i exist",
-            "NEXT without FOR",
-            "Spoonies spoonies?",
+            "i like Spoonies spoonies",
             "dynamic artificial non-intelligence",
-            "subscript out of range",
             "act normal",
             "Undefined line number",
-            "RETURN without GOSUB",
-            "a nice mug of tea",
+            "normalize huge mugs of tea",
             "ok",
             "MSX system version 1.0",
             "Copyright 1983 by microsoft",
@@ -892,7 +888,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Job completed",
             "28815 bytes free",
             "subspace anomoly on line 420",
-            "we can rebuild him",
+            "we can rebuild them",
             "String too long",
             "Unprintable error",
             "Line buffer overflow",
@@ -906,22 +902,19 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "commence 5meodmt inhalation",
             "420 DETECTED",
             "MDMA synthesis complete",
-            "Illegal function call",
             "String formula too complex",
             "80k ram",
             "32K rom",
             "We have the technology",
-            "do not masterbate",
             "Better, stronger, faster",
             "speak now or forever hold your peace",
-            "record output to printer",
+            "record output to printer (Y/N)",
             "turn on, tune in, and drop out",
-            "God is playing hide and seek within you",
+            "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings Human",
             "This is your MSX speaking",
             "color auto goto list run",
-            "Z80A CPU",
     };
 
 }
