@@ -917,7 +917,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "We have the technology",
             "Better, stronger, faster",
             "speak now or forever hold your peace",
-            "record output to printer (Y/N)",
+            "WOULD YOU LIKE OUR CONVERSATION TO BE RECORDED ON PRINTER (Y/N)",
             "turn on, tune in, and drop out",
             "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
