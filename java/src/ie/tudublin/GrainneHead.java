@@ -19,6 +19,8 @@ public class GrainneHead extends Poly
     float radiusY;
     float count = 0;
 
+    float scale_factor = 1.0f;
+
     public GrainneHead(IAMDANI v, String filename)
     {
         super(v);
@@ -28,57 +30,43 @@ public class GrainneHead extends Poly
         radius = 100; 
         radiusX = v.width / 4;
         radiusY = v.height / 4;
-        speed = 0.05f;
+        speed = 0.005f;
         centerX = v.width / 2;
         centerY = v.height / 2;
-        spider_head.rotateX(PApplet.PI);
-        spider_head.rotateY(PApplet.PI - 30);
-
-
+        //spider_head.rotateX(PApplet.PI);
+        //spider_head.rotateY(PApplet.PI - 30);
     }
 
+    float size = 50;
 
-        public void setup()
-        {
-            v.frameRate(30);
-            v.startMinim();
-
-            try 
-            {
-                spider_head = v.loadShape("data\\spiderman1.obj");
-            } 
-            catch (Exception e) 
-            {
-                e.printStackTrace();
-                System.err.println("Error loading shape file: " + e.getMessage());
-            }
-
-        }
-
+    float smoothedBoxSize = 10000;
 
         @Override
         public void render(int ellapsed)
         {       
             v.lights();
 
-            float c = PApplet.map(count, 0, v.getAudioBuffer().size() , 100, 400);
+            float c = 90;                
             float x = centerX + radiusX * PApplet.sin(angle);
             float y = centerY + radiusY * PApplet.cos(angle);
 
             angle += speed * v.spe; 
 
             v.translate(x, y, -250);
+            v.rotateX(-v.HALF_PI);
             v.rotateX(v.pit);
-            v.rotateY(v.yaw);
-            v.rotateZ(v.rol); 
-            v.scale(ellapsed / 990f * v.bas );
-
+            v.rotateZ( v.yaw);
+            v.rotateY(v.rol);
+            float boxSize = size + (v.getAmplitude() * 200); 
+            smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f);                 
+            v.scale(smoothedBoxSize);
+            
             spider_head.setFill(v.color(v.hueShift(c), 255, 255, v.alp));
             v.shape(spider_head);
 
             radiusX = v.width / 4 + v.width / 8 * PApplet.sin(angle * 2);
             radiusY = v.height / 4 + v.height / 8 * PApplet.cos(angle * 2);
-            count += 1;
+            count += 10;
         }
 
     }
