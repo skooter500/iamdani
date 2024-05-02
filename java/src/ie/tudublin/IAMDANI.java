@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.jogamp.opengl.math.Quaternion;
 
+import C22396101.EllaVisual;
 import C21503599.MyFirstChange;
 import C22398106.circles;
 import c21348423.AdriansVisual;
@@ -196,10 +197,17 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //
         // HashMap<Number, Object> g = new HashMap()<Number, Object>();
 
+        addVision(5, new GrainneHead(this, "spiderman1.obj"));
+
+        addVision(0, new circles(this));
+        
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
         addVision(0, new Nematode(this));
         // groups.add(g);
+        
+        
+
         addVision(1, new Life(this, 2, 280, 100));
         addVision(1, new Life(this, 3, 10000, 200));
         addVision(1, new Life(this, 0, 1000, 100));
@@ -211,22 +219,22 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(2, new IFCubes(this, 30, 150, -400));
 
         
-        addVision(3, new AllBalls(this));   
-        //addVision(3, new GrainneHead(this)); 
+        addVision(3, new AllBalls(this));    
+        addVision(3,new EllaVisual(this));    
         addVision(3, new Cubesquared2(this));        
         addVision(3, new Spiral(this));
         addVision(3, new Cubes(this));
         
-
+        addVision(4, new BasakEllipse(this));
         addVision(4, new paris(this));
         addVision(4, new LauraSun(this));
         addVision(4, new Mena(this));
         addVision(4, new ManarBrain(this));
 
+
         addVision(5, new MSXLogos(this, "msx.obj"));
         addVision(5, new MSXLogos(this, "chip.obj"));
 
-        addVision(5, new GrainneHead(this, "spiderman1.obj"));
 
         // YM2413
 
@@ -243,7 +251,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(7, new Terrain(this));
 
 
-        addVision(8, new circles(this));
         addVision(7, new Particles(this));
 
         addVision(7, new Terrain(this)); 
@@ -915,7 +922,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "We have the technology",
             "Better, stronger, faster",
             "speak now or forever hold your peace",
-            "record output to printer (Y/N)",
+            "WOULD YOU LIKE OUR CONVERSATION TO BE RECORDED ON PRINTER (Y/N)",
             "turn on, tune in, and drop out",
             "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
