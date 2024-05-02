@@ -196,6 +196,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //
         // HashMap<Number, Object> g = new HashMap()<Number, Object>();
 
+        addVision(5, new GrainneHead(this, "spiderman1.obj"));
+
         addVision(0, new circles(this));
         
         addVision(0, new Basic(this, "DANI.BAS"));
@@ -231,7 +233,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(5, new MSXLogos(this, "msx.obj"));
         addVision(5, new MSXLogos(this, "chip.obj"));
 
-        addVision(5, new GrainneHead(this, "spiderman1.obj"));
 
         // YM2413
 

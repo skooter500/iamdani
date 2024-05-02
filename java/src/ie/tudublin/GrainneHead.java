@@ -59,7 +59,6 @@ public class GrainneHead extends Poly
         @Override
         public void render(int ellapsed)
         {       
-            v.background(0);
             v.lights();
 
             float c = PApplet.map(count, 0, v.getAudioBuffer().size() , 100, 400);
@@ -74,12 +73,12 @@ public class GrainneHead extends Poly
             v.rotateZ(v.rol); 
             v.scale(ellapsed / 990f * v.bas );
 
-            spider_head.setFill(v.color(v.hueShift(c), v.random(255), v.random(255)));
+            spider_head.setFill(v.color(v.hueShift(c), 255, 255, v.alp));
             v.shape(spider_head);
 
             radiusX = v.width / 4 + v.width / 8 * PApplet.sin(angle * 2);
             radiusY = v.height / 4 + v.height / 8 * PApplet.cos(angle * 2);
-            count += 10;
+            count += 1;
         }
 
     }
