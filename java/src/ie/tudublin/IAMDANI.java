@@ -196,10 +196,15 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //
         // HashMap<Number, Object> g = new HashMap()<Number, Object>();
 
+        addVision(0, new circles(this));
+        
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
         addVision(0, new Nematode(this));
         // groups.add(g);
+        
+        
+
         addVision(1, new Life(this, 2, 280, 100));
         addVision(1, new Life(this, 3, 10000, 200));
         addVision(1, new Life(this, 0, 1000, 100));
@@ -243,7 +248,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(7, new Terrain(this));
 
 
-        addVision(8, new circles(this));
         addVision(7, new Particles(this));
 
         addVision(7, new Terrain(this)); 
