@@ -442,8 +442,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (pitch == 42) {
             if (exp) println("RST");
-            alp = 0;
-            ald = 0;
             visions.get(whichVisual).enter();
             return;
         }
