@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.jogamp.opengl.math.Quaternion;
 
+import C22396101.EllaVisual;
 import C21503599.MyFirstChange;
 import C22398106.circles;
 import c21348423.AdriansVisual;
@@ -220,8 +221,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(2, new IFCubes(this, 30, 150, -400));
 
         
-        addVision(3, new AllBalls(this));   
-        //addVision(3, new GrainneHead(this)); 
+        addVision(3, new AllBalls(this));    
+        addVision(3,new EllaVisual(this));    
         addVision(3, new Cubesquared2(this));        
         addVision(3, new Spiral(this));
         addVision(3, new Cubes(this));
