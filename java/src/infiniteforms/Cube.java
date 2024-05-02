@@ -44,7 +44,7 @@ public class Cube extends Poly
         v.strokeWeight(2);
 
 
-        float c = v.hueShift((colorOffset + v.getAmplitude() * 255));        
+        float c = v.hueShift((colorOffset));        
         v.stroke(c, 255, 255, v.alp);
         v.noFill();
 

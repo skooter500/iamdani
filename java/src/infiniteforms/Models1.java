@@ -36,7 +36,7 @@ public class Models1 extends Poly
     v.stroke(255, 255, 255, 240);
     v.noFill();           
     v.pushMatrix();    
-    v.camera(0, 150, -400, 20, 20, 0, 0, 1, 0);
+    v.camera(200, 0, -400, 20, 20, 0, 0, 1, 0);
     v.rotateX(v.pit);
     v.rotateZ( v.yaw);
     v.rotateY(v.rol);
