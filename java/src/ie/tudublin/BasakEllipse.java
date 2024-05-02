@@ -49,7 +49,6 @@ public class BasakEllipse extends Poly {
             
     
         
-            v.calculateAverageAmplitude();
             
     
             for (float rad = 0; rad < 360; rad += 5) {
@@ -58,30 +57,24 @@ public class BasakEllipse extends Poly {
                 v.pushMatrix();
                 v.rotate(PApplet.radians(rad));
                 v.lights();
-                //v.stroke(map(rad, 0, 360, 0, 255), 255, 255);
                 v.noFill();
+                v.strokeWeight(2);
                 float EllipseSize = 75 + (v.getAmplitude() * 500);
                 smoothedEllipseSize = PApplet.lerp(smoothedEllipseSize, EllipseSize, 0.2f);
              
     
-                //v.pushMatrix();
-                v.stroke(PApplet.map(rad, 0, 255, 0, 360), 255, 255);
-                //v.stroke(v.hue,255,255,v.alp);
-                //strokeWeightMapped = PApplet.map(v.getAmplitude(), 0, 1, 1, 5);
-                //v.strokeWeight(strokeWeightMapped * 2);
-                //v.popMatrix();
-    
-               
+                
+                v.stroke(v.hueShift(rad), 255, 255, v.alp);
+                
                 v.line(x * PApplet.sin(PApplet.radians(angle)), 0, 0, y);
                 v.ellipse(smoothedEllipseSize * PApplet.sin(PApplet.radians(angle)), 0, 5, 5);
                 v.line(x * PApplet.sin(PApplet.radians(angle)), 0, 0, 5, 0, 0);
-                //v.popMatrix();
     
     
                 v.pushMatrix();
                 v.rotate(-PApplet.radians(angle));
+                v.stroke(v.hueShift(rad), 255, 255, v.alp);                
                 v.ellipse(smoothedEllipseSize* PApplet.sin(PApplet.radians(angle)), y, 5, 5);
-                //v.triangle(properties.x*sin(radians(properties.angle)), 0, 0, 5, 0, 0);
                 v.popMatrix();
     
                 v.pushMatrix();
@@ -90,7 +83,6 @@ public class BasakEllipse extends Poly {
                 v.popMatrix();
                 
     
-                //v.stroke(hue, 255, 255);
                 v.pushMatrix();
                 v.rotate(-PApplet.radians(angle));
                 v.ellipse(smoothedEllipseSize * PApplet.sin(PApplet.radians(angle)), y + 100, 20, 20);
@@ -99,11 +91,8 @@ public class BasakEllipse extends Poly {
                 v.pushMatrix();
                 
                 v.rotate(PApplet.radians(angle));
-                //v.ellipse(smoothedEllipseSize * PApplet.sin(PApplet.radians(angle)), y + 150, 30, 30);
                
-                //v.stroke(32, 255, 255);
-                v.stroke(PApplet.map(rad, 0, 360, 0, 255), 255, 255);
-                //v.fill(v.hue, 255, 255);
+                v.stroke(v.hueShift(rad), 255, 255, v.ald);
                 
                 float triangleBaseX = x + 48; 
                 float triangleBaseY = y; 
@@ -111,7 +100,6 @@ public class BasakEllipse extends Poly {
                 float triangleTopX = x + 10; 
                 float triangleTopY = y - triangleHeight; 
                 v.triangle(triangleBaseX+40, triangleBaseY+20, triangleTopX, triangleTopY, x +30, y-40);
-                //v.stroke(32, 255, 255);
                 v.popMatrix();
     
                 v.popMatrix();
@@ -119,7 +107,7 @@ public class BasakEllipse extends Poly {
               
             }
     
-          angle += v.spe;
+          angle += v.spe * 0.2f ;
             
         }
     }
