@@ -12,6 +12,7 @@ import com.jogamp.opengl.math.Quaternion;
 
 import C22396101.EllaVisual;
 import C21503599.MyFirstChange;
+import C22398106.circles;
 import c21348423.AdriansVisual;
 import c21383126.JenniferVisuals;
 import c21415904.SarahVisual;
@@ -110,13 +111,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                     String curr = MidiBus.availableInputs()[i];
                     if (curr.equals("Arturia BeatStep")) {
                         daniMidi = i;
-                        println("JOYSTICK ATTACHED: " + daniMidi);
+                        println("joy detected");
                     }
                 }
             }
 
             if (daniMidi == -1) {
-                println("Insert joystick");
+                println("joy not detected");
             } else {
                 if (myBus != null) {
                     myBus.close();
@@ -196,10 +197,17 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //
         // HashMap<Number, Object> g = new HashMap()<Number, Object>();
 
+        addVision(5, new GrainneHead(this, "spiderman1.obj"));
+
+        addVision(0, new circles(this));
+        
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
         addVision(0, new Nematode(this));
         // groups.add(g);
+        
+        
+
         addVision(1, new Life(this, 2, 280, 100));
         addVision(1, new Life(this, 3, 10000, 200));
         addVision(1, new Life(this, 0, 1000, 100));
@@ -217,14 +225,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(3, new Spiral(this));
         addVision(3, new Cubes(this));
         
-
+        addVision(4, new BasakEllipse(this));
         addVision(4, new paris(this));
         addVision(4, new LauraSun(this));
         addVision(4, new Mena(this));
         addVision(4, new ManarBrain(this));
 
+
         addVision(5, new MSXLogos(this, "msx.obj"));
         addVision(5, new MSXLogos(this, "chip.obj"));
+
 
         // YM2413
 
@@ -240,13 +250,17 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(7, new Bloom(this));
         addVision(7, new Terrain(this));
 
+
+        addVision(7, new Particles(this));
+
+        addVision(7, new Terrain(this)); 
         // addVision(new Airish(this));
 
         // addVision(new Bands(this, 200, 0, 0, 0));
         // addVision(new paris(this));
         // addVision(new Spiral(this));
         // addVision(new SarahVisual(this));
-        // addVision(new JenniferVisuals(this));
+        //addVision(new JenniferVisuals(this));
 
         // addVision(new Life(this, 1, 1000));
 
@@ -300,7 +314,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetYaw = 0f;
         targetBas = 3.6f;
         targetAlp = 75;
-        targetAld = 1;
+        targetAld = 10;
         targetMul = 1.0f;
     
         bhu = 255;
@@ -494,7 +508,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         alp = 0;
         // targetAld = 0;
         visions.get(whichVisual).enter();
-        println(whichVisual + " " + visions.get(whichVisual).getClass().getSimpleName());
+        println("BLOAD \"" + visions.get(whichVisual).getClass().getSimpleName() + ".COM\"");
     }
 
     static public boolean exp = true;
@@ -513,7 +527,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
 
         if (number == 10) {
-            targetBas = max(clockWise ? targetBas + 0.01f : targetBas - 0.01f, 0.01f);
+            targetBas = max(clockWise ? targetBas + 0.1f : targetBas - 0.1f, 0.01f);
             if (exp)
                 println("BAS " + nf(targetBas, 3, 2));
         }
@@ -846,7 +860,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (showConsole)
         {
-            showStats();
+            // showStats();
         }
         // hueShift();
 
@@ -874,16 +888,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "I am alive",
             "welcome to the metaverse",
             "nice to meet you",
-            "strike any key",
             "i exist",
-            "NEXT without FOR",
-            "Spoonies spoonies?",
+            "i like Spoonies spoonies",
             "dynamic artificial non-intelligence",
-            "subscript out of range",
             "act normal",
             "Undefined line number",
-            "RETURN without GOSUB",
-            "a nice mug of tea",
+            "normalize huge mugs of tea",
             "ok",
             "MSX system version 1.0",
             "Copyright 1983 by microsoft",
@@ -894,7 +904,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Job completed",
             "28815 bytes free",
             "subspace anomoly on line 420",
-            "we can rebuild him",
+            "we can rebuild them",
             "String too long",
             "Unprintable error",
             "Line buffer overflow",
@@ -908,22 +918,19 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "commence 5meodmt inhalation",
             "420 DETECTED",
             "MDMA synthesis complete",
-            "Illegal function call",
             "String formula too complex",
             "80k ram",
             "32K rom",
             "We have the technology",
-            "do not masterbate",
             "Better, stronger, faster",
             "speak now or forever hold your peace",
-            "record output to printer",
+            "WOULD YOU LIKE OUR CONVERSATION TO BE RECORDED ON PRINTER (Y/N)",
             "turn on, tune in, and drop out",
-            "God is playing hide and seek within you",
+            "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings Human",
             "This is your MSX speaking",
             "color auto goto list run",
-            "Z80A CPU",
     };
 
 }
