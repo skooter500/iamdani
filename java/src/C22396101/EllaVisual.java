@@ -28,15 +28,12 @@ public class EllaVisual extends Poly {
     }
 
     float ry;
-    // float c = map(getAmplitude(), 0, 500, 0, 255);
 
     float maxAmplitude; // Declare maxAmplitude variable
 
     //code to smooth amplitude 
-    float[] lerpedBuffer;
     float y = 0;
     float smoothedY = 0;
-    float smoothedAmplitude = 0;
 
     public void settings() {
         //size(2048, 1000, P3D);
@@ -51,68 +48,27 @@ public class EllaVisual extends Poly {
     int numColors = 360; // Number of colors in the rainbow
     int[] colors = new int[numColors]; // Array to hold rainbow colors
 
-    public void setup()
-     {
-        v.frameRate(30);
-        v.startMinim();
 
-        minim = new Minim(this);
-        // Uncomment this to use the microphone
-        // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
-        // ab = ai.mix; 
-        //ap = minim.loadFile("data\\Post Malone, Swae Lee - Sunflower (Spider-Man_ Into the Spider-Verse) (256 kbps).mp3", 1024);
-        ap.play();
-        ab = ap.mix;
-
-        // Call loadAudio to load an audio file to process
-        //loadAudio("data\\Post Malone, Swae Lee - Sunflower (Spider-Man_ Into the Spider-Verse) (256 kbps).mp3");
-
-        // Call this instead to read audio from the microphone
-         // startListening();
-
-        //wf = new WaveForm(this);
-        //abv = new AudioBandsVisual(this);
-        // hexagonTunnel = new EndlessHexagonTunnel(this);
-
-        y = v.height / 2;
-        smoothedY = y;
-
-        lerpedBuffer = new float[v.width];
-
-    // Generate rainbow colors (not used for drawing)
-    for (int i = 0; i < numColors; i++) 
-    {
-       colors[i] = v.color(i, 100, 100); // Hue ranges from 0 to 360
-    }
-
-    }
 
     float off = 0;
 
     public void render() {
-    v.background(0);
 
     // Call this is you want to use frequency bands
     //calculateFrequencyBands();
 
     // Call this is you want to get the average amplitude
-    v.calculateAverageAmplitude();
     //wf.render();
     //abv.render();
 
-    //float c = map(amplitude, 0, 500, 0, 255);
-    // fill(c, 0, 0);
-    float amplitude = v.getAmplitude();
+    float amplitude = v.getSmoothedAmplitude();
 
          //Ella
             // hexagonTunnel.repaint()
-            v.colorMode(PApplet.HSB); // Set color mode to HSB
 
-            drawHexagons(v.width / 2.0f, v.height / 2.0f, 400.0f + v.getAmplitude(), 20, v.getSmoothedBands());
-            float c = PApplet.map(amplitude, 0, 500, 0, 255);
-            //fill(c, 0, 0);
-            v.fill(c, 255, 255);
-    
+            
+            drawHexagons(v.width / 2.0f, v.height / 2.0f, 400.0f * v.getSmoothedAmplitude(), 20, v.getSmoothedBands());
+            
 }
 
     //hexagon, stars, shooting stars, confetti and lines all added for Ella's hexagon visual
@@ -127,44 +83,43 @@ public class EllaVisual extends Poly {
         float maxOuterRadius = 400.0f + maxAmplitude;//calculate max outer radius dynamically based on max amplitude
 
         
-        for (int i = 0; i < numHexagons; i++) 
+        for (int i = numHexagons - 1; i > 0; i--) 
         {
             float innerRadius = maxOuterRadius * (numHexagons - i) / numHexagons;//ensures that innerRadius decreases as i increases,
             // resulting in smaller inner radii towards the center of the hexagon arrangement.
-            float brightness = PApplet.map(ab[i % ab.length], 0, maxAmplitude, 50, 100); // Reactivity to music
-            float newSize = PApplet.map(ab[i % ab.length], 0, maxAmplitude, 50, 400); // Adjust size based on frequency
+            float newSize = PApplet.map(ab[i % ab.length], 0, outerRadius, 50, 400); // Adjust size based on frequency
 
 
-            if (i % 2 == 0) {
-                // Set blue color (RGB values)
-                v.fill(0, 0, 255, brightness); // Blue color
-            } else {
-                // Set orange color (RGB values)
-                v.fill(255, 165, 0, brightness); // Orange color
-            }
-
+            
              // Draw the hexagon with the adjusted size
-            drawHexagon(x, y, newSize);
+             v.stroke(0);
+            v.fill(v.hueShift(v.map(i, 0, numHexagons, 0, 256)), 255, 255, v.alp);
+            // drawHexagon(x, y, newSize);
 
             // Set the fill color for confetti (random colors)
             float confettiHue = v.random(360);
             float confettiSaturation = v.random(90, 255); // Random saturation between 90 and 255
             float confettiBrightness = v.random(90, 255); // Random brightness between 90 and 255
-            v.fill(confettiHue, confettiSaturation, confettiBrightness);
 
+            float size = innerRadius * v.getSmoothedAmplitude();
+            v.println(size);
             v.beginShape();
             for (int j = 0; j < 6; j++) {
                 float angle = j * angleStep;
-                float hx = x + PApplet.cos(angle) * innerRadius;
-                float hy = y + PApplet.sin(angle) * innerRadius;
+                v.rotateX(v.pit * 0.1f);
+                    v.rotateY(v.yaw * 0.1f);
+                    v.rotateZ(v.rol * 0.1f);
+                
+                float hx = x + PApplet.cos(angle) * size;
+                float hy = y + PApplet.sin(angle) * size;
                 v.vertex(hx, hy);
             }
             v.endShape(PApplet.CLOSE);
 
             // Draw stars, circles, rectangles, and shooting stars in the gap
-            drawStars(x, y, maxOuterRadius, innerRadius, ab[i % ab.length]);
+            // drawStars(x, y, maxOuterRadius, innerRadius, ab[i % ab.length]);
             //drawShootingStars(x, y, outerRadius, innerRadius, ab[i % ab.length]);
-            drawConfetti(x, y, innerRadius, maxOuterRadius, ab[i % ab.length]);
+            // drawConfetti(x, y, innerRadius, maxOuterRadius, ab[i % ab.length]);
 
 
             maxOuterRadius -= gap; // Adjust the outer radius for the next hexagon
@@ -172,6 +127,11 @@ public class EllaVisual extends Poly {
     }
 
     void drawHexagon(float x, float y, float size) {
+
+        size = 400.0f * v.getSmoothedAmplitude();
+        v.rotateX(v.pit);
+            v.rotateY(v.yaw);
+            v.rotateZ(v.rol);
         float angleStep = PApplet.TWO_PI / 6;
         v.beginShape();
         for (int j = 0; j < 6; j++) {
@@ -198,7 +158,6 @@ public class EllaVisual extends Poly {
         //float previousStarY = y;
 
         // Set purple color (RGB values)
-        v.fill(128, 0, 128); // Purple color
 
         for (int i = 0; i < numStars; i++) {
             float randomAngle = v.random(PApplet.TWO_PI);
