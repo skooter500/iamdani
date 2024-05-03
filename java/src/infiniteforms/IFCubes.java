@@ -41,7 +41,7 @@ public class IFCubes extends Poly {
     v.noFill();
     v.lights();
     v.camera(0, 0, -700, 0, 0, 0f, 0f, 0.001f, 0f);
-    float col = v.hueShift((colorOffset + v.getAmplitude() * 255));        
+    float col = v.hueShift((colorOffset));        
         
     v.stroke(col, 255, 255);
     v.pushMatrix();    
