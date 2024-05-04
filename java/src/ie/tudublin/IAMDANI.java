@@ -1,5 +1,7 @@
 package ie.tudublin;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,7 +51,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float camDistance = 0.5f;
     float strokeWeight = 1;
     
-    PFont f;
+    PFont font;
 
     public void settings() {
         fullScreen(P3D, 2);
@@ -162,11 +164,27 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     // popMatrix();
     // }
 
+    File[] matchingFiles;
+
+    void loadFonts()
+    {  
+        File f = new File("./java/data");
+        matchingFiles = f.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.endsWith("ttf");
+            }
+        });  
+    }
+
+    int whichFont = 20;
+
     public void setup() {
 
-        f = createFont("Hyperspace Bold.otf", 24);
+        loadFonts();
 
-        textFont(f);
+        font = createFont("" + matchingFiles[whichFont], fontSize);
+
+        textFont(font);
 
         sphere = loadShape("sphere.obj");
 
@@ -199,9 +217,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         GrainneHead v = new GrainneHead(this, "msx.obj");
         v.scale_factor = 100;
-        addVision(5, v);
-
-        addVision(0, new circles(this));
+        // addVision(5, v);
         
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
@@ -288,7 +304,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setPosition(40, 40)
                 .setSize(10, (int) 360)
                 .setColor(color(consoleColor, 255, 255, alp))
-                .setFont(f)
+                .setFont(font)
                 .setLineHeight(36)
                 .hideScrollbar()
                 .setText(console.toString())
@@ -320,7 +336,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetMul = 1.0f;
     
         bhu = 255;
-        bri = 255;
+        bri = 0;
         sat = 255;        
         ;
     }
@@ -513,6 +529,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     static public boolean exp = true;
 
+    int fontSize = 24;
+
     public void controllerChange(int channel, int number, int value) {
 
         if (exp)
@@ -545,13 +563,37 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
         if (number == 73) {
             bhu = (clockWise ? bhu + 1f : bhu - 1f);
+
+            if (bhu < 0)
+            {
+                bhu = matchingFiles.length - 1;
+            } 
+            bhu = bhu % matchingFiles.length;
+            String fnt = "" + matchingFiles[(int)bhu];
+            println("FNT: " + fnt);
+            println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
+            font = createFont("" + fnt, fontSize);
+            textFont(font);
+            myTextarea.setFont(font);
+
             if (exp)
                 println("BHU " + nf(bhu, 3, 2));
         }
         if (number == 79) {
-            bri = (clockWise ? bri + 1f : bhu - 1f);
+            bri = (clockWise ? bri + 1f : bri - 1f);
+
             if (exp)
                 println("bri " + nf(bri, 3, 2));
+
+
+            fontSize = (int )bri;
+            font = createFont(font.getName(), fontSize);
+            textFont(font);
+            myTextarea.setFont(font);
+            println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
+            
+
+
         }
         if (number == 75) {
             ArrayList<Integer> group = groups.get(findGroup(whichVisual));
@@ -860,7 +902,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (showConsole)
         {
-            // showStats();
+            showStats();
         }
         // hueShift();
 
