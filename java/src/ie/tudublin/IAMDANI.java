@@ -335,7 +335,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetAld = 10;
         targetMul = 1.0f;
     
-        bhu = 255;
+        bhu = 0;
         bri = 0;
         sat = 255;        
         ;
@@ -570,14 +570,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             } 
             bhu = bhu % matchingFiles.length;
             String fnt = "" + matchingFiles[(int)bhu];
-            println("FNT: " + fnt);
-            println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
             font = createFont("" + fnt, fontSize);
             textFont(font);
             myTextarea.setFont(font);
 
             if (exp)
                 println("BHU " + nf(bhu, 3, 2));
+
+            println("FNT: " + fnt);
+            println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
+                
         }
         if (number == 79) {
             bri = (clockWise ? bri + 1f : bri - 1f);
@@ -587,7 +589,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
             fontSize = (int )bri;
-            font = createFont(font.getName(), fontSize);
+            String fnt = "" + matchingFiles[(int)bhu];
+            
+
+            font = createFont(fnt, fontSize);
             textFont(font);
             myTextarea.setFont(font);
             println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
@@ -804,7 +809,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         for(String key:stats.keySet())
         {
-            fill(0, 255, 255);
+            fill(hueShift(0), 255, 255);
             float x = width - 140;
             
             float f = stats.get(key);
@@ -812,10 +817,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             int ff = (int) f;
             if (ff < 0)
             {
-                fill(87, 255, 255);
+                fill(frameCount % 30 == 0 ? hueShift(42) : hueShift(-42), 255, 255);
                 ff = abs(ff);
             }
-            text(nf(ff, 3, 0), x + 65, y);
+            text(nf(ff, 3, 3), x + 60, y);
+
+            key = new StringBuffer(key).reverse().toString();
+
             text(key, x, y);
 
             y += rh;            
