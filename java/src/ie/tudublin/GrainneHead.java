@@ -61,8 +61,9 @@ public class GrainneHead extends Poly
             smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f);                 
             v.scale(smoothedBoxSize);
             
-            //spider_head.setFill(v.color(v.hueShift(c), 255, 255, v.alp));
-            spider_head.noFill();
+            spider_head.setFill(v.color(v.hueShift(c), 255, 255, v.alp));
+            //spider_head.noFill();
+            //v.noFill();
             v.shape(spider_head);
 
             radiusX = v.width / 4 + v.width / 8 * PApplet.sin(angle * 2);

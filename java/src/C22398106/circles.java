@@ -29,8 +29,6 @@ public class circles extends Poly
         smooth = PApplet.lerp(smooth, average, 0.1f);
 
         v.strokeWeight(1);
-        v.colorMode(PApplet.HSB);
-        v.background(150);
         v.stroke(255);
         for (int i = 0; i < v.width + 25; i += 25) {
             for (int j = 0; j < v.height + 25; j += 25)

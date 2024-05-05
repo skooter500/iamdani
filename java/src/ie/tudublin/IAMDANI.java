@@ -229,7 +229,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         GrainneHead v = new GrainneHead(this, "msx.obj");
         v.scale_factor = 100;
-        addVision(5, v);
+        // addVision(5, v);
 
         addVision(1, new Life(this, 2, 280, 100));
         addVision(1, new Life(this, 3, 10000, 200));
@@ -860,7 +860,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         rect(-width * 5, -height * 5, width * 10, height * 10);
         popMatrix();
         blendMode(BLEND);
-        colorMode(HSB);
+        colorMode(HSB, 255, 255, 255);
 
         yaw = lerp(yaw, targetYaw, 0.01f);
         pit = lerp(pit, targetPit, 0.01f);
