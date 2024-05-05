@@ -32,7 +32,7 @@ class MSXModel {
             v.rotateZ(v.yaw);
             v.rotateY(v.rol);
             
-            float s = 0.5f + v.noise(theta * 0.2f) * 1500;
+            float s = 0.3f + v.noise(theta * 0.2f) * 1500;
             lerpedS = v.lerp(lerpedS, s, 0.01f);
             v.scale(s);
             v.stroke(v.hueShift(h), 255, 255, 10);
@@ -66,7 +66,7 @@ public class MSXLogos extends Poly{
 
     String filename;
 
-    public MSXLogos(IAMDANI v, String filename) {
+    public  MSXLogos(IAMDANI v, String filename) {
         super(v);
         this.filename = filename;
         s = v.loadShape(filename);
@@ -85,15 +85,15 @@ public class MSXLogos extends Poly{
         
         if (models.size() < numLogos && spawnCounter == 0)
         {
-            MSXModel msxModel = new MSXModel(s, v.random(-halfW, halfW), v.random(-halfH, halfH), 127, 100, v);
+            MSXModel msxModel = new MSXModel(s, v.random(-halfW, halfW), v.random(-halfH, halfH), 127, v.random(0, 255), v);
             models.add(msxModel);
-            spawnCounter = 420;
+            spawnCounter = 220;
         }
 
         spawnCounter = v.max(0, spawnCounter - 1);
 
         v.lights();
-        v.strokeWeight(5);
+        v.strokeWeight(2);
 
         v.translate(v.width / 2, v.height / 2, -1000);
         for (MSXModel model:models)

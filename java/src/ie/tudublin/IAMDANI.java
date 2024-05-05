@@ -176,14 +176,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         });  
     }
 
-    int whichFont = 20;
 
     public void setup() {
 
+        defaults();
         loadFonts();
 
-        font = createFont("" + matchingFiles[whichFont], fontSize);
 
+        font = createFont("" + matchingFiles[bhu], bri);
         textFont(font);
 
         sphere = loadShape("sphere.obj");
@@ -198,6 +198,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         cp5 = new ControlP5(this);
 
         resetMessage();
+
+        println("BHU: " + bhu);
+        println("BRI: " + bri);
+        println(matchingFiles[bhu]);
 
         midiConnect();
 
@@ -215,9 +219,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //
         // HashMap<Number, Object> g = new HashMap()<Number, Object>();
 
-        GrainneHead v = new GrainneHead(this, "msx.obj");
-        v.scale_factor = 100;
-        // addVision(5, v);
+        
         
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
@@ -225,6 +227,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // groups.add(g);
         
         
+        GrainneHead v = new GrainneHead(this, "msx.obj");
+        v.scale_factor = 100;
+        addVision(5, v);
 
         addVision(1, new Life(this, 2, 280, 100));
         addVision(1, new Life(this, 3, 10000, 200));
@@ -266,19 +271,18 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(6, new Models1(this, "chip.obj", true, false));
 
         addVision(7, new Bloom(this));
-        addVision(7, new Terrain(this));
-
+        
 
         addVision(7, new Particles(this));
 
         addVision(7, new Terrain(this)); 
-        // addVision(new Airish(this));
+        addVision(7, new Airish(this));
 
-        // addVision(new Bands(this, 200, 0, 0, 0));
-        // addVision(new paris(this));
-        // addVision(new Spiral(this));
-        // addVision(new SarahVisual(this));
-        //addVision(new JenniferVisuals(this));
+        addVision(7, new Bands(this, 200, 0, 0, 0));
+        addVision(7, new paris(this));
+        addVision(7, new Spiral(this));
+        addVision(7, new SarahVisual(this));
+        addVision(7, new JenniferVisuals(this));
 
         // addVision(new Life(this, 1, 1000));
 
@@ -335,8 +339,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetAld = 10;
         targetMul = 1.0f;
     
-        bhu = 0;
-        bri = 0;
+        bhu = 1;
+        bri = 36;
         sat = 255;        
         ;
     }
@@ -352,8 +356,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float targetAld = 4;
     float targetMul = 1.0f;
     float targetBas = 0.3f;
-    public float bhu = 0;
-    public float bri = 0;
+    public int bhu;
+    public float bri;
     public float sat = 0;
 
     public IAMDANI() {
@@ -529,7 +533,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     static public boolean exp = true;
 
-    int fontSize = 24;
 
     public void controllerChange(int channel, int number, int value) {
 
@@ -562,15 +565,15 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 println("HUE " + nf(targetHue, 3, 2));
         }
         if (number == 73) {
-            bhu = (clockWise ? bhu + 1f : bhu - 1f);
+            bhu = (clockWise ? bhu + 1 : bhu - 1);
 
             if (bhu < 0)
             {
-                bhu = matchingFiles.length - 1;
+                bhu = matchingFiles.length;
             } 
             bhu = bhu % matchingFiles.length;
             String fnt = "" + matchingFiles[(int)bhu];
-            font = createFont("" + fnt, fontSize);
+            font = createFont("" + fnt, bri);
             textFont(font);
             myTextarea.setFont(font);
 
@@ -581,6 +584,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
                 
         }
+
         if (number == 79) {
             bri = (clockWise ? bri + 1f : bri - 1f);
 
@@ -588,11 +592,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 println("bri " + nf(bri, 3, 2));
 
 
-            fontSize = (int )bri;
             String fnt = "" + matchingFiles[(int)bhu];
             
 
-            font = createFont(fnt, fontSize);
+            font = createFont(fnt, bri);
             textFont(font);
             myTextarea.setFont(font);
             println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
@@ -801,6 +804,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         stats.put("HUE", hue);
         stats.put("BAS", bas);
         stats.put("MUL", mul);
+        stats.put("BRI", bri);
+        stats.put("BHU", new Float(bhu));
 
         float rh = 30;
 
@@ -810,17 +815,19 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         for(String key:stats.keySet())
         {
             fill(hueShift(0), 255, 255);
-            float x = width - 140;
+            float x = width - 300;
             
             float f = stats.get(key);
 
             int ff = (int) f;
             if (ff < 0)
             {
-                fill(frameCount % 30 == 0 ? hueShift(42) : hueShift(-42), 255, 255);
+                
+                int thisFrame = frameCount % 60;
+                fill(thisFrame < 30 ? hueShift(42) : hueShift(-42), 255, 255);
                 ff = abs(ff);
             }
-            text(nf(ff, 3, 3), x + 60, y);
+            text(nf(ff, 3, 3), x + 100, y);
 
             key = new StringBuffer(key).reverse().toString();
 
@@ -936,29 +943,29 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     String[] randomMessages = {
             "I am DANI",
             "I am alive",
-            "welcome to the metaverse",
-            "nice to meet you",
+            "Welcome to the metaverse",
+            "Nice to meet you",
             "i exist",
-            "i like Spoonies spoonies",
-            "dynamic artificial non-intelligence",
-            "act normal",
+            "i like spoonies spoonies",
+            "Dynamic Artificial Non-Intelligence",
+            "Act normal",
             "Undefined line number",
             "normalize huge mugs of tea",
-            "ok",
+            "OK",
             "MSX system version 1.0",
             "Copyright 1983 by microsoft",
-            "syntax ERROR on line 420",
-            "i seek the creator",
+            "Syntax error on line 420",
+            "I seek the creator",
             // "© Microcabin",
             // "am in a k-hole y/n?",
-            "Job completed",
+            "Job completed normally",
             "28815 bytes free",
-            "subspace anomoly on line 420",
-            "we can rebuild them",
+            "Subspace anomoly on line 420",
+            "We can rebuild them",
             "String too long",
             "Unprintable error",
             "Line buffer overflow",
-            "CONTINUE",
+            "return before gosub ",
             "Division by zero",
             "Type mismatch",
             "Disk full",
@@ -967,15 +974,15 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Out of memory",
             "commence 5meodmt inhalation",
             "420 DETECTED",
-            "MDMA synthesis complete",
+            "MDMA synthesis complete. Collect from slot",
             "String formula too complex",
             "80k ram",
             "32K rom",
             "We have the technology",
             "Better, stronger, faster",
-            "speak now or forever hold your peace",
-            "WOULD YOU LIKE OUR CONVERSATION TO BE RECORDED ON PRINTER (Y/N)",
-            "turn on, tune in, and drop out",
+            "Speak now or forever hold your peace",
+            "Would you like our conversation to be recored on printer (Y/N)",
+            "Turn on, tune in, and drop out",
             "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings Human",

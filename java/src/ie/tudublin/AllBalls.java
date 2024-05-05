@@ -63,7 +63,7 @@ public class AllBalls extends Poly {
             //This is the constructor of the Balls class
             //initialises the variables
             this.angle = 0;
-            this.angleSpeed = 0.001f + (n-1) * 0.00005f;
+            this.angleSpeed = 0.005f + (n-1) * 0.00005f;
             this.radius = 30 + n * 6;
             this.count = 0;
         }
