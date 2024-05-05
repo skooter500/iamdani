@@ -24,6 +24,9 @@ class MSXModel {
 
         float lerpedS = 0;
 
+        float size = 100;
+        float smoothedBoxSize = 100;
+
         void render() {
             v.pushMatrix();
             v.translate(pos.x, pos.y, pos.z);
@@ -32,9 +35,13 @@ class MSXModel {
             v.rotateZ(v.yaw);
             v.rotateY(v.rol);
             
-            float s = 0.1f + v.noise(theta * 0.3f) * 500;
+            float s = 0.1f + v.noise(theta * 0.4f) * 50;
             lerpedS = v.lerp(lerpedS, s, 0.01f);
-            v.scale(s);
+
+            float boxSize = size + (v.getAmplitude() * 40);
+    smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
+    
+            v.scale(s + smoothedBoxSize * 1);
             v.stroke(v.hueShift(h), 255, 255, 10);
             float newC = v.hueShift(h + 127 + lerpedS);
             // v.fill(newC, 255, 255, v.alp);       
@@ -43,7 +50,7 @@ class MSXModel {
             v.shape(sh);
             v.popMatrix();
             theta += v.spe * 0.005f;
-            pos.z += v.spe * v.getSmoothedAmplitude();
+            pos.z += v.spe * v.getSmoothedAmplitude() * 2;
 
             if (pos.z > 4000) {
                 pos.z = -1000 ;
