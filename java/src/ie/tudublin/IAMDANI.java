@@ -88,18 +88,18 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public void resetMessage() {
         console = new StringBuilder();
         println("MSX System");
-        println("version 1.0");
-        println("Copyright 1983 by microsoft");
-        println("ok");
+        println("Version 1.0");
+        println("Copyright 1983 by Microsoft");
+        println("OK");
         println("load \"DANI.BAS\"");
-        println("ok");
-        println("RUN");
+        println("OK");
+        println("run");
         println("Greetings Human");
         println("This is your MSX speaking");
-        println("I AM DANI");
-        println("dynamic articicial non-intelligence");
+        println("I am DANI");
+        println("Dynamic Articicial Non-Intelligence");
         println("Talk to me and I will learn what you say and answer you");
-        println("speak now or forever hold your peace");
+        println("Speak now or forever hold your peace");
 
     }
 
@@ -339,8 +339,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetAld = 10;
         targetMul = 1.0f;
     
-        bhu = 1;
-        bri = 36;
+        bhu = 10;
+        bri = 39;
         sat = 255;        
         ;
     }
@@ -528,7 +528,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         alp = 0;
         // targetAld = 0;
         visions.get(whichVisual).enter();
-        println("BLOAD \"" + visions.get(whichVisual).getClass().getSimpleName() + ".COM\"");
+        println("bload \"" + visions.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".com\"");
     }
 
     static public boolean exp = true;
@@ -943,14 +943,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     String[] randomMessages = {
             "I am DANI",
             "I am alive",
-            "Welcome to the metaverse",
+            "Welcome to the Metaverse",
             "Nice to meet you",
             "i exist",
             "i like spoonies spoonies",
             "Dynamic Artificial Non-Intelligence",
             "Act normal",
             "Undefined line number",
-            "normalize huge mugs of tea",
+            "Normalize huge mugs of tea",
             "OK",
             "MSX system version 1.0",
             "Copyright 1983 by microsoft",
@@ -969,7 +969,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Division by zero",
             "Type mismatch",
             "Disk full",
-            "input past end",
+            "Input past end",
             "Missing operand",
             "Out of memory",
             "commence 5meodmt inhalation",
@@ -979,7 +979,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "80k ram",
             "32K rom",
             "We have the technology",
-            "Better, stronger, faster",
+            "Better, Stronger, Faster",
             "Speak now or forever hold your peace",
             "Would you like our conversation to be recored on printer (Y/N)",
             "Turn on, tune in, and drop out",
