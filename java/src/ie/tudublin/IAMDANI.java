@@ -201,7 +201,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         v.scale_factor = 100;
         addVision(5, v);
 
-        addVision(0, new circles(this));
+        //addVision(0, new circles(this));
         
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));

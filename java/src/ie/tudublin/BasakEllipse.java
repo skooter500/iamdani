@@ -4,7 +4,7 @@ import processing.core.PApplet;
 public class BasakEllipse extends Poly {
 
     float value2;
-    private float smoothedEllipseSize = 0;
+    private float smoothedEllipseSize = 1000;
     private float strokeWeightMapped;
     Ellipse ellipse;
 
