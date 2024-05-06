@@ -219,10 +219,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //
         // HashMap<Number, Object> g = new HashMap()<Number, Object>();
 
-        GrainneHead v = new GrainneHead(this, "msx.obj");
-        v.scale_factor = 100;
-        addVision(5, v);
-
         //addVision(0, new circles(this));
         
         
