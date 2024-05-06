@@ -87,9 +87,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void resetMessage() {
         console = new StringBuilder();
-        println("MSX System");
-        println("Version 1.0");
-        println("Copyright 1983 by Microsoft");
+        println("          MSX System");
+        println("          Version 1.0");
+        println("   Copyright 1983 by Microsoft");
         println("OK");
         println("load \"DANI.BAS\"");
         println("OK");
@@ -113,13 +113,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                     String curr = MidiBus.availableInputs()[i];
                     if (curr.equals("Arturia BeatStep")) {
                         daniMidi = i;
-                        println("joy detected");
+                        println("Joy detected");
                     }
                 }
             }
 
             if (daniMidi == -1) {
-                println("joy not detected");
+                println("Joy not detected");
             } else {
                 if (myBus != null) {
                     myBus.close();
@@ -262,6 +262,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         // YM2413
 
+        addVision(6, new Models1(this, "Eagle3.obj", false, true));
         addVision(6, new Models1(this, "tudub.obj", false, true));
         addVision(6, new Models1(this, "msx.obj", false, true));
         addVision(6, new Models1(this, "eye.obj", true, false));
@@ -340,8 +341,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetAld = 10;
         targetMul = 1.0f;
     
-        bhu = 10;
-        bri = 39;
+        bhu = 16;
+        bri = 21;
         sat = 255;        
         ;
     }
@@ -816,7 +817,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         for(String key:stats.keySet())
         {
             fill(hueShift(0), 255, 255);
-            float x = width - 300;
+            float x = width - 240;
             
             float f = stats.get(key);
 
@@ -828,7 +829,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 fill(thisFrame < 30 ? hueShift(42) : hueShift(-42), 255, 255);
                 ff = abs(ff);
             }
-            text(nf(ff, 3, 3), x + 100, y);
+            text(nf(ff, 3, 3), x + 85, y);
 
             key = new StringBuffer(key).reverse().toString();
 
@@ -973,7 +974,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Input past end",
             "Missing operand",
             "Out of memory",
-            "commence 5meodmt inhalation",
+            "Commence 5MEODMT inhalation",
             "420 DETECTED",
             "MDMA synthesis complete. Collect from slot",
             "String formula too complex",

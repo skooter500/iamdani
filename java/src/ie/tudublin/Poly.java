@@ -10,7 +10,9 @@ public abstract class Poly {
 
     public Poly(Visual v){
         this.v = (IAMDANI) v;
-    }
+    } 
+
+    
 
     public void render(int ellapsed)
     {
