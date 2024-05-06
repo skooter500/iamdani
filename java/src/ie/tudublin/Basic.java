@@ -30,7 +30,7 @@ public class Basic extends Poly {
 
     public void enter()
     {
-        v.println("enter");
+        v.println("run");
         sonnet = writeSonnet();
         line = 0;
         ch = 0;

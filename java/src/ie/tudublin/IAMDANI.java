@@ -87,9 +87,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void resetMessage() {
         console = new StringBuilder();
-        println("MSX System");
-        println("Version 1.0");
-        println("Copyright 1983 by Microsoft");
+        println("          MSX System");
+        println("          Version 1.0");
+        println("   Copyright 1983 by Microsoft");
         println("OK");
         println("load \"DANI.BAS\"");
         println("OK");
@@ -340,8 +340,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetAld = 10;
         targetMul = 1.0f;
     
-        bhu = 1;
-        bri = 32;
+        bhu = 16;
+        bri = 21;
         sat = 255;        
         ;
     }
