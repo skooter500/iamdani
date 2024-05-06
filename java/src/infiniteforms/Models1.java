@@ -26,6 +26,10 @@ public class Models1 extends Poly
     model.smoothedBoxSize = 1000;
     model.colorOffset = (int) v.random(0, 256);
   }
+
+  float smoothedBoxSize = 2000;
+
+  float size = 100;
   
   public void render()
   {
@@ -41,6 +45,7 @@ public class Models1 extends Poly
     v.rotateZ( v.yaw);
     v.rotateY(v.rol);
     v.scale(scale);
+    
     model.render();
     v.popMatrix();
     v.camera(v.width/2.0f, (v.height/2.0f) - 5000, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0, 0, 1, 0);

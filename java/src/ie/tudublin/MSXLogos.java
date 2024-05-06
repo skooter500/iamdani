@@ -24,6 +24,9 @@ class MSXModel {
 
         float lerpedS = 0;
 
+        float size = 100;
+        float smoothedBoxSize = 100;
+
         void render() {
             v.pushMatrix();
             v.translate(pos.x, pos.y, pos.z);
@@ -32,9 +35,13 @@ class MSXModel {
             v.rotateZ(v.yaw);
             v.rotateY(v.rol);
             
-            float s = 0.5f + v.noise(theta * 0.2f) * 1500;
+            float s = 0.1f + v.noise(theta * 0.4f) * 50;
             lerpedS = v.lerp(lerpedS, s, 0.01f);
-            v.scale(s);
+
+            float boxSize = size + (v.getAmplitude() * 40);
+    smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
+    
+            v.scale(s + smoothedBoxSize * 1);
             v.stroke(v.hueShift(h), 255, 255, 10);
             float newC = v.hueShift(h + 127 + lerpedS);
             // v.fill(newC, 255, 255, v.alp);       
@@ -43,9 +50,9 @@ class MSXModel {
             v.shape(sh);
             v.popMatrix();
             theta += v.spe * 0.005f;
-            pos.z += v.spe * v.getSmoothedAmplitude();
+            pos.z += v.spe * v.getSmoothedAmplitude() * 2;
 
-            if (pos.z > 2000) {
+            if (pos.z > 4000) {
                 pos.z = -1000 ;
                 float halfW = v.width / 2;
                 float halfH = v.height / 2;
@@ -53,7 +60,8 @@ class MSXModel {
                 pos.y = v.random(-halfH, halfH);
                 
                 lerpedS = 0;
-                h = 127;
+                h = v.random(256);
+                size = 0;
             }        
         }
     }
@@ -62,11 +70,11 @@ public class MSXLogos extends Poly{
 
     ArrayList<MSXModel> models = new ArrayList<MSXModel>();
 
-    int numLogos = 8;
+    int numLogos = 20;
 
     String filename;
 
-    public MSXLogos(IAMDANI v, String filename) {
+    public  MSXLogos(IAMDANI v, String filename) {
         super(v);
         this.filename = filename;
         s = v.loadShape(filename);
@@ -85,17 +93,17 @@ public class MSXLogos extends Poly{
         
         if (models.size() < numLogos && spawnCounter == 0)
         {
-            MSXModel msxModel = new MSXModel(s, v.random(-halfW, halfW), v.random(-halfH, halfH), 127, 100, v);
+            MSXModel msxModel = new MSXModel(s, v.random(-halfW, halfW), v.random(-halfH, halfH), 127, v.random(0, 255), v);
             models.add(msxModel);
-            spawnCounter = 420;
+            spawnCounter = 60;
         }
 
         spawnCounter = v.max(0, spawnCounter - 1);
 
         v.lights();
-        v.strokeWeight(5);
+        v.strokeWeight(2);
 
-        v.translate(v.width / 2, v.height / 2, -1000);
+        v.translate(v.width / 2, v.height / 2, -2000);
         for (MSXModel model:models)
         {
             model.render();

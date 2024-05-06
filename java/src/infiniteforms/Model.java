@@ -73,6 +73,8 @@ public class Model {
 
     v.translate(position.x, position.y, position.z);
 
+
+    
     // strokeWeight(weight);
     float boxSize = size + (v.getAmplitude() * 10);
     smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
@@ -91,7 +93,9 @@ public class Model {
     // v.rotateZ(0.2f + v.sin(theta) * 0.2f);
     theta += (v.spe * 0.2f);
     c += v.spe * 100 * v.getAmplitude();
-    v.scale(smoothedBoxSize * 4);
+    v.scale(smoothedBoxSize * 4 );
+
+    
     v.shape(s);
     v.popMatrix();
 
