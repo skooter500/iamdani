@@ -38,12 +38,14 @@ public class Models1 extends Poly
     //v.lights();
     v.strokeWeight(2);
     v.stroke(255, 255, 255, 240);
-    v.noFill();           
+    v.noFill();      
+    v.rotateZ( v.yaw);
+    v.rotateX(v.pit);    
+    v.rotateY(v.rol);
+         
     v.pushMatrix();    
     v.camera(200, 0, -400, 20, 20, 0, 0, 1, 0);
-    v.rotateX(v.pit);
-    v.rotateZ( v.yaw);
-    v.rotateY(v.rol);
+    
     v.scale(scale);
     
     model.render();
