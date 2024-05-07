@@ -97,7 +97,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println("Greetings Human");
         println("This is your MSX speaking");
         println("I am DANI");
-        println("Dynamic Articicial Non-Intelligence");
+        println("Dynamic Artificial Non-Intelligence");
         println("Talk to me and I will learn what you say and answer you");
         println("Speak now or forever hold your peace");
 
@@ -529,7 +529,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         alp = 0;
         // targetAld = 0;
         visions.get(whichVisual).enter();
-        println("bload \"" + visions.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".com\"");
+        println("bload \"" + visions.get(whichVisual).getClass().getSimpleName().toLowerCase() + "\"");
     }
 
     static public boolean exp = true;

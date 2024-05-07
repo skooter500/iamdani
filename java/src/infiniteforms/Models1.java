@@ -23,13 +23,13 @@ public class Models1 extends Poly
   
   public void enter()
   {
-    model.smoothedBoxSize = 1000;
+    model.smoothedBoxSize = 20;
     model.colorOffset = (int) v.random(0, 256);
   }
 
-  float smoothedBoxSize = 2000;
+  float smoothedBoxSize = 0;
 
-  float size = 100;
+  float size = 0;
   
   public void render()
   {
