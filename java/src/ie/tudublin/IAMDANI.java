@@ -219,6 +219,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //
         // HashMap<Number, Object> g = new HashMap()<Number, Object>();
 
+        //addVision(0, new circles(this));
         
         
         addVision(0, new Basic(this, "DANI.BAS"));
@@ -261,7 +262,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         // YM2413
 
-        addVision(6, new Models1(this, "Eagle3.obj", false, true));
+        addVision(6, new Models1(this, "brstarfighter.obj", false, true));
         addVision(6, new Models1(this, "tudub.obj", false, true));
         addVision(6, new Models1(this, "msx.obj", false, true));
         addVision(6, new Models1(this, "eye.obj", true, false));
