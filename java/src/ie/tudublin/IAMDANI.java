@@ -87,9 +87,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void resetMessage() {
         console = new StringBuilder();
-        println("          MSX System");
-        println("          Version 1.0");
+        println("          MSX system");
+        println("          version 1.0");
         println("   Copyright 1983 by Microsoft");
+        println("");
+        println("MSX BASIC version 1.0");
+        println("Copyright 1983 by Microsoft");
+        println("28815 Bytes free");
         println("OK");
         println("load \"DANI.BAS\"");
         println("OK");
@@ -296,7 +300,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         // Collections.shuffle(visions);
         defaults();
+
+        colorMode(RGB);
         background(0);
+        colorMode(HSB);
+        
         change(0);
 
         // String[] fonts = PFont.list();
@@ -309,7 +317,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         myTextarea = cp5.addTextarea("txt")
                 .setPosition(40, 40)
                 .setSize(10, (int) 360)
-                .setColor(color(consoleColor, 255, 255, alp))
+                .setColor(color(0, 0, 255, alp))
                 .setFont(font)
                 .setLineHeight(36)
                 .hideScrollbar()
@@ -338,7 +346,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetYaw = 0f;
         targetBas = 3.6f;
         targetAlp = 75;
-        targetAld = 10;
+        //targetAld = 10;
         targetMul = 1.0f;
     
         bhu = 16;
@@ -411,9 +419,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         if (pitch == 48)
         {
-            targetYaw = random(0, TWO_PI);
-            targetPit = random(0, TWO_PI);
-            targetRol = random(0, TWO_PI);
+            targetYaw = HALF_PI;
+            targetPit = HALF_PI;
+            targetRol = - HALF_PI;
             // targetHue = random(0, 255);
             // targetAlp = random(10, 255);
             // targetAld = random(0, 50);
@@ -552,19 +560,19 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (number == 10) {
             targetBas = max(clockWise ? targetBas + 0.1f : targetBas - 0.1f, 0.01f);
             if (exp)
-                println("BAS " + nf(targetBas, 3, 2));
+                println("SAB " + nf(targetBas, 3, 2));
         }
 
         if (number == 114) {
             targetMul = max(clockWise ? targetMul + 0.1f : targetMul - 0.1f, 0);
             if (exp)
-                println("MUL " + nf(targetMul, 3, 2));
+                println("LUM " + nf(targetMul, 3, 2));
         }
         if (number == 74) {
             // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             targetHue = clockWise ? targetHue + 1f : targetHue - 1f;
             if (exp)
-                println("HUE " + nf(targetHue, 3, 2));
+                println("EUH " + nf(targetHue, 3, 2));
         }
         if (number == 73) {
             bhu = (clockWise ? bhu + 1 : bhu - 1);
@@ -628,14 +636,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             targetHue = clockWise ? targetHue + 5f : targetHue - 5f;
             if (exp)
-                println("HUE " + nf(targetHue, 3, 2));
+                println("EUH " + nf(targetHue, 3, 2));
         }
 
         if (number == 76) {
             targetAld = min(max(clockWise ? targetAld + .1f : targetAld - .1f, 0), 50);
             
             if (exp)
-                println("ALD " + nf(targetAld, 3, 2));
+                println("DAL " + nf(targetAld, 3, 2));
         }
 
         // if (number == 16) {
@@ -647,7 +655,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (number == 19) {
             targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 5), 255);
             if (exp)
-                println("ALP " + nf(targetAlp, 3, 2));
+                println("PLA " + nf(targetAlp, 3, 2));
         }
 
         float rotSpeed = 0.01f;
@@ -655,26 +663,26 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (number == 71) {
             targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 1f), 255);
             if (exp)
-                println("ALP " + nf(targetAlp, 3, 2));
+                println("PLA " + nf(targetAlp, 3, 2));
         }
         if (number == 77) {
             targetYaw = clockWise ? targetYaw + rotSpeed : targetYaw - rotSpeed;
             targetYaw = wrapAngle(targetYaw);
             if (exp)
-                println("yaw " + nf(targetYaw, 3, 2));
+                println("WAY " + nf(targetYaw, 3, 2));
         }
 
         if (number == 93) {
             targetRol = clockWise ? targetRol + rotSpeed : targetRol - rotSpeed;
             targetRol = wrapAngle(targetRol);
             if (exp)
-                println("ROL " + nf(targetRol, 3, 2));
+                println("LOR " + nf(targetRol, 3, 2));
         }
 
         if (number == 91) {
             targetCCo = clockWise ? targetCCo + 1f : targetCCo - 1f;
             if (exp)
-                println("CCO " + nf(targetCCo, 3, 2));
+                println("OCC " + nf(targetCCo, 3, 2));
 
         }
 
@@ -682,7 +690,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             targetPit = clockWise ? targetPit + rotSpeed : targetPit - rotSpeed;
             targetPit = wrapAngle(targetPit);
             if (exp)
-                println("pit " + nf(targetPit, 3, 2));
+                println("TIP " + nf(targetPit, 3, 2));
         }
         // int newVisual = whichVisual;
         // if (clockWise)
@@ -852,6 +860,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     int toPass;
 
+
     public void draw() {
         colorMode(RGB);
         blendMode(SUBTRACT);////
@@ -880,7 +889,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             consoleSize = moveTowards(consoleSize, targetSize, 5);
             myTextarea.setSize(1920, (int) consoleSize)
                     .setVisible(true)
-                    .setColor(color(cco, 255, 255));
+                    .setColor(color(0, 0, 255));
 
         } else {
             consoleSize = 0;

@@ -92,7 +92,7 @@ public class BasakEllipse extends Poly {
                 
                 v.rotate(PApplet.radians(angle));
                
-                v.stroke(v.hueShift(rad), 255, 255, v.ald);
+                v.stroke(v.hueShift(rad), 255, 255, v.alp);
                 
                 float triangleBaseX = x + 48; 
                 float triangleBaseY = y; 
