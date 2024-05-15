@@ -53,7 +53,7 @@ public class Particles extends Poly{
 
         float spd = 5.2f;
         float max = 6;
-        float chooseColour = v.random(2);
+        float chooseColour = v.random(3);
 
         Particle(PVector pos, float r) {
             this.pos = pos;
