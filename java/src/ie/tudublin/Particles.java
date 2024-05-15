@@ -20,7 +20,7 @@ public class Particles extends Poly{
     public void newParticles() {
         //loop through the array to create the particles
         for (int i = 0; i < num; i++) {
-            p[i] = new Particle(new PVector(v.random(v.width), v.random(v.height)), 100);
+            p[i] = new Particle(new PVector(v.random(v.width), v.random(v.height)), 200);
         }
         v.stroke(255);
     }
@@ -28,9 +28,18 @@ public class Particles extends Poly{
     @Override
     public void render(int frameCount) {
         // Render particles
+
+        v.translate(-v.width/2, -v.height/2);
+        v.rotateZ( v.yaw);
+        v.rotateX(v.pit);    
+        v.rotateY(v.rol);
+                
+
         for (int i = 0; i < num; i++) {
             p[i].update(p, i);
         }
+        
+        v.translate(v.width/2, v.height/2);
     }
 
     class Particle {
@@ -52,8 +61,9 @@ public class Particles extends Poly{
         }
 
         void update(Particle[] p, int i) {
-            pos.add(vel);
+            pos.add(PVector.mult(vel, v.spe));
 
+            spd = v.spe;
             //if the position of x moves too far left, it will appear from the right side of the screen
             if (pos.x < -10){
                 pos.x = v.width;
@@ -89,12 +99,12 @@ public class Particles extends Poly{
                     if (chooseColour < 0.8) {
                         //setting blue colour
                         float blueHue = v.map(chooseColour, 0.5f, 1.0f, 170, 175);
-                        v.stroke(blueHue, 255, 255);
+                        v.stroke(v.hueShift(blueHue), 255, 255, v.alp);
                     } 
                     else {
                         //setting red colour
                         float redHue = v.map(chooseColour, 0, 0.5f, 0, 2);
-                        v.stroke(redHue, 255, 255);   
+                        v.stroke(v.hueShift(redHue), 255, 255, v.alp);  
                     }
 
                     //drawing the lines between the particles
@@ -116,13 +126,13 @@ public class Particles extends Poly{
             if (chooseColour < 0.8) {
                 //setting blue colour
                 float blueHue = v.map(chooseColour, 0.5f, 1.0f, 170, 175); 
-                v.fill(blueHue, 255, 255); 
+                v.fill(v.hueShift(blueHue), 255, 255, v.alp);
                 
             } 
             else {
                 //setting red colour
                 float redHue = v.map(chooseColour, 0, 0.5f, 0, 2); 
-                v.fill(redHue, 255, 255); 
+                v.fill(v.hueShift(redHue), 255, 255, v.alp);
             }
             
             v.ellipse(pos.x, pos.y, 5, 5);

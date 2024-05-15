@@ -39,12 +39,13 @@ public class Bloom extends Poly{
             c = v.hueShift(c);
             c2 = v.hueShift(c2);
 
-            v.fill((c2/2)+50,c+50,c+30, v.alp);//allows for darker edges of the flower creating an almost 3d shape
+            v.fill(c,255,255, v.alp);//allows for darker edges of the flower creating an almost 3d shape
             v.scale(0.95f);//scales the shape by the percentage given
             v.rotate(PApplet.radians(angle));
         
+            v.rect(0,0,v.getSmoothedAmplitude()*700,v.getSmoothedAmplitude()*700);
+            v.fill(c2,255,255, v.alp);//allows for darker edges of the flower creating an almost 3d shape            
             v.rect(0,0,v.getSmoothedAmplitude()*500,v.getSmoothedAmplitude()*500);
-            //v.rect(0,0,700,700);
            
             
             

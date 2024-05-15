@@ -102,7 +102,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println("This is your MSX speaking");
         println("I am DANI");
         println("Dynamic Artificial Non-Intelligence");
-        println("Talk to me and I will learn what you say and answer you");
+        println("Talk to me and I will learn from what you say, and answer you");
+        println("If you don't think I am learning anything, type 'list' and I will divulge my knowledge.");
         println("Speak now or forever hold your peace");
 
     }
@@ -954,10 +955,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     String[] randomMessages = {
             "I am DANI",
             "I am alive",
-            "Welcome to the Metaverse",
+            "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
-            "i exist",
-            "i like spoonies spoonies",
+            "I exist",
+            "I like spoonies spoonies",
             "Dynamic Artificial Non-Intelligence",
             "Act normal",
             "Undefined line number",
@@ -976,7 +977,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "String too long",
             "Unprintable error",
             "Line buffer overflow",
-            "return before gosub ",
+            "Return without gosub ",
             "Division by zero",
             "Type mismatch",
             "Disk full",
@@ -984,8 +985,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Missing operand",
             "Out of memory",
             "Commence 5MEODMT inhalation",
-            "420 DETECTED",
-            "MDMA synthesis complete. Collect from slot",
+            "420 detected",
+            "MDMA synthesis complete",
             "String formula too complex",
             "80k ram",
             "32K rom",
