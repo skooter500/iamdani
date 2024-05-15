@@ -29,17 +29,19 @@ public class Particles extends Poly{
     public void render(int frameCount) {
         // Render particles
 
-        v.translate(-v.width/2, -v.height/2);
+        // 
+        v.translate(v.width/2, v.height/2);        
+
         v.rotateZ( v.yaw);
         v.rotateX(v.pit);    
         v.rotateY(v.rol);
-                
+        v.translate(-v.width/2, -v.height/2);        
 
         for (int i = 0; i < num; i++) {
             p[i].update(p, i);
         }
         
-        v.translate(v.width/2, v.height/2);
+        // v.translate(v.width/2, v.height/2);
     }
 
     class Particle {
@@ -61,8 +63,8 @@ public class Particles extends Poly{
         }
 
         void update(Particle[] p, int i) {
-            pos.add(PVector.mult(vel, v.spe));
-
+            pos.add(PVector.mult(vel, v.spe * 0.02f));
+            v.strokeWeight(5);
             spd = v.spe;
             //if the position of x moves too far left, it will appear from the right side of the screen
             if (pos.x < -10){

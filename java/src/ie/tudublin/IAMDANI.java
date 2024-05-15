@@ -226,7 +226,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
         
-        
+        addVision(0, new Particles(this));
+
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
         addVision(0, new Nematode(this));
@@ -539,7 +540,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         alp = 0;
         // targetAld = 0;
         visions.get(whichVisual).enter();
-        println("bload \"" + visions.get(whichVisual).getClass().getSimpleName().toLowerCase() + "\"");
+        println("bload \"" + visions.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".COM\"");
     }
 
     static public boolean exp = true;
