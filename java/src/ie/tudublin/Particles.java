@@ -53,7 +53,7 @@ public class Particles extends Poly{
 
         float spd = 5.2f;
         float max = 6;
-        float chooseColour = v.random(3);
+        float chooseColour = v.random(2);
 
         Particle(PVector pos, float r) {
             this.pos = pos;
@@ -63,7 +63,7 @@ public class Particles extends Poly{
         }
 
         void update(Particle[] p, int i) {
-            pos.add(PVector.mult(vel, v.spe * 0.02f));
+            pos.add(PVector.mult(vel, v.spe * 0.01f + v.getSmoothedAmplitude() * 0.1f));
             v.strokeWeight(5);
             spd = v.spe;
             //if the position of x moves too far left, it will appear from the right side of the screen
@@ -100,12 +100,12 @@ public class Particles extends Poly{
                 if (dist < r) {
                     if (chooseColour < 0.8) {
                         //setting blue colour
-                        float blueHue = v.map(chooseColour, 0.5f, 1.0f, 170, 175);
+                        float blueHue = v.map(chooseColour, 0.5f, 1.0f, 50, 90);
                         v.stroke(v.hueShift(blueHue), 255, 255, v.alp);
                     } 
                     else {
                         //setting red colour
-                        float redHue = v.map(chooseColour, 0, 0.5f, 0, 2);
+                        float redHue = v.map(chooseColour, 0, 0.5f, 200, 255);
                         v.stroke(v.hueShift(redHue), 255, 255, v.alp);  
                     }
 

@@ -91,6 +91,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println("          version 1.0");
         println("   Copyright 1983 by Microsoft");
         println("");
+        println("");
         println("MSX BASIC version 1.0");
         println("Copyright 1983 by Microsoft");
         println("28815 Bytes free");
@@ -268,6 +269,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         // YM2413
 
+        
+        addVision(6, new Models1(this, "pyramid.obj", false, true));
+        addVision(6, new Models1(this, "eden.obj", false, true));
+        addVision(6, new Models1(this, "audio garden 1.obj", false, true));
+        
         addVision(6, new Models1(this, "brstarfighter.obj", false, true));
         addVision(6, new Models1(this, "tudub.obj", false, true));
         addVision(6, new Models1(this, "msx.obj", false, true));
@@ -670,6 +676,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (number == 77) {
             targetYaw = clockWise ? targetYaw + rotSpeed : targetYaw - rotSpeed;
             targetYaw = wrapAngle(targetYaw);
+            yaw = targetYaw;
             if (exp)
                 println("WAY " + nf(targetYaw, 3, 2));
         }
@@ -891,7 +898,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             consoleSize = moveTowards(consoleSize, targetSize, 5);
             myTextarea.setSize(1920, (int) consoleSize)
                     .setVisible(true)
-                    .setColor(color(0, 0, 255));
+                    .setColor(color(cco, 255, 255));
 
         } else {
             consoleSize = 0;
