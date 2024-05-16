@@ -540,7 +540,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         alp = 0;
         // targetAld = 0;
         visions.get(whichVisual).enter();
-        println("bload \"" + visions.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".COM\"");
+        println("bload \"" + visions.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".com\"");
     }
 
     static public boolean exp = true;
