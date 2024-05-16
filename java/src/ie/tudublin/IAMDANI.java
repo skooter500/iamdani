@@ -357,9 +357,15 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //targetAld = 10;
         targetMul = 1.0f;
     
-        bhu = 16;
+        bhu = 7;
         bri = 21;
         sat = 255;        
+
+        if (matchingFiles != null)
+        {
+            font = createFont("" + matchingFiles[bhu], bri);
+            textFont(font);
+            }
         ;
     }
 
