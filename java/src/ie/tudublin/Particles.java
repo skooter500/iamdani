@@ -8,7 +8,7 @@ import processing.core.PVector;
 public class Particles extends Poly{
     
 
-    int num = 100; //amount of particles
+    int num = 200; //amount of particles
     Particle[] p = new Particle[num]; //array of particles
 
     public Particles(IAMDANI v){
