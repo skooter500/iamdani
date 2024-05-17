@@ -226,8 +226,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // HashMap<Number, Object> g = new HashMap()<Number, Object>();
 
         //addVision(0, new circles(this));
-        
-        addVision(0, new Particles(this));
 
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
@@ -265,6 +263,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         addVision(5, new MSXLogos(this, "msx.obj"));
         addVision(5, new MSXLogos(this, "chip.obj"));
+        addVision(0, new SarahVisual(this));
+        addVision(0, new Particles(this));
 
 
         // YM2413
@@ -286,14 +286,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         addVision(7, new Bloom(this));
         
-
-        addVision(7, new Particles(this));
-
         addVision(7, new Terrain(this)); 
         addVision(7, new Airish(this));
 
         addVision(7, new Bands(this, 200, 0, 0, 0));
-        addVision(7, new paris(this));
         addVision(7, new Spiral(this));
         addVision(7, new SarahVisual(this));
         addVision(7, new JenniferVisuals(this));
@@ -682,7 +678,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (number == 77) {
             targetYaw = clockWise ? targetYaw + rotSpeed : targetYaw - rotSpeed;
             targetYaw = wrapAngle(targetYaw);
-            yaw = targetYaw;
             if (exp)
                 println("WAY " + nf(targetYaw, 3, 2));
         }
@@ -888,13 +883,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         blendMode(BLEND);
         colorMode(HSB, 255, 255, 255);
 
-        yaw = lerp(yaw, targetYaw, 0.01f);
-        pit = lerp(pit, targetPit, 0.01f);
-        rol = lerp(rol, targetRol, 0.01f);
+        yaw = lerp(yaw, targetYaw, 0.1f);
+        pit = lerp(pit, targetPit, 0.1f);
+        rol = lerp(rol, targetRol, 0.1f);
+        
         cco = targetCCo;
         spe = lerp(spe, targetSpe, 0.1f);
         ald = lerp(ald, targetAld, 0.1f);
-        alp = lerp(alp, targetAlp, 0.005f);
+        alp = lerp(alp, targetAlp, 0.1f);
         bas = lerp(bas, targetBas, 0.1f);
         mul = lerp(mul, targetMul, 0.1f);
         hue = lerp(hue, targetHue, 0.1f);
