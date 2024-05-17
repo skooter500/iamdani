@@ -118,12 +118,37 @@ public class DANI extends Poly {
         }
         return line;
     } 
+
+   
+    
+        public static String capitalizeFirstLetterOfEachWord(String input) {
+            // Split the input string into words
+            String[] words = input.split("\\s+");
+    
+            // Initialize a StringBuilder to hold the result
+            StringBuilder capitalizedString = new StringBuilder();
+    
+            // Loop through each word
+            for (String word : words) {
+                if (word.length() > 0) {
+                    // Capitalize the first letter and add the rest of the word
+                    capitalizedString.append(Character.toUpperCase(word.charAt(0)))
+                                     .append(word.substring(1).toLowerCase());
+                }
+                // Add a space after each word
+                capitalizedString.append(" ");
+            }
+    
+            // Convert the StringBuilder to a string and trim any trailing space
+            return capitalizedString.toString().trim();
+        }
+    
     
     public String[] writeSonnet()
     {
         String[] sonnet = new String[l];
 
-        sonnet[0] = generateName();
+        sonnet[0] = capitalizeFirstLetterOfEachWord(generateName());
         sonnet[1] = " ";
         for(int i = 2 ; i < l-4 ; i ++)
         {
@@ -145,7 +170,7 @@ public class DANI extends Poly {
                     break;
                 }
             }
-            sonnet[i] = line;
+            sonnet[i] = capitalizeFirstCharacter(line);
                         
         }
         int e = l -4;
@@ -168,6 +193,20 @@ public class DANI extends Poly {
     int reset = 0;
 
     public int l = 16;
+
+    public static String capitalizeFirstCharacter(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        
+        char firstChar = Character.toUpperCase(str.charAt(0));
+        if (str.length() == 1) {
+            return String.valueOf(firstChar);
+        }
+
+        String restOfString = str.substring(1);
+        return firstChar + restOfString;
+    }
 
 	public void render()
     {
@@ -214,7 +253,8 @@ public class DANI extends Poly {
                     }
                     else
                     {
-                        String s = sonnet[i].substring(0, j);                        
+                        String s = sonnet[i].substring(0, j);       
+
                         v.text(s, 0, i * h);
                     }                    
                 }
