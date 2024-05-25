@@ -205,8 +205,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         resetMessage();
 
-        println("BHU: " + bhu);
-        println("BRI: " + bri);
         println(matchingFiles[bhu]);
 
         midiConnect();
@@ -967,10 +965,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "I am alive",
             "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
-            "I exist",
             "I like spoonies spoonies",
             "Dynamic Artificial Non-Intelligence",
-            "Act normal",
+            "Operating within normal paramaters",
             "Undefined line number",
             "Normalize huge mugs of tea",
             "OK",
@@ -995,11 +992,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Missing operand",
             "Out of memory",
             "Commence 5MEODMT inhalation",
-            "420 detected",
+            "420 detected. Commence inhalation",
             "MDMA synthesis complete",
-            "String formula too complex",
+            "Formula too complex",
             "80k ram",
             "32K rom",
+            "Universal Serial Bus",
+            "socket, bind, listen, accept",
             "We have the technology",
             "Better, Stronger, Faster",
             "Speak now or forever hold your peace",
@@ -1007,7 +1006,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Turn on, tune in, and drop out",
             "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
-            "Greetings Human",
+            "Greetings human",
             "This is your MSX speaking",
             "color auto goto list run",
     };
