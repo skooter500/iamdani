@@ -21,6 +21,7 @@ import c21415904.SarahVisual;
 import controlP5.ControlP5;
 import controlP5.Textarea;
 import ddf.minim.analysis.BeatDetect;
+import ie.tudublin.visual.BEATSStepControllerhandler;
 import infiniteforms.City;
 import infiniteforms.IFCubes;
 import infiniteforms.Life;
@@ -38,11 +39,11 @@ import themidibus.*; //Import the library
 
 public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
-    ArrayList<Poly> visions = new ArrayList<Poly>();
+    public ArrayList<Poly> visions = new ArrayList<Poly>();
 
     // Poly play;
-    int previousVisual = 0;
-    int whichVisual = 0;
+    public int previousVisual = 0;
+    public int whichVisual = 0;
 
     MidiBus myBus = null; // The MidiBus
 
@@ -51,7 +52,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float camDistance = 0.5f;
     float strokeWeight = 1;
     
-    PFont font;
+    public PFont font;
 
     public void settings() {
         fullScreen(P3D, 2);
@@ -109,7 +110,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     }
 
+    ControllerHandler ch = null;
+
     public void midiConnect() {
+
+        
         try {
             MidiBus.list();
             int daniMidi = -1;
@@ -117,9 +122,17 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             if (daniMidi == -1) {
                 for (int i = 0; i < MidiBus.availableInputs().length; i++) {
                     String curr = MidiBus.availableInputs()[i];
-                    if (curr.equals("Arturia BeatStep")) {
+                    if (curr.equals("LPD8 mk2")) {
                         daniMidi = i;
-                        println("Joy detected");
+                        ch = new AKAIControllerHandler(this);
+                        println("Joy detected: " + curr);
+                        break;
+                    }
+                    if (curr.equals("Beatstep")) {
+                        daniMidi = i;
+                        ch = new BEATSStepControllerhandler(this);
+                        println("Joy detected: " + curr);
+                        break;
                     }
                 }
             }
@@ -138,7 +151,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
     }
 
-    HashMap<Integer, ArrayList<Integer>> groups = new HashMap<Integer, ArrayList<Integer>>();
+    public HashMap<Integer, ArrayList<Integer>> groups = new HashMap<Integer, ArrayList<Integer>>();
 
     public float moveTowards(float current, float target, float maxDistanceDelta) {
         float delta = target - current;
@@ -170,7 +183,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     // popMatrix();
     // }
 
-    File[] matchingFiles;
+    public File[] matchingFiles;
 
     void loadFonts()
     {  
@@ -329,18 +342,18 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     }
 
-    float consoleSize = 0;
+    public float consoleSize = 0;
     float originalTargetSize = 400;
 
     float targetSize = 1040;
 
     ControlP5 cp5;
-    Textarea myTextarea;
+    public Textarea myTextarea;
     float consoleColor = 100;
 
-    private boolean takeScreenshot = false;
+    public boolean takeScreenshot = false;
 
-    void defaults() {
+    public void defaults() {
         println("DEF");
         targetCCo = cco = 76f;
         targetRol = 0f;
@@ -363,17 +376,17 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         ;
     }
 
-    float targetPit = 0f;
-    float targetYaw = 0f;
+    public float targetPit = 0f;
+    public float targetYaw = 0f;
 
-    float targetCCo = 0f;
-    float targetRol = 0f;
-    float targetSpe = 1.0f;
-    float targetHue = 0;
-    float targetAlp = 75;
-    float targetAld = 4;
-    float targetMul = 1.0f;
-    float targetBas = 0.3f;
+    public float targetCCo = 0f;
+    public float targetRol = 0f;
+    public float targetSpe = 1.0f;
+    public float targetHue = 0;
+    public float targetAlp = 75;
+    public float targetAld = 4;
+    public float targetMul = 1.0f;
+    public float targetBas = 0.3f;
     public int bhu;
     public float bri;
     public float sat = 0;
@@ -386,122 +399,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void noteOn(int channel, int pitch, int velocity) {
 
-        // 43 is print screen button
-        if (exp && pitch != 43)
-            println("N+ CH " + channel + " PI " + pitch + " VE " + velocity);
-
-        switch (mode) {
-            case Auto: {
-                if (pitch == 43) {
-                    takeScreenshot = true;
-                    return;
-                }
-                int newVisual = pitch % visions.size();
-                change(newVisual);
-                return;
-            }
-            case AutoRandom: {
-                if (pitch == 43) {
-                    takeScreenshot = true;
-                    return;
-                }
-                int newVisual = (int) random(0, visions.size());
-                change(newVisual);
-                return;
-            }
-        }
-
-        if (pitch == 43) {
-            takeScreenshot = true;
-            return;
-        }
-
-        // Receive a noteOn
-        // SPecial codes
-
-        if (pitch >= 44 && pitch <= 47) {
-            int g = pitch - 44;
-            changeToGroupVisual(g);
-            return;
-        }
-
-        if (pitch == 48)
-        {
-            targetYaw = HALF_PI;
-            targetPit = HALF_PI;
-            targetRol = - HALF_PI;
-            // targetHue = random(0, 255);
-            // targetAlp = random(10, 255);
-            // targetAld = random(0, 50);
-            if (exp) println("RND");
-        }
-
-        if (pitch >= 36 && pitch <= 39) {
-            int g = pitch - 36;
-            g += 4;
-            changeToGroupVisual(g);            
-        }
-
-        if (pitch == 40) {
-            exp = !exp;
-            if (exp) {
-                println("TRON");
-                return;
-            } else {
-
-                println("TROFF");
-                return;
-            }
-        }
-
-        if (pitch == 51) {
-            showConsole = !showConsole;
-            println("CON:" + showConsole);
-            consoleSize = 0;
-            if (!showConsole) {
-                myTextarea.setVisible(showConsole);
-            }
-            return;
-        }
-        if (pitch == 49) {
-            boolean clockWise = true;
-            ArrayList<Integer> group = groups.get(findGroup(whichVisual));
-            int newWhichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)),
-                    group.get(group.size() - 1));
-            if (newWhichVisual != whichVisual) {
-                whichVisual = newWhichVisual;
-                change(whichVisual);
-            }
-            return;
-        }
-
-        if (pitch == 41) {
-            boolean clockWise = false;
-            ArrayList<Integer> group = groups.get(findGroup(whichVisual));
-            int newWhichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)),
-                    group.get(group.size() - 1));
-            if (newWhichVisual != whichVisual) {
-                whichVisual = newWhichVisual;
-                change(whichVisual);
-            }
-            return;
-        }
-
-        if (pitch == 42) {
-            if (exp) println("RST");
-            visions.get(whichVisual).enter();
-            return;
-        }
-
-        if (pitch == 50) {
-
-            defaults();
-            return;
-        }
+        
 
     }
 
-    private void changeToGroupVisual(int g)
+    public  void changeToGroupVisual(int g)
     {
         int v = 0;
         if (groups.containsKey(g)) {
@@ -553,170 +455,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
     public void controllerChange(int channel, int number, int value) {
-
-        if (exp)
-            println("CH " + channel + " NUM " + number + " VA " + value);
-
-        boolean clockWise = (value < 100);
-
-        if (number == 7) {
-            targetSpe = min(max(clockWise ? targetSpe + 0.05f : targetSpe - 0.05f, 0.0f), 3.58f);
-            if (exp)
-                println("Z80 " + nf(targetSpe, 1, 2) + " MHZ");
-        }
-
-        if (number == 10) {
-            targetBas = max(clockWise ? targetBas + 0.1f : targetBas - 0.1f, 0.01f);
-            if (exp)
-                println("SAB " + nf(targetBas, 3, 2));
-        }
-
-        if (number == 114) {
-            targetMul = max(clockWise ? targetMul + 0.1f : targetMul - 0.1f, 0);
-            if (exp)
-                println("LUM " + nf(targetMul, 3, 2));
-        }
-        if (number == 74) {
-            // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
-            targetHue = clockWise ? targetHue + 1f : targetHue - 1f;
-            if (exp)
-                println("EUH " + nf(targetHue, 3, 2));
-        }
-        if (number == 73) {
-            bhu = (clockWise ? bhu + 1 : bhu - 1);
-
-            if (bhu < 0)
-            {
-                bhu = matchingFiles.length;
-            } 
-            bhu = bhu % matchingFiles.length;
-            String fnt = "" + matchingFiles[(int)bhu];
-            font = createFont("" + fnt, bri);
-            textFont(font);
-            myTextarea.setFont(font);
-
-            if (exp)
-                println("BHU " + nf(bhu, 3, 2));
-
-            println("FNT: " + fnt);
-            println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
-                
-        }
-
-        if (number == 79) {
-            bri = (clockWise ? bri + 1f : bri - 1f);
-
-            if (exp)
-                println("bri " + nf(bri, 3, 2));
-
-
-            String fnt = "" + matchingFiles[(int)bhu];
-            
-
-            font = createFont(fnt, bri);
-            textFont(font);
-            myTextarea.setFont(font);
-            println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
-            
-
-
-        }
-        if (number == 75) {
-            ArrayList<Integer> group = groups.get(findGroup(whichVisual));
-            int newWhichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, group.get(0)),
-                    group.get(group.size() - 1));
-            if (newWhichVisual != whichVisual) {
-                whichVisual = newWhichVisual;
-                change(whichVisual);
-            }
-            return;
-        }
-        if (number == 72) {
-            int newWhichVisual = min(max(clockWise ? whichVisual + 1 : whichVisual - 1, 0), visions.size() - 1);
-            if (newWhichVisual != whichVisual) {
-                whichVisual = newWhichVisual;
-                change(whichVisual);
-            }
-            return;
-        }
-
-        if (number == 18) {
-            // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
-            targetHue = clockWise ? targetHue + 5f : targetHue - 5f;
-            if (exp)
-                println("EUH " + nf(targetHue, 3, 2));
-        }
-
-        if (number == 76) {
-            targetAld = min(max(clockWise ? targetAld + .1f : targetAld - .1f, 0), 50);
-            
-            if (exp)
-                println("DAL " + nf(targetAld, 3, 2));
-        }
-
-        // if (number == 16) {
-        //     targetAld = min(max(clockWise ? targetAld + 1f : targetAld - 1f, 10), 50);
-        //     if (exp)
-        //         println("ALD " + nf(targetAld, 3, 2));
-        // }
-
-        if (number == 19) {
-            targetAlp = min(max(clockWise ? targetAlp + 1f : targetAlp - 1f, 5), 255);
-            if (exp)
-                println("PLA " + nf(targetAlp, 3, 2));
-        }
-
-        float rotSpeed = 0.01f;
-
-        if (number == 71) {
-            targetAlp = min(max(clockWise ? targetAlp + 0.1f : targetAlp - 0.1f, 1f), 255);
-            if (exp)
-                println("PLA " + nf(targetAlp, 3, 2));
-        }
-        if (number == 77) {
-            targetYaw = clockWise ? targetYaw + rotSpeed : targetYaw - rotSpeed;
-            targetYaw = wrapAngle(targetYaw);
-            if (exp)
-                println("WAY " + nf(targetYaw, 3, 2));
-        }
-
-        if (number == 93) {
-            targetRol = clockWise ? targetRol + rotSpeed : targetRol - rotSpeed;
-            targetRol = wrapAngle(targetRol);
-            if (exp)
-                println("LOR " + nf(targetRol, 3, 2));
-        }
-
-        if (number == 91) {
-            targetCCo = clockWise ? targetCCo + 1f : targetCCo - 1f;
-            if (exp)
-                println("OCC " + nf(targetCCo, 3, 2));
-
-        }
-
-        if (number == 17) {
-            targetPit = clockWise ? targetPit + rotSpeed : targetPit - rotSpeed;
-            targetPit = wrapAngle(targetPit);
-            if (exp)
-                println("TIP " + nf(targetPit, 3, 2));
-        }
-        // int newVisual = whichVisual;
-        // if (clockWise)
-        // newVisual = (newVisual + 1) % visions.size();
-        // else {
-        // newVisual--;
-        // if (newVisual < 0) {
-        // newVisual = visions.size() - 1;
-        // }
-        // }
-        // change(newVisual);
+        ch.controllerChange(channel, number, value);        
     }
 
-    private float wrapAngle(float targetPit2) {
+    public float wrapAngle(float targetPit2) {
         return targetPit2;
             }
 
-    private int findGroup(int g) {
+    public int findGroup(int g) {
         int currentG = 0;
         Iterator<Integer> it = groups.keySet().iterator();
         while (it.hasNext()) {
@@ -861,7 +607,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         saveFrame("../screenshots/i.am.dani-######.png");
     }
 
-    boolean showConsole = true;
+    public boolean showConsole = true;
 
     public static float timeDelta = 0;
     long last = 0;                                                                                                                                                                                                 
