@@ -194,6 +194,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 return name.endsWith("ttf");
             }
         });  
+        for (File f1 : matchingFiles)
+        {
+            println(f1);
+        }
     }
 
 
@@ -363,8 +367,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //targetAld = 10;
         targetMul = 1.0f;
     
-        bhu = 3;
-        bri = 19;
+        bhu = 4;
+        bri = 23;
         sat = 255;        
 
         font = createFont("" + matchingFiles[bhu], bri);
@@ -752,15 +756,4 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "This is your MSX speaking",
             "color auto goto list run",
     };
-
 }
-
-
-
-
-
-
-
-
-
-
