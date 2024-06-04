@@ -32,7 +32,7 @@ public class Particles extends Poly{
         // 
         v.translate(v.width/2, v.height/2);        
 
-        v.rotateY( v.yaw);
+        v.rotateY(v.yaw);
         v.rotateX(v.pit);    
         v.rotateZ(v.rol);
         v.translate(-v.width/2, -v.height/2);        

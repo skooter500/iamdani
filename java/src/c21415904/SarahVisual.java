@@ -1,5 +1,6 @@
 package c21415904;
 
+import ie.tudublin.IAMDANI;
 import ie.tudublin.visual.AudioAnalysis;
 import ie.tudublin.visual.VObject;
 import ie.tudublin.visual.VScene;
@@ -11,7 +12,7 @@ import ddf.minim.AudioBuffer;
 import global.GlobalVisual;
 
 public class SarahVisual extends VScene {
-    Visual v;
+    IAMDANI v;
     VObject wf;
     Spiral1 sp1;
     Spiral2 sp2;
@@ -23,7 +24,7 @@ public class SarahVisual extends VScene {
 
     public SarahVisual(Visual v) {
         super(v);
-        this.v = v;
+        this.v = (IAMDANI) v;
 
         sp1 = new Spiral1(v, new PVector(0, 0, 0));
         sp2 = new Spiral2(v, new PVector(0, 0, 0));
@@ -46,6 +47,10 @@ public class SarahVisual extends VScene {
         // v.strokeWeight(2);
         // gv.render(elapsed);
         // cs.render();
+        //v.translate(v.width/2, v.height/2);        
+
+        //v.translate(-v.width/2, -v.height/2);        
+
         mb.render();
         // wf.render();        
     }
@@ -62,9 +67,8 @@ public class SarahVisual extends VScene {
 
         public void render() {
 
-            v.noStroke();
-            v.translate(cx, cy);
-
+            
+            
             for (int i = 0; i < v.ab.size(); i++) {
                 float c = PApplet.map(i, 0, v.ab.size(), 0, 360);
                 v.fill(c, 255, 255);
@@ -309,7 +313,8 @@ public class SarahVisual extends VScene {
 
             public void update() {
                 // keep blobs moving
-                pos.add(vel);
+                PVector vn = PVector.mult(vel, v.spe);
+                pos.add(vn);
 
                 // stop blobs from leaving screen
                 if (pos.x > v.width || pos.x < 0) {
@@ -336,12 +341,17 @@ public class SarahVisual extends VScene {
 
         @Override
         public synchronized void render() {
+
+        
+            
             v.beginShape();
+            
 
             v.loadPixels();
+            float vsize = 20;
             // show every fourth pixel so processor can handle image
-            for (int x = 0; x < v.width; x += 4) {
-                for (int y = 0; y < v.height; y += 4) {
+            for (int x = 0; x < v.width; x += vsize) {
+                for (int y = 0; y < v.height; y += vsize) {
                     int index = x + y * v.width;
                     float sum = 0;
 
@@ -351,12 +361,12 @@ public class SarahVisual extends VScene {
                     }
 
                     float c = v.hueShift(sum % 360);
-                    for(int row = 0 ; row < 4 ; row ++)
+                    for(int row = 0 ; row < vsize ; row ++)
                     {
-                        for(int col = 0 ; col < 4 ; col ++)
+                        for(int col = 0 ; col < vsize ; col ++)
                         {
                             int i = (x + col) + (y + row) * v.width;
-                            v.pixels[i] = v.color(c, 255, 255);
+                            v.pixels[i] = v.color(c, 255, 255, v.alp);
                         }                    
                     }
                      // modulus operator makes ball inside of ball
@@ -369,8 +379,7 @@ public class SarahVisual extends VScene {
                 b.update();
             }
 
-            v.endShape();
-
+            v.endShape();        
         }
     }
 }

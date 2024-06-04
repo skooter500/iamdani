@@ -205,8 +205,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         resetMessage();
 
-        println("BHU: " + bhu);
-        println("BRI: " + bri);
         println(matchingFiles[bhu]);
 
         midiConnect();
@@ -226,8 +224,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // HashMap<Number, Object> g = new HashMap()<Number, Object>();
 
         //addVision(0, new circles(this));
-        
-        addVision(0, new Particles(this));
 
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
@@ -265,6 +261,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         addVision(5, new MSXLogos(this, "msx.obj"));
         addVision(5, new MSXLogos(this, "chip.obj"));
+        addVision(0, new SarahVisual(this));
+        addVision(0, new Particles(this));
 
 
         // YM2413
@@ -286,14 +284,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         addVision(7, new Bloom(this));
         
-
-        addVision(7, new Particles(this));
-
         addVision(7, new Terrain(this)); 
         addVision(7, new Airish(this));
 
         addVision(7, new Bands(this, 200, 0, 0, 0));
-        addVision(7, new paris(this));
         addVision(7, new Spiral(this));
         addVision(7, new SarahVisual(this));
         addVision(7, new JenniferVisuals(this));
@@ -682,7 +676,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (number == 77) {
             targetYaw = clockWise ? targetYaw + rotSpeed : targetYaw - rotSpeed;
             targetYaw = wrapAngle(targetYaw);
-            yaw = targetYaw;
             if (exp)
                 println("WAY " + nf(targetYaw, 3, 2));
         }
@@ -888,13 +881,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         blendMode(BLEND);
         colorMode(HSB, 255, 255, 255);
 
-        yaw = lerp(yaw, targetYaw, 0.01f);
-        pit = lerp(pit, targetPit, 0.01f);
-        rol = lerp(rol, targetRol, 0.01f);
+        yaw = lerp(yaw, targetYaw, 0.1f);
+        pit = lerp(pit, targetPit, 0.1f);
+        rol = lerp(rol, targetRol, 0.1f);
+        
         cco = targetCCo;
         spe = lerp(spe, targetSpe, 0.1f);
         ald = lerp(ald, targetAld, 0.1f);
-        alp = lerp(alp, targetAlp, 0.005f);
+        alp = lerp(alp, targetAlp, 0.1f);
         bas = lerp(bas, targetBas, 0.1f);
         mul = lerp(mul, targetMul, 0.1f);
         hue = lerp(hue, targetHue, 0.1f);
@@ -971,10 +965,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "I am alive",
             "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
-            "I exist",
             "I like spoonies spoonies",
             "Dynamic Artificial Non-Intelligence",
-            "Act normal",
+            "Operating within normal paramaters",
             "Undefined line number",
             "Normalize huge mugs of tea",
             "OK",
@@ -999,11 +992,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Missing operand",
             "Out of memory",
             "Commence 5MEODMT inhalation",
-            "420 detected",
+            "420 detected. Commence inhalation",
             "MDMA synthesis complete",
-            "String formula too complex",
+            "Formula too complex",
             "80k ram",
             "32K rom",
+            "Universal Serial Bus",
+            "socket, bind, listen, accept",
             "We have the technology",
             "Better, Stronger, Faster",
             "Speak now or forever hold your peace",
@@ -1011,7 +1006,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Turn on, tune in, and drop out",
             "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
-            "Greetings Human",
+            "Greetings human",
             "This is your MSX speaking",
             "color auto goto list run",
     };
