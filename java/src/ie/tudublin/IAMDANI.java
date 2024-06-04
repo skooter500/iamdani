@@ -366,7 +366,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //targetAld = 10;
         targetMul = 1.0f;
     
-        bhu = 1;
+        bhu = 3;
         bri = 21;
         sat = 255;        
 
