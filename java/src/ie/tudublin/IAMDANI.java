@@ -21,6 +21,7 @@ import c21415904.SarahVisual;
 import controlP5.ControlP5;
 import controlP5.Textarea;
 import ddf.minim.analysis.BeatDetect;
+import ie.tudublin.visual.AKAIControllerHandler;
 import ie.tudublin.visual.BEATSStepControllerhandler;
 import infiniteforms.City;
 import infiniteforms.IFCubes;
@@ -202,10 +203,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         defaults();
         
 
-
-        font = createFont("" + matchingFiles[bhu], bri);
-        textFont(font);
-
         sphere = loadShape("sphere.obj");
 
         toPass = (int) random(1000);
@@ -367,19 +364,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetMul = 1.0f;
     
         bhu = 3;
-        bri = 21;
+        bri = 19;
         sat = 255;        
 
         font = createFont("" + matchingFiles[bhu], bri);
         textFont(font);
 
-
-        if (matchingFiles != null)
-        {
-            font = createFont("" + matchingFiles[bhu], bri);
-            textFont(font);
-            }
-        ;
     }
 
     public float targetPit = 0f;

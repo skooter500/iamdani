@@ -40,7 +40,7 @@ public class JenniferVisuals extends VScene {
         // v.background(0);
         //wf.render();
         speaker.render();
-        hex.render();
+        //hex.render();
         
         //dots.render(elapsed);
         //clock.render(elapsed);
@@ -153,7 +153,7 @@ public class JenniferVisuals extends VScene {
             float clockDiameter;
 
             v.fill(0);
-            v.stroke(255);
+            v.stroke(0, v.alp);
 
             int radius = PApplet.min(v.width, v.height) / 3; // circle radius
             // smaller lines
