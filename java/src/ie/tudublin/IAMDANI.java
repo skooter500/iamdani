@@ -56,7 +56,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void settings() {
         fullScreen(P3D, 2);
-        // size(1000, 1000, P3D);
+        //size(1000, 1000, P3D);
     }
 
     PShape sphere;
@@ -128,7 +128,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                         println("Joy detected: " + curr);
                         break;
                     }
-                    if (curr.equals("Beatstep")) {
+                    if (curr.equals("Arturia BeatStep")) {
                         daniMidi = i;
                         ch = new BEATSStepControllerhandler(this);
                         println("Joy detected: " + curr);
@@ -198,8 +198,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void setup() {
 
-        defaults();
         loadFonts();
+        defaults();
+        
 
 
         font = createFont("" + matchingFiles[bhu], bri);
@@ -295,12 +296,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(6, horse);
         addVision(6, new Models1(this, "chip.obj", true, false));
 
+        addVision(7, new Airish(this));
+
         addVision(7, new Bloom(this));
         
         addVision(7, new Terrain(this)); 
-        addVision(7, new Airish(this));
-
-        addVision(7, new Bands(this, 200, 0, 0, 0));
+        
+        addVision(7, new Bands(this, 300, 0, 0, 0));
         addVision(7, new Spiral(this));
         addVision(7, new SarahVisual(this));
         addVision(7, new JenniferVisuals(this));
@@ -364,9 +366,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //targetAld = 10;
         targetMul = 1.0f;
     
-        bhu = 7;
+        bhu = 1;
         bri = 21;
         sat = 255;        
+
+        font = createFont("" + matchingFiles[bhu], bri);
+        textFont(font);
+
 
         if (matchingFiles != null)
         {
@@ -398,9 +404,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     }
 
     public void noteOn(int channel, int pitch, int velocity) {
-
+        if (ch!= null)
+            ch.noteOn(channel, pitch, velocity);
         
-
     }
 
     public  void changeToGroupVisual(int g)

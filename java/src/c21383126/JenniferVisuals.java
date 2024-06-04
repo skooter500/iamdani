@@ -40,7 +40,7 @@ public class JenniferVisuals extends VScene {
         // v.background(0);
         //wf.render();
         speaker.render();
-        //hex.render();
+        hex.render();
         
         //dots.render(elapsed);
         //clock.render(elapsed);
@@ -229,7 +229,7 @@ public class JenniferVisuals extends VScene {
             int length = ((y2 + border) - (y1 - border));
             int width = ((x2 + border) - (x1 - border));
             float col = v.random(0, 255); /// box colour
-            v.fill(v.hueShift(col), 255, 255);
+            v.fill(v.hueShift(col), 255, 255, v.alp);
 
             // 3D boxes
             v.translate(x1, v.height / 2);
@@ -248,7 +248,7 @@ public class JenniferVisuals extends VScene {
 
             for (int i = 0; i < v.ab.size(); i++) {
                 float c = PApplet.map(v.ab.get(i), -1, 1, 0, 360);
-                v.stroke(v.hueShift(c), 100, 100);
+                v.stroke(v.hueShift(c), 100, 100, v.alp);
                 float radius = v.ab.get(i) * 1000 + 50; // radius size determined by the music
                 v.circle(x1 + 30, y1 + 60, radius - 1);
                 v.circle(x2 + 30, y2, radius - 1);

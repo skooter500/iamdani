@@ -190,7 +190,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
             v.println("EUH " + v.nf(v.targetHue, 3, 2));
             v.targetMul = v.max(clockWise ? v.targetMul + 0.1f : v.targetMul - 0.1f, 0);
             if (v.exp)
-                println("LUM " + nf(v.targetMul, 3, 2));
+                v.println("LUM " + v.nf(v.targetMul, 3, 2));
         }
         if (number == 74) {
             // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
@@ -223,7 +223,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
             v.bri = (clockWise ? v.bri + 1f : v.bri - 1f);
 
             if (v.exp)
-                println("v.bri " + v.nf(v.bri, 3, 2));
+                v.println("v.bri " + v.nf(v.bri, 3, 2));
 
 
             String fnt = "" + v.matchingFiles[(int)v.bhu];
@@ -239,7 +239,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
         }
         if (number == 75) {
             ArrayList<Integer> group = v.groups.get(v.findGroup(v.whichVisual));
-            int newWhichVisual = min(max(clockWise ? v.whichVisual + 1 : v.whichVisual - 1, group.get(0)),
+            int newWhichVisual = v.min(v.max(clockWise ? v.whichVisual + 1 : v.whichVisual - 1, group.get(0)),
                     group.get(group.size() - 1));
             if (newWhichVisual != v.whichVisual) {
                 v.whichVisual = newWhichVisual;
@@ -260,14 +260,14 @@ public class BEATSStepControllerhandler implements ControllerHandler{
             // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
             v.targetHue = clockWise ? v.targetHue + 5f : v.targetHue - 5f;
             if (v.exp)
-                println("EUH " + nf(targetHue, 3, 2));
+                v.println("EUH " + v.nf(v.targetHue, 3, 2));
         }
 
         if (number == 76) {
-            targetAld = min(max(clockWise ? targetAld + .1f : targetAld - .1f, 0), 50);
+            v.targetAld = v.min(v.max(clockWise ? v.targetAld + .1f : v.targetAld - .1f, 0), 50);
             
             if (v.exp)
-                println("DAL " + nf(targetAld, 3, 2));
+                v.println("DAL " + v.nf(v.targetAld, 3, 2));
         }
 
         // if (number == 16) {
@@ -277,36 +277,34 @@ public class BEATSStepControllerhandler implements ControllerHandler{
         // }
 
         if (number == 19) {
-            v.targetAlp = min(max(clockWise ? v.targetAlp + 1f : v.targetAlp - 1f, 5), 255);
+            v.targetAlp = v.min(v.max(clockWise ? v.targetAlp + 1f : v.targetAlp - 1f, 5), 255);
             if (v.exp)
-                println("PLA " + nf(targetAlp, 3, 2));
+            v.println("PLA " + v.nf(v.targetAlp, 3, 2));
         }
 
-        float rotSpeed = 0.01f;
-
         if (number == 71) {
-            v.targetAlp = min(v.max(clockWise ? v.targetAlp + 0.1f : v.targetAlp - 0.1f, 1f), 255);
+            v.targetAlp = v.min(v.max(clockWise ? v.targetAlp + 0.1f : v.targetAlp - 0.1f, 1f), 255);
             if (v.exp)
-                println("PLA " + nf(v.targetAlp, 3, 2));
+            v.println("PLA " + v.nf(v.targetAlp, 3, 2));
         }
         if (number == 77) {
             v.targetYaw = clockWise ? v.targetYaw + rotSpeed : v.targetYaw - rotSpeed;
             v.targetYaw =v.wrapAngle(v.targetYaw);
             if (v.exp)
-                println("WAY " + nf(v.targetYaw, 3, 2));
+            v.println("WAY " + v.nf(v.targetYaw, 3, 2));
         }
 
         if (number == 93) {
-            targetRol = clockWise ? targetRol + rotSpeed : targetRol - rotSpeed;
-            targetRol = wrapAngle(targetRol);
+            v.targetRol = clockWise ? v.targetRol + rotSpeed : v.targetRol - rotSpeed;
+            v.targetRol = v.wrapAngle(v.targetRol);
             if (v.exp)
-                println("LOR " + nf(targetRol, 3, 2));
+            v.println("LOR " + v.nf(v.targetRol, 3, 2));
         }
 
         if (number == 91) {
             v.targetCCo = clockWise ? v.targetCCo + 1f : v.targetCCo - 1f;
             if (v.exp)
-            v.println("OCC " + nf(targetCCo, 3, 2));v.
+            v.println("OCC " + v.nf(v.targetCCo, 3, 2));
 
         }
 

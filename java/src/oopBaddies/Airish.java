@@ -24,6 +24,12 @@ public class Airish extends Poly {
     public void render() {
 
         
+        v.translate(v.width/2, v.height/2);        
+
+        v.rotateY(v.yaw);
+        v.rotateX(v.pit);    
+        v.rotateZ(v.rol);
+        v.translate(-v.width/2, -v.height/2);    
         float avg = v.getAmplitude();
         
         // make colours to music
@@ -109,9 +115,9 @@ public class Airish extends Poly {
         if (a >= 2) {
             for (i = -125; i < 1700; i += 250) {
                 for (j = -125; j < 900; j += 250) {
-                    v.fill(v.hueShift(93), 255, 255);
+                    v.fill(v.hueShift(93), 255, 255, v.alp);
                     v.ellipse(250 + i, 250 + j, 100, 100);
-                    v.fill(v.hueShift(13), 255, 255);
+                    v.fill(v.hueShift(13), 255, 255, v.alp);
 
                     v.ellipse(175 + i, 175 + j, 50, 50);
                     v.triangle(175 + i, 200 + j, 250 + i, 250 + j, 200 + i, 175 + j);
@@ -144,12 +150,12 @@ public class Airish extends Poly {
         } // end if
 
         // draw butterfly
-        v.stroke(v.hueShift(6), 255, 255);
+        v.stroke(v.hueShift(6), 255, 255, v.alp);
         v.strokeWeight(2);
 
         
         v.strokeWeight(3);
-        v.fill(v.hueShift(c), 255, 255);
+        v.fill(v.hueShift(c), 255, 255, v.alp);
         v.quad(v.mouseX - 60, v.mouseY - 70, v.mouseX - 10, v.mouseY - 50, v.mouseX,
                 v.mouseY, v.mouseX - 40, v.mouseY - 10);
         v.quad(v.mouseX + 60, v.mouseY - 70, v.mouseX + 10, v.mouseY - 50, v.mouseX,
