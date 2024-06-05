@@ -744,6 +744,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "80k ram",
             "32K rom",
             "Universal Serial Bus",
+            "Verb Noun",
+            "Ullege Pillage Silage Tillage",
             "socket, bind, listen, accept",
             "We have the technology",
             "Better, Stronger, Faster",
