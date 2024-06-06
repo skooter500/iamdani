@@ -133,7 +133,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
     if (number == 71) {
         v.cqz = v.min(v.max(clockWise ? v.cqz + 1.0f : v.cqz - 1.0f, 1f), 255);
         if (v.exp)
-        v.println("PLA " + v.nf(v.targetAlp, 3, 2));
+        v.println("cqz " + v.nf(v.cqz, 3, 2));
     }
     
     if (number == 77) {

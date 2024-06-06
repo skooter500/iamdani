@@ -49,7 +49,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     MidiBus myBus = null; // The MidiBus
 
     float ald = 1;
-    public float cqz = 1;
     float colorRange = 255;
     float camDistance = 0.5f;
     float strokeWeight = 1;

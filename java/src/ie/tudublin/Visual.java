@@ -13,6 +13,9 @@ public abstract class Visual extends PApplet
 	public float[] bands;
 	public float[] smoothedBands;
 
+	public float cqz = 1;
+    
+
 	public Minim minim;
 	public AudioInput ai;
 	public AudioPlayer ap;
@@ -240,7 +243,8 @@ public abstract class Visual extends PApplet
 	}
 
     public float hueShift(float f) {
-        return pingpongmap(f + hue, 0, 255, 0, 255);
+		float g = (floor(f / cqz) * cqz) + hue;
+        return pingpongmap(g, 0, cqz, 0, cqz);
     }
 }
 
