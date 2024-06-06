@@ -259,6 +259,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(2, new infiniteforms.Cube(this));
         addVision(2, new IFCubes(this, 7, 150, -600));
         addVision(2, new IFCubes(this, 30, 150, -400));
+        addVision(2, new Models1(this, "msx1.obj", false, true));
+
 
         
         addVision(3, new AllBalls(this));    
@@ -281,8 +283,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
         // YM2413
-
+        // addVision(6, new Models1(this, "phoenix.obj", false, true));
         
+        
+        addVision(6, new Models1(this, "bong.obj", false, true));
         addVision(6, new Models1(this, "pyramid.obj", false, true));
         addVision(6, new Models1(this, "eden.obj", false, true));
         addVision(6, new Models1(this, "audio garden 1.obj", false, true));
@@ -368,8 +372,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetMul = 1.0f;
     
         bhu = 4;
-        bri = 23;
-        sat = 255;        
+        bri = 22;
+        sat = 255;    
+        cqz = 255;   
 
         font = createFont("" + matchingFiles[bhu], bri);
         textFont(font);
@@ -644,7 +649,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             consoleSize = moveTowards(consoleSize, targetSize, 5);
             myTextarea.setSize(1920, (int) consoleSize)
                     .setVisible(true)
-                    .setColor(color(cco, 255, 255));
+                    .setColor(color(255, 0, 255));
 
         } else {
             consoleSize = 0;
