@@ -6,13 +6,17 @@
 
 i.am.dani celebrates the 40th birthday of MSX. Inspired by DANI, a chatbot from 1986, i.am.dani is about the experience of learning programming, and features work by myself and teams of students from TU Dublin Computer Science and Game Design. Developed in Java, using the Processing libraries for creative coding, i.am.dani features MIDI controlled, sound responsive visuals for music and algorithmic poetry made from the words of Captain Beefheart.
 
-![](screenshots/i.am.dani-000360.png)
+![](images/i.am.dani-014342.png)
 
-![](screenshots/i.am.dani-007672.png)
+![](images/i.am.dani-014591.png)
 
-![](screenshots/i.am.dani-011423.png)
+![](images/i.am.dani-025426.png)
 
-![](screenshots/i.am.dani-009379.png)
+![](images/i.am.dani-067402.png)
+
+![](images/i.am.dani-003762.png)
+
+![](images/i.am.dani-006705.png)
 
 ## Contributors:
 
