@@ -324,7 +324,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         defaults();
 
         colorMode(RGB);
-        background(0);
+        background(bgColor);
         colorMode(HSB);
         
         change(0);
@@ -619,10 +619,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     int toPass;
 
+    int bgColor = color(21, 29, 252);
+
 
     public void draw() {
         colorMode(RGB);
         blendMode(SUBTRACT);////
+        //fill(, ald);
+        float c = color(255 - red(bgColor), 255 - green(bgColor), 255 - blue(bgColor));
         fill(255, ald);
 
         pushMatrix();
@@ -750,7 +754,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "32K rom",
             "Universal Serial Bus",
             "Verb Noun",
-            "Ullege Pillage Silage Tillage",
+            "More input",
+            "Ullege pillage silage tillage",
             "socket, bind, listen, accept",
             "We have the technology",
             "Better, Stronger, Faster",
