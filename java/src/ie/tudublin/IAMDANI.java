@@ -371,6 +371,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         bri = 23;
         sat = 255;        
 
+        cqz = 255;
         font = createFont("" + matchingFiles[bhu], bri);
         textFont(font);
 
@@ -644,7 +645,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             consoleSize = moveTowards(consoleSize, targetSize, 5);
             myTextarea.setSize(1920, (int) consoleSize)
                     .setVisible(true)
-                    .setColor(color(cco, 255, 255));
+                    .setColor(color(255));
 
         } else {
             consoleSize = 0;
@@ -721,8 +722,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Copyright 1983 by microsoft",
             "Syntax error on line 420",
             "I seek the creator",
-            // "© Microcabin",
-            // "am in a k-hole y/n?",
             "Job completed normally",
             "28815 bytes free",
             "Subspace anomoly on line 420",
@@ -739,13 +738,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Out of memory",
             "Commence 5MEODMT inhalation",
             "420 detected. Commence inhalation",
-            "MDMA synthesis complete",
+            //"MDMA synthesis complete",
             "Formula too complex",
             "80k ram",
             "32K rom",
             "Universal Serial Bus",
             "Verb Noun",
-            "Ullege Pillage Silage Tillage",
+            "Ullege pillage silage tillage",
             "socket, bind, listen, accept",
             "We have the technology",
             "Better, Stronger, Faster",
