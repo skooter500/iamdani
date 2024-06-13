@@ -66,6 +66,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public static IAMDANI instance;
 
+    public Poly startPoly = new Splash(this);
+
     public StringBuilder console = new StringBuilder();
 
     public enum Modes {
@@ -89,11 +91,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void resetMessage() {
         console = new StringBuilder();
-        println("                                     MSX system");
-        println("                                     version 1.0");
-        println("                              Copyright 1983 by Microsoft");
-        println("");
-        println("");
         println("MSX BASIC version 1.0");
         println("Copyright 1983 by Microsoft");
         println("28815 Bytes free");
@@ -675,7 +672,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         pushMatrix();
         pushStyle();
-        visions.get(whichVisual).render(frameCount); // renders the currently loaded visual
+        if (startPoly != null)
+        {
+            startPoly.render(0);
+        }
+        else
+        {
+            visions.get(whichVisual).render(frameCount); // renders the currently loaded visual
+        }
         popStyle();
         popMatrix();
 
