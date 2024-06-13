@@ -26,6 +26,7 @@ public class Splash extends Poly
     public void render()
     {
         int d = v.millis() - t;
+        v.println(d);
         if (d > duration)
         {
             v.change(0);

@@ -56,8 +56,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public PFont font;
 
     public void settings() {
-        fullScreen(P3D, 2);
-        //size(1000, 1000, P3D);
+        //fullScreen(P3D, 2);
+        size(1000, 1000, P3D);
     }
 
     PShape sphere;
