@@ -12,7 +12,6 @@ public abstract class Poly {
         this.v = (IAMDANI) v;
     } 
 
-    
 
     public void render(int ellapsed)
     {

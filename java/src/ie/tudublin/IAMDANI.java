@@ -56,8 +56,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public PFont font;
 
     public void settings() {
-        fullScreen(P3D, 2);
-        //size(1000, 1000, P3D);
+        //fullScreen(P3D, 2);
+        size(1000, 1000, P3D);
     }
 
     PShape sphere;
@@ -65,6 +65,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public int lea = 0;
 
     public static IAMDANI instance;
+
+    public Poly startPoly = new Splash(this);
 
     public StringBuilder console = new StringBuilder();
 
@@ -89,11 +91,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void resetMessage() {
         console = new StringBuilder();
-        println("          MSX system");
-        println("          version 1.0");
-        println("   Copyright 1983 by Microsoft");
-        println("");
-        println("");
         println("MSX BASIC version 1.0");
         println("Copyright 1983 by Microsoft");
         println("28815 Bytes free");
@@ -107,7 +104,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println("Dynamic Artificial Non-Intelligence");
         println("Talk to me and I will learn from what you say, and answer you");
         println("If you don't think I am learning anything, type 'list' and I will divulge my knowledge.");
-        println("Speak now or forever hold your peace");
+        println("Speak now or forever hold your peace!");
 
     }
 
@@ -676,7 +673,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         pushMatrix();
         pushStyle();
-        visions.get(whichVisual).render(frameCount); // renders the currently loaded visual
+        if (startPoly != null)
+        {
+            startPoly.render(0);
+        }
+        else
+        {
+            visions.get(whichVisual).render(frameCount); // renders the currently loaded visual
+        }
         popStyle();
         popMatrix();
 
