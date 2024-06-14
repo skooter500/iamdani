@@ -259,6 +259,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(2, new infiniteforms.Cube(this));
         addVision(2, new IFCubes(this, 7, 150, -600));
         addVision(2, new IFCubes(this, 30, 150, -400));
+        addVision(2, new Models1(this, "msx1.obj", false, true));
+
 
         
         addVision(3, new AllBalls(this));    
@@ -281,8 +283,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
         // YM2413
-
+        // addVision(6, new Models1(this, "phoenix.obj", false, true));
         
+        
+        addVision(6, new Models1(this, "bong.obj", false, true));
         addVision(6, new Models1(this, "pyramid.obj", false, true));
         addVision(6, new Models1(this, "eden.obj", false, true));
         addVision(6, new Models1(this, "audio garden 1.obj", false, true));
@@ -320,7 +324,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         defaults();
 
         colorMode(RGB);
-        background(0);
+        background(bgColor);
         colorMode(HSB);
         
         change(0);
@@ -368,8 +372,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetMul = 1.0f;
     
         bhu = 4;
-        bri = 23;
-        sat = 255;        
+        bri = 22;
+        sat = 255;    
+        cqz = 255;   
 
         cqz = 255;
         font = createFont("" + matchingFiles[bhu], bri);
@@ -615,10 +620,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     int toPass;
 
+    int bgColor = color(21, 29, 252);
+
 
     public void draw() {
         colorMode(RGB);
         blendMode(SUBTRACT);////
+        //fill(, ald);
+        float c = color(255 - red(bgColor), 255 - green(bgColor), 255 - blue(bgColor));
         fill(255, ald);
 
         pushMatrix();
@@ -645,7 +654,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             consoleSize = moveTowards(consoleSize, targetSize, 5);
             myTextarea.setSize(1920, (int) consoleSize)
                     .setVisible(true)
-                    .setColor(color(255));
+                    .setColor(color(255, 0, 255));
 
         } else {
             consoleSize = 0;
@@ -744,10 +753,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "32K rom",
             "Universal Serial Bus",
             "Verb Noun",
-            "Ullege pillage silage tillage",
+            "ullege pillage silage tillage",
             "socket, bind, listen, accept",
             "We have the technology",
-            "Better, Stronger, Faster",
+            "better stronger faster",
             "Speak now or forever hold your peace",
             "Would you like our conversation to be recored on printer (Y/N)",
             "Turn on, tune in, and drop out",

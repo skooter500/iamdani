@@ -131,7 +131,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
     float rotSpeed = 0.01f;
 
     if (number == 71) {
-        v.cqz = v.min(v.max(clockWise ? v.cqz + 1.0f : v.cqz - 1.0f, 1f), 255);
+        v.cqz = v.min(v.max(clockWise ? v.cqz + 5.0f : v.cqz - 5f, 1f), 255);
         if (v.exp)
         v.println("cqz " + v.nf(v.cqz, 3, 2));
     }
