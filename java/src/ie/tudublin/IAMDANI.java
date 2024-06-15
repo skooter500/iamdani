@@ -56,8 +56,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public PFont font;
 
     public void settings() {
-        //fullScreen(P3D, 2);
-        size(1000, 1000, P3D);
+        fullScreen(P3D, 2);
+        //size(1000, 1000, P3D);
     }
 
     PShape sphere;
@@ -200,6 +200,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void setup() {
 
+        
         loadFonts();
         defaults();
         
@@ -283,6 +284,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // addVision(6, new Models1(this, "phoenix.obj", false, true));
         
         
+        addVision(6, new Models1(this, "dave and rosie.obj", false, true));
         addVision(6, new Models1(this, "bong.obj", false, true));
         addVision(6, new Models1(this, "pyramid.obj", false, true));
         addVision(6, new Models1(this, "eden.obj", false, true));
@@ -324,8 +326,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         background(bgColor);
         colorMode(HSB);
         
-        change(0);
-
         // String[] fonts = PFont.list();
 
         // for(String s:fonts)
@@ -343,6 +343,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setText(console.toString())
                 .setVisible(true);
         ;
+        startPoly.enter();
 
     }
 
@@ -594,6 +595,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 fill(thisFrame < 30 ? hueShift(42) : hueShift(-42), 255, 255);
                 ff = abs(ff);
             }
+            else
+            {
+                fill(hueShift(90), 255, 255);
+            }
             text(nf(ff, 3, 3), x + 85, y);
 
             key = new StringBuffer(key).reverse().toString();
@@ -621,6 +626,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
     public void draw() {
+
+        if (startPoly != null)
+        {
+            startPoly.render(frameCount);
+            return;
+        }
+        
+
         colorMode(RGB);
         blendMode(SUBTRACT);////
         //fill(, ald);
@@ -673,14 +686,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         pushMatrix();
         pushStyle();
-        if (startPoly != null)
-        {
-            startPoly.render(0);
-        }
-        else
-        {
-            visions.get(whichVisual).render(frameCount); // renders the currently loaded visual
-        }
+        visions.get(whichVisual).render(frameCount); // renders the currently loaded visual        
         popStyle();
         popMatrix();
 
