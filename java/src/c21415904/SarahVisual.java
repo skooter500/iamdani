@@ -74,7 +74,7 @@ public class SarahVisual extends VScene {
                 v.fill(c, 255, 255);
                 v.scale((float) 0.99);
                 v.rotate(PApplet.radians(theta));
-                v.ellipse(cx, cy, 50 + (v.getSmoothedAmplitude() * 750), 50 + (v.getSmoothedAmplitude() * 750));
+                v.ellipse(cx, cy, 50 + (v.getSmoothedAmplitude() * 200), 50 + (v.getSmoothedAmplitude() * 200));
 
             }
             theta += 0.08;

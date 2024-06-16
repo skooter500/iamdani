@@ -36,7 +36,7 @@ public class Mena extends Poly {
         int h = 900;
 
         //represent the stars
-        v.fill(v.hueShift(27), 255, 255, v.alp);
+        v.fill(v.hueShift(27), 255, 255, v.alp * 4);
         v.noStroke();
         v.ellipse(v.random(w), v.random(h), 5, 5);
 

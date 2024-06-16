@@ -82,6 +82,7 @@ public class Model {
 
     v.rotateX(-v.HALF_PI + v.pit + pitOff);
     v.rotateZ(v.PI + v.yaw);
+    v.rotateY(v.rol);
     // v.rotateX(v.xRotation);
     // /v.rotateZ(v.zRotation);
 
@@ -91,15 +92,15 @@ public class Model {
       v.rotateZ(-angle);
 
     // v.rotateZ(0.2f + v.sin(theta) * 0.2f);
-    theta += (v.spe * 0.2f);
+    theta += (v.spe * 0.6f);
     c += v.spe * 100 * v.getAmplitude();
-    v.scale(smoothedBoxSize * 4 );
+    v.scale(20 * v.bas);
 
     
     v.shape(s);
     v.popMatrix();
 
-    angle += 0.001f * v.spe;
+    angle += 0.01f * v.spe;
 
     /*
      * ArrayList<Quad> quads = obj.getQuads();

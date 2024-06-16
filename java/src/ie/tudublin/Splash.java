@@ -3,7 +3,7 @@ package ie.tudublin;
 public class Splash extends Poly
 {
     int t = 0;
-    int duration = 1000;
+    int duration = 100;
     public Splash(Visual v) {
         super(v);
         //TODO Auto-generated constructor stub

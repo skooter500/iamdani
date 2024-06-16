@@ -54,6 +54,8 @@ public class BasakEllipse extends Poly {
             for (float rad = 0; rad < 360; rad += 5) {
                 v.rotateX(v.pit);
                 v.rotateY(v.yaw);
+                v.rotateZ(v.rol);
+
                 v.pushMatrix();
                 v.rotate(PApplet.radians(rad));
                 v.lights();

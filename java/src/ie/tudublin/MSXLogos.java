@@ -42,7 +42,7 @@ class MSXModel {
     smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
     
             v.scale(s + smoothedBoxSize * 1);
-            v.stroke(v.hueShift(h), 255, 255, 10);
+            v.stroke(v.hueShift(h), 255, 255, v.alp);
             float newC = v.hueShift(h + 127 + lerpedS);
             // v.fill(newC, 255, 255, v.alp);       
             v.noFill();     

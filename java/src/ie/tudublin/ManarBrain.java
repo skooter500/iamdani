@@ -37,7 +37,7 @@ public class ManarBrain extends Poly
     float z = 0;
     public void drawBrain()
     {
-        p.strokeWeight(8);
+        p.strokeWeight(2);
         p.stroke(p.hueShift(30), 255, 255, v.alp);//color + weight of the line
         p.translate(p.width/2 , brainHeight, 0);//position of the brain on the screen
         v.rotateX(v.pit);
@@ -245,7 +245,7 @@ public class ManarBrain extends Poly
             float y = p.sin(angle + i * p.TWO_PI / 10) * radius + p.height/2f;
             p.stroke(p.hueShift(93), 255, 255, v.alp);
             p.fill(p.hueShift(93), 255, 255, v.alp);
-
+            p.noFill();
             p.ellipse(x, y, 20, 20);
         }
         angle += 0.01 * v.spe;//speed of the smaller rotating circles

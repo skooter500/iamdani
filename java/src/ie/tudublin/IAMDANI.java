@@ -365,16 +365,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetPit = 0f;
         targetYaw = 0f;
         targetBas = 3.6f;
-        targetAlp = 75;
-        //targetAld = 10;
+        targetAlp = 25;
+        targetAld = 10;
         targetMul = 1.0f;
     
         bhu = 4;
-        bri = 22;
+        bri = 19;
         sat = 255;    
         cqz = 255;   
 
-        cqz = 255;
+        cqz = 1;
         font = createFont("" + matchingFiles[bhu], bri);
         textFont(font);
 
@@ -582,7 +582,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         for(String key:stats.keySet())
         {
-            fill(hueShift(0), 255, 255);
             float x = width - 240;
             
             float f = stats.get(key);
@@ -592,12 +591,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             {
                 
                 int thisFrame = frameCount % 60;
-                fill(thisFrame < 30 ? hueShift(42) : hueShift(-42), 255, 255);
+                fill(thisFrame < 30 ? pingpongmap(cco + 42, 0, 255, 0, 255) : pingpongmap(cco - 42, 0, 255, 0, 255), 255, 255);
                 ff = abs(ff);
             }
             else
             {
-                fill(hueShift(90), 255, 255);
+                fill(pingpongmap(cco + 200, 0, 255, 0, 255), 255, 255);                        
             }
             text(nf(ff, 3, 3), x + 85, y);
 
@@ -664,7 +663,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             consoleSize = moveTowards(consoleSize, targetSize, 5);
             myTextarea.setSize(1920, (int) consoleSize)
                     .setVisible(true)
-                    .setColor(color(255, 0, 255));
+                    .setFont(font)
+                    .setColor(color(cco, 255, 255));
 
         } else {
             consoleSize = 0;

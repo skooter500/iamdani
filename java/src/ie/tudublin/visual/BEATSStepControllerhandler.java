@@ -102,12 +102,13 @@ public class BEATSStepControllerhandler implements ControllerHandler{
         return;
     }
 
-    if (number == 18) {
+    /*if (number == 18) {
         // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
         v.targetHue = clockWise ? v.targetHue + 5f : v.targetHue - 5f;
         if (v.exp)
             v.println("EUH " + v.nf(v.targetHue, 3, 2));
     }
+    */
 
     if (number == 76) {
         v.targetAld = v.min(v.max(clockWise ? v.targetAld + .1f : v.targetAld - .1f, 0), 50);
