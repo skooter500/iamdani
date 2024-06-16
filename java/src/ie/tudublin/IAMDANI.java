@@ -238,6 +238,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
+        addVision(0, new SarahVisual(this));
+        
+
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
         addVision(0, new Nematode(this));
@@ -276,7 +279,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         addVision(5, new MSXLogos(this, "msx.obj"));
         addVision(5, new MSXLogos(this, "chip.obj"));
-        addVision(0, new SarahVisual(this));
         addVision(0, new Particles(this));
 
 
@@ -367,7 +369,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetYaw = 0f;
         targetBas = 3.6f;
         targetAlp = 50;
-        targetAld = 10;
+        targetAld = 26;
         targetMul = 1.0f;
     
         bhu = 4;
@@ -576,14 +578,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         stats.put("BRI", bri);
         stats.put("BHU", new Float(bhu));
 
-        float rh = 30;
+        float rh = 25;
 
         float h = rh * stats.size();
         float y = height - h;
         
         for(String key:stats.keySet())
         {
-            float x = width - 240;
+            float x = width - 210;
             
             float f = stats.get(key);
 
@@ -599,7 +601,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             {
                 fill(pingpongmap(cco + 200, 0, 255, 0, 255), 255, 255, alp);                        
             }
-            text(nf(ff, 3, 3), x + 85, y);
+            text(nf(ff, 3, 3), x + 65, y);
 
             key = new StringBuffer(key).reverse().toString();
 

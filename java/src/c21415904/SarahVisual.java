@@ -74,7 +74,7 @@ public class SarahVisual extends VScene {
                 v.fill(c, 255, 255);
                 v.scale((float) 0.99);
                 v.rotate(PApplet.radians(theta));
-                v.ellipse(cx, cy, 50 + (v.getSmoothedAmplitude() * 200), 50 + (v.getSmoothedAmplitude() * 200));
+                v.ellipse(cx, cy, 20 + (v.getSmoothedAmplitude() * 10), 20 + (v.getSmoothedAmplitude() * 10));
 
             }
             theta += 0.08;
@@ -357,7 +357,7 @@ public class SarahVisual extends VScene {
 
                     for (Blob b : blobs) {
                         float d = PApplet.dist(x, y, b.pos.x, b.pos.y);
-                        sum += 100 * b.r / d * (v.getSmoothedAmplitude() * 50);
+                        sum += 100 * b.r / d * (v.getSmoothedAmplitude());
                     }
 
                     float c = v.hueShift(sum % 360);

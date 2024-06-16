@@ -40,12 +40,11 @@ public class Terrain extends Poly {
 
         v.noFill();
 
-        v.translate(v.width / 2, v.height / 2 - 200, -500);
+        v.translate(v.width / 2, v.height / 2, -500);
         v.rotateX(v.pit);
         v.rotateY(-v.yaw);
         v.rotateZ(v.rol);
 
-        v.rotateX(v.PI / 3);
         v.translate(-w / 2, -h / 2);
         for (int y = 0; y < rows - 1; y++) {
             v.beginShape(v.TRIANGLE_STRIP);

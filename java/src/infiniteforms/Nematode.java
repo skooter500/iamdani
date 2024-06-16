@@ -93,7 +93,7 @@ public class Nematode extends Poly
     
     w = 80;
     float half = w * length * 0.5f;
-    v.strokeWeight(1);
+    v.strokeWeight(2);
 
     v.rotateX(v.pit);
     v.rotateY(-v.yaw + 0.13f);
@@ -134,11 +134,11 @@ public class Nematode extends Poly
       if (limbs > 0 && i > 0)
       {
         float er = (w * 1.0f) - eyeRadius;
-        v.line(-haw, y, -er + (eyeRadius * 2.5f), y);
-        v.line(haw, y, er - (eyeRadius * 2.5f), y);
+        v.line(-haw, y, -er + (eyeRadius * 1.5f), y);
+        v.line(haw, y, er - (eyeRadius * 1.5f), y);
         v.stroke(v.hueShift(c2), 255, 255, v.alp);
-        v.circle(er, y, eyeRadius * 5.0f);
-        v.circle(-er, y, eyeRadius * 5.0f);
+        v.circle(er, y, eyeRadius * 3.0f);
+        v.circle(-er, y, eyeRadius * 3.0f);
       }      
       if (i == 0)
       {
