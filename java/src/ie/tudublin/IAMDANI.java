@@ -284,7 +284,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // addVision(6, new Models1(this, "phoenix.obj", false, true));
         
         
-        addVision(6, new Models1(this, "dave and rosie.obj", false, true));
+        addVision(6, new Models1(this, "skooter500.obj", false, true));
+        addVision(6, new Models1(this, "iamdani.obj", false, true));
         addVision(6, new Models1(this, "bong.obj", false, true));
         addVision(6, new Models1(this, "pyramid.obj", false, true));
         addVision(6, new Models1(this, "eden.obj", false, true));
@@ -365,7 +366,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetPit = 0f;
         targetYaw = 0f;
         targetBas = 3.6f;
-        targetAlp = 25;
+        targetAlp = 50;
         targetAld = 10;
         targetMul = 1.0f;
     
@@ -422,13 +423,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
         
         if (g == 0) {
-             targetAld = 0;
-             targetPit = 0;
-             targetRol = 0;
-             targetYaw = 0;
-             rol = 0;
-             pit = 0;
-             yaw = 0;
+             // targetAld = 0;
+             //targetPit = 0;
+             //targetRol = 0;
+             //targetYaw = 0;
+             //rol = 0;
+             //pit = 0;
+            //  /yaw = 0;
          }
 
         change(v);
@@ -591,12 +592,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             {
                 
                 int thisFrame = frameCount % 60;
-                fill(thisFrame < 30 ? pingpongmap(cco + 42, 0, 255, 0, 255) : pingpongmap(cco - 42, 0, 255, 0, 255), 255, 255);
+                fill(thisFrame < 30 ? pingpongmap(cco + 42, 0, 255, 0, 255) : pingpongmap(cco - 42, 0, 255, 0, 255), 255, 255, alp);
                 ff = abs(ff);
             }
             else
             {
-                fill(pingpongmap(cco + 200, 0, 255, 0, 255), 255, 255);                        
+                fill(pingpongmap(cco + 200, 0, 255, 0, 255), 255, 255, alp);                        
             }
             text(nf(ff, 3, 3), x + 85, y);
 
@@ -664,7 +665,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             myTextarea.setSize(1920, (int) consoleSize)
                     .setVisible(true)
                     .setFont(font)
-                    .setColor(color(cco, 255, 255));
+                    .setColor(color(cco, 255, 255, alp));
 
         } else {
             consoleSize = 0;

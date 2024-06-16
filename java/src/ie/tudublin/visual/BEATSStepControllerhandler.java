@@ -219,9 +219,10 @@ public class BEATSStepControllerhandler implements ControllerHandler{
 
         if (pitch == 48)
         {
-            v.targetYaw = v.HALF_PI;
-            v.targetPit = v.HALF_PI;
-            v.targetRol = - v.HALF_PI;
+            v.targetYaw = v.QUARTER_PI * (int) v.random(0,7);
+            v.targetPit = v.QUARTER_PI * (int) v.random(0,7);
+            v.targetRol = v.QUARTER_PI * (int) v.random(0,7);
+            //v.targetRol = - v.HALF_PI;
             // targetHue = random(0, 255);
             // v.targetAlp = random(10, 255);
             // targetAld = random(0, 50);
