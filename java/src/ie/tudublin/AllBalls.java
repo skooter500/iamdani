@@ -18,6 +18,11 @@ public class AllBalls extends Poly {
     
     Balls[] balls; //This is an array of Balls
     int numBalls = 150; //This is the number of Balls
+
+    public void enter()
+    {
+        v.cqz = 255;
+    }
     
 
     public AllBalls(IAMDANI v)

@@ -74,6 +74,11 @@ public class MSXLogos extends Poly{
 
     String filename;
 
+    public void enter()
+    {
+        v.cqz = 1;
+    }
+
     public  MSXLogos(IAMDANI v, String filename) {
         super(v);
         this.filename = filename;

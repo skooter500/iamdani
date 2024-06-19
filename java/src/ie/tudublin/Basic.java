@@ -35,6 +35,7 @@ public class Basic extends Poly {
         line = 0;
         ch = 0;
         f = v.random(265);
+        v.cqz = 1;
     }
 
     float f = 0;

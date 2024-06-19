@@ -17,6 +17,8 @@ public class Mena extends Poly {
     public void enter()
     {
         y = 1000;
+        v.cqz = 255;
+        
     }
 
     // varaible for rocket

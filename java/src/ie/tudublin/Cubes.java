@@ -17,6 +17,7 @@ public class Cubes extends Poly
     {
         sizeBox = 1000;
         sizeRect = 10;
+        v.cqz = 255;
     }
 
     @Override

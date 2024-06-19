@@ -12,6 +12,10 @@ public class paris extends Poly {
     super(v);
   }
 
+  public void enter() {
+    v.cqz = 255;
+  }
+
   // declare the variable
 
   int cols, rows;

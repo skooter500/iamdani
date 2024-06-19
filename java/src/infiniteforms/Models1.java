@@ -25,6 +25,7 @@ public class Models1 extends Poly
   {
     model.smoothedBoxSize = 20;
     model.colorOffset = (int) v.random(0, 256);
+    v.cqz = 1;
   }
 
   float smoothedBoxSize = 0;

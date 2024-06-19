@@ -10,6 +10,11 @@ public class ManarBrain extends Poly
     float y = 0;
     float smoothedY = 0;
     float smoothedAmplitude = 0;
+
+    public void enter()
+    {
+        v.cqz = 256;
+    }
  
     public ManarBrain(Visual p)
     {
