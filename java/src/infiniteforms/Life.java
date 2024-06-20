@@ -61,6 +61,7 @@ public class Life extends Poly
   {
     clearBoard();
     makePattern();
+    v.cqz = 255;
   }
 
   public void MakeGosperGun(int x, int y)

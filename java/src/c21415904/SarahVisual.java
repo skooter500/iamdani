@@ -24,6 +24,10 @@ public class SarahVisual extends VScene {
 
     GlobalVisual gv;
 
+    public void enter() {
+        v.cqz = 255;
+    }
+
     public SarahVisual(Visual v) {
         super(v);
         this.v = (IAMDANI) v;

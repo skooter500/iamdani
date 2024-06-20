@@ -20,6 +20,10 @@ public class Terrain extends Poly {
         terrain = new float[cols][rows];
     }
 
+    public void enter() {
+        v.cqz = 1;
+    }
+
     float offs = 0;
 
     public void render() {

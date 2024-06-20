@@ -17,6 +17,7 @@ public class IFCubes extends Poly {
       c.smoothedBoxSize = 200;
       c.colorOffset = offs;
     }
+    v.cqz = 1;
   }
   
   public IFCubes(IAMDANI v, int numCubes, float radius, float z)

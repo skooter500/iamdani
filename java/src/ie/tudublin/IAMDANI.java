@@ -238,9 +238,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
-        addVision(0, new SarahVisual(this));
-        
-
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
         addVision(0, new Nematode(this));
@@ -280,7 +277,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(5, new MSXLogos(this, "msx.obj"));
         addVision(5, new MSXLogos(this, "chip.obj"));
         addVision(0, new Particles(this));
-
+        addVision(0, new SarahVisual(this));
+        
 
         // YM2413
         // addVision(6, new Models1(this, "phoenix.obj", false, true));
@@ -374,10 +372,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     
         bhu = 4;
         bri = 19;
-        sat = 255;    
-        cqz = 255;   
+        sat = 255;   
+        targetHue = 90;
 
-        cqz = 1;
+        //cqz = 255;   
+
+        //cqz = 1;
         font = createFont("" + matchingFiles[bhu], bri);
         textFont(font);
 
@@ -456,6 +456,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // targetAld = 0;
         visions.get(whichVisual).enter();
         println("bload \"" + visions.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".com\"");
+        println("ok");
+        println("run");
     }
 
     static public boolean exp = true;

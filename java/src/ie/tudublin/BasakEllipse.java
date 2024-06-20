@@ -8,6 +8,11 @@ public class BasakEllipse extends Poly {
     private float strokeWeightMapped;
     Ellipse ellipse;
 
+    public void enter()
+    {
+        v.cqz = 1;
+    }
+
     
 
     public BasakEllipse(Visual v) {

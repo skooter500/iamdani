@@ -45,6 +45,7 @@ public class Nematode extends Poly
 
     dani = new DANI(v, "nematodes.txt");
     dani.l = 15;
+    v.cqz = 50;
     
   }
 

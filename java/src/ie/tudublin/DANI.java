@@ -27,6 +27,7 @@ public class DANI extends Poly {
         this.fileName = fileName;
         f = (int) v.random(256);
         loadFile();
+
     }
 
     public void enter()
@@ -35,6 +36,7 @@ public class DANI extends Poly {
         line = 0;
         ch = 0;
         f = (int) v.random(256);
+        v.cqz = 1;
     }
 
     int f = 0;

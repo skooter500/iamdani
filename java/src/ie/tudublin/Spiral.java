@@ -11,6 +11,10 @@ public class Spiral extends Poly{
     
   }
 
+  public void enter(){
+    v.cqz = 1;
+  }
+
   
   
   @Override
@@ -41,7 +45,7 @@ public class Spiral extends Poly{
         else{
           cRange = 3000;
         }
-        diameter = v.getSmoothedAmplitude() * 600; //diametre of ellipse linked to song
+        diameter = v.getSmoothedAmplitude() * 100; //diametre of ellipse linked to song
         //float c = PApplet.map(i,0, v.getAudioBuffer().size() , 0, 50);
         float c = PApplet.map(i,0, 10 , 0, 255);
         c = v.hueShift(c);
@@ -63,7 +67,7 @@ public class Spiral extends Poly{
         else{
           cRange = 3000;
         }
-          diameter = v.getSmoothedAmplitude() * 600;
+          diameter = v.getSmoothedAmplitude() * 100;
           float c = PApplet.map(i, 0, v.getAudioBuffer().size() , 0, cRange);
           v.fill(v.hueShift(c),255,255, v.alp);
           v.scale(0.95f); //0.95-og //.98 // 0.5f //0.8
@@ -75,7 +79,7 @@ public class Spiral extends Poly{
        
     }
 
-    angle+=(PApplet.map(v.getSmoothedAmplitude() * v.spe * 0.1f, 0, 1.0f, 0, 1f)); //maps the rotation speed to the smoothedAmplitude
+    angle+=(PApplet.map(v.getSmoothedAmplitude() * v.spe * 0.01f, 0, 1.0f, 0, 1.0f)); //maps the rotation speed to the smoothedAmplitude
       
   }
 

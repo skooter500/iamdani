@@ -4,6 +4,11 @@ package ie.tudublin;
 import processing.core.PApplet;
 
 public class Cubesquared2 extends Poly{
+
+    public void enter(){
+        v.cqz = 255;
+    }
+
     public Cubesquared2 (IAMDANI v){
         super(v);
     }

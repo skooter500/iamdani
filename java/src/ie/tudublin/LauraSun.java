@@ -19,6 +19,10 @@ public class LauraSun extends Poly
         p = v;
         this.beat = v.beat;
     }
+
+    public void enter() {
+        v.cqz = 255;
+      }
  
     BeatDetect beat;
    
