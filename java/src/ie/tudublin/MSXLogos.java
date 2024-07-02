@@ -76,7 +76,8 @@ public class MSXLogos extends Poly{
 
     public void enter()
     {
-        v.cqz = 1;
+        v.defaults();
+        v.cqz = 1;        
     }
 
     public  MSXLogos(IAMDANI v, String filename) {

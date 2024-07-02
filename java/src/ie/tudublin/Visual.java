@@ -146,7 +146,7 @@ public abstract class Visual extends PApplet
 		}
 	}
 
-	public float pingpongmap(float a, float b, float c, float d, float e) {
+	public float pingpong(float a, float b, float c, float d, float e) {
         float range1 = c - b;
         float range2 = e - d;
         if (range1 == 0) {
@@ -245,7 +245,7 @@ public abstract class Visual extends PApplet
     public float hueShift(float f) {
 		//float g = (floor(f / cqz) * cqz);
 		//float g = (floor(f / cqz) * cqz) + hue;
-        return pingpongmap(map(f, 0, 255, 0, cqz) + hue, 0, 255, 0, 255);
+        return pingpong(map(f, 0, 255, 0, cqz) + hue, 0, 255, 0, 255);
     }
 }
 

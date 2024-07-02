@@ -587,7 +587,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         for(String key:stats.keySet())
         {
-            float x = width - 210;
+            float x = width - 150;
             
             float f = stats.get(key);
 
@@ -596,14 +596,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             {
                 
                 int thisFrame = frameCount % 60;
-                fill(thisFrame < 30 ? pingpongmap(cco + 42, 0, 255, 0, 255) : pingpongmap(cco - 42, 0, 255, 0, 255), 255, 255, alp);
+                fill(thisFrame < 30 ? pingpong(cco + 42, 0, 255, 0, 255) : pingpong(cco - 42, 0, 255, 0, 255), 255, 255, alp);
                 ff = abs(ff);
             }
             else
             {
-                fill(pingpongmap(cco + 200, 0, 255, 0, 255), 255, 255, alp);                        
+                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp);                        
             }
-            text(nf(ff, 3, 3), x + 65, y);
+            text(nf(ff, 3, 0), x + 75, y);
 
             key = new StringBuffer(key).reverse().toString();
 
@@ -669,6 +669,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             myTextarea.setSize(1920, (int) consoleSize)
                     .setVisible(true)
                     .setFont(font)
+                    .setLineHeight(30)
                     .setColor(color(cco, 255, 255, alp));
 
         } else {
