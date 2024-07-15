@@ -376,8 +376,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setText(console.toString())
                 .setVisible(true);
         ;
-        startPoly.enter();
 
+        art.enter();
     }
 
     public float consoleSize = 0;
@@ -675,13 +675,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void draw() {
 
-        if (startPoly != null)
-        {
-            startPoly.render(frameCount);
-            return;
-        }
-        
-
         colorMode(RGB);
         blendMode(SUBTRACT);////
         //fill(, ald);
@@ -736,7 +729,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         pushMatrix();
         pushStyle();
-        arts.get(whichVisual).render(frameCount); // renders the currently loaded visual        
+        art.render(frameCount); // renders the currently loaded visual        
         popStyle();
         popMatrix();
 

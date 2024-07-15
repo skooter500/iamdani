@@ -5,7 +5,7 @@ import processing.core.PFont;
 public class Splash extends Art
 {
     int t = 0;
-    int duration = 1000;
+    int duration = 10000;
 
     PFont font;
 
@@ -21,7 +21,7 @@ public class Splash extends Art
         v.showConsole = false;
         t = v.millis();
 
-        font = v.createFont("PixelOperatorMono8.ttf", 23);
+        font = v.createFont("./java/data/PixelOperatorMono8.ttf", 23);
         
         v.textFont(font);
     }
@@ -29,19 +29,18 @@ public class Splash extends Art
     public void exit()
     {
         v.showConsole = true;
-        v.startPoly = null;
-
         v.textFont(v.font);
+        v.background(0);
     }
 
     public void render()
     {
         v.pushStyle();
+        v.textFont(font);
         int d = v.millis() - t;
         if (d > duration)
         {
             v.showConsole = true;
-            v.startPoly = null;
             v.change(0);
             return;
         }
