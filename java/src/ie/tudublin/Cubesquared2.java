@@ -3,7 +3,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Cubesquared2 extends Poly{
+public class Cubesquared2 extends Art{
 
     public void enter(){
         v.cqz = 255;

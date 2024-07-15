@@ -4,11 +4,11 @@ import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
 
-public abstract class Poly {
+public abstract class Art {
     public IAMDANI v;
 
 
-    public Poly(Visual v){
+    public Art(Visual v){
         this.v = (IAMDANI) v;
     } 
 

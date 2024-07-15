@@ -1,9 +1,9 @@
 package infiniteforms;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 
-public class Life extends Poly
+public class Life extends Art
 {
   
   int boardWidth = 200;

@@ -3,7 +3,7 @@ package ie.tudublin;
 
 import ddf.minim.analysis.BeatDetect;
  
-public class RightHeart extends Poly
+public class RightHeart extends Art
 {
     Visual p;
     BeatDetect beat;

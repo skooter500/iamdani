@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class SinWaves extends Poly{
+public class SinWaves extends Art{
 
     public SinWaves(IAMDANI v) {
         super(v);

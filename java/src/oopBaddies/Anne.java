@@ -1,11 +1,11 @@
 package oopBaddies;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import ie.tudublin.Visual;
 
 //Start of the main 
-public class Anne extends Poly
+public class Anne extends Art
 // start of the main
 {
  

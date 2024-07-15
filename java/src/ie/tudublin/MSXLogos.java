@@ -66,7 +66,7 @@ class MSXModel {
         }
     }
 
-public class MSXLogos extends Poly{
+public class MSXLogos extends Art{
 
     ArrayList<MSXModel> models = new ArrayList<MSXModel>();
 

@@ -8,7 +8,7 @@ import infiniteforms.Nematode;
 import processing.core.PApplet;
 
 
-public class Basic extends Poly {
+public class Basic extends Art {
 
 	int mode = 0;
 

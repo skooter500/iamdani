@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class WaveyVisual extends Poly{
+public class WaveyVisual extends Art{
 
     public WaveyVisual(IAMDANI v) {
         super(v);

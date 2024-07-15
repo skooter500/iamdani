@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Spiral extends Poly{
+public class Spiral extends Art{
 
   float angle;
   

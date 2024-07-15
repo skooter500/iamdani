@@ -94,7 +94,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
         return;
     }
     if (number == 72) {
-        int newWhichVisual = v.min(v.max(clockWise ? v.whichVisual + 1 : v.whichVisual - 1, 0), v.visions.size() - 1);
+        int newWhichVisual = v.min(v.max(clockWise ? v.whichVisual + 1 : v.whichVisual - 1, 0), v.arts.size() - 1);
         if (newWhichVisual != v.whichVisual) {
             v.whichVisual = newWhichVisual;
             v.change(v.whichVisual);
@@ -102,6 +102,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
         return;
     }
 
+    
     /*if (number == 18) {
         // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
         v.targetHue = clockWise ? v.targetHue + 5f : v.targetHue - 5f;
@@ -188,7 +189,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
                     v.takeScreenshot = true;
                     return;
                 }
-                int newVisual = pitch % v.visions.size();
+                int newVisual = pitch % v.arts.size();
                 v.change(newVisual);
                 return;
             }
@@ -197,7 +198,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
                     v.takeScreenshot = true;
                     return;
                 }
-                int newVisual = (int) v.random(0, v.visions.size());
+                int newVisual = (int) v.random(0, v.arts.size());
                 v.change(newVisual);
                 return;
             }
@@ -208,10 +209,147 @@ public class BEATSStepControllerhandler implements ControllerHandler{
             return;
         }
 
+        if (pitch == 44)
+        {
+            v.hueShift(true);
+            return;
+        }
+
+        if (pitch == 36)
+        {
+            v.hueShift(false);
+            return;
+        }
+
+        if (pitch == 45)
+        {
+            v.hueShiftCCo(true);
+            return;
+        }
+
+        if (pitch == 37)
+        {
+            v.hueShiftCCo(false);
+            return;
+        }
+
+        if (pitch == 46)
+        {
+            v.targetYaw += v.QUARTER_PI;
+
+            if (v.checkKey(v.SHIFT) )
+            {
+                v.yaw = v.targetYaw;
+            }
+            v.println("WAY " + v.nf(v.degrees(v.targetYaw), 3, 0));
+            return;
+        }
+
+        if (pitch == 47)
+        {
+            v.targetPit += v.QUARTER_PI;
+
+            if (v.checkKey(v.SHIFT) )
+            {
+                v.pit = v.targetPit;
+            }
+
+            v.println("TIP " + v.nf(v.degrees(v.targetPit), 3, 0));
+            return;
+        }
+
+        if (pitch == 48)
+        {
+            v.targetRol += v.QUARTER_PI;
+
+            if (v.checkKey(v.SHIFT) )
+            {
+                v.rol = v.targetRol;
+            }
+
+            v.println("LOR " + v.nf(v.degrees(v.targetRol), 3, 0));
+            return;
+        }
+
+        if (pitch ==38)
+        {
+            v.targetYaw -= v.QUARTER_PI;
+
+            if (v.checkKey(v.SHIFT) )
+            {
+                v.yaw = v.targetYaw;
+            }
+
+            v.println("WAY " + v.nf(v.degrees(v.targetYaw), 3, 0));
+            return;
+        }
+
+
+        if (pitch == 39)
+        {
+            v.targetPit -= v.QUARTER_PI;
+
+            if (v.checkKey(v.SHIFT) )
+            {
+                v.pit = v.targetPit;
+            }
+
+            v.println("TIP " + v.nf(v.degrees(v.targetPit), 3, 0));
+            return;
+        }
+
+        if (pitch == 40)
+        {
+            v.targetRol -= v.QUARTER_PI;
+
+            if (v.checkKey(v.SHIFT) )
+            {
+                v.rol = v.targetRol;
+            }
+
+            v.println("LOR " + v.nf(v.degrees(v.targetRol), 3, 0));
+            return;
+        }
+
+        if (pitch == 49 && v.checkKey(v.SHIFT))
+        {
+            v.change(v.cue);
+            return;
+        }
+
+        if (pitch == 50 && v.checkKey(v.SHIFT))
+        {
+            v.targetAld = 5;
+            return;
+        }
+
+        if (pitch== 50)
+        {
+            v.targetAld = 0;
+            return;
+        }
+
+
+        if (pitch == 49)
+        {
+            v.cue = (v.cue + 1) % v.arts.size();
+            return;
+        }
+
+        if (pitch == 41)
+        {
+            v.cue = (v.cue - 1);
+            if (v.cue < 0)
+            {
+                v.cue = v.arts.size() - 1;
+            }
+            return;
+        }      
+
         // Receive a noteOn
         // SPecial codes
 
-        if (pitch >= 44 && pitch <= 47) {
+        /*if (pitch >= 44 && pitch <= 47) {
             int g = pitch - 44;
             v.changeToGroupVisual(g);
             return;
@@ -291,6 +429,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
             v.defaults();
             return;
         }
+        */
     }
     
 }

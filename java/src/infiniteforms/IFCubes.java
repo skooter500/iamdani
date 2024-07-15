@@ -1,9 +1,9 @@
 package infiniteforms;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 
-public class IFCubes extends Poly {
+public class IFCubes extends Art {
     IFCube[] cubes;
     float z = 0;
 

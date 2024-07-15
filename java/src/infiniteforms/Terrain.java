@@ -1,9 +1,9 @@
 package infiniteforms;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 
-public class Terrain extends Poly {
+public class Terrain extends Art {
     int cols, rows;
     int scl = 50;
     int w = 2000;

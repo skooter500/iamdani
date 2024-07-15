@@ -2,7 +2,7 @@ package ie.tudublin;
  
 import ddf.minim.Minim;
  
-public class ManarBrain extends Poly
+public class ManarBrain extends Art
 {
     Minim m;
     Visual p;

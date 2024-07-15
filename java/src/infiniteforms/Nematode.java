@@ -2,10 +2,10 @@ package infiniteforms;
 
 import ie.tudublin.IAMDANI;
 import ie.tudublin.DANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import processing.core.PFont;
 
-public class Nematode extends Poly
+public class Nematode extends Art
 {
   float length = 5;
   String name = "";

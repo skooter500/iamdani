@@ -1,6 +1,6 @@
 package ie.tudublin.visual;
 
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -33,7 +33,7 @@ import processing.core.PVector;
  *  }
  * </code></pre>
  */
-public abstract class VObject extends Poly{
+public abstract class VObject extends Art{
 
     public Visual v;
     public PVector position;

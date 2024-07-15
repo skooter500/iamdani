@@ -5,7 +5,7 @@ package ie.tudublin;
 import ddf.minim.AudioPlayer;
 import ddf.minim.analysis.BeatDetect;
  
-public class LeftHeart extends Poly
+public class LeftHeart extends Art
 {
     BeatDetect beat;
  

@@ -2,7 +2,7 @@ package ie.tudublin;
 import processing.core.PApplet;
 import processing.core.PShape;
 
-public class GrainneHead extends Poly
+public class GrainneHead extends Art
 {
 
     PShape spider_head;

@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Bloom extends Poly{
+public class Bloom extends Art{
 
     float angle;
 

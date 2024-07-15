@@ -1,10 +1,10 @@
 package infiniteforms;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import processing.core.PVector;
 
-public class Cube extends Poly 
+public class Cube extends Art 
 {
     
     PVector position;

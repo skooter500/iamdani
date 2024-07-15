@@ -1,10 +1,10 @@
 package C22398106;
 
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import ie.tudublin.Visual;
 import processing.core.PApplet;
 
-public class circles extends Poly
+public class circles extends Art
 {
     public circles(Visual v)
     { 

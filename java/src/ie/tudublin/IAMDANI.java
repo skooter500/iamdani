@@ -40,7 +40,7 @@ import themidibus.*; //Import the library
 
 public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
-    public ArrayList<Poly> visions = new ArrayList<Poly>();
+    public ArrayList<Art> arts = new ArrayList<Art>();
 
     // Poly play;
     public int previousVisual = 0;
@@ -60,21 +60,40 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //size(1000, 1000, P3D);
     }
 
+    public boolean[] keys = new boolean[2048];
+
+    
     PShape sphere;
 
     public int lea = 0;
 
+    public int cue = 0;
+
     public static IAMDANI instance;
 
-    public Poly startPoly = new Splash(this);
-
     public StringBuilder console = new StringBuilder();
+
+    public Art art = new Splash(this);
 
     public enum Modes {
         Ctrl, Auto, AutoRandom
     };
 
     public Modes mode = Modes.Ctrl;
+
+    public void hueShift(boolean upOrDown) {
+        float dist = 42;
+        targetHue += upOrDown ? dist : -dist;
+
+        println("HUE " + targetHue);
+    }
+
+    public void hueShiftCCo(boolean upOrDown) {
+        float dist = 42;
+        targetCCo += upOrDown ? dist : -dist;
+        println("CCO " + targetCCo);
+    }
+
 
     public static void println(String o) {
         instance.console.append(o + "\n");
@@ -161,7 +180,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         return current + (delta > 0 ? 1 : -1) * maxDistanceDelta;
     }
 
-    void addVision(int g, Poly p) {
+    void addVision(int g, Art p) {
         ArrayList<Integer> group = null;
         if (groups.containsKey(g)) {
             group = groups.get(g);
@@ -169,8 +188,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             group = new ArrayList<Integer>();
             groups.put(g, group);
         }
-        group.add(visions.size());
-        visions.add(p);
+        group.add(arts.size());
+        arts.add(p);
     }
 
     // public void sphere(float size)
@@ -449,19 +468,22 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void change(int into) {
         if (into < 0) {
-            into = visions.size() + into;
+            into = arts.size() + into;
         }
-        into = into % visions.size();
-        if (whichVisual >= 0 && whichVisual < visions.size()) {
-            visions.get(whichVisual).exit();
+        into = into % arts.size();
+        if (whichVisual >= 0 && whichVisual < arts.size()) {
+            arts.get(whichVisual).exit();
         }
         whichVisual = into;
         alp = 0;
         // targetAld = 0;
-        visions.get(whichVisual).enter();
-        println("bload \"" + visions.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".com\"");
+
+        art = arts.get(whichVisual);
+        art.enter();
+        println("bload \"" + arts.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".art\"");
         println("ok");
         println("run");
+        println("ok");
     }
 
     static public boolean exp = true;
@@ -492,7 +514,23 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         return -1;
     }
 
+    public void keyReleased() {
+        keys[keyCode] = false;
+    }
+
+    public boolean checkKey(int k)
+    {
+    if (keys.length >= k) 
+    {
+        return keys[k] || keys[Character.toUpperCase(k)];  
+    }
+    return false;
+    }
+
+
     public void keyPressed() {
+
+        keys[keyCode] = true;
 
         if (key == ENTER) {
             midiConnect();
@@ -570,6 +608,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         
         stats.put("Z80", spe);
+        stats.put("cue", (float) cue);
         stats.put("IDX", (float) whichVisual);        
         stats.put("AMP", getSmoothedAmplitude());
         stats.put("ALD", ald);
@@ -675,7 +714,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                     .setVisible(true)
                     .setFont(font)
                     .setLineHeight(30)
-                    .setColor(color(cco, 255, 255, alp));
+                    .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp));
 
         } else {
             consoleSize = 0;
@@ -697,7 +736,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         pushMatrix();
         pushStyle();
-        visions.get(whichVisual).render(frameCount); // renders the currently loaded visual        
+        arts.get(whichVisual).render(frameCount); // renders the currently loaded visual        
         popStyle();
         popMatrix();
 

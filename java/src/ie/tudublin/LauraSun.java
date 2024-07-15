@@ -3,7 +3,7 @@ package ie.tudublin;
 import ddf.minim.analysis.BeatDetect;
 import example.MyVisual;
  
-public class LauraSun extends Poly
+public class LauraSun extends Art
 {
     IAMDANI p;
  

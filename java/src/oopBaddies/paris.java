@@ -2,10 +2,10 @@ package oopBaddies;
 
 import processing.core.PApplet;
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import ie.tudublin.Visual;
 
-public class paris extends Poly {
+public class paris extends Art {
 
   public paris(IAMDANI v) {
 

@@ -3,7 +3,7 @@ package ie.tudublin;
  
 import ddf.minim.analysis.BeatDetect;
  
-public class JiaHeart extends Poly
+public class JiaHeart extends Art
 {
     Visual p;
     BeatDetect beat;

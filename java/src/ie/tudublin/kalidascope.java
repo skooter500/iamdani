@@ -1,7 +1,7 @@
 package ie.tudublin;
 import processing.core.PApplet;
 
-public class kalidascope extends Poly
+public class kalidascope extends Art
 {
     public kalidascope(IAMDANI v) {
         super(v);
