@@ -200,9 +200,22 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void setup() {
 
+        targetAld = 5;
+        targetHue = 47;
         
         loadFonts();
         defaults();
+
+        sat = 255;   
+        //
+
+
+        bhu = 3;
+        bri = 23;
+
+        cqz = 1;
+        font = createFont("" + matchingFiles[bhu], bri);
+        textFont(font);
         
 
         sphere = loadShape("sphere.obj");
@@ -361,37 +374,28 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void defaults() {
         println("DEF");
-        targetCCo = cco = 76f;
+        
         targetRol = 0f;
         targetPit = 0f;
         targetYaw = 0f;
-        targetBas = 3.6f;
-        targetAlp = 50;
-        targetAld = 26;
-        targetMul = 1.0f;
+        //targetBas = 3.6f;
+        //targetAlp = 50;
+        //
+        //targetMul = 1.0f;
     
-        bhu = 4;
-        bri = 19;
-        sat = 255;   
-        targetHue = 90;
-
-        //cqz = 255;   
-
-        //cqz = 1;
-        font = createFont("" + matchingFiles[bhu], bri);
-        textFont(font);
+        
 
     }
 
     public float targetPit = 0f;
     public float targetYaw = 0f;
 
-    public float targetCCo = 0f;
+    public float targetCCo = 91f;
     public float targetRol = 0f;
     public float targetSpe = 1.0f;
     public float targetHue = 0;
     public float targetAlp = 75;
-    public float targetAld = 4;
+    public float targetAld = 5;
     public float targetMul = 1.0f;
     public float targetBas = 0.3f;
     public int bhu;
@@ -596,7 +600,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             {
                 
                 int thisFrame = frameCount % 60;
-                fill(thisFrame < 30 ? pingpong(cco + 42, 0, 255, 0, 255) : pingpong(cco - 42, 0, 255, 0, 255), 255, 255, alp);
+                fill(thisFrame < 30 ? pingpong(
+                    42, 0, 255, 0, 255) : pingpong(cco - 42, 0, 255, 0, 255), 255, 255, alp);
                 ff = abs(ff);
             }
             else
