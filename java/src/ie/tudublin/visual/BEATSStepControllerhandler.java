@@ -278,6 +278,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
             if (v.checkKey(v.SHIFT) )
             {
                 v.yaw = v.targetYaw;
+                v.println("shift");
             }
 
             v.println("WAY " + v.nf(v.degrees(v.targetYaw), 3, 0));

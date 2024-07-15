@@ -473,6 +473,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         into = into % arts.size();
         if (whichVisual >= 0 && whichVisual < arts.size()) {
             arts.get(whichVisual).exit();
+            println("OK");
         }
         whichVisual = into;
         alp = 0;
@@ -483,7 +484,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         println("bload \"" + arts.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".art\"");
         println("ok");
         println("run");
-        println("ok");
     }
 
     static public boolean exp = true;
@@ -627,6 +627,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         float h = rh * stats.size();
         float y = height - h;
+
+        textFont(font);
         
         for(String key:stats.keySet())
         {

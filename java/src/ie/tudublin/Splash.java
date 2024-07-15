@@ -5,7 +5,7 @@ import processing.core.PFont;
 public class Splash extends Art
 {
     int t = 0;
-    int duration = 10000;
+    int duration = 1000;
 
     PFont font;
 
@@ -41,6 +41,7 @@ public class Splash extends Art
         if (d > duration)
         {
             v.showConsole = true;
+            exit();
             v.change(0);
             return;
         }
