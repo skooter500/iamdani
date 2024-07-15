@@ -67,7 +67,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
 
     if (number == 79) {
         v.bri = (clockWise ? v.bri + 1f : v.bri - 1f);
-        v.bri = v.max(0, v.bri);
+        v.bri = v.max(1, v.bri);
         if (v.exp)
         v.println("v.bri " + v.nf(v.bri, 3, 2));
 
@@ -83,22 +83,21 @@ public class BEATSStepControllerhandler implements ControllerHandler{
 
 
     }
+    // if (number == 75) {
+    //     ArrayList<Integer> group = v.groups.get(v.findGroup(v.whichVisual));
+    //     int newWhichVisual = v.min(v.max(clockWise ? v.whichVisual + 1 : v.whichVisual - 1, group.get(0)),
+    //             group.get(group.size() - 1));
+    //     if (newWhichVisual != v.whichVisual) {
+    //         v.whichVisual = newWhichVisual;
+    //         v.change(v.whichVisual);
+    //     }
+    //     return;
+    // }
     if (number == 75) {
-        ArrayList<Integer> group = v.groups.get(v.findGroup(v.whichVisual));
-        int newWhichVisual = v.min(v.max(clockWise ? v.whichVisual + 1 : v.whichVisual - 1, group.get(0)),
-                group.get(group.size() - 1));
-        if (newWhichVisual != v.whichVisual) {
-            v.whichVisual = newWhichVisual;
-            v.change(v.whichVisual);
-        }
-        return;
-    }
-    if (number == 72) {
-        int newWhichVisual = v.min(v.max(clockWise ? v.whichVisual + 1 : v.whichVisual - 1, 0), v.arts.size() - 1);
-        if (newWhichVisual != v.whichVisual) {
-            v.whichVisual = newWhichVisual;
-            v.change(v.whichVisual);
-        }
+        v.cue = v.min(v.max(clockWise ? v.cue + 1 : v.cue - 1, 0), v.arts.size() - 1);
+        v.println("EUC: " + v.cue);
+        v.println("CUE ART: \"" + v.arts.get(v.cue).getClass().getSimpleName().toLowerCase() + ".art\"");
+
         return;
     }
 
@@ -241,7 +240,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
             {
                 v.yaw = v.targetYaw;
             }
-            v.println("WAY " + v.nf(v.degrees(v.targetYaw), 3, 0));
+            v.println("WAY: " + v.nf(v.degrees(v.targetYaw), 3, 0));
             return;
         }
 
@@ -254,7 +253,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
                 v.pit = v.targetPit;
             }
 
-            v.println("TIP " + v.nf(v.degrees(v.targetPit), 3, 0));
+            v.println("TIP: " + v.nf(v.degrees(v.targetPit), 3, 0));
             return;
         }
 
@@ -267,7 +266,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
                 v.rol = v.targetRol;
             }
 
-            v.println("LOR " + v.nf(v.degrees(v.targetRol), 3, 0));
+            v.println("LOR: " + v.nf(v.degrees(v.targetRol), 3, 0));
             return;
         }
 
@@ -281,7 +280,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
                 v.println("shift");
             }
 
-            v.println("WAY " + v.nf(v.degrees(v.targetYaw), 3, 0));
+            v.println("WAY: " + v.nf(v.degrees(v.targetYaw), 3, 0));
             return;
         }
 
@@ -295,7 +294,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
                 v.pit = v.targetPit;
             }
 
-            v.println("TIP " + v.nf(v.degrees(v.targetPit), 3, 0));
+            v.println("TIP: " + v.nf(v.degrees(v.targetPit), 3, 0));
             return;
         }
 
@@ -308,7 +307,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
                 v.rol = v.targetRol;
             }
 
-            v.println("LOR " + v.nf(v.degrees(v.targetRol), 3, 0));
+            v.println("LOR: " + v.nf(v.degrees(v.targetRol), 3, 0));
             return;
         }
 
@@ -321,12 +320,14 @@ public class BEATSStepControllerhandler implements ControllerHandler{
         if (pitch == 50 && v.checkKey(v.SHIFT))
         {
             v.targetAld = 5;
+            v.println("DAL: " + v.targetAld);
             return;
         }
 
         if (pitch== 50)
         {
             v.targetAld = 0;
+            v.println("DAL: " + v.targetAld);
             return;
         }
 
@@ -334,6 +335,9 @@ public class BEATSStepControllerhandler implements ControllerHandler{
         if (pitch == 49)
         {
             v.cue = (v.cue + 1) % v.arts.size();
+            v.println("EUC: " + v.cue);
+            v.println("CUE ART: " + v.arts.get(v.cue).getClass().getSimpleName().toLowerCase() + ".art\"");
+
             return;
         }
 
@@ -344,8 +348,40 @@ public class BEATSStepControllerhandler implements ControllerHandler{
             {
                 v.cue = v.arts.size() - 1;
             }
+            v.println("CUE: " + v.cue);
+            v.println("CUE ART: " + v.arts.get(v.cue).getClass().getSimpleName().toLowerCase() + ".art\"");
             return;
-        }      
+        }    
+        
+        if (pitch == 42 && v.checkKey(v.SHIFT))
+        {
+            v.targetBas -= 2f;
+            v.println("SAB: " + v.targetBas);
+            return;
+        }
+
+        if (pitch == 42)
+        {
+            v.targetBas += 2f;
+            v.println("SAB: " + v.targetBas);
+            return;
+        }
+
+        if (pitch == 51 && v.checkKey(v.SHIFT))
+        {
+            v.defaults();
+            return;
+        }
+
+        if (pitch == 51) {
+            v.showConsole = !v.showConsole;
+            v.println("CON:" + v.showConsole);
+            v.consoleSize = 0;
+            if (!v.showConsole) {
+                v.myTextarea.setVisible(v.showConsole);
+            }
+            return;
+        }
 
         // Receive a noteOn
         // SPecial codes
@@ -386,15 +422,7 @@ public class BEATSStepControllerhandler implements ControllerHandler{
             }
         }
 
-        if (pitch == 51) {
-            v.showConsole = !v.showConsole;
-            v.println("CON:" + v.showConsole);
-            v.consoleSize = 0;
-            if (!v.showConsole) {
-                v.myTextarea.setVisible(v.showConsole);
-            }
-            return;
-        }
+        
         if (pitch == 49) {
             boolean clockWise = true;
             ArrayList<Integer> group = v.groups.get(v.findGroup(v.whichVisual));

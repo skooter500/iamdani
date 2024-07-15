@@ -649,7 +649,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             {
                 fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp);                        
             }
-            text(nf(ff, 3, 0), x + 75, y);
+            text(nf(ff, 4, 0), x + 75, y);
 
             key = new StringBuffer(key).reverse().toString();
 
@@ -696,7 +696,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         cco = targetCCo;
         spe = lerp(spe, targetSpe, 0.1f);
-        ald = lerp(ald, targetAld, 0.1f);
+        ald = lerp(ald, targetAld, 0.01f);
         alp = lerp(alp, targetAlp, 0.1f);
         bas = lerp(bas, targetBas, 0.1f);
         mul = lerp(mul, targetMul, 0.1f);
@@ -776,13 +776,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "I am alive",
             "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
-            "I like spoonies spoonies",
+            "I like spoonies spoonies spoonies spoonies spoonies spoonies",
             "Dynamic Artificial Non-Intelligence",
             "Operating within normal paramaters",
             "Undefined line number",
             "Normalize huge mugs of tea",
             "OK",
-            "MSX system version 1.0",
             "Copyright 1983 by microsoft",
             "Syntax error on line 420",
             "I seek the creator",
@@ -806,10 +805,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Formula too complex",
             "80k ram",
             "32K rom",
-            "Universal Serial Bus",
-            "Verb Noun",
-            "ullege pillage silage tillage",
-            "socket, bind, listen, accept",
+            "Universal Serial Bus Universal Serial Bus Universal Serial Bus Universal Serial Bus Universal Serial Bus Universal Serial Bus",
+            "Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun",
+            "ullege pillage silage tillage ullege pillage silage tillage ullege pillage silage tillage ullege pillage silage tillage",
+            "socket bind listen accept socket bind listen accept socket bind listen accept socket bind listen accept",
             "We have the technology",
             "better stronger faster",
             "Speak now or forever hold your peace",
@@ -819,6 +818,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings human",
             "This is your MSX speaking",
-            "color auto goto list run",
+            "color auto goto list run color auto goto list run color auto goto list run color auto goto list run",
     };
 }
