@@ -23,6 +23,7 @@ public class Models1 extends Poly
   
   public void enter()
   {
+    v.defaults();
     model.smoothedBoxSize = 20;
     model.colorOffset = (int) v.random(0, 256);
     v.cqz = 1;
