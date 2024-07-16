@@ -216,6 +216,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
     }
 
+    public float targetCqz = 1;
 
     public void setup() {
 
@@ -233,6 +234,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         bri = 23;
 
         cqz = 1;
+        targetCqz = 1;
         font = createFont("" + matchingFiles[bhu], bri);
         textFont(font);
         
@@ -390,6 +392,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float consoleColor = 100;
 
     public boolean takeScreenshot = false;
+
+
 
     public void defaults() {
         println("DEF");
@@ -701,6 +705,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         bas = lerp(bas, targetBas, 0.1f);
         mul = lerp(mul, targetMul, 0.1f);
         hue = lerp(hue, targetHue, 0.1f);
+        cqz = lerp(cqz, targetCqz, 0.1f);
         colorRange = lerp(colorRange, bhu, 0.1f);
 
         if (showConsole) {
