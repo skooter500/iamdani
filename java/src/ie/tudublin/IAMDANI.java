@@ -151,6 +151,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                         println("Joy detected: " + curr);
                         break;
                     }
+                    if (curr.equals("MoveMusic")) {
+                        daniMidi = i;
+                        ch = new BEATSStepControllerhandler(this);
+                        println("Joy detected: " + curr);
+                        break;
+                    }
+
                 }
             }
 
