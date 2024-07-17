@@ -22,30 +22,30 @@ public class MoveMusicHandler implements ControllerHandler{
         boolean clockWise = (value < 100);
 
     if (number == 7) {
-        v.targetSpe = v.min(v.max(clockWise ? v.targetSpe + 0.05f : v.targetSpe - 0.05f, 0.0f), 3.58f);
+        v.targetSpe = v.map((float) value, 0.0f, 127.0f, 0.0f, 3.58f);
         if (v.exp)
             v.println("Z80 " + v.nf(v.targetSpe, 1, 2) + " MHZ");
     }
 
     if (number == 10) {
-        v.targetBas = v.max(clockWise ? v.targetBas + 0.1f : v.targetBas - 0.1f, 0.01f);
+        v.targetBas = v.map((float) value, 0.0f, 127.0f,0.0f, 10.0f);
         if (v.exp)
             v.println("SAB " + v.nf(v.targetBas, 3, 2));
     }
 
     if (number == 114) {
-        v.targetMul = v.max(clockWise ? v.targetMul + 0.1f : v.targetMul - 0.1f, 0);
+        v.targetMul = v.map((float) value, 0.0f, 127.0f,0.0f, 100.0f);
         if (v.exp)
         v.println("LUM " + v.nf(v.targetMul, 3, 2));
     }
     if (number == 74) {
         // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
-        v.targetHue = clockWise ? v.targetHue + 1f : v.targetHue - 1f;
+        v.targetHue = v.map((float) value, 0.0f, 127.0f,0.0f, 255.0f);
         if (v.exp)
         v.println("EUH " + v.nf(v.targetHue, 3, 2));
     }
     if (number == 73) {
-        v.bhu = (clockWise ? v.bhu + 1 : v.bhu - 1);
+        v.bhu = (int) v.map((float) value, 0.0f, 127.0f,0.0f, v.matchingFiles.length - 1);
 
         if (v.bhu < 0)
         {
@@ -66,8 +66,7 @@ public class MoveMusicHandler implements ControllerHandler{
     }
 
     if (number == 79) {
-        v.bri = (clockWise ? v.bri + 1f : v.bri - 1f);
-        v.bri = v.max(1, v.bri);
+        v.bri = v.map((float) value, 0.0f, 127.0f,1.0f, 100);
         if (v.exp)
         v.println("v.bri " + v.nf(v.bri, 3, 2));
 
@@ -94,7 +93,7 @@ public class MoveMusicHandler implements ControllerHandler{
     //     return;
     // }
     if (number == 75) {
-        v.cue = v.min(v.max(clockWise ? v.cue + 1 : v.cue - 1, 0), v.arts.size() - 1);
+        v.cue = (int) v.map((float) value, 0.0f, 127.0f,0.0f, v.arts.size() - 1);
         v.println("EUC: " + v.cue);
         v.println("CUE ART: \"" + v.arts.get(v.cue).getClass().getSimpleName().toLowerCase() + ".art\"");
 
@@ -111,7 +110,7 @@ public class MoveMusicHandler implements ControllerHandler{
     */
 
     if (number == 76) {
-        v.targetAld = v.min(v.max(clockWise ? v.targetAld + .1f : v.targetAld - .1f, 0), 50);
+        v.targetAld = v.map((float) value, 0.0f, 127.0f,0.0f, 50.0f);
         
         if (v.exp)
             v.println("DAL " + v.nf(v.targetAld, 3, 2));
@@ -124,7 +123,7 @@ public class MoveMusicHandler implements ControllerHandler{
     // }
 
     if (number == 19) {
-        v.targetAlp = v.min(v.max(clockWise ? v.targetAlp + 1f : v.targetAlp - 1f, 5), 255);
+        v.targetAlp = v.map((float) value, 0.0f, 127.0f,0.0f, 255.0f);
         if (v.exp)
             v.println("PLA " + v.nf(v.targetAlp, 3, 2));
     }
@@ -132,34 +131,33 @@ public class MoveMusicHandler implements ControllerHandler{
     float rotSpeed = 0.01f;
 
     if (number == 71) {
-        v.targetCqz = v.min(v.max(clockWise ? v.targetCqz + 5.0f : v.targetCqz - 5f, 1f), 255);
+        v.targetCqz = v.map((float) value, 0.0f, 127.0f,0.0f, 255.0f);
         if (v.exp)
         v.println("cqz " + v.nf(v.targetCqz, 3, 2));
     }
     
     if (number == 77) {
-        v.targetYaw = clockWise ? v.targetYaw + rotSpeed : v.targetYaw - rotSpeed;
-        v.targetYaw = v.wrapAngle(v.targetYaw);
+        v.targetYaw = v.map((float) value, 0.0f, 127.0f,0.0f, v.TWO_PI);        
         if (v.exp)
         v.println("WAY " + v.nf(v.targetYaw, 3, 2));
     }
 
     if (number == 93) {
-        v.targetRol = clockWise ? v.targetRol + rotSpeed : v.targetRol - rotSpeed;
+        v.targetRol = v.map((float) value, 0.0f, 127.0f,0.0f, v.TWO_PI);
         v.targetRol = v.wrapAngle(v.targetRol);
         if (v.exp)
         v.println("LOR " + v.nf(v.targetRol, 3, 2));
     }
 
     if (number == 91) {
-        v.targetCCo = clockWise ? v.targetCCo + 1f : v.targetCCo - 1f;
+        v.targetCCo = v.map((float) value, 0.0f, 127.0f,0.0f, 255);
         if (v.exp)
         v.println("OCC " + v.nf(v.targetCCo, 3, 2));
 
     }
 
     if (number == 17) {
-        v.targetPit = clockWise ? v.targetPit + rotSpeed : v.targetPit - rotSpeed;
+        v.targetPit = v.map((float) value, 0.0f, 127.0f,0.0f, v.TWO_PI);
         v.targetPit = v.wrapAngle(v.targetPit);
         if (v.exp)
             v.println("TIP " + v.nf(v.targetPit, 3, 2));
@@ -311,20 +309,20 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 49 && v.checkKey(v.SHIFT))
+        if (pitch == 52)
         {
             v.change(v.cue);
             return;
         }
 
-        if (pitch == 50 && v.checkKey(v.SHIFT))
+        if (pitch == 54)
         {
             v.targetAld = 5;
             v.println("DAL: " + v.targetAld);
             return;
         }
 
-        if (pitch== 50)
+        if (pitch== 55)
         {
             v.targetAld = 0;
             v.println("DAL: " + v.targetAld);
@@ -367,7 +365,7 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 51 && v.checkKey(v.SHIFT))
+        if (pitch == 53)
         {
             v.defaults();
             return;

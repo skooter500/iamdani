@@ -23,6 +23,7 @@ import controlP5.Textarea;
 import ddf.minim.analysis.BeatDetect;
 import ie.tudublin.visual.AKAIControllerHandler;
 import ie.tudublin.visual.BEATSStepControllerhandler;
+import ie.tudublin.visual.MoveMusicHandler;
 import infiniteforms.City;
 import infiniteforms.IFCubes;
 import infiniteforms.Life;
@@ -153,7 +154,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                     }
                     if (curr.equals("MoveMusic")) {
                         daniMidi = i;
-                        ch = new BEATSStepControllerhandler(this);
+                        ch = new MoveMusicHandler(this);
                         println("Joy detected: " + curr);
                         break;
                     }
@@ -171,6 +172,27 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 myBus = new MidiBus(this, daniMidi, 0);
             }
         } catch (Exception e) {
+            targetAld = 5;
+            targetHue = 47;
+            
+            loadFonts();
+            defaults();
+
+            sat = 255;   
+            //
+
+
+            bhu = 3;
+            bri = 23;
+
+            cqz = 1;
+            targetCqz = 1;
+            font = createFont("" + matchingFiles[bhu], bri);
+            textFont(font);
+
+            showConsole = false;
+            art = new Splash(this);
+            
             e.printStackTrace();
         }
     }
@@ -688,85 +710,95 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void draw() {
 
-        colorMode(RGB);
-        blendMode(SUBTRACT);////
-        //fill(, ald);
-        float c = color(255 - red(bgColor), 255 - green(bgColor), 255 - blue(bgColor));
-        fill(255, ald);
-
-        pushMatrix();
-        translate(0, 0, -5000);
-        rect(-width * 5, -height * 5, width * 10, height * 10);
-        popMatrix();
-        blendMode(BLEND);
-        colorMode(HSB, 255, 255, 255);
-
-        yaw = lerp(yaw, targetYaw, 0.1f);
-        pit = lerp(pit, targetPit, 0.1f);
-        rol = lerp(rol, targetRol, 0.1f);
-        
-        cco = targetCCo;
-        spe = lerp(spe, targetSpe, 0.1f);
-        ald = lerp(ald, targetAld, 0.01f);
-        alp = lerp(alp, targetAlp, 0.1f);
-        bas = lerp(bas, targetBas, 0.1f);
-        mul = lerp(mul, targetMul, 0.1f);
-        hue = lerp(hue, targetHue, 0.1f);
-        cqz = lerp(cqz, targetCqz, 0.1f);
-        colorRange = lerp(colorRange, bhu, 0.1f);
-
-        if (showConsole) {
-            consoleSize = moveTowards(consoleSize, targetSize, 5);
-            myTextarea.setSize(1920, (int) consoleSize)
-                    .setVisible(true)
-                    .setFont(font)
-                    .setLineHeight(30)
-                    .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp));
-
-        } else {
-            consoleSize = 0;
-        }
-
-        // background(bhu, 255, bri, ald);
-        try {
-            // Call this if you want to use FFT data
-            calculateFFT();
-        } catch (VisualException e) {
-            e.printStackTrace();
-        }
-        // Call this is you want to use frequency bands
-        calculateFrequencyBands();
-        // will pulse an object with music volume
-        calculateAverageAmplitude();
-
-        // speed = map(getAmplitude(), 0, 1, 0, 0.1f);
-
-        pushMatrix();
-        pushStyle();
-        art.render(frameCount); // renders the currently loaded visual        
-        popStyle();
-        popMatrix();
-
-        int ellapsed = millis();
-
-        if (ellapsed > toPass) {
-            println(randomMessages[(int) random(0, randomMessages.length)]);
-            toPass = ellapsed + (int) random(10000);
-        }
-        if (takeScreenshot) {
-            takeScreenshot();
-            takeScreenshot = false;
-        }
-
-        if (showConsole)
+        try
         {
-            showStats();
-        }
-        // hueShift();
 
-        int now = millis();
-        timeDelta = (now - last) / 1000.0f;
-        last = now;
+            colorMode(RGB);
+            blendMode(SUBTRACT);////
+            //fill(, ald);
+            float c = color(255 - red(bgColor), 255 - green(bgColor), 255 - blue(bgColor));
+            fill(255, ald);
+
+            pushMatrix();
+            translate(0, 0, -5000);
+            rect(-width * 5, -height * 5, width * 10, height * 10);
+            popMatrix();
+            blendMode(BLEND);
+            colorMode(HSB, 255, 255, 255);
+
+            yaw = lerp(yaw, targetYaw, 0.1f);
+            pit = lerp(pit, targetPit, 0.1f);
+            rol = lerp(rol, targetRol, 0.1f);
+            
+            cco = targetCCo;
+            spe = lerp(spe, targetSpe, 0.1f);
+            ald = lerp(ald, targetAld, 0.01f);
+            alp = lerp(alp, targetAlp, 0.1f);
+            bas = lerp(bas, targetBas, 0.1f);
+            mul = lerp(mul, targetMul, 0.1f);
+            hue = lerp(hue, targetHue, 0.1f);
+            cqz = lerp(cqz, targetCqz, 0.1f);
+            colorRange = lerp(colorRange, bhu, 0.1f);
+
+            if (showConsole) {
+                consoleSize = moveTowards(consoleSize, targetSize, 5);
+                myTextarea.setSize(1920, (int) consoleSize)
+                        .setVisible(true)
+                        .setFont(font)
+                        .setLineHeight(30)
+                        .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp));
+
+            } else {
+                consoleSize = 0;
+            }
+
+            // background(bhu, 255, bri, ald);
+            try {
+                // Call this if you want to use FFT data
+                calculateFFT();
+            } catch (VisualException e) {
+                e.printStackTrace();
+            }
+            // Call this is you want to use frequency bands
+            calculateFrequencyBands();
+            // will pulse an object with music volume
+            calculateAverageAmplitude();
+
+            // speed = map(getAmplitude(), 0, 1, 0, 0.1f);
+
+            pushMatrix();
+            pushStyle();
+            art.render(frameCount); // renders the currently loaded visual        
+            popStyle();
+            popMatrix();
+
+            int ellapsed = millis();
+
+            if (ellapsed > toPass) {
+                println(randomMessages[(int) random(0, randomMessages.length)]);
+                toPass = ellapsed + (int) random(10000);
+            }
+            if (takeScreenshot) {
+                takeScreenshot();
+                takeScreenshot = false;
+            }
+
+            if (showConsole)
+            {
+                showStats();
+            }
+            // hueShift();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            defaults();
+
+        }
+
+            int now = millis();
+            timeDelta = (now - last) / 1000.0f;
+            last = now;
     }
 
     public void hueShift() {
@@ -817,9 +849,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Formula too complex",
             "80k ram",
             "32K rom",
-            "Universal Serial Bus Universal Serial Bus Universal Serial Bus Universal Serial Bus Universal Serial Bus Universal Serial Bus",
-            "Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun Verb Noun",
-            "ullege pillage silage tillage ullege pillage silage tillage ullege pillage silage tillage ullege pillage silage tillage",
+            "Universal Serial Bus",
+            "Verb Noun",
+            "ullege pillage silage tillage",
             "socket bind listen accept socket bind listen accept socket bind listen accept socket bind listen accept",
             "We have the technology",
             "better stronger faster",
