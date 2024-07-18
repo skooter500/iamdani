@@ -4,6 +4,8 @@ import ie.tudublin.Art;
 
 public class MovementArt extends Art {
 
+    private float theta = 0;
+
     public MovementArt(Visual v) {
 
         super(v);
@@ -23,8 +25,9 @@ public class MovementArt extends Art {
         v.stroke(c, 255, 255, v.alp);
         
         v.noFill();
-        v.rotateY(v.spe * .05f);
+        v.rotateY(theta);
         v.sphere(50 * v.getSmoothedAmplitude());
+        theta += v.spe * 0.001f;
         
     }
     
