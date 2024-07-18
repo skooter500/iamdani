@@ -209,7 +209,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         return current + (delta > 0 ? 1 : -1) * maxDistanceDelta;
     }
 
-    void addVision(int g, Art p) {
+    void addArt(int g, Art p) {
         ArrayList<Integer> group = null;
         if (groups.containsKey(g)) {
             group = groups.get(g);
@@ -301,9 +301,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
-        addVision(0, new Basic(this, "DANI.BAS"));
-        addVision(0, new DANI(this, "captainb.txt"));
-        addVision(0, new Nematode(this));
+        addArt(0, new Spirals(this));       
+        addArt(0, new FlippedWaveform(this));       
+        addArt(0, new FlippedWaveform1(this));       
+        
+        addArt(0, new Basic(this, "DANI.BAS"));
+        addArt(0, new DANI(this, "captainb.txt"));
+        addArt(0, new Nematode(this));
         // groups.add(g);
         
         
@@ -311,69 +315,69 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         v.scale_factor = 100;
         // addVision(5, v);
 
-        addVision(1, new Life(this, 2, 280, 100));
-        addVision(1, new Life(this, 3, 10000, 200));
-        addVision(1, new Life(this, 0, 1000, 100));
-        addVision(1, new Life(this, 1, 1000, 100));
+        addArt(1, new Life(this, 2, 280, 100));
+        addArt(1, new Life(this, 3, 10000, 200));
+        addArt(1, new Life(this, 0, 1000, 100));
+        addArt(1, new Life(this, 1, 1000, 100));
         // addVision(1, new Life(this, 4, 10000, 100));
 
-        addVision(2, new infiniteforms.Cube(this));
-        addVision(2, new IFCubes(this, 7, 150, -600));
-        addVision(2, new IFCubes(this, 30, 150, -400));
-        addVision(2, new Models1(this, "msx1.obj", false, true));
+        addArt(2, new infiniteforms.Cube(this));
+        addArt(2, new IFCubes(this, 7, 150, -600));
+        addArt(2, new IFCubes(this, 30, 150, -400));
+        addArt(2, new Models1(this, "msx1.obj", false, true));
 
 
         
-        addVision(3, new AllBalls(this));    
-        addVision(3,new EllaVisual(this));    
-        addVision(3, new Cubesquared2(this));        
-        addVision(3, new Spiral(this));
-        addVision(3, new Cubes(this));
+        addArt(3, new AllBalls(this));    
+        addArt(3,new EllaVisual(this));    
+        addArt(3, new Cubesquared2(this));        
+        addArt(3, new Spiral(this));
+        addArt(3, new Cubes(this));
         
-        addVision(4, new BasakEllipse(this));
-        addVision(4, new paris(this));
-        addVision(4, new LauraSun(this));
-        addVision(4, new Mena(this));
-        addVision(4, new ManarBrain(this));
+        addArt(4, new BasakEllipse(this));
+        addArt(4, new paris(this));
+        addArt(4, new LauraSun(this));
+        addArt(4, new Mena(this));
+        addArt(4, new ManarBrain(this));
 
 
-        addVision(5, new MSXLogos(this, "msx.obj"));
-        addVision(5, new MSXLogos(this, "chip.obj"));
-        addVision(0, new Particles(this));
-        addVision(0, new SarahVisual(this));
+        addArt(5, new MSXLogos(this, "msx.obj"));
+        addArt(5, new MSXLogos(this, "chip.obj"));
+        addArt(0, new Particles(this));
+        addArt(0, new SarahVisual(this));
         
 
         // YM2413
         // addVision(6, new Models1(this, "phoenix.obj", false, true));
         
         
-        addVision(6, new Models1(this, "skooter500.obj", false, true));
-        addVision(6, new Models1(this, "iamdani.obj", false, true));
-        addVision(6, new Models1(this, "bong.obj", false, true));
-        addVision(6, new Models1(this, "pyramid.obj", false, true));
-        addVision(6, new Models1(this, "eden.obj", false, true));
-        addVision(6, new Models1(this, "audio garden 1.obj", false, true));
+        addArt(6, new Models1(this, "skooter500.obj", false, true));
+        addArt(6, new Models1(this, "iamdani.obj", false, true));
+        addArt(6, new Models1(this, "bong.obj", false, true));
+        addArt(6, new Models1(this, "pyramid.obj", false, true));
+        addArt(6, new Models1(this, "eden.obj", false, true));
+        addArt(6, new Models1(this, "audio garden 1.obj", false, true));
         
-        addVision(6, new Models1(this, "brstarfighter.obj", false, true));
-        addVision(6, new Models1(this, "tudub.obj", false, true));
-        addVision(6, new Models1(this, "msx.obj", false, true));
-        addVision(6, new Models1(this, "eye.obj", true, false));
+        addArt(6, new Models1(this, "brstarfighter.obj", false, true));
+        addArt(6, new Models1(this, "tudub.obj", false, true));
+        addArt(6, new Models1(this, "msx.obj", false, true));
+        addArt(6, new Models1(this, "eye.obj", true, false));
         Models1 horse = new Models1(this, "horse.obj", true, false);
         horse.scale = 0.5f;
         horse.model.pitOff = 1;
-        addVision(6, horse);
-        addVision(6, new Models1(this, "chip.obj", true, false));
+        addArt(6, horse);
+        addArt(6, new Models1(this, "chip.obj", true, false));
 
-        addVision(7, new Airish(this));
+        addArt(7, new Airish(this));
 
-        addVision(7, new Bloom(this));
+        addArt(7, new Bloom(this));
         
-        addVision(7, new Terrain(this)); 
+        addArt(7, new Terrain(this)); 
         
-        addVision(7, new Bands(this, 300, 0, 0, 0));
-        addVision(7, new Spiral(this));
-        addVision(7, new SarahVisual(this));
-        addVision(7, new JenniferVisuals(this));
+        addArt(7, new Bands(this, 300, 0, 0, 0));
+        addArt(7, new Spiral(this));
+        addArt(7, new SarahVisual(this));
+        addArt(7, new JenniferVisuals(this));
 
         // addVision(new Life(this, 1, 1000));
 
@@ -763,6 +767,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             calculateFrequencyBands();
             // will pulse an object with music volume
             calculateAverageAmplitude();
+            
 
             // speed = map(getAmplitude(), 0, 1, 0, 0.1f);
 
