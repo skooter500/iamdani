@@ -351,7 +351,7 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }    
         
-        if (pitch == 42 && v.checkKey(v.SHIFT))
+        if (pitch == 56)
         {
             v.targetBas -= 2f;
             v.println("SAB: " + v.targetBas);
