@@ -25,7 +25,7 @@ public abstract class Visual extends PApplet
 	BeatListener bl;
 
 	private float amplitude  = 0;
-	private float smothedAmplitude = 0;
+	public float smothedAmplitude = 0;
 
 	public float spe = 1.0f;
 
@@ -88,6 +88,7 @@ public abstract class Visual extends PApplet
         // Could potentially encapsulate all of the above into AudioAnalysis class
         // Not going to do it as it's not necessary, it works fine as is
         this.aAnalysis = new AudioAnalysis(fft, beat, 0.5f);
+		
 
 	}
 
@@ -115,12 +116,15 @@ public abstract class Visual extends PApplet
 
 	public float raw = 0;
 
+	public float[] smoothedBuffer;
+
 	public void calculateAverageAmplitude()
 	{
 		float total = 0;
 		for(int i = 0 ; i < ab.size() ; i ++)
         {
 			total += abs(ab.get(i));
+			smoothedBuffer[i] = lerp(smoothedBuffer[i], ab.get(i), 0.02f);
 		}
 		amplitude = total / ab.size();
 		raw = amplitude;
@@ -176,7 +180,15 @@ public abstract class Visual extends PApplet
 	{
 		ai = minim.getLineIn(Minim.MONO, frameSize, 44100, 16);
 		ab = ai.left;
+		smoothedBuffer = new float[ab.size()];
+		halfH = height / 2;        
+        halfWidth = halfDrawable = width / 2;
+        
 	}
+
+	public  float halfH;
+    public float halfWidth, halfDrawable;
+        
 
 	public void loadAudio(String filename)
 	{

@@ -21,6 +21,11 @@ public class GrainneHead extends Art
 
     float scale_factor = 1.0f;
 
+    public String toString()
+  {
+    return filename;
+  }
+
     public GrainneHead(IAMDANI v, String filename)
     {
         super(v);

@@ -2,6 +2,7 @@ package ie.tudublin.visual;
 
 import java.util.ArrayList;
 
+import ie.tudublin.Art;
 import ie.tudublin.ControllerHandler;
 import ie.tudublin.IAMDANI;
 
@@ -95,10 +96,35 @@ public class MoveMusicHandler implements ControllerHandler{
     if (number == 75) {
         v.cue = (int) v.map((float) value, 0.0f, 127.0f,0.0f, v.arts.size() - 1);
         v.println("EUC: " + v.cue);
-        v.println("CUE ART: \"" + v.arts.get(v.cue).getClass().getSimpleName().toLowerCase() + ".art\"");
+        Art a = v.arts.get(v.cue);
+        v.println("CUE ART: \"" + a.getClass().getSimpleName().toLowerCase() + " " + a.toString() + ".art\"");
 
         return;
     }
+
+    if (number == 57) {
+        v.whichVisual = v.whichVisual - 1;
+        if (v.whichVisual < 0 )
+        {
+            v.whichVisual = v.arts.size() - 1;
+        }
+        v.println("III: " + v.whichVisual);
+        Art a = v.arts.get(v.whichVisual);
+        v.println("ART: \"" + a.getClass().getSimpleName().toLowerCase() + " " + a.toString() + ".art\"");
+
+        return;
+    }
+
+    if (number == 58) {
+        v.whichVisual = (v.whichVisual + 1) % v.arts.size();
+        
+        v.println("III: " + v.whichVisual);
+        Art a = v.arts.get(v.whichVisual);
+        v.println("ART: \"" + a.getClass().getSimpleName().toLowerCase() + " " + a.toString() + ".art\"");
+
+        return;
+    }
+
 
     
     /*if (number == 18) {
@@ -351,7 +377,7 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }    
         
-        if (pitch == 42 && v.checkKey(v.SHIFT))
+        if (pitch == 56)
         {
             v.targetBas -= 2f;
             v.println("SAB: " + v.targetBas);

@@ -61,7 +61,7 @@ public class Life extends Art
   {
     clearBoard();
     makePattern();
-    v.cqz = 255;
+    // v.cqz = 255;
   }
 
   public void MakeGosperGun(int x, int y)

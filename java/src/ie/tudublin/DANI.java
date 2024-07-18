@@ -20,6 +20,11 @@ public class DANI extends Art {
     int ch = 0;
     public Nematode t;
 
+    public String toString()
+  {
+    return fileName;
+  }
+
     public DANI(IAMDANI v, String fileName)
     {
         super(v);

@@ -11,11 +11,14 @@ public class Models1 extends Art
   public float scale = 1;
 
   public float pitOff = 0;
+
+  public String fileName;
   
   public Models1(IAMDANI v, String fileName, boolean rotate, boolean rotateX)
   {
     super(v);
     model = new Model(fileName, 0, 0, 0, v);    
+    this.fileName = fileName;
     model.rotate = rotate;
     model.pitOff = pitOff;
     model.rotateX = rotateX;
@@ -51,6 +54,11 @@ public class Models1 extends Art
     v.popMatrix();
     v.camera(v.width/2.0f, (v.height/2.0f) - 5000, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0, 0, 1, 0);
 
+  }
+
+  public String toString()
+  {
+    return fileName;
   }
   
 }
