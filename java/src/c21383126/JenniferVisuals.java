@@ -152,8 +152,12 @@ public class JenniferVisuals extends VScene {
             float hoursRadius;
             float clockDiameter;
 
+            v.rotateX(v.pit);
+            v.rotateY(v.yaw);
+            v.rotateZ(v.rol);
+
             v.fill(0);
-            v.stroke(0, v.alp);
+            v.stroke(v.hueShift(0), 255, 255, v.alp);
 
             int radius = PApplet.min(v.width, v.height) / 3; // circle radius
             // smaller lines

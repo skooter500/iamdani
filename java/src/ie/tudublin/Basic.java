@@ -20,6 +20,11 @@ public class Basic extends Art {
     int ch = 0;
     public Nematode t;
 
+    public String toString()
+  {
+    return fileName;
+  }
+
     public Basic(IAMDANI v, String fileName)
     {
         super(v);

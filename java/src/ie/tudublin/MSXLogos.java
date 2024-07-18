@@ -80,6 +80,11 @@ public class MSXLogos extends Art{
         v.cqz = 1;        
     }
 
+    public String toString()
+  {
+    return filename;
+  }
+
     public  MSXLogos(IAMDANI v, String filename) {
         super(v);
         this.filename = filename;

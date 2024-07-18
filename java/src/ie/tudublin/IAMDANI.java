@@ -301,7 +301,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
-        addArt(0, new Spirals(this));       
+        addArt(0, new Models1(this, "msx1.obj", false, true));
+        addArt(0, new AliensOnUranus(this));       
+        
+        
         addArt(0, new FlippedWaveform(this));       
         addArt(0, new FlippedWaveform1(this));       
         
@@ -453,7 +456,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float targetAlp = 75;
     public float targetAld = 5;
     public float targetMul = 1.0f;
-    public float targetBas = 0.3f;
+    public float targetBas = 4f;
     public int bhu;
     public float bri;
     public float sat = 0;
