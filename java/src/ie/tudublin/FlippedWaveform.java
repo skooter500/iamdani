@@ -21,14 +21,20 @@ public class FlippedWaveform extends Art {
         for (int i = 0; i < bs; i ++)
         {
         
-        v.stroke(v.hueShift(v.map(i, 0, bs, 0, 255)), 255, 255);
+        v.stroke(v.hueShift(v.map(i, 0, bs, 0, 255)), 255, 255, v.alp);
         //line(i, halfH + sample, i, halfH - sample); 
 
         //v.smoothedBuffer[i] = v.lerp(v.smoothedBuffer[i], v.ab.get(i), 0.02f);
 
-        float sample = v.smoothedBuffer[i * 4] * v.width * v.mul * 0.1f;    
-        v.stroke(v.hueShift(v.map(i, 0, bs, 0, 255)), 255, 255);
+        float sample = v.smoothedBuffer[i * 4] * v.width * v.mul * 0.01f;    
+        v.stroke(v.hueShift(v.map(i, 0, bs, 0, 255)), 255, 255, v.alp);
         float x = (int) v.map(i, 0, bs, halfWidth - halfDrawable, halfWidth + halfDrawable);
+
+        v.rotateX(v.pit * 0.5f);
+        v.rotateY(v.yaw * 0.5f);
+        v.rotateZ(v.rol * 0.5f);
+        
+
         v.line(x, v.height / 2 - sample, x, v.height/2 + sample); 
         float y = v.height / 2 + sample;
         float r = 6;
