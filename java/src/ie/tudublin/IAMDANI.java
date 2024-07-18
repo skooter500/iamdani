@@ -24,6 +24,7 @@ import ddf.minim.analysis.BeatDetect;
 import ie.tudublin.visual.AKAIControllerHandler;
 import ie.tudublin.visual.BEATSStepControllerhandler;
 import ie.tudublin.visual.MoveMusicHandler;
+import ie.tudublin.visual.MovementArt;
 import infiniteforms.City;
 import infiniteforms.IFCubes;
 import infiniteforms.Life;
@@ -302,6 +303,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //addVision(0, new circles(this));
 
 
+        addArt(0, new MovementArt(this));
         addArt(0, new Models1(this, "msx1.obj", false, true));
         addArt(0, new AliensOnUranus(this));       
         

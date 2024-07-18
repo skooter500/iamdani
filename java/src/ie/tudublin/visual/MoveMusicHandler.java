@@ -102,28 +102,7 @@ public class MoveMusicHandler implements ControllerHandler{
         return;
     }
 
-    if (number == 57) {
-        v.whichVisual = v.whichVisual - 1;
-        if (v.whichVisual < 0 )
-        {
-            v.whichVisual = v.arts.size() - 1;
-        }
-        v.println("III: " + v.whichVisual);
-        Art a = v.arts.get(v.whichVisual);
-        v.println("ART: \"" + a.getClass().getSimpleName().toLowerCase() + " " + a.toString() + ".art\"");
-
-        return;
-    }
-
-    if (number == 58) {
-        v.whichVisual = (v.whichVisual + 1) % v.arts.size();
-        
-        v.println("III: " + v.whichVisual);
-        Art a = v.arts.get(v.whichVisual);
-        v.println("ART: \"" + a.getClass().getSimpleName().toLowerCase() + " " + a.toString() + ".art\"");
-
-        return;
-    }
+    
 
 
     
@@ -225,6 +204,31 @@ public class MoveMusicHandler implements ControllerHandler{
                 v.change(newVisual);
                 return;
             }
+        }
+
+        if (pitch == 57) {
+            v.whichVisual = v.whichVisual - 1;
+            if (v.whichVisual < 0 )
+            {
+                v.whichVisual = v.arts.size() - 1;
+                
+            }
+            v.change(v.whichVisual);
+            v.println("III: " + v.whichVisual);
+            Art a = v.arts.get(v.whichVisual);
+            v.println("ART: \"" + a.getClass().getSimpleName().toLowerCase() + " " + a.toString() + ".art\"");
+    
+            return;
+        }
+    
+        if (pitch == 58) {
+            v.whichVisual = (v.whichVisual + 1) % v.arts.size();
+            
+            v.println("III: " + v.whichVisual);
+            Art a = v.arts.get(v.whichVisual);
+            v.println("ART: \"" + a.getClass().getSimpleName().toLowerCase() + " " + a.toString() + ".art\"");
+            v.change(v.whichVisual);
+            return;
         }
 
         if (pitch == 43) {
