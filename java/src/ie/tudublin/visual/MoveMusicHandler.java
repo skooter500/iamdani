@@ -430,7 +430,9 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 48)
+        */
+
+        if (pitch == 60)
         {
             v.targetYaw = v.QUARTER_PI * (int) v.random(0,7);
             v.targetPit = v.QUARTER_PI * (int) v.random(0,7);
@@ -442,6 +444,7 @@ public class MoveMusicHandler implements ControllerHandler{
             if (v.exp) v.println("RND");
         }
 
+        /*
         if (pitch >= 36 && pitch <= 39) {
             int g = pitch - 36;
             g += 4;

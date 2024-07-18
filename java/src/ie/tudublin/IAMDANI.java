@@ -303,13 +303,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //addVision(0, new circles(this));
 
 
+        addArt(0, new FlippedWaveform(this));       
+        addArt(0, new FlippedWaveform1(this));               
         addArt(0, new MovementArt(this));
         addArt(0, new Models1(this, "msx1.obj", false, true));
         addArt(0, new AliensOnUranus(this));       
         
         
-        addArt(0, new FlippedWaveform(this));       
-        addArt(0, new FlippedWaveform1(this));       
         
         addArt(0, new Basic(this, "DANI.BAS"));
         addArt(0, new DANI(this, "captainb.txt"));
