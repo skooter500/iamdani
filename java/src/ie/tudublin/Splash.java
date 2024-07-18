@@ -29,6 +29,7 @@ public class Splash extends Art
     public void exit()
     {
         v.showConsole = true;
+        v.targetBas = 5;
         v.textFont(v.font);
         v.background(0);
     }

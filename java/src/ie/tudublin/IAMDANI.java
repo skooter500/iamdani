@@ -301,6 +301,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
+        addVision(0, new Models1(this, "msx1.obj", false, true));
+
         addVision(0, new Basic(this, "DANI.BAS"));
         addVision(0, new DANI(this, "captainb.txt"));
         addVision(0, new Nematode(this));
@@ -320,8 +322,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addVision(2, new infiniteforms.Cube(this));
         addVision(2, new IFCubes(this, 7, 150, -600));
         addVision(2, new IFCubes(this, 30, 150, -400));
-        addVision(2, new Models1(this, "msx1.obj", false, true));
-
+        
 
         
         addVision(3, new AllBalls(this));    
