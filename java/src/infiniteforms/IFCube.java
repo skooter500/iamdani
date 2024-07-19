@@ -1,6 +1,7 @@
 package infiniteforms;
 
 import ie.tudublin.IAMDANI;
+import processing.core.PShape;
 import processing.core.PVector;
 
 public class IFCube
@@ -14,11 +15,15 @@ public class IFCube
   
   boolean useAmplitude = true;
   IAMDANI v;
+  PShape s;
+  String filename;
   
-  public IFCube(IAMDANI v, float x, float y, float z)
+  public IFCube(IAMDANI v, float x, float y, float z, String filename)
   {
     this.v = v;
     position = new PVector(x, y, z);
+    this.filename = filename;
+    s = Model.loadModel(filename, v);
   }
 
   float colorOffset = 0;
@@ -41,8 +46,12 @@ public class IFCube
     {
       float amp = v.getAmplitude();
       float boxSize = size + (amp * 100); 
-      smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f);                 
-      v.box(smoothedBoxSize);
+      smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f);      
+      v.rotateX(-v.HALF_PI);
+      v.rotateZ(v.PI);
+      v.scale(smoothedBoxSize);
+      v.shape(s);          
+      //v.box(smoothedBoxSize);
     }
     else
     {

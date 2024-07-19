@@ -58,7 +58,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public PFont font;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 3);
         //size(1000, 1000, P3D);
     }
 
@@ -184,7 +184,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
             bhu = 3;
-            bri = 23;
+            bri = 26;
 
             cqz = 1;
             targetCqz = 1;
@@ -250,8 +250,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void setup() {
 
-        targetAld = 5;
-        targetHue = 47;
+        targetAld = 10;
+        targetHue = 57;
+        
+        targetAlp = 40;
         
         loadFonts();
         defaults();
@@ -302,11 +304,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
-
+        loadModels();
+        
         addArt(0, new FlippedWaveform(this));       
         addArt(0, new FlippedWaveform1(this));               
         addArt(0, new MovementArt(this));
-        addArt(0, new Models1(this, "msx1.obj", false, true));
+        //addArt(0, new Models1(this, "msx1.obj", false, true));
         addArt(0, new AliensOnUranus(this));       
         
         
@@ -321,6 +324,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         v.scale_factor = 100;
         // addVision(5, v);
 
+
         addArt(1, new Life(this, 2, 280, 100));
         addArt(1, new Life(this, 3, 10000, 200));
         addArt(1, new Life(this, 0, 1000, 100));
@@ -328,9 +332,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // addVision(1, new Life(this, 4, 10000, 100));
 
         addArt(2, new infiniteforms.Cube(this));
-        addArt(2, new IFCubes(this, 7, 150, -600));
-        addArt(2, new IFCubes(this, 30, 150, -400));
-        addArt(2, new Models1(this, "msx1.obj", false, true));
+        //addArt(2, new Models1(this, "msx1.obj", false, true));
 
 
         
@@ -347,33 +349,19 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addArt(4, new ManarBrain(this));
 
 
-        addArt(5, new MSXLogos(this, "msx.obj"));
-        addArt(5, new MSXLogos(this, "chip.obj"));
+        //addArt(5, new MSXLogos(this, "msx.obj"));
+        //addArt(5, new MSXLogos(this, "chip.obj"));
         addArt(0, new Particles(this));
         addArt(0, new SarahVisual(this));
         
 
         // YM2413
         // addVision(6, new Models1(this, "phoenix.obj", false, true));
-        
-        
-        addArt(6, new Models1(this, "skooter500.obj", false, true));
-        addArt(6, new Models1(this, "iamdani.obj", false, true));
-        addArt(6, new Models1(this, "bong.obj", false, true));
-        addArt(6, new Models1(this, "pyramid.obj", false, true));
-        addArt(6, new Models1(this, "eden.obj", false, true));
-        addArt(6, new Models1(this, "audio garden 1.obj", false, true));
-        
-        addArt(6, new Models1(this, "brstarfighter.obj", false, true));
-        addArt(6, new Models1(this, "tudub.obj", false, true));
-        addArt(6, new Models1(this, "msx.obj", false, true));
-        addArt(6, new Models1(this, "eye.obj", true, false));
-        Models1 horse = new Models1(this, "horse.obj", true, false);
-        horse.scale = 0.5f;
-        horse.model.pitOff = 1;
-        addArt(6, horse);
-        addArt(6, new Models1(this, "chip.obj", true, false));
 
+        
+        
+        
+        
         addArt(7, new Airish(this));
 
         addArt(7, new Bloom(this));
@@ -421,6 +409,60 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         art.enter();
     }
 
+    private void loadModels() {
+
+        File f = new File("./java/data");
+        File[] matchingFiles = f.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.endsWith("obj");
+            }
+        });  
+        for (File f1 : matchingFiles)
+        {
+            println(f1);
+            addArt(6, new Models1(this, "" + f1, false, true));
+
+            int numLogos = 10;
+            String fn = "" + f1;
+            int i = fn.indexOf(" ");
+            
+            if (i != -1)
+            {
+                numLogos = Integer.parseInt(fn.substring(i + 1, fn.indexOf(".", i)));
+            }
+            else
+            {
+                addArt(2, new IFCubes(this, 3, 150, -600, fn));
+                addArt(2, new IFCubes(this, 4, 150, -600, fn));
+                addArt(2, new IFCubes(this, 7, 150, -600, fn));
+                addArt(2, new IFCubes(this, 7, 150, -600, fn));
+                addArt(2, new IFCubes(this, 30, 150, -400, fn));
+                addArt(7, new MSXLogos(this, fn, numLogos));
+            }
+            if (numLogos != 0)
+            {
+                addArt(7, new MSXLogos(this, fn, numLogos));                
+            }                
+        }
+        /*addArt(6, new Models1(this, "skooter500.obj", false, true));
+        addArt(6, new Models1(this, "iamdani.obj", false, true));
+        addArt(6, new Models1(this, "bong.obj", false, true));
+        addArt(6, new Models1(this, "pyramid.obj", false, true));
+        addArt(6, new Models1(this, "eden.obj", false, true));
+        addArt(6, new Models1(this, "audio garden 1.obj", false, true));
+        
+        addArt(6, new Models1(this, "brstarfighter.obj", false, true));
+        addArt(6, new Models1(this, "tudub.obj", false, true));
+        addArt(6, new Models1(this, "msx.obj", false, true));
+        addArt(6, new Models1(this, "eye.obj", true, false));
+        Models1 horse = new Models1(this, "horse.obj", true, false);
+        horse.scale = 0.5f;
+        horse.model.pitOff = 1;
+        addArt(6, horse);
+        addArt(6, new Models1(this, "chip.obj", true, false));
+        */
+    }
+
     public float consoleSize = 0;
     float originalTargetSize = 400;
 
@@ -456,8 +498,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float targetRol = 0f;
     public float targetSpe = 1.0f;
     public float targetHue = 0;
-    public float targetAlp = 75;
-    public float targetAld = 5;
+    public float targetAlp = 69;
+    public float targetAld = 6;
     public float targetMul = 1.0f;
     public float targetBas = 4f;
     public int bhu;
@@ -685,12 +727,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 
                 int thisFrame = frameCount % 60;
                 fill(thisFrame < 30 ? pingpong(
-                    42, 0, 255, 0, 255) : pingpong(cco - 42, 0, 255, 0, 255), 255, 255, alp);
+                    42, 0, 255, 0, 255) : pingpong(cco - 42, 0, 255, 0, 255), 255, 255, alp * 2);
                 ff = abs(ff);
             }
             else
             {
-                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp);                        
+                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp * 2);                        
             }
             text(nf(ff, 4, 0), x + 75, y);
 
@@ -756,7 +798,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                         .setVisible(true)
                         .setFont(font)
                         .setLineHeight(30)
-                        .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp));
+                        .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp * 2));
 
             } else {
                 consoleSize = 0;

@@ -29,6 +29,7 @@ public class Models1 extends Art
     v.defaults();
     model.smoothedBoxSize = 20;
     model.colorOffset = (int) v.random(0, 256);
+    v.bas = v.targetBas;
     v.cqz = 1;
   }
 

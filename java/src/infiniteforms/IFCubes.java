@@ -20,7 +20,7 @@ public class IFCubes extends Art {
     v.cqz = 1;
   }
   
-  public IFCubes(IAMDANI v, int numCubes, float radius, float z)
+  public IFCubes(IAMDANI v, int numCubes, float radius, float z, String filename)
   {
     super(v);
     cubes = new IFCube[numCubes];
@@ -30,7 +30,7 @@ public class IFCubes extends Art {
       float theta = v.map(i, 0, numCubes, v.HALF_PI, v.TWO_PI + v.HALF_PI);
       float x = v.sin(theta) * radius;
       float y = - v.cos(theta) * radius;
-      cubes[i] = new IFCube(v, x, y, 0.0f);        
+      cubes[i] = new IFCube(v, x, y, 0.0f, filename);        
     }
     this.z = z;
   }

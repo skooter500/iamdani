@@ -1,9 +1,11 @@
 package c21383126;
 
+import ie.tudublin.IAMDANI;
 import ie.tudublin.visual.AudioAnalysis;
 import ie.tudublin.visual.VObject;
 import ie.tudublin.visual.VScene;
 import ie.tudublin.visual.Visual;
+import infiniteforms.Model;
 import jogamp.opengl.glu.nurbs.Backend;
 import processing.core.PApplet;
 import processing.core.PShape;
@@ -13,7 +15,7 @@ import ddf.minim.Minim;
 import global.GlobalVisual;
 
 public class JenniferVisuals extends VScene {
-    Visual v;
+    IAMDANI v;
     VObject speaker;
     Clock clock;
     VObject dots;
@@ -22,7 +24,7 @@ public class JenniferVisuals extends VScene {
     VObject hex;
     GlobalVisual gv;
     
-    public JenniferVisuals(Visual v) {
+    public JenniferVisuals(IAMDANI v) {
         super(v);
         this.v = v;
         speaker = new Speaker(v, new PVector(v.width / 4, v.height / 4));
@@ -72,10 +74,10 @@ public class JenniferVisuals extends VScene {
 
         PShape star;
 
-        Stars(Visual v, PVector pos) {
+        Stars(IAMDANI v, PVector pos) {
             super(v, pos);
             // load star object
-            star = v.loadShape("estrellica.obj");
+            star = Model.loadModel("jen/estrellica.obj", IAMDANI.instance);
         }
 
         int MAX = 150; // maximum distance between the stars
@@ -116,7 +118,7 @@ public class JenniferVisuals extends VScene {
     }
 
     class Dots extends VObject {
-        Dots(Visual v, PVector pos) {
+        Dots(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -141,7 +143,7 @@ public class JenniferVisuals extends VScene {
 
     class Clock extends VObject {
 
-        Clock(Visual v, PVector pos) {
+        Clock(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -207,7 +209,7 @@ public class JenniferVisuals extends VScene {
 
     class Speaker extends VObject {
 
-        Speaker(Visual v, PVector pos) {
+        Speaker(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -263,7 +265,7 @@ public class JenniferVisuals extends VScene {
     }
 
     class WaveForm extends VObject {
-        WaveForm(Visual v, PVector pos) {
+        WaveForm(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -285,7 +287,7 @@ public class JenniferVisuals extends VScene {
     }
 
     class Hex extends VObject {
-        Hex(Visual v, PVector pos) {
+        Hex(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
