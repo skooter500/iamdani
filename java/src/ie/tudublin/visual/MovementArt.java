@@ -1,14 +1,19 @@
 package ie.tudublin.visual;
 
 import ie.tudublin.Art;
+import ie.tudublin.IAMDANI;
+import infiniteforms.Model;
+import processing.core.PShape;
 
 public class MovementArt extends Art {
 
     private float theta = 0;
 
-    public MovementArt(Visual v) {
+    PShape s;
+    public MovementArt(IAMDANI v, String filename) {
 
         super(v);
+        s = Model.loadModel(filename, v);
         //TODO Auto-generated constructor stub
     }
 
@@ -26,7 +31,9 @@ public class MovementArt extends Art {
         
         v.noFill();
         v.rotateY(theta);
-        v.sphere(50 * v.getSmoothedAmplitude());
+        v.rotateX(-v.HALF_PI);
+        v.scale(50 * v.getSmoothedAmplitude());
+        v.shape(s);
         theta += v.spe * 0.001f;
         
     }

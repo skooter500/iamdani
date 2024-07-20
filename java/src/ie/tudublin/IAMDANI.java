@@ -308,9 +308,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         addArt(0, new FlippedWaveform(this));       
         addArt(0, new FlippedWaveform1(this));               
-        addArt(0, new MovementArt(this));
         //addArt(0, new Models1(this, "msx1.obj", false, true));
-        addArt(0, new AliensOnUranus(this));       
+        //addArt(0, new AliensOnUranus(this));       
         
         
         
@@ -421,7 +420,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         {
             println(f1);
             addArt(6, new Models1(this, "" + f1, false, true));
-
+            addArt(0, new MovementArt(this, "" + f1));
+        
             int numLogos = 11;
             String fn = "" + f1;
             int i = fn.indexOf(" ");
@@ -429,16 +429,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             if (i != -1)
             {
                 numLogos = Integer.parseInt(fn.substring(i + 1, fn.indexOf(".", i)));
-            }
-            else
-            {
                 if (numLogos > 10)
                 {
                     addArt(2, new IFCubes(this, 3, 150, -600, fn));
                     addArt(2, new IFCubes(this, 4, 250, -600, fn));                
                     addArt(2, new IFCubes(this, 7, 350, -600, fn));
                 // addArt(2, new IFCubes(this, 20, 200, -400, fn));
-                addArt(7, new MSXLogos(this, fn, numLogos));
+                    addArt(7, new MSXLogos(this, fn, numLogos));
                 }
             }
             if (numLogos != 0)
