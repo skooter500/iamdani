@@ -422,7 +422,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             println(f1);
             addArt(6, new Models1(this, "" + f1, false, true));
 
-            int numLogos = 10;
+            int numLogos = 11;
             String fn = "" + f1;
             int i = fn.indexOf(" ");
             
@@ -432,12 +432,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             }
             else
             {
-                addArt(2, new IFCubes(this, 3, 150, -600, fn));
-                addArt(2, new IFCubes(this, 4, 150, -600, fn));
-                addArt(2, new IFCubes(this, 7, 150, -600, fn));
-                addArt(2, new IFCubes(this, 7, 150, -600, fn));
-                addArt(2, new IFCubes(this, 30, 150, -400, fn));
+                if (numLogos > 10)
+                {
+                    addArt(2, new IFCubes(this, 3, 150, -600, fn));
+                    addArt(2, new IFCubes(this, 4, 250, -600, fn));                
+                    addArt(2, new IFCubes(this, 7, 350, -600, fn));
+                // addArt(2, new IFCubes(this, 20, 200, -400, fn));
                 addArt(7, new MSXLogos(this, fn, numLogos));
+                }
             }
             if (numLogos != 0)
             {
