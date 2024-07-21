@@ -54,11 +54,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float colorRange = 255;
     float camDistance = 0.5f;
     float strokeWeight = 1;
+
+
     
     public PFont font;
 
     public void settings() {
-        fullScreen(P3D, 3);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -184,7 +186,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
             bhu = 3;
-            bri = 26;
+            bri = 56;
 
             cqz = 1;
             targetCqz = 1;
@@ -210,6 +212,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         return current + (delta > 0 ? 1 : -1) * maxDistanceDelta;
     }
 
+    public int lineHeight = 50;
     void addArt(int g, Art p) {
         ArrayList<Integer> group = null;
         if (groups.containsKey(g)) {
@@ -263,7 +266,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
         bhu = 3;
-        bri = 23;
+        bri = 56;
 
         cqz = 1;
         targetCqz = 1;
@@ -271,7 +274,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         textFont(font);
         
 
-        sphere = loadShape("sphere.obj");
+        //sphere = loadShape("sphere.obj");
 
         toPass = (int) random(1000);
         noCursor();
@@ -399,7 +402,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setSize(10, (int) 360)
                 .setColor(color(0, 0, 255, alp))
                 .setFont(font)
-                .setLineHeight(36)
+                .setLineHeight(lineHeight)
                 .hideScrollbar()
                 .setText(console.toString())
                 .setVisible(true);
@@ -707,7 +710,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         stats.put("BRI", bri);
         stats.put("BHU", new Float(bhu));
 
-        float rh = 25;
+        float rh = lineHeight;
 
         float h = rh * stats.size();
         float y = height - h;
@@ -716,7 +719,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         for(String key:stats.keySet())
         {
-            float x = width - 150;
+            float x = width - 300;
             
             float f = stats.get(key);
 
@@ -733,7 +736,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             {
                 fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp * 2);                        
             }
-            text(nf(ff, 4, 0), x + 75, y);
+            text(nf(ff, 4, 0), x + 125, y);
 
             key = new StringBuffer(key).reverse().toString();
 
@@ -796,8 +799,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 myTextarea.setSize(1920, (int) consoleSize)
                         .setVisible(true)
                         .setFont(font)
-                        .setLineHeight(30)
-                        .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp * 2));
+                        .setLineHeight(lineHeight)
+                        .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp));
 
             } else {
                 consoleSize = 0;
@@ -909,7 +912,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "better stronger faster",
             "Speak now or forever hold your peace",
             "Would you like our conversation to be recored on printer (Y/N)",
-            "Turn on, tune in, and drop out",
+            "Turn on tune in and drop out",
             "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings human",
