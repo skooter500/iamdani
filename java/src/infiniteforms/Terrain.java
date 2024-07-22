@@ -55,7 +55,7 @@ public class Terrain extends Art {
             for (int x = 0; x < cols; x++) {
                 float c3 = v.map(x + y + offs, 0, rows + cols, 255, 0);
                 c3 = v.hueShift(c3); 
-                v.stroke(c3, 255, 255, v.alp);
+                v.stroke(c3, v.sat, 255, v.alp);
                 v.vertex(x * scl, y * scl, terrain[x][y]);
                 v.vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
                 // rect(x*scl, y*scl, scl, scl);

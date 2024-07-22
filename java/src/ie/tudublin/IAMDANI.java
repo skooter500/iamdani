@@ -55,12 +55,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float camDistance = 0.5f;
     float strokeWeight = 1;
 
-
-    
     public PFont font;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 1);
         //size(1000, 1000, P3D);
     }
 
@@ -185,9 +183,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             //
 
 
-            bhu = 3;
-            bri = 56;
-
             cqz = 1;
             targetCqz = 1;
             font = createFont("" + matchingFiles[bhu], bri);
@@ -255,7 +250,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         targetAld = 10;
         targetHue = 57;
-        
+        targetSat = 255;
         targetAlp = 40;
         
         loadFonts();
@@ -307,6 +302,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
+        addArt(7, new Terrain(this)); 
+      
         loadModels();
         
         addArt(0, new FlippedWaveform(this));       
@@ -368,7 +365,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         addArt(7, new Bloom(this));
         
-        addArt(7, new Terrain(this)); 
         
         addArt(7, new Bands(this, 300, 0, 0, 0));
         addArt(7, new Spiral(this));
@@ -489,10 +485,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetRol = 0f;
         targetPit = 0f;
         targetYaw = 0f;
-        //targetBas = 3.6f;
-        //targetAlp = 50;
-        //
-        //targetMul = 1.0f;
+        
+        targetBas = 3.6f;
+        targetAlp = 10;
+        targetMul = 1.0f;
+
+        targetAld = 10;
+        targetHue = 57;
+        targetSat = 255;
+        targetAlp = 40;
+        
     
         
 
@@ -766,6 +768,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     int bgColor = color(21, 29, 252);
 
+    public float targetSat;
+
 
     public void draw() {
 
@@ -797,6 +801,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             mul = lerp(mul, targetMul, 0.1f);
             hue = lerp(hue, targetHue, 0.1f);
             cqz = lerp(cqz, targetCqz, 0.1f);
+
+            sat = lerp(sat, targetSat, 0.1f);
+
             colorRange = lerp(colorRange, bhu, 0.1f);
 
             if (showConsole) {

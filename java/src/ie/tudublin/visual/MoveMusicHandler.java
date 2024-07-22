@@ -102,6 +102,14 @@ public class MoveMusicHandler implements ControllerHandler{
         return;
     }
 
+    if (number == 18) {
+        // hueShift = min(max(clockWise ? hueShift + 50 : hueShift - 50f, -250), 250);
+        v.targetSat = v.map((float) value, 0.0f, 127.0f,0.0f, 255.0f);
+        if (v.exp)
+        v.println("TAS " + v.nf(v.targetSat, 3, 2));
+    }
+    
+
     
 
 
