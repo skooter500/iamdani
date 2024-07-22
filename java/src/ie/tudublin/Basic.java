@@ -128,12 +128,12 @@ public class Basic extends Art {
         v.rotateX(v.pit);
         v.rotateY(-v.yaw + 0.13f);
         v.rotateZ(v.rol);
-        v.translate(cx * .30f, cy*.1f);
+        v.translate(cx * .25f, cy*.1f);
         
 
 		for(int i = 0 ; i <= line ; i ++)
         { 
-            float h = 36;
+            float h = 50;
             if (i != line)
             {
                 v.text(sonnet[i], 0, i * h);

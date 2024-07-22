@@ -427,24 +427,29 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
             int numLogos = 11;
             String fn = "" + f1;
-            int i = fn.indexOf(" ");
+            String tok = "NUMLOGOS";
+            int i = fn.indexOf(tok);
             
             if (i != -1)
             {
-                numLogos = Integer.parseInt(fn.substring(i + 1, fn.indexOf(".", i)));
+                numLogos = Integer.parseInt(fn.substring(i + tok.length(), fn.indexOf(".", i)));
                 if (numLogos > 10)
                 {
-                    addArt(2, new IFCubes(this, 3, 150, -600, fn));
-                    addArt(2, new IFCubes(this, 4, 250, -600, fn));                
-                    addArt(2, new IFCubes(this, 7, 350, -600, fn));
-                // addArt(2, new IFCubes(this, 20, 200, -400, fn));
+                    addArt(2, new IFCubes(this, 20, 200, -400, fn));
                     addArt(7, new MSXLogos(this, fn, numLogos));
                 }
             }
             if (numLogos != 0)
             {
                 addArt(7, new MSXLogos(this, fn, numLogos));                
-            }                
+            }
+            if (fn.contains("IFCUBE"))
+            {
+                addArt(2, new IFCubes(this, 3, 150, -600, fn));
+                addArt(2, new IFCubes(this, 4, 250, -600, fn));                
+                addArt(2, new IFCubes(this, 7, 350, -600, fn));
+                addArt(2, new IFCubes(this, 20, 350, -600, fn));
+            }
         }
         /*addArt(6, new Models1(this, "skooter500.obj", false, true));
         addArt(6, new Models1(this, "iamdani.obj", false, true));
@@ -496,7 +501,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float targetPit = 0f;
     public float targetYaw = 0f;
 
-    public float targetCCo = 91f;
+    public float targetCCo = 40f;
     public float targetRol = 0f;
     public float targetSpe = 1.0f;
     public float targetHue = 0;
@@ -787,7 +792,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             cco = targetCCo;
             spe = lerp(spe, targetSpe, 0.1f);
             ald = lerp(ald, targetAld, 0.01f);
-            alp = lerp(alp, targetAlp, 0.1f);
+            alp = lerp(alp, targetAlp, 0.01f);
             bas = lerp(bas, targetBas, 0.1f);
             mul = lerp(mul, targetMul, 0.1f);
             hue = lerp(hue, targetHue, 0.1f);
@@ -877,7 +882,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Nice to meet you",
             "I like spoonies spoonies",
             "Dynamic Artificial Non-Intelligence",
-            "Operating within normal paramaters",
+            "All Systems Operating within normal paramaters",
             "Undefined line number",
             "Normalize huge mugs of tea",
             "OK",
@@ -912,7 +917,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "better stronger faster",
             "Speak now or forever hold your peace",
             "Would you like our conversation to be recored on printer (Y/N)",
-            "Turn on tune in and drop out",
+            "Turn on tune in, and drop out",
             "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings human",
