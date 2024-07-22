@@ -85,11 +85,11 @@ public class MSXLogos extends Art{
     return filename;
   }
 
-    public  MSXLogos(IAMDANI v, String filename) {
+    public  MSXLogos(IAMDANI v, String filename, int numLogos) {
         super(v);
         this.filename = filename;
-        s = v.loadShape(filename);
-        
+        s = Model.loadModel(filename, v);
+        this.numLogos = numLogos;
         //
     }
 

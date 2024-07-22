@@ -235,7 +235,7 @@ public class DANI extends Art {
         float cx = v.width;
         float cy = v.height / 2;
 
-        v.translate(cx * .35f, cy/3);
+        v.translate(cx * .25f, cy/3);
         if (transform)
         {
             v.rotateX(v.pit);
@@ -245,7 +245,7 @@ public class DANI extends Art {
         }
 		for(int i = 0 ; i <= line ; i ++)
         { 
-            float h = 36;
+            float h = 50;
             if (i != line)
             {
                 v.text(sonnet[i], 0, i * h);

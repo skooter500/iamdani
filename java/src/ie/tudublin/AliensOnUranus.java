@@ -36,15 +36,11 @@ public class AliensOnUranus extends Art {
 
     public AliensOnUranus(Visual v) {
         super(v);
-        setup();
+        //setup();
     }
 
-    public void setup() {
-        v.size(1920, 1080, v.P3D);
-        v.frameRate(30);
-        v.colorMode(v.HSB);
-        v.background(0);
-
+    public void enter()
+    {
         stars = new ArrayList<>();
         ships = new ArrayList<>();
         lastFrame = 0;
@@ -64,6 +60,9 @@ public class AliensOnUranus extends Art {
         // UFO setup
         setupUFOs();
     }
+
+
+        
 
     private void setupCrowd() {
         img1 = v.loadImage("alien_crowd/alien1.png");

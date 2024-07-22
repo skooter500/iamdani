@@ -24,6 +24,7 @@ import ddf.minim.analysis.BeatDetect;
 import ie.tudublin.visual.AKAIControllerHandler;
 import ie.tudublin.visual.BEATSStepControllerhandler;
 import ie.tudublin.visual.MoveMusicHandler;
+import ie.tudublin.visual.MovementArt;
 import infiniteforms.City;
 import infiniteforms.IFCubes;
 import infiniteforms.Life;
@@ -53,6 +54,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float colorRange = 255;
     float camDistance = 0.5f;
     float strokeWeight = 1;
+
+
     
     public PFont font;
 
@@ -183,7 +186,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
             bhu = 3;
-            bri = 23;
+            bri = 56;
 
             cqz = 1;
             targetCqz = 1;
@@ -209,6 +212,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         return current + (delta > 0 ? 1 : -1) * maxDistanceDelta;
     }
 
+    public int lineHeight = 50;
     void addArt(int g, Art p) {
         ArrayList<Integer> group = null;
         if (groups.containsKey(g)) {
@@ -249,8 +253,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void setup() {
 
-        targetAld = 5;
-        targetHue = 47;
+        targetAld = 10;
+        targetHue = 57;
+        
+        targetAlp = 40;
         
         loadFonts();
         defaults();
@@ -260,7 +266,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
         bhu = 3;
-        bri = 23;
+        bri = 56;
 
         cqz = 1;
         targetCqz = 1;
@@ -268,7 +274,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         textFont(font);
         
 
-        sphere = loadShape("sphere.obj");
+        //sphere = loadShape("sphere.obj");
 
         toPass = (int) random(1000);
         noCursor();
@@ -301,12 +307,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
-        addArt(0, new Models1(this, "msx1.obj", false, true));
-        addArt(0, new AliensOnUranus(this));       
-        
+        loadModels();
         
         addArt(0, new FlippedWaveform(this));       
-        addArt(0, new FlippedWaveform1(this));       
+        addArt(0, new FlippedWaveform1(this));               
+        //addArt(0, new Models1(this, "msx1.obj", false, true));
+        //addArt(0, new AliensOnUranus(this));       
+        
+        
         
         addArt(0, new Basic(this, "DANI.BAS"));
         addArt(0, new DANI(this, "captainb.txt"));
@@ -318,6 +326,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         v.scale_factor = 100;
         // addVision(5, v);
 
+
         addArt(1, new Life(this, 2, 280, 100));
         addArt(1, new Life(this, 3, 10000, 200));
         addArt(1, new Life(this, 0, 1000, 100));
@@ -325,9 +334,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // addVision(1, new Life(this, 4, 10000, 100));
 
         addArt(2, new infiniteforms.Cube(this));
-        addArt(2, new IFCubes(this, 7, 150, -600));
-        addArt(2, new IFCubes(this, 30, 150, -400));
-        addArt(2, new Models1(this, "msx1.obj", false, true));
+        //addArt(2, new Models1(this, "msx1.obj", false, true));
 
 
         
@@ -344,33 +351,19 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addArt(4, new ManarBrain(this));
 
 
-        addArt(5, new MSXLogos(this, "msx.obj"));
-        addArt(5, new MSXLogos(this, "chip.obj"));
+        //addArt(5, new MSXLogos(this, "msx.obj"));
+        //addArt(5, new MSXLogos(this, "chip.obj"));
         addArt(0, new Particles(this));
         addArt(0, new SarahVisual(this));
         
 
         // YM2413
         // addVision(6, new Models1(this, "phoenix.obj", false, true));
-        
-        
-        addArt(6, new Models1(this, "skooter500.obj", false, true));
-        addArt(6, new Models1(this, "iamdani.obj", false, true));
-        addArt(6, new Models1(this, "bong.obj", false, true));
-        addArt(6, new Models1(this, "pyramid.obj", false, true));
-        addArt(6, new Models1(this, "eden.obj", false, true));
-        addArt(6, new Models1(this, "audio garden 1.obj", false, true));
-        
-        addArt(6, new Models1(this, "brstarfighter.obj", false, true));
-        addArt(6, new Models1(this, "tudub.obj", false, true));
-        addArt(6, new Models1(this, "msx.obj", false, true));
-        addArt(6, new Models1(this, "eye.obj", true, false));
-        Models1 horse = new Models1(this, "horse.obj", true, false);
-        horse.scale = 0.5f;
-        horse.model.pitOff = 1;
-        addArt(6, horse);
-        addArt(6, new Models1(this, "chip.obj", true, false));
 
+        
+        
+        
+        
         addArt(7, new Airish(this));
 
         addArt(7, new Bloom(this));
@@ -409,13 +402,72 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setSize(10, (int) 360)
                 .setColor(color(0, 0, 255, alp))
                 .setFont(font)
-                .setLineHeight(36)
+                .setLineHeight(lineHeight)
                 .hideScrollbar()
                 .setText(console.toString())
                 .setVisible(true);
         ;
 
         art.enter();
+    }
+
+    private void loadModels() {
+
+        File f = new File("./java/data");
+        File[] matchingFiles = f.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.endsWith("obj");
+            }
+        });  
+        for (File f1 : matchingFiles)
+        {
+            println(f1);
+            addArt(6, new Models1(this, "" + f1, false, true));
+            addArt(0, new MovementArt(this, "" + f1));
+        
+            int numLogos = 11;
+            String fn = "" + f1;
+            String tok = "NUMLOGOS";
+            int i = fn.indexOf(tok);
+            
+            if (i != -1)
+            {
+                numLogos = Integer.parseInt(fn.substring(i + tok.length(), fn.indexOf(".", i)));
+                if (numLogos > 10)
+                {
+                    addArt(2, new IFCubes(this, 20, 200, -400, fn));
+                    addArt(7, new MSXLogos(this, fn, numLogos));
+                }
+            }
+            if (numLogos != 0)
+            {
+                addArt(7, new MSXLogos(this, fn, numLogos));                
+            }
+            if (fn.contains("IFCUBE"))
+            {
+                addArt(2, new IFCubes(this, 3, 150, -600, fn));
+                addArt(2, new IFCubes(this, 4, 250, -600, fn));                
+                addArt(2, new IFCubes(this, 7, 350, -600, fn));
+                addArt(2, new IFCubes(this, 20, 350, -600, fn));
+            }
+        }
+        /*addArt(6, new Models1(this, "skooter500.obj", false, true));
+        addArt(6, new Models1(this, "iamdani.obj", false, true));
+        addArt(6, new Models1(this, "bong.obj", false, true));
+        addArt(6, new Models1(this, "pyramid.obj", false, true));
+        addArt(6, new Models1(this, "eden.obj", false, true));
+        addArt(6, new Models1(this, "audio garden 1.obj", false, true));
+        
+        addArt(6, new Models1(this, "brstarfighter.obj", false, true));
+        addArt(6, new Models1(this, "tudub.obj", false, true));
+        addArt(6, new Models1(this, "msx.obj", false, true));
+        addArt(6, new Models1(this, "eye.obj", true, false));
+        Models1 horse = new Models1(this, "horse.obj", true, false);
+        horse.scale = 0.5f;
+        horse.model.pitOff = 1;
+        addArt(6, horse);
+        addArt(6, new Models1(this, "chip.obj", true, false));
+        */
     }
 
     public float consoleSize = 0;
@@ -449,12 +501,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float targetPit = 0f;
     public float targetYaw = 0f;
 
-    public float targetCCo = 91f;
+    public float targetCCo = 40f;
     public float targetRol = 0f;
     public float targetSpe = 1.0f;
     public float targetHue = 0;
-    public float targetAlp = 75;
-    public float targetAld = 5;
+    public float targetAlp = 69;
+    public float targetAld = 6;
     public float targetMul = 1.0f;
     public float targetBas = 4f;
     public int bhu;
@@ -663,7 +715,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         stats.put("BRI", bri);
         stats.put("BHU", new Float(bhu));
 
-        float rh = 25;
+        float rh = lineHeight;
 
         float h = rh * stats.size();
         float y = height - h;
@@ -672,7 +724,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         for(String key:stats.keySet())
         {
-            float x = width - 150;
+            float x = width - 300;
             
             float f = stats.get(key);
 
@@ -682,14 +734,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 
                 int thisFrame = frameCount % 60;
                 fill(thisFrame < 30 ? pingpong(
-                    42, 0, 255, 0, 255) : pingpong(cco - 42, 0, 255, 0, 255), 255, 255, alp);
+                    42, 0, 255, 0, 255) : pingpong(cco - 42, 0, 255, 0, 255), 255, 255, alp * 2);
                 ff = abs(ff);
             }
             else
             {
-                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp);                        
+                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp * 2);                        
             }
-            text(nf(ff, 4, 0), x + 75, y);
+            text(nf(ff, 4, 0), x + 125, y);
 
             key = new StringBuffer(key).reverse().toString();
 
@@ -740,7 +792,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             cco = targetCCo;
             spe = lerp(spe, targetSpe, 0.1f);
             ald = lerp(ald, targetAld, 0.01f);
-            alp = lerp(alp, targetAlp, 0.1f);
+            alp = lerp(alp, targetAlp, 0.01f);
             bas = lerp(bas, targetBas, 0.1f);
             mul = lerp(mul, targetMul, 0.1f);
             hue = lerp(hue, targetHue, 0.1f);
@@ -752,7 +804,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 myTextarea.setSize(1920, (int) consoleSize)
                         .setVisible(true)
                         .setFont(font)
-                        .setLineHeight(30)
+                        .setLineHeight(lineHeight)
                         .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp));
 
             } else {
@@ -828,9 +880,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "I am alive",
             "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
-            "I like spoonies spoonies spoonies spoonies spoonies spoonies",
+            "I like spoonies spoonies",
             "Dynamic Artificial Non-Intelligence",
-            "Operating within normal paramaters",
+            "All Systems Operating within normal paramaters",
             "Undefined line number",
             "Normalize huge mugs of tea",
             "OK",
@@ -860,16 +912,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Universal Serial Bus",
             "Verb Noun",
             "ullege pillage silage tillage",
-            "socket bind listen accept socket bind listen accept socket bind listen accept socket bind listen accept",
+            "socket bind listen accept",
             "We have the technology",
             "better stronger faster",
             "Speak now or forever hold your peace",
             "Would you like our conversation to be recored on printer (Y/N)",
-            "Turn on, tune in, and drop out",
+            "Turn on tune in, and drop out",
             "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings human",
             "This is your MSX speaking",
-            "color auto goto list run color auto goto list run color auto goto list run color auto goto list run",
+            "color auto goto list run",
     };
 }

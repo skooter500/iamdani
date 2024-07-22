@@ -29,7 +29,7 @@ public class MoveMusicHandler implements ControllerHandler{
     }
 
     if (number == 10) {
-        v.targetBas = v.map((float) value, 0.0f, 127.0f,0.0f, 10.0f);
+        v.targetBas = v.map((float) value, 0.0f, 127.0f,0.0f, 20.0f);
         if (v.exp)
             v.println("SAB " + v.nf(v.targetBas, 3, 2));
     }
@@ -101,6 +101,9 @@ public class MoveMusicHandler implements ControllerHandler{
 
         return;
     }
+
+    
+
 
     
     /*if (number == 18) {
@@ -201,6 +204,41 @@ public class MoveMusicHandler implements ControllerHandler{
                 v.change(newVisual);
                 return;
             }
+        }
+
+        if (pitch == 57) {
+            v.whichVisual = v.whichVisual - 1;
+            if (v.whichVisual < 0 )
+            {
+                v.whichVisual = v.arts.size() - 1;
+                
+            }
+            v.change(v.whichVisual);
+            v.println("III: " + v.whichVisual);
+            Art a = v.arts.get(v.whichVisual);
+            v.println("ART: \"" + a.getClass().getSimpleName().toLowerCase() + " " + a.toString() + ".art\"");
+    
+            return;
+        }
+    
+        if (pitch == 58) {
+            v.whichVisual = (v.whichVisual + 1) % v.arts.size();
+            v.cue = v.whichVisual;
+            v.println("III: " + v.whichVisual);
+            Art a = v.arts.get(v.whichVisual);
+            v.println("ART: \"" + a.getClass().getSimpleName().toLowerCase() + " " + a.toString() + ".art\"");
+            v.change(v.whichVisual);
+            return;
+        }
+
+        if (pitch == 59) {
+            v.whichVisual = (int) v.random(v.arts.size());
+            v.cue = v.whichVisual;
+            v.println("III: " + v.whichVisual);
+            Art a = v.arts.get(v.whichVisual);
+            v.println("ART: \"" + a.getClass().getSimpleName().toLowerCase() + " " + a.toString() + ".art\"");
+            v.change(v.whichVisual);
+            return;
         }
 
         if (pitch == 43) {
@@ -392,7 +430,9 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 48)
+        */
+
+        if (pitch == 60)
         {
             v.targetYaw = v.QUARTER_PI * (int) v.random(0,7);
             v.targetPit = v.QUARTER_PI * (int) v.random(0,7);
@@ -404,6 +444,7 @@ public class MoveMusicHandler implements ControllerHandler{
             if (v.exp) v.println("RND");
         }
 
+        /*
         if (pitch >= 36 && pitch <= 39) {
             int g = pitch - 36;
             g += 4;
