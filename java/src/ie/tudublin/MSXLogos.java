@@ -52,19 +52,18 @@ class MSXModel {
             theta += v.spe * 0.005f;
             pos.z += v.spe * v.getSmoothedAmplitude() * 2;
 
-            if (pos.z > 4000) {
+            if (pos.z > 3000) {
                 pos.z = -1000 ;
                 float halfW = v.width / 2;
                 float halfH = v.height / 2;
-                pos.x = v.random(-halfW, halfW);
-                pos.y = v.random(-halfH, halfH);
+                pos.x = v.random(-v.width, v.width);
+                pos.y = v.random(-v.width, v.width);
                 
                 lerpedS = 0;
                 h = v.random(256);
                 size = 0;
             }        
-        }
-    }
+        }    }
 
 public class MSXLogos extends Art{
 
@@ -99,12 +98,12 @@ public class MSXLogos extends Art{
 
     @Override
     public void render() {
-        float halfW = v.width / 2;
-        float halfH = v.height / 2;
+        float halfW = v.width;
+        float halfH = v.height;
         
         if (models.size() < numLogos && spawnCounter == 0)
         {
-            MSXModel msxModel = new MSXModel(s, v.random(-halfW, halfW), v.random(-halfH, halfH), 127, v.random(0, 255), v);
+            MSXModel msxModel = new MSXModel(s, v.random(-v.width, v.width), v.random(-halfH, halfH), 127, v.random(0, 255), v);
             models.add(msxModel);
             spawnCounter = 60;
         }

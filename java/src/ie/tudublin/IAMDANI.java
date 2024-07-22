@@ -40,6 +40,8 @@ import processing.core.PShape;
 import processing.core.PShapeSVG.Font;
 import themidibus.*; //Import the library
 
+
+
 public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public ArrayList<Art> arts = new ArrayList<Art>();
@@ -54,6 +56,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float colorRange = 255;
     float camDistance = 0.5f;
     float strokeWeight = 1;
+
+    public Ease.EASE ease = Ease.EASE.CIRCULAR;
+
+    public Ease.TYPE type = Ease.TYPE.EASE_IN_OUT;
+
+    public float duration = 2.0f;
+    public float t = 1000;
 
     public PFont font;
 
@@ -477,32 +486,44 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public boolean takeScreenshot = false;
 
+    private int startSat;
+
 
 
     public void defaults() {
         println("DEF");
         
-        targetRol = 0f;
-        targetPit = 0f;
-        targetYaw = 0f;
+        targetRol = startRol = 0f;
+        targetPit = startPit = 0f;
+        targetYaw = startYaw = 0f;
         
-        targetBas = 3.6f;
-        targetAlp = 10;
-        targetMul = 1.0f;
+        targetBas = startBas = 3.6f;
+        targetAlp = startAlp = 10;
+        targetMul = startMul = 1.0f;
 
-        targetAld = 10;
-        targetHue = 57;
-        targetSat = 255;
-        targetAlp = 40;
-        
+        targetAld = startAld = 10;
+        targetHue = startHue = 57;
+        targetSat = startSat = 255;
+        targetAlp = startAlp = 40;
+
     
         
 
     }
 
+    public float startPit = 0f;
+    public float startYaw = 0f;
+    public float startCCo = 40f;
+    public float startRol = 0f;
+    public float startSpe = 1.0f;
+    public float startHue = 0;
+    public float startAlp = 69;
+    public float startAld = 6;
+    public float startMul = 1.0f;
+    public float startBas = 4f;
+
     public float targetPit = 0f;
     public float targetYaw = 0f;
-
     public float targetCCo = 40f;
     public float targetRol = 0f;
     public float targetSpe = 1.0f;
@@ -789,9 +810,25 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             blendMode(BLEND);
             colorMode(HSB, 255, 255, 255);
 
-            yaw = lerp(yaw, targetYaw, 0.1f);
-            pit = lerp(pit, targetPit, 0.1f);
-            rol = lerp(rol, targetRol, 0.1f);
+            yaw = Ease.Map2(t, duration, 0.0f, startYaw, targetYaw, ease, type);
+            pit = Ease.Map2(t, duration, 0.0f, startPit, targetPit, ease, type);
+            cco = Ease.Map2(t, duration, 0.0f, startCCo, targetCCo, ease, type);
+            rol = Ease.Map2(t, duration, 0.0f, startRol, targetRol, ease, type);
+            spe = Ease.Map2(t, duration, 0.0f, startSpe, targetSpe, ease, type);
+            hue = Ease.Map2(t, duration, 0.0f, startHue, targetHue, ease, type);
+            alp = Ease.Map2(t, duration, 0.0f, startAlp, targetAlp, ease, type);
+            ald = Ease.Map2(t, duration, 0.0f, startAld, targetAld, ease, type);
+            mul = Ease.Map2(t, duration, 0.0f, startMul, targetMul, ease, type);
+            bas = Ease.Map2(t, duration, 0.0f, startBas, targetBas, ease, type);
+            t += timeDelta; 
+            t = min(duration, t);
+            
+            ald = lerp(ald, targetAld, 0.01f);
+            
+
+            /*yaw = lerp(yaw, targetYaw, 0.05f);
+            pit = lerp(pit, targetPit, 0.05f);
+            rol = lerp(rol, targetRol, 0.05f);
             
             cco = targetCCo;
             spe = lerp(spe, targetSpe, 0.1f);
@@ -803,6 +840,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             cqz = lerp(cqz, targetCqz, 0.1f);
 
             sat = lerp(sat, targetSat, 0.1f);
+            */
 
             colorRange = lerp(colorRange, bhu, 0.1f);
 

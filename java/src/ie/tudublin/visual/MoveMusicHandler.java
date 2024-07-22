@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import ie.tudublin.Art;
 import ie.tudublin.ControllerHandler;
 import ie.tudublin.IAMDANI;
+import ie.tudublin.Ease.EASE;
+import ie.tudublin.Ease;
 
 public class MoveMusicHandler implements ControllerHandler{
 
@@ -160,6 +162,13 @@ public class MoveMusicHandler implements ControllerHandler{
         v.targetRol = v.wrapAngle(v.targetRol);
         if (v.exp)
         v.println("LOR " + v.nf(v.targetRol, 3, 2));
+    }
+
+    if (number == 90)
+    {
+        v.duration = v.map((float) value, 0.0f, 127.0f, 0.0f, 10.0f);
+        if (v.exp)
+        v.println("DUR " + v.nf(v.duration, 3, 2));
     }
 
     if (number == 91) {
@@ -442,14 +451,31 @@ public class MoveMusicHandler implements ControllerHandler{
 
         if (pitch == 60)
         {
+            v.startYaw = v.yaw;
+            v.startPit = v.pit;
+            v.startRol = v.rol;
+            
             v.targetYaw = v.QUARTER_PI * (int) v.random(0,7);
             v.targetPit = v.QUARTER_PI * (int) v.random(0,7);
             v.targetRol = v.QUARTER_PI * (int) v.random(0,7);
+            v.t = 0;
+
             //v.targetRol = - v.HALF_PI;
             // targetHue = random(0, 255);
             // v.targetAlp = random(10, 255);
             // targetAld = random(0, 50);
             if (v.exp) v.println("RND");
+        }
+
+        if (pitch == 61)
+        {
+            v.ease = EASE.values()[(v.ease.ordinal() + 1) % EASE.values().length];
+            v.println("EASE: " + v.ease);
+        }
+
+        if (pitch == 62)
+        {
+            v.duration = 0.0f;
         }
 
         /*
