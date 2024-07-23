@@ -296,6 +296,7 @@ public class MoveMusicHandler implements ControllerHandler{
                 v.yaw = v.targetYaw;
             }
             v.println("WAY: " + v.nf(v.degrees(v.targetYaw), 3, 0));
+            v.startEase();
             return;
         }
 
@@ -309,6 +310,7 @@ public class MoveMusicHandler implements ControllerHandler{
             }
 
             v.println("TIP: " + v.nf(v.degrees(v.targetPit), 3, 0));
+            v.startEase();
             return;
         }
 
@@ -320,7 +322,7 @@ public class MoveMusicHandler implements ControllerHandler{
             {
                 v.rol = v.targetRol;
             }
-
+            v.startEase();
             v.println("LOR: " + v.nf(v.degrees(v.targetRol), 3, 0));
             return;
         }
@@ -334,7 +336,7 @@ public class MoveMusicHandler implements ControllerHandler{
                 v.yaw = v.targetYaw;
                 v.println("shift");
             }
-
+            v.startEase();
             v.println("WAY: " + v.nf(v.degrees(v.targetYaw), 3, 0));
             return;
         }
@@ -343,7 +345,8 @@ public class MoveMusicHandler implements ControllerHandler{
         if (pitch == 39)
         {
             v.targetPit -= v.QUARTER_PI;
-
+            v.t = 0;
+            v.startEase();
             if (v.checkKey(v.SHIFT) )
             {
                 v.pit = v.targetPit;
@@ -356,7 +359,8 @@ public class MoveMusicHandler implements ControllerHandler{
         if (pitch == 40)
         {
             v.targetRol -= v.QUARTER_PI;
-
+            v.startEase();
+        
             if (v.checkKey(v.SHIFT) )
             {
                 v.rol = v.targetRol;
@@ -450,15 +454,11 @@ public class MoveMusicHandler implements ControllerHandler{
         */
 
         if (pitch == 60)
-        {
-            v.startYaw = v.yaw;
-            v.startPit = v.pit;
-            v.startRol = v.rol;
-            
+        {            
             v.targetYaw = v.QUARTER_PI * (int) v.random(0,7);
             v.targetPit = v.QUARTER_PI * (int) v.random(0,7);
             v.targetRol = v.QUARTER_PI * (int) v.random(0,7);
-            v.t = 0;
+            v.startEase();
 
             //v.targetRol = - v.HALF_PI;
             // targetHue = random(0, 255);

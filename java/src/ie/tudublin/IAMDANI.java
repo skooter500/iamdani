@@ -67,7 +67,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public PFont font;
 
     public void settings() {
-        fullScreen(P3D, 1);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -486,7 +486,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public boolean takeScreenshot = false;
 
-    private int startSat;
+    private float startSat;
 
 
 
@@ -810,20 +810,27 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             blendMode(BLEND);
             colorMode(HSB, 255, 255, 255);
 
-            if (t < duration)
+            if (t <= duration)
             {
                 t += timeDelta;
                 t = min(duration, t);
-                yaw = Ease.Map2(t, duration, 0.0f, startYaw, targetYaw, ease, type);
-                pit = Ease.Map2(t, duration, 0.0f, startPit, targetPit, ease, type);
-                cco = Ease.Map2(t, duration, 0.0f, startCCo, targetCCo, ease, type);
-                rol = Ease.Map2(t, duration, 0.0f, startRol, targetRol, ease, type);
-                spe = Ease.Map2(t, duration, 0.0f, startSpe, targetSpe, ease, type);
-                hue = Ease.Map2(t, duration, 0.0f, startHue, targetHue, ease, type);
-                alp = Ease.Map2(t, duration, 0.0f, startAlp, targetAlp, ease, type);
-                ald = Ease.Map2(t, duration, 0.0f, startAld, targetAld, ease, type);
-                mul = Ease.Map2(t, duration, 0.0f, startMul, targetMul, ease, type);
-                bas = Ease.Map2(t, duration, 0.0f, startBas, targetBas, ease, type);
+                yaw = Ease.Map2(t, 0, duration, startYaw, targetYaw, ease, type);
+                pit = Ease.Map2(t, 0, duration, startPit, targetPit, ease, type);
+                cco = Ease.Map2(t, 0, duration, startCCo, targetCCo, ease, type);
+                rol = Ease.Map2(t, 0, duration, startRol, targetRol, ease, type);
+                spe = Ease.Map2(t, 0, duration, startSpe, targetSpe, ease, type);
+                hue = Ease.Map2(t, 0, duration, startHue, targetHue, ease, type);
+                alp = Ease.Map2(t, 0, duration, startAlp, targetAlp, ease, type);
+                ald = Ease.Map2(t, 0, duration, startAld, targetAld, ease, type);
+                mul = Ease.Map2(t, 0, duration, startMul, targetMul, ease, type);
+                bas = Ease.Map2(t, 0, duration, startBas, targetBas, ease, type);
+
+                // 
+                if (t == duration)
+                {
+                    t = 1000;
+                    println("Transition finished");
+                }
             }
             else
             {
@@ -988,4 +995,18 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "color auto goto list run",
             "Whatever your hand finds to do, do it with all your might; for there is no activity or planning or knowledge or wisdom in Sheol where you are going. Ecclesiastes 9:10"
     };
+
+    public void startEase() {
+        t = 0;
+        startRol = rol;
+        startPit = pit;
+        startYaw = yaw;
+        startBas = bas;
+        startAlp = alp;
+        startMul = mul;
+        startAld = ald;
+        startHue = hue;
+        startSat = sat;
+        startAlp = alp;
+    }
 }
