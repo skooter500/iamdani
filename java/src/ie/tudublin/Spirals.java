@@ -14,7 +14,7 @@ public class Spirals extends Art {
 
     }
 
-    public void render(int ellapsed)
+    public void render(int frameCount)
     { 
         v.rotateX(v.pit);
         v.rotateY(v.yaw);
@@ -23,7 +23,9 @@ public class Spirals extends Art {
         x = cx + v.sin(theta) * r;
         y = cy + (v.cos(theta) * dir) * r;
         v.stroke(v.hueShift(c), 255, 255);
-        
+        v.rotateX(v.pit * 0.5f);
+        v.rotateY(v.yaw * 0.5f);
+        v.rotateZ(v.rol * 0.5f);
         v.line(px, py, x, y);
         r += rInc;
         theta += thetaInc;

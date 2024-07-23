@@ -46,6 +46,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public ArrayList<Art> arts = new ArrayList<Art>();
 
+    Quaternion from = new Quaternion();
+    Quaternion to = new Quaternion();
+
     // Poly play;
     public int previousVisual = 0;
     public int whichVisual = 0;
@@ -66,8 +69,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public PFont font;
 
+    public enum ControlType {Move, Rotate};
+
+    public ControlType controlType = ControlType.Move; 
+
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 1);
         //size(1000, 1000, P3D);
     }
 
@@ -103,6 +110,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         float dist = 42;
         targetCCo += upOrDown ? dist : -dist;
         println("CCO " + targetCCo);
+
+        //q.sl
     }
 
 
@@ -312,13 +321,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //addVision(0, new circles(this));
 
         addArt(7, new Terrain(this)); 
-      
+        addArt(7, new Spirals(this));
+        addArt(0, new FlippedWaveform(this));       
+        addArt(0, new FlippedWaveform1(this));                       
         loadModels();
         
-        addArt(0, new FlippedWaveform(this));       
-        addArt(0, new FlippedWaveform1(this));               
         //addArt(0, new Models1(this, "msx1.obj", false, true));
-        //addArt(0, new AliensOnUranus(this));       
+        addArt(0, new AliensOnUranus(this));       
         
         
         
@@ -376,8 +385,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         
         addArt(7, new Bands(this, 300, 0, 0, 0));
-        addArt(7, new Spiral(this));
-        addArt(7, new SarahVisual(this));
         addArt(7, new JenniferVisuals(this));
 
         // addVision(new Life(this, 1, 1000));
@@ -428,7 +435,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         {
             println(f1);
             addArt(6, new Models1(this, "" + f1, false, true));
-            addArt(0, new MovementArt(this, "" + f1));
+            // addArt(0, new MovementArt(this, "" + f1));
         
             int numLogos = 11;
             String fn = "" + f1;
@@ -493,18 +500,18 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public void defaults() {
         println("DEF");
         
-        targetRol = startRol = 0f;
-        targetPit = startPit = 0f;
-        targetYaw = startYaw = 0f;
+        targetRol = rol = startRol = 0f;
+        targetPit = pit = startPit = 0f;
+        targetYaw = yaw = startYaw = 0f;
         
-        targetBas = startBas = 3.6f;
-        targetAlp = startAlp = 10;
-        targetMul = startMul = 1.0f;
+        targetBas = bas = startBas = 3.6f;
+        targetAlp = alp = startAlp = 10;
+        targetMul = mul = startMul = 1.0f;
 
-        targetAld = startAld = 10;
-        targetHue = startHue = 57;
-        targetSat = startSat = 255;
-        targetAlp = startAlp = 40;
+        targetAld = ald = startAld = 10;
+        targetHue = hue = startHue = 57;
+        targetSat = sat = startSat = 255;
+        targetAlp = alp = startAlp = 40;
 
     
         
@@ -814,10 +821,19 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             {
                 t += timeDelta;
                 t = min(duration, t);
+                
+                /*
                 yaw = Ease.Map2(t, 0, duration, startYaw, targetYaw, ease, type);
                 pit = Ease.Map2(t, 0, duration, startPit, targetPit, ease, type);
-                cco = Ease.Map2(t, 0, duration, startCCo, targetCCo, ease, type);
                 rol = Ease.Map2(t, 0, duration, startRol, targetRol, ease, type);
+                */
+
+                Quaternion q = new Quaternion();
+                float qt = Ease.Map2(t, 0, duration, 0, 1, ease, type);
+                q.setSlerp(from, to, qt);
+
+
+                cco = Ease.Map2(t, 0, duration, startCCo, targetCCo, ease, type);
                 spe = Ease.Map2(t, 0, duration, startSpe, targetSpe, ease, type);
                 hue = Ease.Map2(t, 0, duration, startHue, targetHue, ease, type);
                 alp = Ease.Map2(t, 0, duration, startAlp, targetAlp, ease, type);
@@ -943,8 +959,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         updatePixels();
     }
 
-    Quaternion q;
-
     String[] randomMessages = {
             "I am DANI",
             "I am alive",
@@ -993,14 +1007,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Greetings human",
             "This is your MSX speaking",
             "color auto goto list run",
-            "Whatever your hand finds to do, do it with all your might; for there is no activity or planning or knowledge or wisdom in Sheol where you are going. Ecclesiastes 9:10"
+            "Whatever your hand finds to do, do it with all your might"
     };
 
     public void startEase() {
         t = 0;
-        startRol = rol;
-        startPit = pit;
-        startYaw = yaw;
+
+        from.setFromEuler(yaw, pit, rol);
+        to.setFromEuler(targetYaw, targetPit, targetRol);
         startBas = bas;
         startAlp = alp;
         startMul = mul;

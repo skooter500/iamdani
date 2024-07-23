@@ -6,6 +6,7 @@ import ie.tudublin.Art;
 import ie.tudublin.ControllerHandler;
 import ie.tudublin.IAMDANI;
 import ie.tudublin.Ease.EASE;
+import ie.tudublin.IAMDANI.ControlType;
 import ie.tudublin.Ease;
 
 public class MoveMusicHandler implements ControllerHandler{
@@ -440,6 +441,12 @@ public class MoveMusicHandler implements ControllerHandler{
                 v.myTextarea.setVisible(v.showConsole);
             }
             return;
+        }
+
+        if (pitch == 63)
+        {
+            v.controlType = ControlType.values()[(v.controlType.ordinal() + 1) % ControlType.values().length];
+            v.println("Control Type: " + v.controlType); 
         }
 
         // Receive a noteOn
