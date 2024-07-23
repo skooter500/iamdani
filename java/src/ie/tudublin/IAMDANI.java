@@ -810,19 +810,37 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             blendMode(BLEND);
             colorMode(HSB, 255, 255, 255);
 
-            yaw = Ease.Map2(t, duration, 0.0f, startYaw, targetYaw, ease, type);
-            pit = Ease.Map2(t, duration, 0.0f, startPit, targetPit, ease, type);
-            cco = Ease.Map2(t, duration, 0.0f, startCCo, targetCCo, ease, type);
-            rol = Ease.Map2(t, duration, 0.0f, startRol, targetRol, ease, type);
-            spe = Ease.Map2(t, duration, 0.0f, startSpe, targetSpe, ease, type);
-            hue = Ease.Map2(t, duration, 0.0f, startHue, targetHue, ease, type);
-            alp = Ease.Map2(t, duration, 0.0f, startAlp, targetAlp, ease, type);
-            ald = Ease.Map2(t, duration, 0.0f, startAld, targetAld, ease, type);
-            mul = Ease.Map2(t, duration, 0.0f, startMul, targetMul, ease, type);
-            bas = Ease.Map2(t, duration, 0.0f, startBas, targetBas, ease, type);
-            t += timeDelta; 
-            t = min(duration, t);
-            
+            if (t < duration)
+            {
+                t += timeDelta;
+                t = min(duration, t);
+                yaw = Ease.Map2(t, duration, 0.0f, startYaw, targetYaw, ease, type);
+                pit = Ease.Map2(t, duration, 0.0f, startPit, targetPit, ease, type);
+                cco = Ease.Map2(t, duration, 0.0f, startCCo, targetCCo, ease, type);
+                rol = Ease.Map2(t, duration, 0.0f, startRol, targetRol, ease, type);
+                spe = Ease.Map2(t, duration, 0.0f, startSpe, targetSpe, ease, type);
+                hue = Ease.Map2(t, duration, 0.0f, startHue, targetHue, ease, type);
+                alp = Ease.Map2(t, duration, 0.0f, startAlp, targetAlp, ease, type);
+                ald = Ease.Map2(t, duration, 0.0f, startAld, targetAld, ease, type);
+                mul = Ease.Map2(t, duration, 0.0f, startMul, targetMul, ease, type);
+                bas = Ease.Map2(t, duration, 0.0f, startBas, targetBas, ease, type);
+            }
+            else
+            {
+                yaw = lerp(yaw, targetYaw, 0.1f);
+                pit = lerp(pit, targetPit, 0.1f);
+                rol = lerp(rol, targetRol, 0.1f);
+                
+                cco = targetCCo;
+                spe = lerp(spe, targetSpe, 0.1f);
+                // ald = lerp(ald, targetAld, 0.01f);
+                alp = lerp(alp, targetAlp, 0.01f);
+                bas = lerp(bas, targetBas, 0.1f);
+                mul = lerp(mul, targetMul, 0.1f);
+                hue = lerp(hue, targetHue, 0.1f);
+                cqz = lerp(cqz, targetCqz, 0.1f);
+            }
+                
             ald = lerp(ald, targetAld, 0.01f);
             
 
