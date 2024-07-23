@@ -832,7 +832,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 float qt = Ease.Map2(t, 0, duration, 0, 1, ease, type);
                 q.setSlerp(from, to, qt);
 
-
+                float[] euler = new float[3];
+                q.toEuler(euler);
+                yaw = euler[0];
+                pit = euler[1];
+                rol = euler[2];
                 cco = Ease.Map2(t, 0, duration, startCCo, targetCCo, ease, type);
                 spe = Ease.Map2(t, 0, duration, startSpe, targetSpe, ease, type);
                 hue = Ease.Map2(t, 0, duration, startHue, targetHue, ease, type);
@@ -1011,10 +1015,18 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     };
 
     public void startEase() {
-        t = 0;
+        t = 0;        
+        float[] startEuler = new float[3];
+        startEuler[0] = yaw;
+        startEuler[1] = pit;
+        startEuler[2] = rol;
+        from.setFromEuler(startEuler);
 
-        from.setFromEuler(yaw, pit, rol);
-        to.setFromEuler(targetYaw, targetPit, targetRol);
+        float[] targetEuler = new float[3];
+        targetEuler[0] = targetYaw;
+        targetEuler[1] = targetPit;
+        targetEuler[2] = targetRol;
+        to.setFromEuler(targetEuler);
         startBas = bas;
         startAlp = alp;
         startMul = mul;
