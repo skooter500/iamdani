@@ -968,5 +968,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Greetings human",
             "This is your MSX speaking",
             "color auto goto list run",
+            "Whatever your hand finds to do, do it with all your might; for there is no activity or planning or knowledge or wisdom in Sheol where you are going. Ecclesiastes 9:10"
     };
 }
