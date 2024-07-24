@@ -239,9 +239,9 @@ public class DANI extends Art {
         if (transform)
         {
             v.rotateX(v.pit);
-    v.rotateY(-v.yaw + 0.13f);
-    v.rotateZ(v.rol);
-        
+            v.rotateY(-v.yaw + 0.13f);
+            v.rotateZ(v.rol);
+                
         }
 		for(int i = 0 ; i <= line ; i ++)
         { 

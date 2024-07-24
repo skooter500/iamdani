@@ -36,7 +36,7 @@ public class Spirals extends Art {
             py = y;
         }
         
-        if (r >= 700)
+        if (r >= 1000)
         {
             enter();
         }

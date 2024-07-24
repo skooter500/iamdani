@@ -320,6 +320,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
+        addArt(0, new Basic(this, "DANI.BAS"));
+        addArt(0, new DANI(this, "captainb.txt"));
+        addArt(0, new Nematode(this));
         addArt(7, new Terrain(this)); 
         addArt(7, new Spirals(this));
         addArt(0, new FlippedWaveform(this));       
@@ -331,9 +334,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         
         
-        addArt(0, new Basic(this, "DANI.BAS"));
-        addArt(0, new DANI(this, "captainb.txt"));
-        addArt(0, new Nematode(this));
         // groups.add(g);
         
         
@@ -385,7 +385,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         
         addArt(7, new Bands(this, 300, 0, 0, 0));
-        addArt(7, new JenniferVisuals(this));
+        //addArt(7, new JenniferVisuals(this));
 
         // addVision(new Life(this, 1, 1000));
 
@@ -447,7 +447,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 numLogos = Integer.parseInt(fn.substring(i + tok.length(), fn.indexOf(".", i)));
                 if (numLogos > 10)
                 {
-                    addArt(2, new IFCubes(this, 20, 200, -400, fn));
                     addArt(7, new MSXLogos(this, fn, numLogos));
                 }
             }
@@ -460,7 +459,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 addArt(2, new IFCubes(this, 3, 150, -600, fn));
                 addArt(2, new IFCubes(this, 4, 250, -600, fn));                
                 addArt(2, new IFCubes(this, 7, 350, -600, fn));
-                addArt(2, new IFCubes(this, 20, 350, -600, fn));
             }
         }
         /*addArt(6, new Models1(this, "skooter500.obj", false, true));
@@ -731,6 +729,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (key == ' ')
         {
             ch.noteOn(0, 53, 100);
+        }
+
+        if (key == 'z')
+        {
+            art.enter();
         }
 
     }

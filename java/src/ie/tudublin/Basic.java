@@ -134,6 +134,12 @@ public class Basic extends Art {
 		for(int i = 0 ; i <= line ; i ++)
         { 
             float h = 50;
+            float coeff = 0.9318812f;            
+            v.rotateX(v.pit);
+            v.rotateY(-v.yaw + 0.13f);
+            v.rotateZ(v.rol);
+    
+            
             if (i != line)
             {
                 v.text(sonnet[i], 0, i * h);
