@@ -500,13 +500,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public void defaults() {
         println("DEF");
         
-        targetRol = rol = startRol = 0f;
-        targetPit = pit = startPit = 0f;
-        targetYaw = yaw = startYaw = 0f;
+        targetRol =  0f;
+        targetPit = 0f;
+        targetYaw = 0f;
         
         targetBas = bas = startBas = 3.6f;
         targetAlp = alp = startAlp = 10;
-        targetMul = mul = startMul = 1.0f;
+        targetMul = mul = startMul = 20.0f;
 
         targetAld = ald = startAld = 10;
         targetHue = hue = startHue = 57;
@@ -514,7 +514,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetAlp = alp = startAlp = 40;
 
     
-        
+        startEase();
 
     }
 
@@ -722,6 +722,17 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (key == 'p') {
             takeScreenshot = true;
         }
+
+        if (key == 'y')
+        {
+            ch.noteOn(0, 60, 100);
+        }
+
+        if (key == ' ')
+        {
+            ch.noteOn(0, 53, 100);
+        }
+
     }
 
     void showStats()
@@ -827,11 +838,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             blendMode(BLEND);
             colorMode(HSB, 255, 255, 255);
 
-            if (keys['Y'])
-            {
-                ch.noteOn(0, 60, 100);
-            }
-
+            
             
             if (t <= duration)
             {

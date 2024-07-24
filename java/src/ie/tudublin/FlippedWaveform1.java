@@ -16,7 +16,7 @@ public class FlippedWaveform1 extends Art {
         v.strokeWeight(2);
         for (int i = 0; i < bs; i ++)
         {
-        float sample = v.smoothedBuffer[i * 4] * v.halfH * v.mul * 0.1f;
+        float sample = v.smoothedBuffer[i * 4] * v.halfH * v.getSmoothedAmplitude() * 5.0f;
         v.stroke(v.map(i, 0, bs, 0, 255), 255, 255, v.alp);
         //line(i, halfH + sample, i, halfH - sample); 
 

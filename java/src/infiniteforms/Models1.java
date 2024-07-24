@@ -50,7 +50,7 @@ public class Models1 extends Art
     v.camera(200, 0, -400, 20, 20, 0, 0, 1, 0);
     
     v.scale(scale);
-    
+    v.rotateX(-v.HALF_PI);
     model.render();
     v.popMatrix();
     v.camera(v.width/2.0f, (v.height/2.0f) - 5000, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0, 0, 1, 0);
