@@ -102,8 +102,8 @@ public class Model {
     }
     else
     {
-      v.rotateX(-v.HALF_PI + v.pit + pitOff);
-      v.rotateZ(v.PI + v.yaw);
+      v.rotateZ(v.yaw);      
+      v.rotateX(v.pit);
       v.rotateY(v.rol);
     }
     // v.rotateX(v.xRotation);

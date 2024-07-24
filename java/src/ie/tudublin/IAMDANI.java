@@ -60,11 +60,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float camDistance = 0.5f;
     float strokeWeight = 1;
 
-    public Ease.EASE ease = Ease.EASE.CIRCULAR;
+    public Ease.EASE ease = Ease.EASE.QUINTIC;
 
     public Ease.TYPE type = Ease.TYPE.EASE_IN_OUT;
 
-    public float duration = 2.0f;
+    public float duration = 1.0f;
     public float t = 1000;
 
     public PFont font;
@@ -737,6 +737,17 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         stats.put("RAW", raw * 10.0f);
         stats.put("ALP", alp);
         stats.put("YAW", degrees(yaw));
+        stats.put("TGY", degrees(targetYaw));
+        stats.put("TGP", degrees(targetPit));
+        stats.put("TGR", degrees(targetRol));
+        
+        stats.put("FGY", degrees(startYaw));
+        stats.put("FGP", degrees(startPit));
+        stats.put("FGR", degrees(startRol));
+        
+        
+        
+        
         stats.put("PIT", degrees(pit));
         stats.put("ROL", degrees(rol));
         stats.put("HUE", hue);
@@ -817,6 +828,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             blendMode(BLEND);
             colorMode(HSB, 255, 255, 255);
 
+            if (keys['Y'])
+            {
+                ch.noteOn(0, 60, 100);
+            }
+
             if (t <= duration)
             {
                 t += timeDelta;
@@ -829,9 +845,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 */
 
                 Quaternion q = new Quaternion();
-                float qt = Ease.Map2(t, 0, duration, 0, 1, ease, type);
+                float qt = Ease.Map2(t, 0, duration, 00f, 1.0f, ease, type);
+                println("qt:" + qt);                
                 q.setSlerp(from, to, qt);
-
+                q.normalize();
                 float[] euler = new float[3];
                 q.toEuler(euler);
                 yaw = euler[0];
@@ -854,9 +871,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             }
             else
             {
-                yaw = lerp(yaw, targetYaw, 0.1f);
-                pit = lerp(pit, targetPit, 0.1f);
-                rol = lerp(rol, targetRol, 0.1f);
+                //yaw = lerp(yaw, targetYaw, 0.1f);
+                //pit = lerp(pit, targetPit, 0.1f);
+                //rol = lerp(rol, targetRol, 0.1f);
                 
                 cco = targetCCo;
                 spe = lerp(spe, targetSpe, 0.1f);
@@ -1020,13 +1037,19 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         startEuler[0] = yaw;
         startEuler[1] = pit;
         startEuler[2] = rol;
-        from.setFromEuler(startEuler);
+        //from.setFromEuler(startEuler);
+        from = new Quaternion();
+        from.rotateByEuler(yaw, pit, rol);
+        from.normalize();
 
         float[] targetEuler = new float[3];
-        targetEuler[0] = targetYaw;
-        targetEuler[1] = targetPit;
-        targetEuler[2] = targetRol;
-        to.setFromEuler(targetEuler);
+        targetEuler[0] = map(targetYaw, 0, TWO_PI, -PI, PI);
+        targetEuler[1] = map(targetPit, 0, TWO_PI, -PI, PI);
+        targetEuler[2] = map(targetRol, 0, TWO_PI, -PI, PI);
+        //to.setFromEuler(targetEuler);
+        to = new Quaternion();
+        to.rotateByEuler(targetYaw, targetPit, targetRol);
+        to.normalize();
         startBas = bas;
         startAlp = alp;
         startMul = mul;
