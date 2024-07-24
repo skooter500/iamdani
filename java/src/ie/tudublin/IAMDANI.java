@@ -757,7 +757,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         float rh = lineHeight;
 
         float h = rh * stats.size();
-        float y = height - h + 50;
+        float y = height - h + 20;
 
         textFont(font);
         
@@ -847,13 +847,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 Quaternion q = new Quaternion();
                 float qt = Ease.Map2(t, 0, duration, 00f, 1.0f, ease, type);
 
-                // String thisOne = nf(qt, 1, 3);
-                // if (! lastOne.equals(thisOne))
-                // { 
-                //     println("qt:" + thisOne);
-                //     lastOne = thisOne;
-                // }                
-                println("qt:" + qt);
+                String thisOne = Float.toString(qt);
+                if (! lastOne.equals(thisOne))
+                { 
+                    println("qt:" + qt);                    
+                }                
+                lastOne = thisOne;
                 q.setSlerp(from, to, qt);
                 q.normalize();
                 float[] euler = new float[3];
