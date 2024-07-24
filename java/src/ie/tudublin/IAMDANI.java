@@ -808,6 +808,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float targetSat;
 
 
+    String lastOne = "";
     public void draw() {
 
         try
@@ -831,6 +832,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 ch.noteOn(0, 60, 100);
             }
 
+            
             if (t <= duration)
             {
                 t += timeDelta;
@@ -844,7 +846,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
                 Quaternion q = new Quaternion();
                 float qt = Ease.Map2(t, 0, duration, 00f, 1.0f, ease, type);
-                println("qt:" + qt);                
+
+                // String thisOne = nf(qt, 1, 3);
+                // if (! lastOne.equals(thisOne))
+                // { 
+                //     println("qt:" + thisOne);
+                //     lastOne = thisOne;
+                // }                
+                println("qt:" + qt);
                 q.setSlerp(from, to, qt);
                 q.normalize();
                 float[] euler = new float[3];
