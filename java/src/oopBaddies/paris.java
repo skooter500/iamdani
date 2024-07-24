@@ -14,6 +14,7 @@ public class paris extends Art {
 
   public void enter() {
     v.cqz = 255;
+    v.targetCqz = 255;
   }
 
   // declare the variable

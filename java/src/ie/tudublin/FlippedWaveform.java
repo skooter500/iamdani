@@ -45,6 +45,8 @@ public class FlippedWaveform extends Art {
     
     public void enter()
     {
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     public void exit()

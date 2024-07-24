@@ -42,6 +42,8 @@ public class DANI extends Art {
         ch = 0;
         f = (int) v.random(256);
         v.cqz = 1;
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     int f = 0;

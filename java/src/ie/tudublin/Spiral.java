@@ -13,6 +13,8 @@ public class Spiral extends Art{
 
   public void enter(){
     v.cqz = 1;
+    v.cqz = 1;
+        v.targetCqz = 1;
   }
 
   

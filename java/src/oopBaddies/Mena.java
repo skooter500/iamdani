@@ -18,6 +18,7 @@ public class Mena extends Art {
     {
         y = 1000;
         v.cqz = 255;
+        v.targetCqz = 255;
         
     }
 

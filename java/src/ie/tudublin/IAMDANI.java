@@ -379,7 +379,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         
         
-        addArt(7, new Airish(this));
+        // addArt(7, new Airish(this));
 
         addArt(7, new Bloom(this));
         
@@ -657,7 +657,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             return;
         }
 
-        if (key == 'o') {
+        if (key == 's') {
             exp = !exp;
             if (exp) {
                 println("TRON");
@@ -707,7 +707,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             mode = Modes.Auto;
         }
 
-        if (key == 'r') {
+        if (key == 'd') {
             println("RAND");
             mode = Modes.AutoRandom;
         }
@@ -721,7 +721,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             takeScreenshot = true;
         }
 
-        if (key == 'y')
+        if (key == 'f')
         {
             ch.noteOn(0, 60, 100);
         }
@@ -735,6 +735,49 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         {
             art.enter();
         }
+
+        if (key == 'q')
+        {
+            ch.noteOn(0, 54, 100);
+        }
+
+        if (key == 'w')
+        {
+            ch.noteOn(0, 55, 100);
+        }
+
+        if (key == 'e')
+        {
+            ch.noteOn(0, 56, 100);
+        }
+
+        if (key == 'r')
+        {
+            ch.noteOn(0, 42, 100);
+        }
+
+        if (key == 't')
+        {
+            ch.noteOn(0, 44, 100);
+        }
+
+        if (key == 'y')
+        {
+            ch.noteOn(0, 36, 100);
+        }
+
+        if (key == 'u')
+        {
+            ch.noteOn(0, 45, 100);
+        }
+
+        if (key == 'i')
+        {
+            ch.noteOn(0, 37, 100);
+        }
+        
+
+        //54, 55, 56, 42, 44, 36, 45, 37
 
     }
 

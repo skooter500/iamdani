@@ -13,7 +13,8 @@ public class ManarBrain extends Art
 
     public void enter()
     {
-        v.cqz = 256;
+        v.cqz = 255;
+        v.targetCqz = 255;
     }
  
     public ManarBrain(Visual p)

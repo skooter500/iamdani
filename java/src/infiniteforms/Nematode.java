@@ -46,7 +46,7 @@ public class Nematode extends Art
     dani = new DANI(v, "nematodes.txt");
     dani.l = 15;
     v.cqz = 50;
-    
+    v.targetCqz = 50; 
   }
 
   
@@ -149,7 +149,7 @@ public class Nematode extends Art
     
     drawGenitals();
     theta += v.spe * 0.03f * v.getSmoothedAmplitude();
-    v.translate(-400, -500); 
+    v.translate(-200, -500); 
     dani.render(false);
        
     v.popMatrix();

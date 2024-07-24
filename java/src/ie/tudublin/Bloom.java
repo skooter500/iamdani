@@ -6,6 +6,12 @@ public class Bloom extends Art{
 
     float angle;
 
+    public void enter()
+    {
+        v.cqz = 255;
+        v.targetCqz = 255;
+    }
+
     public Bloom(IAMDANI v){
         super(v);
     }

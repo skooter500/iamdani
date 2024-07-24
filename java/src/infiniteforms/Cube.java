@@ -22,6 +22,8 @@ public class Cube extends Art
         colorOffset = (int) v.random(0, 256);
         smoothedBoxSize = 200;
         v.cqz = 1;
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     public Cube(IAMDANI v)

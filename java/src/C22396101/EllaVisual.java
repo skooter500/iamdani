@@ -52,6 +52,12 @@ public class EllaVisual extends Art {
 
     float off = 0;
 
+    public void enter()
+    {
+        v.cqz = 1;
+        v.targetCqz = 1;
+    }
+
     public void render() {
 
     // Call this is you want to use frequency bands

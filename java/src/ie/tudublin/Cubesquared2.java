@@ -7,6 +7,7 @@ public class Cubesquared2 extends Art{
 
     public void enter(){
         v.cqz = 255;
+        v.targetCqz = 255;
     }
 
     public Cubesquared2 (IAMDANI v){

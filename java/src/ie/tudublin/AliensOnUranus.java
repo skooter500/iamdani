@@ -61,6 +61,7 @@ public class AliensOnUranus extends Art {
         setupUFOs();
 
         v.cqz = 255;
+        v.targetCqz = 255;
     }
 
 

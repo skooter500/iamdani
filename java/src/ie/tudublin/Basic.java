@@ -41,6 +41,7 @@ public class Basic extends Art {
         ch = 0;
         f = v.random(265);
         v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     float f = 0;

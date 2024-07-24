@@ -462,7 +462,6 @@ public class MoveMusicHandler implements ControllerHandler{
 
         if (pitch == 60)
         {            
-            float coeff = 0.8318812f;
             v.targetYaw = v.QUARTER_PI * (int) v.random(-4,3);
             v.targetPit = v.QUARTER_PI * (int) v.random(-4,3);
             v.targetRol = v.QUARTER_PI * (int) v.random(-2,2);

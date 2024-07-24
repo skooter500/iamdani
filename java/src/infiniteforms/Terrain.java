@@ -22,6 +22,8 @@ public class Terrain extends Art {
 
     public void enter() {
         v.cqz = 1;
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     float offs = 0;

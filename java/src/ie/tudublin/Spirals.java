@@ -63,6 +63,9 @@ public class Spirals extends Art {
         rInc = v.random(2, 10);
         thetaInc = v.random(1, 5);
         dir = ((int) v.random(0, 2)) == 0 ? 1 : -1;
+
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     public void exit()
