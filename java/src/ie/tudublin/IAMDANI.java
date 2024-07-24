@@ -857,7 +857,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 String thisOne = Float.toString(qt);
                 if (! lastOne.equals(thisOne))
                 { 
-                    println("qt:" + qt);                    
+                    //println("qt:" + qt);                    
                 }                
                 lastOne = thisOne;
                 q.setSlerp(from, to, qt);

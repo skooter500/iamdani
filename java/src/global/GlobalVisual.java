@@ -1,5 +1,6 @@
 package global;
 
+import ie.tudublin.IAMDANI;
 import ie.tudublin.visual.AudioAnalysis;
 import ie.tudublin.visual.EaseFunction;
 import ie.tudublin.visual.VAnimation;
@@ -15,7 +16,7 @@ public class GlobalVisual extends VScene {
 
     int length = 50000;
 
-    public GlobalVisual(Visual v) {
+    public GlobalVisual(IAMDANI v) {
         super(v);
         waveformFrame = new WaveformFrame(v);
     }
@@ -28,7 +29,7 @@ public class GlobalVisual extends VScene {
 
     class WaveformFrame extends VObject {
         VAnimation effect;
-        public WaveformFrame(Visual v) {
+        public WaveformFrame(IAMDANI v) {
             super(v);
             effect = new VAnimation(length);
             // Start

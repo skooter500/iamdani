@@ -20,18 +20,21 @@ public class Spirals extends Art {
         //v.rotateY(v.yaw);
         //v.rotateZ(v.rol);
         v.strokeWeight(2);
-        x = cx + v.sin(theta) * r * v.getSmoothedAmplitude();
-        y = cy + (v.cos(theta) * dir) * r * v.getSmoothedAmplitude();
+        x = cx + v.sin(theta) * r * v.getSmoothedAmplitude() * 0.5f;
+        y = cy + (v.cos(theta) * dir) * r * v.getSmoothedAmplitude() * 0.5f;
         v.stroke(v.hueShift(c), v.sat, 255);
         v.rotateX(v.pit * 0.5f);
         v.rotateY(v.yaw * 0.5f);
         v.rotateZ(v.rol * 0.5f);
         v.line(px, py, x, y);
-        r += rInc;
-        theta += thetaInc;
-        c += 1f;
-        px = x;
-        py = y;
+        if (frameCount % 2 == 0)
+        {
+            r += rInc;
+            theta += thetaInc;
+            c += 1f;
+            px = x;
+            py = y;
+        }
         
         if (r >= 700)
         {

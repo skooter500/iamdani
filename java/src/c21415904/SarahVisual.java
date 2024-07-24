@@ -26,7 +26,7 @@ public class SarahVisual extends VScene {
         v.cqz = 255;
     }
 
-    public SarahVisual(Visual v) {
+    public SarahVisual(IAMDANI v) {
         super(v);
         this.v = (IAMDANI) v;
 
@@ -61,7 +61,7 @@ public class SarahVisual extends VScene {
 
     class Spiral1 extends VObject {
 
-        Spiral1(Visual v, PVector pos) {
+        Spiral1(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -88,7 +88,7 @@ public class SarahVisual extends VScene {
 
     class Spiral2 extends VObject {
 
-        Spiral2(Visual v, PVector pos) {
+        Spiral2(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -143,7 +143,7 @@ public class SarahVisual extends VScene {
 
     class SoundWaves extends VObject {
 
-        SoundWaves(Visual v, PVector pos) {
+        SoundWaves(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -223,7 +223,7 @@ public class SarahVisual extends VScene {
 
     class Circles extends VObject {
 
-        Circles(Visual v, PVector pos) {
+        Circles(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -281,7 +281,7 @@ public class SarahVisual extends VScene {
 
     class WaveForm extends VObject {
 
-        WaveForm(Visual v, PVector pos) {
+        WaveForm(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -334,7 +334,7 @@ public class SarahVisual extends VScene {
         // array of blobs
         Blob[] blobs = new Blob[20];
 
-        metaBalls(Visual v, PVector pos) {
+        metaBalls(IAMDANI v, PVector pos) {
             super(v, pos);
 
             // create blobs

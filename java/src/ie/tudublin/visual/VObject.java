@@ -1,6 +1,7 @@
 package ie.tudublin.visual;
 
 import ie.tudublin.Art;
+import ie.tudublin.IAMDANI;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -35,7 +36,7 @@ import processing.core.PVector;
  */
 public abstract class VObject extends Art{
 
-    public Visual v;
+    public IAMDANI v;
     public PVector position;
     public PVector rotation;
     public PVector scale;
@@ -58,16 +59,16 @@ public abstract class VObject extends Art{
         return scale;
     }
 
-    public VObject(Visual v) {
+    public VObject(IAMDANI v) {
         this(v, new PVector(0,0,0), new PVector(0,0,0), new PVector(1,1,1));
     }
-    public VObject(Visual v, PVector position) {
+    public VObject(IAMDANI v, PVector position) {
         this(v, position, new PVector(0,0,0), new PVector(1,1,1));
     }
-    public VObject(Visual v, PVector position, PVector rotation) {
+    public VObject(IAMDANI v, PVector position, PVector rotation) {
         this(v, position, rotation, new PVector(1,1,1));
     }
-    public VObject(Visual v, PVector position, PVector rotation, PVector scale) {
+    public VObject(IAMDANI v, PVector position, PVector rotation, PVector scale) {
         super(v);
         this.v = v;
         this.position = position;
