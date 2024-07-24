@@ -31,6 +31,7 @@ public class Models1 extends Art
     model.colorOffset = (int) v.random(0, 256);
     v.bas = v.targetBas;
     v.cqz = 1;
+    v.targetCqz = 1;
   }
 
   float smoothedBoxSize = 0;
