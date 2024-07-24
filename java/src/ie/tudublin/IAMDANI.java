@@ -74,7 +74,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public ControlType controlType = ControlType.Rotate; 
 
     public void settings() {
-        fullScreen(P3D, 1);
+        fullScreen(P3D, 3);
         //size(1000, 1000, P3D);
     }
 
@@ -866,7 +866,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 if (t == duration)
                 {
                     t = 1000;
-                    println("Transition finished");
+                    println("Transmission finished");
                 }
             }
             else
