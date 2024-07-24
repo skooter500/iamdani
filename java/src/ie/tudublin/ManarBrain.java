@@ -30,7 +30,7 @@ public class ManarBrain extends Art
    
     public void draw()
     {
-        p = v;
+        p = v;        
         p.pushMatrix();//seperating drawBrain function from other functions
         drawBrain();
         p.popMatrix();
@@ -49,9 +49,10 @@ public class ManarBrain extends Art
         v.rotateX(v.pit);
         v.rotateY(v.yaw);
         v.rotateZ(v.rol);
+        
         p.beginShape();
  
-        p.rotateY(p.frameCount * rotationSpeed);//makes the brain drawing rotate on the Y axis
+        p.rotateY(p.frameCount * rotationSpeed * v.spe);//makes the brain drawing rotate on the Y axis
  
  
         // /p.translate(0, 0, z);
@@ -252,7 +253,14 @@ public class ManarBrain extends Art
             p.stroke(p.hueShift(93), 255, 255, v.alp);
             p.fill(p.hueShift(93), 255, 255, v.alp);
             p.noFill();
-            p.ellipse(x, y, 20, 20);
+            v.rotateX(v.pit);
+            v.rotateY(v.yaw);
+            v.rotateZ(v.rol);        
+            p.pushMatrix();
+            p.translate(x, y);            
+            p.sphere(20);
+            p.ellipse(0, 0, 20, 20);
+            p.popMatrix();
         }
         angle += 0.01 * v.spe;//speed of the smaller rotating circles
     }//end function drawCircles
