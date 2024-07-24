@@ -64,14 +64,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public Ease.TYPE type = Ease.TYPE.EASE_IN_OUT;
 
-    public float duration = 1.0f;
+    public float duration = 1.5f;
     public float t = 1000;
 
     public PFont font;
 
     public enum ControlType {Move, Rotate};
 
-    public ControlType controlType = ControlType.Move; 
+    public ControlType controlType = ControlType.Rotate; 
 
     public void settings() {
         fullScreen(P3D, 1);
