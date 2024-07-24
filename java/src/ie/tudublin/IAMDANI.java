@@ -866,14 +866,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 if (t == duration)
                 {
                     t = 1000;
-                    println("Transmission finished");
+                    println("END Transmission");
                 }
             }
             else
             {
-                //yaw = lerp(yaw, targetYaw, 0.1f);
-                //pit = lerp(pit, targetPit, 0.1f);
-                //rol = lerp(rol, targetRol, 0.1f);
+                yaw = lerp(yaw, targetYaw, 0.1f);
+                pit = lerp(pit, targetPit, 0.1f);
+                rol = lerp(rol, targetRol, 0.1f);
                 
                 cco = targetCCo;
                 spe = lerp(spe, targetSpe, 0.1f);
@@ -1032,6 +1032,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     };
 
     public void startEase() {
+        println("Begin transmission");
         t = 0;        
         float[] startEuler = new float[3];
         startEuler[0] = yaw;
