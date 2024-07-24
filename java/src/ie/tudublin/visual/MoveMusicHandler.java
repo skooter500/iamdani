@@ -147,19 +147,19 @@ public class MoveMusicHandler implements ControllerHandler{
     float rotSpeed = 0.01f;
 
     if (number == 71) {
-        v.targetCqz = v.map((float) value, 0.0f, 127.0f,0.0f, 255.0f);
+        v.targetCqz = v.map((float) value, 0.0f, 127.0f,-v.PI, v.PI);
         if (v.exp)
         v.println("cqz " + v.nf(v.targetCqz, 3, 2));
     }
     
     if (number == 77) {
-        v.targetYaw = v.map((float) value, 0.0f, 127.0f,0.0f, v.TWO_PI);        
+        v.targetYaw = v.map((float) value, 0.0f, 127.0f,-v.PI, v.PI);        
         if (v.exp)
         v.println("WAY " + v.nf(v.targetYaw, 3, 2));
     }
 
     if (number == 93) {
-        v.targetRol = v.map((float) value, 0.0f, 127.0f,0.0f, v.TWO_PI);
+        v.targetRol = v.map((float) value, 0.0f, 127.0f,-v.PI, v.PI);
         v.targetRol = v.wrapAngle(v.targetRol);
         if (v.exp)
         v.println("LOR " + v.nf(v.targetRol, 3, 2));

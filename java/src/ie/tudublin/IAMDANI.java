@@ -746,8 +746,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         stats.put("FGR", degrees(startRol));
         
         
-        
-        
         stats.put("PIT", degrees(pit));
         stats.put("ROL", degrees(rol));
         stats.put("HUE", hue);
@@ -759,7 +757,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         float rh = lineHeight;
 
         float h = rh * stats.size();
-        float y = height - h;
+        float y = height - h + 50;
 
         textFont(font);
         
@@ -775,7 +773,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 
                 int thisFrame = frameCount % 60;
                 fill(thisFrame < 30 ? pingpong(
-                    42, 0, 255, 0, 255) : pingpong(cco - 42, 0, 255, 0, 255), 255, 255, alp * 2);
+                    cco + 100, 0, 255, 0, 255) : pingpong(cco - 100, 0, 255, 0, 255), 255, 255, alp * 2);
                 ff = abs(ff);
             }
             else
