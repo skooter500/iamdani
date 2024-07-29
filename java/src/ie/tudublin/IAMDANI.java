@@ -275,7 +275,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         sat = 255;   
         //
 
-
         bhu = 3;
         bri = 55;
 
@@ -915,10 +914,6 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
         keys[keyCode] = true;
     
         // Visual selection with shift + 3 digits
-        if (keyCode == SHIFT) {
-            visualBuffer = "";
-            return;
-        }
         
         if (keys[SHIFT] && key >= '0' && key <= '9') {
             visualBuffer += key;
@@ -929,6 +924,14 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             }
             return;
         }
+        
+        
+        // if (keyCode == SHIFT) {
+        //     visualBuffer = "";
+        //     return;
+        // }
+        
+        
     
         switch (key) {
             // Existing key mappings
