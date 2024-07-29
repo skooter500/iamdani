@@ -2,6 +2,7 @@ package c21415952;
 
 import ddf.minim.AudioBuffer;
 import global.GlobalVisual;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.visual.VScene;
 import ie.tudublin.visual.Visual;
 import processing.core.PApplet;
@@ -11,7 +12,7 @@ public class AjVisual extends VScene {
     AudioBuffer ab;
     private VScene gv;
 
-    public AjVisual(Visual v) {
+    public AjVisual(IAMDANI v) {
         super(v);
         this.v = v;
 

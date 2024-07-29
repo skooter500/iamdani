@@ -1,9 +1,9 @@
 package infiniteforms;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 
-public class Life extends Poly
+public class Life extends Art
 {
   
   int boardWidth = 200;
@@ -25,6 +25,7 @@ public class Life extends Poly
     
     this.pattern = pattern;
     this.generationMax = generationMax;
+
     initialize();
     clearBoard();
   }
@@ -62,6 +63,7 @@ public class Life extends Poly
     clearBoard();
     makePattern();
     v.cqz = 255;
+    v.targetCqz = 255;
   }
 
   public void MakeGosperGun(int x, int y)

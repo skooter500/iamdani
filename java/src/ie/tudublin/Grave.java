@@ -1,6 +1,6 @@
 package ie.tudublin;
 
-public class Grave extends Poly {
+public class Grave extends Art {
 
     public Grave (IAMDANI v){
         super(v);

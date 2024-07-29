@@ -2,7 +2,7 @@ package ie.tudublin;
 import processing.core.PApplet;
 import processing.core.PShape;
 
-public class GrainneHead extends Poly
+public class GrainneHead extends Art
 {
 
     PShape spider_head;
@@ -20,6 +20,11 @@ public class GrainneHead extends Poly
     float count = 0;
 
     float scale_factor = 1.0f;
+
+    public String toString()
+  {
+    return filename;
+  }
 
     public GrainneHead(IAMDANI v, String filename)
     {

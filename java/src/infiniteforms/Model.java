@@ -20,8 +20,9 @@ public class Model {
 
   IAMDANI v;
 
-  Model(String fileName, float x, float y, float z, IAMDANI v) {
-
+  public static PShape loadModel(String fileName, IAMDANI v)
+  {
+    PShape s;
     if (shapes.containsKey(fileName))
     {
       s = shapes.get(fileName);
@@ -31,12 +32,22 @@ public class Model {
       s = v.loadShape(fileName);
       shapes.put(fileName, s);
     }
+    return s;
+  }
+
+  Model(String fileName, float x, float y, float z, IAMDANI v) {
+
+    s = loadModel(fileName, v);
 
     // obj = new myObject(fileName);
     
     s.disableStyle();
     position = new PVector(x, y, z);
     this.v = v;
+
+    float boxSize = size + (v.getAmplitude() * 10);
+    smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
+    
   }
 
   float c = 0;
@@ -80,9 +91,21 @@ public class Model {
     smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f * v.spe * 0.2f);
     // scale(1);
 
-    v.rotateX(-v.HALF_PI + v.pit + pitOff);
-    v.rotateZ(v.PI + v.yaw);
-    v.rotateY(v.rol);
+    if (v.controlType == IAMDANI.ControlType.Move)
+    {
+      float x = v.map(v.yaw, 0, v.TWO_PI, 0, v.width);
+      float y = v.map(v.rol, v.TWO_PI, 0.0f, 0, v.height);
+      float z = v.map(v.pit, 0, v.TWO_PI, 0, v.height);        
+      v. translate(x, y, z);       
+      v.rotateX(-v.HALF_PI + pitOff);
+      v.rotateZ(v.PI);
+    }
+    else
+    {
+      v.rotateZ(v.yaw);      
+      v.rotateX(v.pit);
+      v.rotateY(v.rol);
+    }
     // v.rotateX(v.xRotation);
     // /v.rotateZ(v.zRotation);
 

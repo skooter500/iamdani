@@ -5,7 +5,7 @@ package ie.tudublin;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class Particles extends Poly{
+public class Particles extends Art{
     
 
     int num = 200; //amount of particles

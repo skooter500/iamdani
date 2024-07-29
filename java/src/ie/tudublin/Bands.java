@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PVector;
 
-public class Bands extends Poly {
+public class Bands extends Art {
 
         //
   PVector[] positions;

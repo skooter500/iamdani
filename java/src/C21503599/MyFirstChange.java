@@ -3,12 +3,12 @@ package C21503599;
 import ddf.minim.*;
 import ddf.minim.analysis.BeatDetect;
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import ie.tudublin.Visual;
 import processing.core.PVector;
 
 
-public class MyFirstChange extends Poly {
+public class MyFirstChange extends Art {
 
     public MyFirstChange(IAMDANI v)
     {

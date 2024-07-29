@@ -2,10 +2,10 @@ package infiniteforms;
 
 import ie.tudublin.IAMDANI;
 import ie.tudublin.DANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import processing.core.PFont;
 
-public class Nematode extends Poly
+public class Nematode extends Art
 {
   float length = 5;
   String name = "";
@@ -46,7 +46,7 @@ public class Nematode extends Poly
     dani = new DANI(v, "nematodes.txt");
     dani.l = 15;
     v.cqz = 50;
-    
+    v.targetCqz = 50; 
   }
 
   
@@ -149,7 +149,7 @@ public class Nematode extends Poly
     
     drawGenitals();
     theta += v.spe * 0.03f * v.getSmoothedAmplitude();
-    v.translate(-400, -500); 
+    v.translate(-200, -500); 
     dani.render(false);
        
     v.popMatrix();

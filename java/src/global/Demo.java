@@ -2,6 +2,7 @@ package global;
 
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
+import ie.tudublin.IAMDANI;
 import ie.tudublin.visual.VScene;
 import ie.tudublin.visual.Visual;
 import processing.core.PApplet;
@@ -11,7 +12,7 @@ public class Demo extends VScene {
     float height8 = v.height / 8;
     float width4 = v.width / 4;
 
-    public Demo(Visual v) {
+    public Demo(IAMDANI v) {
         super(v);
     }
 

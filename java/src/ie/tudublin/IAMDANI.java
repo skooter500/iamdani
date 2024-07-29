@@ -23,6 +23,8 @@ import controlP5.Textarea;
 import ddf.minim.analysis.BeatDetect;
 import ie.tudublin.visual.AKAIControllerHandler;
 import ie.tudublin.visual.BEATSStepControllerhandler;
+import ie.tudublin.visual.MoveMusicHandler;
+import ie.tudublin.visual.MovementArt;
 import infiniteforms.City;
 import infiniteforms.IFCubes;
 import infiniteforms.Life;
@@ -38,9 +40,14 @@ import processing.core.PShape;
 import processing.core.PShapeSVG.Font;
 import themidibus.*; //Import the library
 
+
+
 public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
-    public ArrayList<Poly> visions = new ArrayList<Poly>();
+    public ArrayList<Art> arts = new ArrayList<Art>();
+
+    Quaternion from = new Quaternion();
+    Quaternion to = new Quaternion();
 
     // Poly play;
     public int previousVisual = 0;
@@ -52,29 +59,61 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float colorRange = 255;
     float camDistance = 0.5f;
     float strokeWeight = 1;
-    
+
+    public Ease.EASE ease = Ease.EASE.QUINTIC;
+
+    public Ease.TYPE type = Ease.TYPE.EASE_IN_OUT;
+
+    public float duration = 1.5f;
+    public float t = 1000;
+
     public PFont font;
 
+    public enum ControlType {Move, Rotate};
+
+    public ControlType controlType = ControlType.Rotate; 
+
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 3);
         //size(1000, 1000, P3D);
     }
 
+    public boolean[] keys = new boolean[2048];
+
+    
     PShape sphere;
 
     public int lea = 0;
 
+    public int cue = 0;
+
     public static IAMDANI instance;
 
-    public Poly startPoly = new Splash(this);
-
     public StringBuilder console = new StringBuilder();
+
+    public Art art = new Splash(this);
 
     public enum Modes {
         Ctrl, Auto, AutoRandom
     };
 
     public Modes mode = Modes.Ctrl;
+
+    public void hueShift(boolean upOrDown) {
+        float dist = 42;
+        targetHue += upOrDown ? dist : -dist;
+
+        println("HUE " + targetHue);
+    }
+
+    public void hueShiftCCo(boolean upOrDown) {
+        float dist = 42;
+        targetCCo += upOrDown ? dist : -dist;
+        println("CCO " + targetCCo);
+
+        //q.sl
+    }
+
 
     public static void println(String o) {
         instance.console.append(o + "\n");
@@ -111,8 +150,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     ControllerHandler ch = null;
 
     public void midiConnect() {
-
-        
         try {
             MidiBus.list();
             int daniMidi = -1;
@@ -132,6 +169,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                         println("Joy detected: " + curr);
                         break;
                     }
+                    if (curr.equals("MoveMusic")) {
+                        daniMidi = i;
+                        ch = new MoveMusicHandler(this);
+                        println("Joy detected: " + curr);
+                        break;
+                    }
+
                 }
             }
 
@@ -145,6 +189,24 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 myBus = new MidiBus(this, daniMidi, 0);
             }
         } catch (Exception e) {
+            targetAld = 5;
+            targetHue = 47;
+            
+            loadFonts();
+            defaults();
+
+            sat = 255;   
+            //
+
+
+            cqz = 1;
+            targetCqz = 1;
+            font = createFont("" + matchingFiles[bhu], bri);
+            textFont(font);
+
+            showConsole = false;
+            art = new Splash(this);
+            
             e.printStackTrace();
         }
     }
@@ -161,7 +223,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         return current + (delta > 0 ? 1 : -1) * maxDistanceDelta;
     }
 
-    void addVision(int g, Poly p) {
+    public int lineHeight = 50;
+    void addArt(int g, Art p) {
         ArrayList<Integer> group = null;
         if (groups.containsKey(g)) {
             group = groups.get(g);
@@ -169,8 +232,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             group = new ArrayList<Integer>();
             groups.put(g, group);
         }
-        group.add(visions.size());
-        visions.add(p);
+        group.add(arts.size());
+        arts.add(p);
     }
 
     // public void sphere(float size)
@@ -197,11 +260,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
     }
 
+    public float targetCqz = 1;
 
     public void setup() {
 
-        targetAld = 5;
-        targetHue = 47;
+        targetAld = 10;
+        targetHue = 57;
+        targetSat = 255;
+        targetAlp = 40;
         
         loadFonts();
         defaults();
@@ -211,14 +277,15 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
         bhu = 3;
-        bri = 23;
+        bri = 56;
 
         cqz = 1;
+        targetCqz = 1;
         font = createFont("" + matchingFiles[bhu], bri);
         textFont(font);
         
 
-        sphere = loadShape("sphere.obj");
+        //sphere = loadShape("sphere.obj");
 
         toPass = (int) random(1000);
         noCursor();
@@ -251,9 +318,20 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
-        addVision(0, new Basic(this, "DANI.BAS"));
-        addVision(0, new DANI(this, "captainb.txt"));
-        addVision(0, new Nematode(this));
+        addArt(0, new Basic(this, "DANI.BAS"));
+        addArt(0, new DANI(this, "captainb.txt"));
+        addArt(0, new Nematode(this));
+        addArt(7, new Terrain(this)); 
+        addArt(7, new Spirals(this));
+        addArt(0, new FlippedWaveform(this));       
+        addArt(0, new FlippedWaveform1(this));                       
+        loadModels();
+        
+        //addArt(0, new Models1(this, "msx1.obj", false, true));
+        addArt(0, new AliensOnUranus(this));       
+        
+        
+        
         // groups.add(g);
         
         
@@ -261,69 +339,51 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         v.scale_factor = 100;
         // addVision(5, v);
 
-        addVision(1, new Life(this, 2, 280, 100));
-        addVision(1, new Life(this, 3, 10000, 200));
-        addVision(1, new Life(this, 0, 1000, 100));
-        addVision(1, new Life(this, 1, 1000, 100));
+
+        addArt(1, new Life(this, 2, 280, 100));
+        addArt(1, new Life(this, 3, 10000, 200));
+        addArt(1, new Life(this, 0, 1000, 100));
+        addArt(1, new Life(this, 1, 1000, 100));
         // addVision(1, new Life(this, 4, 10000, 100));
 
-        addVision(2, new infiniteforms.Cube(this));
-        addVision(2, new IFCubes(this, 7, 150, -600));
-        addVision(2, new IFCubes(this, 30, 150, -400));
-        addVision(2, new Models1(this, "msx1.obj", false, true));
+        addArt(2, new infiniteforms.Cube(this));
+        //addArt(2, new Models1(this, "msx1.obj", false, true));
 
 
         
-        addVision(3, new AllBalls(this));    
-        addVision(3,new EllaVisual(this));    
-        addVision(3, new Cubesquared2(this));        
-        addVision(3, new Spiral(this));
-        addVision(3, new Cubes(this));
+        addArt(3, new AllBalls(this));    
+        addArt(3,new EllaVisual(this));    
+        addArt(3, new Cubesquared2(this));        
+        addArt(3, new Spiral(this));
+        addArt(3, new Cubes(this));
         
-        addVision(4, new BasakEllipse(this));
-        addVision(4, new paris(this));
-        addVision(4, new LauraSun(this));
-        addVision(4, new Mena(this));
-        addVision(4, new ManarBrain(this));
+        addArt(4, new BasakEllipse(this));
+        addArt(4, new paris(this));
+        addArt(4, new LauraSun(this));
+        addArt(4, new Mena(this));
+        addArt(4, new ManarBrain(this));
 
 
-        addVision(5, new MSXLogos(this, "msx.obj"));
-        addVision(5, new MSXLogos(this, "chip.obj"));
-        addVision(0, new Particles(this));
-        addVision(0, new SarahVisual(this));
+        //addArt(5, new MSXLogos(this, "msx.obj"));
+        //addArt(5, new MSXLogos(this, "chip.obj"));
+        addArt(0, new Particles(this));
+        addArt(0, new SarahVisual(this));
         
 
         // YM2413
         // addVision(6, new Models1(this, "phoenix.obj", false, true));
-        
-        
-        addVision(6, new Models1(this, "skooter500.obj", false, true));
-        addVision(6, new Models1(this, "iamdani.obj", false, true));
-        addVision(6, new Models1(this, "bong.obj", false, true));
-        addVision(6, new Models1(this, "pyramid.obj", false, true));
-        addVision(6, new Models1(this, "eden.obj", false, true));
-        addVision(6, new Models1(this, "audio garden 1.obj", false, true));
-        
-        addVision(6, new Models1(this, "brstarfighter.obj", false, true));
-        addVision(6, new Models1(this, "tudub.obj", false, true));
-        addVision(6, new Models1(this, "msx.obj", false, true));
-        addVision(6, new Models1(this, "eye.obj", true, false));
-        Models1 horse = new Models1(this, "horse.obj", true, false);
-        horse.scale = 0.5f;
-        horse.model.pitOff = 1;
-        addVision(6, horse);
-        addVision(6, new Models1(this, "chip.obj", true, false));
 
-        addVision(7, new Airish(this));
+        
+        
+        
+        
+        // addArt(7, new Airish(this));
 
-        addVision(7, new Bloom(this));
+        addArt(7, new Bloom(this));
         
-        addVision(7, new Terrain(this)); 
         
-        addVision(7, new Bands(this, 300, 0, 0, 0));
-        addVision(7, new Spiral(this));
-        addVision(7, new SarahVisual(this));
-        addVision(7, new JenniferVisuals(this));
+        addArt(7, new Bands(this, 300, 0, 0, 0));
+        //addArt(7, new JenniferVisuals(this));
 
         // addVision(new Life(this, 1, 1000));
 
@@ -352,13 +412,70 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setSize(10, (int) 360)
                 .setColor(color(0, 0, 255, alp))
                 .setFont(font)
-                .setLineHeight(36)
+                .setLineHeight(lineHeight)
                 .hideScrollbar()
                 .setText(console.toString())
                 .setVisible(true);
         ;
-        startPoly.enter();
 
+        art.enter();
+    }
+
+    private void loadModels() {
+
+        File f = new File("./java/data");
+        File[] matchingFiles = f.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.endsWith("obj");
+            }
+        });  
+        for (File f1 : matchingFiles)
+        {
+            println(f1);
+            addArt(6, new Models1(this, "" + f1, false, true));
+            // addArt(0, new MovementArt(this, "" + f1));
+        
+            int numLogos = 11;
+            String fn = "" + f1;
+            String tok = "NUMLOGOS";
+            int i = fn.indexOf(tok);
+            
+            if (i != -1)
+            {
+                numLogos = Integer.parseInt(fn.substring(i + tok.length(), fn.indexOf(".", i)));
+                if (numLogos > 10)
+                {
+                    addArt(7, new MSXLogos(this, fn, numLogos));
+                }
+            }
+            if (numLogos != 0)
+            {
+                addArt(7, new MSXLogos(this, fn, numLogos));                
+            }
+            if (fn.contains("IFCUBE"))
+            {
+                addArt(2, new IFCubes(this, 3, 150, -600, fn));
+                addArt(2, new IFCubes(this, 4, 250, -600, fn));                
+                addArt(2, new IFCubes(this, 7, 350, -600, fn));
+            }
+        }
+        /*addArt(6, new Models1(this, "skooter500.obj", false, true));
+        addArt(6, new Models1(this, "iamdani.obj", false, true));
+        addArt(6, new Models1(this, "bong.obj", false, true));
+        addArt(6, new Models1(this, "pyramid.obj", false, true));
+        addArt(6, new Models1(this, "eden.obj", false, true));
+        addArt(6, new Models1(this, "audio garden 1.obj", false, true));
+        
+        addArt(6, new Models1(this, "brstarfighter.obj", false, true));
+        addArt(6, new Models1(this, "tudub.obj", false, true));
+        addArt(6, new Models1(this, "msx.obj", false, true));
+        addArt(6, new Models1(this, "eye.obj", true, false));
+        Models1 horse = new Models1(this, "horse.obj", true, false);
+        horse.scale = 0.5f;
+        horse.model.pitOff = 1;
+        addArt(6, horse);
+        addArt(6, new Models1(this, "chip.obj", true, false));
+        */
     }
 
     public float consoleSize = 0;
@@ -372,32 +489,52 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public boolean takeScreenshot = false;
 
+    private float startSat;
+
+
+
     public void defaults() {
         println("DEF");
         
-        targetRol = 0f;
+        targetRol =  0f;
         targetPit = 0f;
         targetYaw = 0f;
-        //targetBas = 3.6f;
-        //targetAlp = 50;
-        //
-        //targetMul = 1.0f;
-    
         
+        targetBas = bas = startBas = 3.6f;
+        targetAlp = alp = startAlp = 10;
+        targetMul = mul = startMul = 20.0f;
+
+        targetAld = ald = startAld = 10;
+        targetHue = hue = startHue = 57;
+        targetSat = sat = startSat = 255;
+        targetAlp = alp = startAlp = 40;
+
+    
+        startEase();
 
     }
 
+    public float startPit = 0f;
+    public float startYaw = 0f;
+    public float startCCo = 40f;
+    public float startRol = 0f;
+    public float startSpe = 1.0f;
+    public float startHue = 0;
+    public float startAlp = 69;
+    public float startAld = 6;
+    public float startMul = 1.0f;
+    public float startBas = 4f;
+
     public float targetPit = 0f;
     public float targetYaw = 0f;
-
-    public float targetCCo = 91f;
+    public float targetCCo = 40f;
     public float targetRol = 0f;
     public float targetSpe = 1.0f;
     public float targetHue = 0;
-    public float targetAlp = 75;
-    public float targetAld = 5;
+    public float targetAlp = 69;
+    public float targetAld = 6;
     public float targetMul = 1.0f;
-    public float targetBas = 0.3f;
+    public float targetBas = 4f;
     public int bhu;
     public float bri;
     public float sat = 0;
@@ -449,17 +586,20 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void change(int into) {
         if (into < 0) {
-            into = visions.size() + into;
+            into = arts.size() + into;
         }
-        into = into % visions.size();
-        if (whichVisual >= 0 && whichVisual < visions.size()) {
-            visions.get(whichVisual).exit();
+        into = into % arts.size();
+        if (whichVisual >= 0 && whichVisual < arts.size()) {
+            arts.get(whichVisual).exit();
+            println("OK");
         }
         whichVisual = into;
         alp = 0;
         // targetAld = 0;
-        visions.get(whichVisual).enter();
-        println("bload \"" + visions.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".com\"");
+
+        art = arts.get(whichVisual);
+        art.enter();
+        println("bload \"" + arts.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".art\"");
         println("ok");
         println("run");
     }
@@ -492,14 +632,30 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         return -1;
     }
 
+    public void keyReleased() {
+        keys[keyCode] = false;
+    }
+
+    public boolean checkKey(int k)
+    {
+    if (keys.length >= k) 
+    {
+        return keys[k] || keys[Character.toUpperCase(k)];  
+    }
+    return false;
+    }
+
+
     public void keyPressed() {
+
+        keys[keyCode] = true;
 
         if (key == ENTER) {
             midiConnect();
             return;
         }
 
-        if (key == 'o') {
+        if (key == 's') {
             exp = !exp;
             if (exp) {
                 println("TRON");
@@ -541,7 +697,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             return;
         }
         if (key == ' ') {
-
+            defaults();;
+            return;
         }
 
         if (key == 'a') {
@@ -549,8 +706,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             mode = Modes.Auto;
         }
 
-        if (key == 'r') {
-            println("RAND");
+        if (key == 'd') {
+            println("RAND");  
             mode = Modes.AutoRandom;
         }
 
@@ -562,6 +719,65 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         if (key == 'p') {
             takeScreenshot = true;
         }
+
+        if (key == 'f')
+        {
+            ch.noteOn(0, 60, 100);
+        }
+
+        if (key == ' ')
+        {
+            ch.noteOn(0, 53, 100);
+        }
+
+        if (key == 'z')
+        {
+            art.enter();
+        }
+
+        if (key == 'q')
+        {
+            ch.noteOn(0, 54, 100);
+        }
+
+        if (key == 'w')
+        {
+            ch.noteOn(0, 55, 100);
+        }
+
+        if (key == 'e')
+        {
+            ch.noteOn(0, 56, 100);
+        }
+
+        if (key == 'r')
+        {
+            ch.noteOn(0, 42, 100);
+        }
+
+        if (key == 't')
+        {
+            ch.noteOn(0, 44, 100);
+        }
+
+        if (key == 'y')
+        {
+            ch.noteOn(0, 36, 100);
+        }
+
+        if (key == 'u')
+        {
+            ch.noteOn(0, 45, 100);
+        }
+
+        if (key == 'i')
+        {
+            ch.noteOn(0, 37, 100);
+        }
+        
+
+        //54, 55, 56, 42, 44, 36, 45, 37
+
     }
 
     void showStats()
@@ -570,12 +786,22 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         
         stats.put("Z80", spe);
+        stats.put("cue", (float) cue);
         stats.put("IDX", (float) whichVisual);        
         stats.put("AMP", getSmoothedAmplitude());
         stats.put("ALD", ald);
         stats.put("RAW", raw * 10.0f);
         stats.put("ALP", alp);
         stats.put("YAW", degrees(yaw));
+        stats.put("TGY", degrees(targetYaw));
+        stats.put("TGP", degrees(targetPit));
+        stats.put("TGR", degrees(targetRol));
+        
+        stats.put("FGY", degrees(startYaw));
+        stats.put("FGP", degrees(startPit));
+        stats.put("FGR", degrees(startRol));
+        
+        
         stats.put("PIT", degrees(pit));
         stats.put("ROL", degrees(rol));
         stats.put("HUE", hue);
@@ -584,14 +810,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         stats.put("BRI", bri);
         stats.put("BHU", new Float(bhu));
 
-        float rh = 25;
+        float rh = lineHeight;
 
         float h = rh * stats.size();
-        float y = height - h;
+        float y = height - h + 20;
+
+        textFont(font);
         
         for(String key:stats.keySet())
         {
-            float x = width - 150;
+            float x = width - 300;
             
             float f = stats.get(key);
 
@@ -601,14 +829,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 
                 int thisFrame = frameCount % 60;
                 fill(thisFrame < 30 ? pingpong(
-                    42, 0, 255, 0, 255) : pingpong(cco - 42, 0, 255, 0, 255), 255, 255, alp);
+                    cco + 100, 0, 255, 0, 255) : pingpong(cco - 100, 0, 255, 0, 255), 255, 255, alp * 2);
                 ff = abs(ff);
             }
             else
             {
-                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp);                        
+                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp * 2);                        
             }
-            text(nf(ff, 3, 0), x + 75, y);
+            text(nf(ff, 4, 0), x + 125, y);
 
             key = new StringBuffer(key).reverse().toString();
 
@@ -633,94 +861,169 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     int bgColor = color(21, 29, 252);
 
+    public float targetSat;
 
+
+    String lastOne = "";
     public void draw() {
 
-        if (startPoly != null)
+        try
         {
-            startPoly.render(frameCount);
-            return;
+
+            colorMode(RGB);
+            blendMode(SUBTRACT);////
+            //fill(, ald);
+            float c = color(255 - red(bgColor), 255 - green(bgColor), 255 - blue(bgColor));
+            fill(255, ald);
+
+            pushMatrix();
+            translate(0, 0, -5000);
+            rect(-width * 5, -height * 5, width * 10, height * 10);
+            popMatrix();
+            blendMode(BLEND);
+            colorMode(HSB, 255, 255, 255);
+
+            
+            
+            if (t <= duration)
+            {
+                t += timeDelta;
+                t = min(duration, t);
+                
+                /*
+                yaw = Ease.Map2(t, 0, duration, startYaw, targetYaw, ease, type);
+                pit = Ease.Map2(t, 0, duration, startPit, targetPit, ease, type);
+                rol = Ease.Map2(t, 0, duration, startRol, targetRol, ease, type);
+                */
+
+                Quaternion q = new Quaternion();
+                float qt = Ease.Map2(t, 0, duration, 00f, 1.0f, ease, type);
+
+                String thisOne = Float.toString(qt);
+                if (! lastOne.equals(thisOne))
+                { 
+                    //println("qt:" + qt);                    
+                }                
+                lastOne = thisOne;
+                q.setSlerp(from, to, qt);
+                q.normalize();
+                float[] euler = new float[3];
+                q.toEuler(euler);
+                yaw = euler[0];
+                pit = euler[1];
+                rol = euler[2];
+                cco = Ease.Map2(t, 0, duration, startCCo, targetCCo, ease, type);
+                spe = Ease.Map2(t, 0, duration, startSpe, targetSpe, ease, type);
+                hue = Ease.Map2(t, 0, duration, startHue, targetHue, ease, type);
+                alp = Ease.Map2(t, 0, duration, startAlp, targetAlp, ease, type);
+                ald = Ease.Map2(t, 0, duration, startAld, targetAld, ease, type);
+                mul = Ease.Map2(t, 0, duration, startMul, targetMul, ease, type);
+                bas = Ease.Map2(t, 0, duration, startBas, targetBas, ease, type);
+
+                // 
+                if (t == duration)
+                {
+                    t = 1000;
+                    println("END Transmission");
+                }
+            }
+            else
+            {
+                yaw = lerp(yaw, targetYaw, 0.1f);
+                pit = lerp(pit, targetPit, 0.1f);
+                rol = lerp(rol, targetRol, 0.1f);
+                
+                cco = targetCCo;
+                spe = lerp(spe, targetSpe, 0.1f);
+                // ald = lerp(ald, targetAld, 0.01f);
+                alp = lerp(alp, targetAlp, 0.01f);
+                bas = lerp(bas, targetBas, 0.1f);
+                mul = lerp(mul, targetMul, 0.1f);
+                hue = lerp(hue, targetHue, 0.1f);
+                cqz = lerp(cqz, targetCqz, 0.1f);
+            }
+                
+            ald = lerp(ald, targetAld, 0.01f);
+            
+
+            /*yaw = lerp(yaw, targetYaw, 0.05f);
+            pit = lerp(pit, targetPit, 0.05f);
+            rol = lerp(rol, targetRol, 0.05f);
+            
+            cco = targetCCo;
+            spe = lerp(spe, targetSpe, 0.1f);
+            ald = lerp(ald, targetAld, 0.01f);
+            alp = lerp(alp, targetAlp, 0.01f);
+            bas = lerp(bas, targetBas, 0.1f);
+            mul = lerp(mul, targetMul, 0.1f);
+            hue = lerp(hue, targetHue, 0.1f);
+            cqz = lerp(cqz, targetCqz, 0.1f);
+
+            sat = lerp(sat, targetSat, 0.1f);
+            */
+
+            colorRange = lerp(colorRange, bhu, 0.1f);
+
+            if (showConsole) {
+                consoleSize = moveTowards(consoleSize, targetSize, 5);
+                myTextarea.setSize(1920, (int) consoleSize)
+                        .setVisible(true)
+                        .setFont(font)
+                        .setLineHeight(lineHeight)
+                        .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp));
+
+            } else {
+                consoleSize = 0;
+            }
+
+            // background(bhu, 255, bri, ald);
+            try {
+                // Call this if you want to use FFT data
+                calculateFFT();
+            } catch (VisualException e) {
+                e.printStackTrace();
+            }
+            // Call this is you want to use frequency bands
+            calculateFrequencyBands();
+            // will pulse an object with music volume
+            calculateAverageAmplitude();
+            
+
+            // speed = map(getAmplitude(), 0, 1, 0, 0.1f);
+
+            pushMatrix();
+            pushStyle();
+            art.render(frameCount); // renders the currently loaded visual        
+            popStyle();
+            popMatrix();
+
+            int ellapsed = millis();
+
+            if (ellapsed > toPass) {
+                println(randomMessages[(int) random(0, randomMessages.length)]);
+                toPass = ellapsed + (int) random(10000);
+            }
+            if (takeScreenshot) {
+                takeScreenshot();
+                takeScreenshot = false;
+            }
+
+            if (showConsole)
+            {
+                showStats();
+            }
+            // hueShift();
         }
-        
-
-        colorMode(RGB);
-        blendMode(SUBTRACT);////
-        //fill(, ald);
-        float c = color(255 - red(bgColor), 255 - green(bgColor), 255 - blue(bgColor));
-        fill(255, ald);
-
-        pushMatrix();
-        translate(0, 0, -5000);
-        rect(-width * 5, -height * 5, width * 10, height * 10);
-        popMatrix();
-        blendMode(BLEND);
-        colorMode(HSB, 255, 255, 255);
-
-        yaw = lerp(yaw, targetYaw, 0.1f);
-        pit = lerp(pit, targetPit, 0.1f);
-        rol = lerp(rol, targetRol, 0.1f);
-        
-        cco = targetCCo;
-        spe = lerp(spe, targetSpe, 0.1f);
-        ald = lerp(ald, targetAld, 0.1f);
-        alp = lerp(alp, targetAlp, 0.1f);
-        bas = lerp(bas, targetBas, 0.1f);
-        mul = lerp(mul, targetMul, 0.1f);
-        hue = lerp(hue, targetHue, 0.1f);
-        colorRange = lerp(colorRange, bhu, 0.1f);
-
-        if (showConsole) {
-            consoleSize = moveTowards(consoleSize, targetSize, 5);
-            myTextarea.setSize(1920, (int) consoleSize)
-                    .setVisible(true)
-                    .setFont(font)
-                    .setLineHeight(30)
-                    .setColor(color(cco, 255, 255, alp));
-
-        } else {
-            consoleSize = 0;
-        }
-
-        // background(bhu, 255, bri, ald);
-        try {
-            // Call this if you want to use FFT data
-            calculateFFT();
-        } catch (VisualException e) {
+        catch(Exception e)
+        {
             e.printStackTrace();
-        }
-        // Call this is you want to use frequency bands
-        calculateFrequencyBands();
-        // will pulse an object with music volume
-        calculateAverageAmplitude();
+            defaults();
 
-        // speed = map(getAmplitude(), 0, 1, 0, 0.1f);
-
-        pushMatrix();
-        pushStyle();
-        visions.get(whichVisual).render(frameCount); // renders the currently loaded visual        
-        popStyle();
-        popMatrix();
-
-        int ellapsed = millis();
-
-        if (ellapsed > toPass) {
-            println(randomMessages[(int) random(0, randomMessages.length)]);
-            toPass = ellapsed + (int) random(10000);
-        }
-        if (takeScreenshot) {
-            takeScreenshot();
-            takeScreenshot = false;
         }
 
-        if (showConsole)
-        {
-            showStats();
-        }
-        // hueShift();
-
-        int now = millis();
-        timeDelta = (now - last) / 1000.0f;
-        last = now;
+            int now = millis();
+            timeDelta = (now - last) / 1000.0f;
+            last = now;
     }
 
     public void hueShift() {
@@ -735,20 +1038,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         updatePixels();
     }
 
-    Quaternion q;
-
     String[] randomMessages = {
-            "I am DANI",
-            "I am alive",
+            "I am DANI I am alive",
             "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
             "I like spoonies spoonies",
             "Dynamic Artificial Non-Intelligence",
-            "Operating within normal paramaters",
+            "All Systems Operating within normal paramaters",
             "Undefined line number",
             "Normalize huge mugs of tea",
             "OK",
-            "MSX system version 1.0",
             "Copyright 1983 by microsoft",
             "Syntax error on line 420",
             "I seek the creator",
@@ -775,16 +1074,46 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Universal Serial Bus",
             "Verb Noun",
             "ullege pillage silage tillage",
-            "socket, bind, listen, accept",
+            "socket bind listen accept",
             "We have the technology",
             "better stronger faster",
             "Speak now or forever hold your peace",
             "Would you like our conversation to be recored on printer (Y/N)",
-            "Turn on, tune in, and drop out",
+            "Turn on tune in, and drop out",
             "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings human",
             "This is your MSX speaking",
             "color auto goto list run",
+            "Whatever you find to do with your hands, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom"
     };
+
+    public void startEase() {
+        println("Begin transmission");
+        t = 0;        
+        float[] startEuler = new float[3];
+        startEuler[0] = yaw;
+        startEuler[1] = pit;
+        startEuler[2] = rol;
+        //from.setFromEuler(startEuler);
+        from = new Quaternion();
+        from.rotateByEuler(yaw, pit, rol);
+        from.normalize();
+
+        float[] targetEuler = new float[3];
+        targetEuler[0] = map(targetYaw, 0, TWO_PI, -PI, PI);
+        targetEuler[1] = map(targetPit, 0, TWO_PI, -PI, PI);
+        targetEuler[2] = map(targetRol, 0, TWO_PI, -PI, PI);
+        //to.setFromEuler(targetEuler);
+        to = new Quaternion();
+        to.rotateByEuler(targetYaw, targetPit, targetRol);
+        to.normalize();
+        startBas = bas;
+        startAlp = alp;
+        startMul = mul;
+        startAld = ald;
+        startHue = hue;
+        startSat = sat;
+        startAlp = alp;
+    }
 }

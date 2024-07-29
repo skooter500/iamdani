@@ -1,10 +1,10 @@
 package infiniteforms;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import processing.core.PVector;
 
-public class Cube extends Poly 
+public class Cube extends Art 
 {
     
     PVector position;
@@ -22,6 +22,8 @@ public class Cube extends Poly
         colorOffset = (int) v.random(0, 256);
         smoothedBoxSize = 200;
         v.cqz = 1;
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     public Cube(IAMDANI v)

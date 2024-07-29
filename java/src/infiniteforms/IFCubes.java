@@ -1,9 +1,9 @@
 package infiniteforms;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 
-public class IFCubes extends Poly {
+public class IFCubes extends Art {
     IFCube[] cubes;
     float z = 0;
 
@@ -20,7 +20,7 @@ public class IFCubes extends Poly {
     v.cqz = 1;
   }
   
-  public IFCubes(IAMDANI v, int numCubes, float radius, float z)
+  public IFCubes(IAMDANI v, int numCubes, float radius, float z, String filename)
   {
     super(v);
     cubes = new IFCube[numCubes];
@@ -30,7 +30,7 @@ public class IFCubes extends Poly {
       float theta = v.map(i, 0, numCubes, v.HALF_PI, v.TWO_PI + v.HALF_PI);
       float x = v.sin(theta) * radius;
       float y = - v.cos(theta) * radius;
-      cubes[i] = new IFCube(v, x, y, 0.0f);        
+      cubes[i] = new IFCube(v, x, y, 0.0f, filename);        
     }
     this.z = z;
   }

@@ -1,5 +1,6 @@
 package ie.tudublin.visual;
 
+import ie.tudublin.IAMDANI;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -26,15 +27,15 @@ import processing.core.PVector;
  */
 public abstract class VScene extends VObject {
 
-    public VScene(Visual v) {
+    public VScene(IAMDANI v) {
         this(v, new PVector(0, 0, 0), new PVector(0, 0, 0));
     }
 
-    public VScene(Visual v, PVector position) {
+    public VScene(IAMDANI v, PVector position) {
         this(v, position, new PVector(0, 0, 0));
     }
 
-    public VScene(Visual v, PVector position, PVector rotation) {
+    public VScene(IAMDANI v, PVector position, PVector rotation) {
         super(v, position, rotation);
     }
 

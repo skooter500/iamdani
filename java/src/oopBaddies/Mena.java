@@ -1,11 +1,11 @@
 package oopBaddies;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import ie.tudublin.Visual;
 
 // start of the main
-public class Mena extends Poly {
+public class Mena extends Art {
 
     //constructor
     public Mena(IAMDANI v)
@@ -18,6 +18,7 @@ public class Mena extends Poly {
     {
         y = 1000;
         v.cqz = 255;
+        v.targetCqz = 255;
         
     }
 

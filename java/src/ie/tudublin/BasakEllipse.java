@@ -1,7 +1,7 @@
 package ie.tudublin;
 import processing.core.PApplet;
 
-public class BasakEllipse extends Poly {
+public class BasakEllipse extends Art {
 
     float value2;
     private float smoothedEllipseSize = 1000;
@@ -11,6 +11,8 @@ public class BasakEllipse extends Poly {
     public void enter()
     {
         v.cqz = 1;
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     

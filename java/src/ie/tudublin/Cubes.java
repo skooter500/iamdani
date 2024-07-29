@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Cubes extends Poly
+public class Cubes extends Art
 {
     float start = v.millis();
     float sizeBox = 800;
@@ -18,6 +18,8 @@ public class Cubes extends Poly
         sizeBox = 1000;
         sizeRect = 10;
         v.cqz = 255;
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     @Override

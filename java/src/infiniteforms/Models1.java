@@ -1,9 +1,9 @@
 package infiniteforms;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 
-public class Models1 extends Poly
+public class Models1 extends Art
 {
   public Model model;
 
@@ -11,11 +11,14 @@ public class Models1 extends Poly
   public float scale = 1;
 
   public float pitOff = 0;
+
+  public String fileName;
   
   public Models1(IAMDANI v, String fileName, boolean rotate, boolean rotateX)
   {
     super(v);
     model = new Model(fileName, 0, 0, 0, v);    
+    this.fileName = fileName;
     model.rotate = rotate;
     model.pitOff = pitOff;
     model.rotateX = rotateX;
@@ -23,10 +26,12 @@ public class Models1 extends Poly
   
   public void enter()
   {
-    v.defaults();
+    // v.defaults();
     model.smoothedBoxSize = 20;
     model.colorOffset = (int) v.random(0, 256);
+    v.bas = v.targetBas;
     v.cqz = 1;
+    v.targetCqz = 1;
   }
 
   float smoothedBoxSize = 0;
@@ -46,11 +51,16 @@ public class Models1 extends Poly
     v.camera(200, 0, -400, 20, 20, 0, 0, 1, 0);
     
     v.scale(scale);
-    
+    v.rotateX(-v.HALF_PI);
     model.render();
     v.popMatrix();
     v.camera(v.width/2.0f, (v.height/2.0f) - 5000, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0, 0, 1, 0);
 
+  }
+
+  public String toString()
+  {
+    return fileName;
   }
   
 }

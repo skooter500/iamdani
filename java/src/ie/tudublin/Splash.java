@@ -1,34 +1,48 @@
 package ie.tudublin;
 
-public class Splash extends Poly
+import processing.core.PFont;
+
+public class Splash extends Art
 {
     int t = 0;
     int duration = 1000;
+
+    PFont font;
+
     public Splash(Visual v) {
         super(v);
+
         //TODO Auto-generated constructor stub
     }
 
     public void enter()
     {
+
         v.showConsole = false;
         t = v.millis();
+
+        font = v.createFont("./java/data/PixelOperatorMono8.ttf", 23);
+        
+        v.textFont(font);
     }
 
     public void exit()
     {
         v.showConsole = true;
-        v.startPoly = null;
+        v.targetBas = 5;
+        v.textFont(v.font);
+        v.background(0);
     }
 
     public void render()
     {
         v.pushStyle();
+        v.textFont(font);
         int d = v.millis() - t;
         if (d > duration)
         {
             v.showConsole = true;
-            v.startPoly = null;
+            exit();
             v.change(0);
             return;
         }

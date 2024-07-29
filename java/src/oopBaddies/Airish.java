@@ -1,13 +1,13 @@
 package oopBaddies;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import ie.tudublin.Visual;
 //import processing.core.PVector;
 //import processing.core.PVector;
 
 //main class
-public class Airish extends Poly {
+public class Airish extends Art {
 
     // constructor
 

@@ -1,9 +1,11 @@
 package c21383126;
 
+import ie.tudublin.IAMDANI;
 import ie.tudublin.visual.AudioAnalysis;
 import ie.tudublin.visual.VObject;
 import ie.tudublin.visual.VScene;
 import ie.tudublin.visual.Visual;
+import infiniteforms.Model;
 import jogamp.opengl.glu.nurbs.Backend;
 import processing.core.PApplet;
 import processing.core.PShape;
@@ -13,7 +15,7 @@ import ddf.minim.Minim;
 import global.GlobalVisual;
 
 public class JenniferVisuals extends VScene {
-    Visual v;
+    IAMDANI v;
     VObject speaker;
     Clock clock;
     VObject dots;
@@ -22,7 +24,7 @@ public class JenniferVisuals extends VScene {
     VObject hex;
     GlobalVisual gv;
     
-    public JenniferVisuals(Visual v) {
+    public JenniferVisuals(IAMDANI v) {
         super(v);
         this.v = v;
         speaker = new Speaker(v, new PVector(v.width / 4, v.height / 4));
@@ -40,10 +42,10 @@ public class JenniferVisuals extends VScene {
         // v.background(0);
         //wf.render();
         speaker.render();
-        //hex.render();
+        hex.render();
         
-        //dots.render(elapsed);
-        //clock.render(elapsed);
+        dots.render(elapsed);
+        clock.render(elapsed);
 
         /*
         // 1:03 - 1:48 - Second verse & chorus
@@ -72,10 +74,10 @@ public class JenniferVisuals extends VScene {
 
         PShape star;
 
-        Stars(Visual v, PVector pos) {
+        Stars(IAMDANI v, PVector pos) {
             super(v, pos);
             // load star object
-            star = v.loadShape("estrellica.obj");
+            star = Model.loadModel("jen/estrellica.obj", IAMDANI.instance);
         }
 
         int MAX = 150; // maximum distance between the stars
@@ -116,7 +118,7 @@ public class JenniferVisuals extends VScene {
     }
 
     class Dots extends VObject {
-        Dots(Visual v, PVector pos) {
+        Dots(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -141,7 +143,7 @@ public class JenniferVisuals extends VScene {
 
     class Clock extends VObject {
 
-        Clock(Visual v, PVector pos) {
+        Clock(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -152,8 +154,12 @@ public class JenniferVisuals extends VScene {
             float hoursRadius;
             float clockDiameter;
 
+            v.rotateX(v.pit);
+            v.rotateY(v.yaw);
+            v.rotateZ(v.rol);
+
             v.fill(0);
-            v.stroke(0, v.alp);
+            v.stroke(v.hueShift(0), v.sat, 255, v.alp);
 
             int radius = PApplet.min(v.width, v.height) / 3; // circle radius
             // smaller lines
@@ -177,7 +183,7 @@ public class JenniferVisuals extends VScene {
                     - PApplet.HALF_PI;
 
             // Draw the hands of the clock
-            v.stroke(255);
+            v.stroke(v.hueShift(255), v.sat, 255, v.alp);
             v.strokeWeight(3);
             v.line(cx, cy, cx + PApplet.cos(s) * secondsRadius, cy + PApplet.sin(s) * secondsRadius);
             v.strokeWeight(4);
@@ -203,7 +209,7 @@ public class JenniferVisuals extends VScene {
 
     class Speaker extends VObject {
 
-        Speaker(Visual v, PVector pos) {
+        Speaker(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -229,7 +235,7 @@ public class JenniferVisuals extends VScene {
             int length = ((y2 + border) - (y1 - border));
             int width = ((x2 + border) - (x1 - border));
             float col = v.random(0, 255); /// box colour
-            v.fill(v.hueShift(col), 255, 255, v.alp);
+            v.fill(v.hueShift(col), v.sat, 255, v.alp);
 
             // 3D boxes
             v.translate(x1, v.height / 2);
@@ -248,7 +254,7 @@ public class JenniferVisuals extends VScene {
 
             for (int i = 0; i < v.ab.size(); i++) {
                 float c = PApplet.map(v.ab.get(i), -1, 1, 0, 360);
-                v.stroke(v.hueShift(c), 100, 100, v.alp);
+                v.stroke(v.hueShift(c), v.sat, 255, v.alp);
                 float radius = v.ab.get(i) * 1000 + 50; // radius size determined by the music
                 v.circle(x1 + 30, y1 + 60, radius - 1);
                 v.circle(x2 + 30, y2, radius - 1);
@@ -259,7 +265,7 @@ public class JenniferVisuals extends VScene {
     }
 
     class WaveForm extends VObject {
-        WaveForm(Visual v, PVector pos) {
+        WaveForm(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 
@@ -270,7 +276,7 @@ public class JenniferVisuals extends VScene {
             // top and bottom of screen wave form
             for (int i = 0; i < v.ab.size(); i++) {
                 float c = PApplet.map(i, 0, v.ab.size(), 0, 360); // rainbow coloured
-                v.stroke(c, 100, 100);
+                v.stroke(v.hueShift(c), v.sat, 255, v.alp);
                 float f = v.ab.get(i) * v.height / 2;
                 float x = PApplet.map(i, 0, v.ab.size(), 0, v.width); // x value determined by music
                 v.line(x, y + f, x, y - f);
@@ -281,7 +287,7 @@ public class JenniferVisuals extends VScene {
     }
 
     class Hex extends VObject {
-        Hex(Visual v, PVector pos) {
+        Hex(IAMDANI v, PVector pos) {
             super(v, pos);
         }
 

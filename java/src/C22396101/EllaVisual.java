@@ -11,7 +11,7 @@ import ddf.minim.Minim;
 // import javax.swing.*;
 // import jn ava.awt.geom.GeneralPath;
 
-public class EllaVisual extends Poly {
+public class EllaVisual extends Art {
     //WaveForm wf;
     //AudioBandsVisual abv;
     int mode = 0;
@@ -51,6 +51,12 @@ public class EllaVisual extends Poly {
 
 
     float off = 0;
+
+    public void enter()
+    {
+        v.cqz = 1;
+        v.targetCqz = 1;
+    }
 
     public void render() {
 

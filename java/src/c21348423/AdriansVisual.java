@@ -1,5 +1,6 @@
 package c21348423;
 
+import ie.tudublin.IAMDANI;
 import ie.tudublin.visual.AudioAnalysis;
 import ie.tudublin.visual.EaseFunction;
 import ie.tudublin.visual.VAnimation;
@@ -52,7 +53,7 @@ public class AdriansVisual extends VScene {
 
     private int background;
 
-    public AdriansVisual(Visual v) {
+    public AdriansVisual(IAMDANI v) {
         super(v);
         this.v = v;
         background = v.color(0, 0, 100);
@@ -154,7 +155,7 @@ public class AdriansVisual extends VScene {
     class HappyHorse extends VObject {
         PShape horse;
 
-        HappyHorse(Visual v, PVector pos) {
+        HappyHorse(IAMDANI v, PVector pos) {
             super(v, pos);
             horse = v.loadShape("horse.obj");
         }
@@ -179,7 +180,7 @@ public class AdriansVisual extends VScene {
     public class SquigglyArcs extends VObject {
         private AudioAnalysis aa;
 
-        public SquigglyArcs(Visual v, PVector position) {
+        public SquigglyArcs(IAMDANI v, PVector position) {
             super(v, position);
             aa = v.audioAnalysis();
         }
@@ -243,7 +244,7 @@ public class AdriansVisual extends VScene {
      */
     private class SuperStars extends VObject {
 
-        public SuperStars(Visual v, PVector position) {
+        public SuperStars(IAMDANI v, PVector position) {
             super(v, position);
         }
 

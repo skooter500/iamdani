@@ -14,14 +14,15 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class AllBalls extends Poly {
+public class AllBalls extends Art {
     
     Balls[] balls; //This is an array of Balls
     int numBalls = 150; //This is the number of Balls
 
     public void enter()
     {
-        v.cqz = 255;
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
     
 

@@ -1,5 +1,6 @@
 package global;
 
+import ie.tudublin.IAMDANI;
 import ie.tudublin.visual.EaseFunction;
 import ie.tudublin.visual.VAnimation;
 import ie.tudublin.visual.VObject;
@@ -9,7 +10,7 @@ import ie.tudublin.visual.Visual;
 public class AnimationDemo extends VScene {
     WooCircle circle;
 
-    public AnimationDemo(Visual v) {
+    public AnimationDemo(IAMDANI v) {
         super(v);
         circle = new WooCircle(v);
     }
@@ -31,7 +32,7 @@ public class AnimationDemo extends VScene {
         VAnimation animX;
         VAnimation animY;
 
-        public WooCircle(Visual v) {
+        public WooCircle(IAMDANI v) {
             super(v);
             animX = new VAnimation(5000);
             animY = new VAnimation(5000);

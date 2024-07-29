@@ -1,9 +1,9 @@
 package infiniteforms;
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 
-public class Terrain extends Poly {
+public class Terrain extends Art {
     int cols, rows;
     int scl = 50;
     int w = 2000;
@@ -22,6 +22,8 @@ public class Terrain extends Poly {
 
     public void enter() {
         v.cqz = 1;
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     float offs = 0;
@@ -55,7 +57,7 @@ public class Terrain extends Poly {
             for (int x = 0; x < cols; x++) {
                 float c3 = v.map(x + y + offs, 0, rows + cols, 255, 0);
                 c3 = v.hueShift(c3); 
-                v.stroke(c3, 255, 255, v.alp);
+                v.stroke(c3, v.sat, 255, v.alp);
                 v.vertex(x * scl, y * scl, terrain[x][y]);
                 v.vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
                 // rect(x*scl, y*scl, scl, scl);

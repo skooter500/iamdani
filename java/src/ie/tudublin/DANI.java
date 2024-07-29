@@ -8,7 +8,7 @@ import infiniteforms.Nematode;
 import processing.core.PApplet;
 
 
-public class DANI extends Poly {
+public class DANI extends Art {
 
 	int mode = 0;
 
@@ -19,6 +19,11 @@ public class DANI extends Poly {
     int line = 0;
     int ch = 0;
     public Nematode t;
+
+    public String toString()
+  {
+    return fileName;
+  }
 
     public DANI(IAMDANI v, String fileName)
     {
@@ -37,6 +42,8 @@ public class DANI extends Poly {
         ch = 0;
         f = (int) v.random(256);
         v.cqz = 1;
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     int f = 0;
@@ -230,17 +237,17 @@ public class DANI extends Poly {
         float cx = v.width;
         float cy = v.height / 2;
 
-        v.translate(cx * .35f, cy/3);
+        v.translate(cx * .25f, cy/3);
         if (transform)
         {
             v.rotateX(v.pit);
-    v.rotateY(-v.yaw + 0.13f);
-    v.rotateZ(v.rol);
-        
+            v.rotateY(-v.yaw + 0.13f);
+            v.rotateZ(v.rol);
+                
         }
 		for(int i = 0 ; i <= line ; i ++)
         { 
-            float h = 36;
+            float h = 50;
             if (i != line)
             {
                 v.text(sonnet[i], 0, i * h);

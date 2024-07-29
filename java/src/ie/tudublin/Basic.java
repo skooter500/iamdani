@@ -8,7 +8,7 @@ import infiniteforms.Nematode;
 import processing.core.PApplet;
 
 
-public class Basic extends Poly {
+public class Basic extends Art {
 
 	int mode = 0;
 
@@ -19,6 +19,11 @@ public class Basic extends Poly {
     int line = 0;
     int ch = 0;
     public Nematode t;
+
+    public String toString()
+  {
+    return fileName;
+  }
 
     public Basic(IAMDANI v, String fileName)
     {
@@ -36,6 +41,7 @@ public class Basic extends Poly {
         ch = 0;
         f = v.random(265);
         v.cqz = 1;
+        v.targetCqz = 1;
     }
 
     float f = 0;
@@ -123,12 +129,18 @@ public class Basic extends Poly {
         v.rotateX(v.pit);
         v.rotateY(-v.yaw + 0.13f);
         v.rotateZ(v.rol);
-        v.translate(cx * .30f, cy*.1f);
+        v.translate(cx * .5f, cy*.1f);
         
 
 		for(int i = 0 ; i <= line ; i ++)
         { 
-            float h = 36;
+            float h = 50;
+            float coeff = 0.9318812f;            
+            v.rotateX(v.pit);
+            v.rotateY(-v.yaw + 0.13f);
+            v.rotateZ(v.rol);
+    
+            
             if (i != line)
             {
                 v.text(sonnet[i], 0, i * h);

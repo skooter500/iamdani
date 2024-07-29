@@ -2,10 +2,10 @@ package infiniteforms;
 
 
 import ie.tudublin.IAMDANI;
-import ie.tudublin.Poly;
+import ie.tudublin.Art;
 import processing.core.PVector;
 
-public class City extends Poly
+public class City extends Art
 {
     int rows = 100;
     float gap = 100;
