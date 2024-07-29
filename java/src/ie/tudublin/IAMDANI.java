@@ -1085,7 +1085,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Greetings human",
             "This is your MSX speaking",
             "color auto goto list run",
-            "Whatever you find to do with your hands, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom"
+            "Whatever your hand finds to do, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom"
     };
 
     public void startEase() {
