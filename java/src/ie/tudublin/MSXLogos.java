@@ -78,6 +78,7 @@ public class MSXLogos extends Art{
     {
         // v.defaults();
         v.cqz = 1;        
+        v.targetCqz = 1;
     }
 
     public String toString()

@@ -27,7 +27,7 @@ public class Models1 extends Art
   public void enter()
   {
     // v.defaults();
-    model.smoothedBoxSize = 20;
+    model.smoothedBoxSize = 0;
     model.colorOffset = (int) v.random(0, 256);
     v.bas = v.targetBas;
     v.cqz = 1;

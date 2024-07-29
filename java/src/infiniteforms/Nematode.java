@@ -96,13 +96,11 @@ public class Nematode extends Art
     float half = w * length * 0.5f;
     v.strokeWeight(2);
 
-    v.rotateX(v.pit);
-    v.rotateY(-v.yaw + 0.13f);
-    v.rotateZ(v.rol);
+    
     
     v.pushMatrix();
     //v.camera(0, 0, -5000, 0, 0, 0f, 0f, 0.001f, 0f);
-    v.translate(cx * .8f, cy);
+    v.translate(cx * .6f, cy);
     v.translate(-200, - half * 0.2f - 100);
 
     //v.rotateX(v.pit);
@@ -122,6 +120,9 @@ public class Nematode extends Art
     v.noFill();
     for (int i = 0; i < length; i ++)
     { 
+      v.rotateX(v.pit);
+      v.rotateY(-v.yaw + 0.13f);
+      v.rotateZ(v.rol);
       //println(c1, c2);
       v.stroke(c3, 255, 255, v.alp);
     
@@ -200,10 +201,12 @@ public class Nematode extends Art
   { //<>//
     float offs = 90.0f / (float)numEyes;
     for(float i = 0 ; i < numEyes ; i ++)
-    {
+    {      
       float angle = v.map(i, 0, numEyes, -90, 90) + offs;
       float stalkLength = r * 0.25f + (v.sin(v.map(angle, -90, 90, 0, v.PI)) * r * 8);
+      
       drawEye(angle, stalkLength, hw, hh);
+      
     }     
   }
 
@@ -218,6 +221,11 @@ public class Nematode extends Art
     float ex = v.sin(v.radians(angle)) * (headW + stalkLength + eyeRadius);
     float ey = - v.cos(v.radians(angle)) * (headH + stalkLength + eyeRadius);
     v.stroke(v.hueShift(c2), 255, 255, v.alp);        
+
+    v.rotateX(v.pit);
+    v.rotateY(-v.yaw + 0.13f);
+    v.rotateZ(v.rol);
+
     v.circle(ex, ey, eyeRadius * 2.0f);
 
     v.stroke(v.hueShift(c1), 255, 255, v.alp);

@@ -17,6 +17,7 @@ public class IFCubes extends Art {
       c.smoothedBoxSize = 200;
       c.colorOffset = offs;
     }
+    v.targetCqz = 1;
     v.cqz = 1;
   }
   
