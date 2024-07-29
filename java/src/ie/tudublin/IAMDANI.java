@@ -707,7 +707,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         }
 
         if (key == 'd') {
-            println("RAND");
+            println("RAND");  
             mode = Modes.AutoRandom;
         }
 

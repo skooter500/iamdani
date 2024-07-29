@@ -62,6 +62,7 @@ class MSXModel {
                 lerpedS = 0;
                 h = v.random(256);
                 size = 0;
+                smoothedBoxSize =0;
             }        
         }    }
 
