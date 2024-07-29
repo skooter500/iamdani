@@ -645,7 +645,51 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     return false;
     }
 
+    /*
+    | MIDI Note | Keypress | Action |
+|-----------|----------|--------|
+| 36 | y | Shift hue counter-clockwise |
+| 37 | i | Shift CCo (possibly color complement) counter-clockwise |
+| 38 | j | Decrease yaw by QUARTER_PI |
+| 39 | k | Decrease pitch by QUARTER_PI |
+| 40 | l | Decrease roll by QUARTER_PI |
+| 41 | m | Decrease cue value |
+| 42 | r | Increase bass (SAB) by 2.0 |
+| 43 | p | Take screenshot |
+| 44 | t | Shift hue clockwise |
+| 45 | u | Shift CCo (possibly color complement) clockwise |
+| 46 | n | Increase yaw by QUARTER_PI |
+| 47 | b | Increase pitch by QUARTER_PI |
+| 48 | v | Increase roll by QUARTER_PI |
+| 49 | x | Increase cue value |
+| 51 | g | Toggle console visibility |
+| 52 | h | Change to cued visual |
+| 53 | SPACE | Reset to defaults |
+| 54 | q | Set targetAld to 5 |
+| 55 | w | Set targetAld to 0 |
+| 56 | e | Decrease bass (SAB) by 2.0 |
+| 57 | UP/LEFT arrow | Switch to previous visual |
+| 58 | DOWN/RIGHT arrow | Switch to next visual |
+| 59 | o | Switch to random visual |
+| 60 | f | Randomize yaw, pitch, and roll |
+| 61 | [ | Cycle through easing types |
+| 62 | ] | Set duration to 0.0 |
+| 63 | \ | Cycle through control types |
+| - | ENTER | MIDI Connect |
+| - | s | Toggle TRON/TROFF (exp variable) |
+| - | c | Toggle CTRON/CTROFF (exp variable) |
+| - | 0-9 | Change to visual 0-9 |
+| - | a | Set mode to Auto |
+| - | d | Set mode to AutoRandom |
+| - | z | Re-enter current art |
+| - | , | One Color |
+| - | . | Full Spectrum |
 
+*/
+
+
+
+    /*
     public void keyPressed() {
 
         keys[keyCode] = true;
@@ -778,6 +822,82 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //54, 55, 56, 42, 44, 36, 45, 37
 
+    }
+
+    */
+
+    public void keyPressed() {
+        keys[keyCode] = true;
+    
+        switch (key) {
+            case ENTER: midiConnect(); break;
+            case 's': 
+                exp = !exp;
+                println(exp ? "TRON" : "TROFF");
+                break;
+            case 'c':
+                exp = !exp;
+                println(exp ? "CTRON" : "CTROFF");
+                break;
+            case ' ': defaults(); break;
+            case 'a': 
+                println("AUTO");
+                mode = Modes.Auto;
+                break;
+            case 'd':
+                println("RAND");
+                mode = Modes.AutoRandom;
+                break;
+            case ',':
+                println("CZQ: 1");
+                cqz = 1;
+                targetCqz = 1;
+                break;
+            case '.':
+                println("CZQ: 255");
+                cqz = 255;
+                targetCqz = 255;
+                break;
+            case 'p': takeScreenshot = true; break;
+            case 'z': art.enter(); break;
+            case 'y': ch.noteOn(0, 36, 100); break;
+            case 'i': ch.noteOn(0, 37, 100); break;
+            case 'j': ch.noteOn(0, 38, 100); break;
+            case 'k': ch.noteOn(0, 39, 100); break;
+            case 'l': ch.noteOn(0, 40, 100); break;
+            case 'm': ch.noteOn(0, 41, 100); break;
+            case 'r': ch.noteOn(0, 42, 100); break;
+            case 't': ch.noteOn(0, 44, 100); break;
+            case 'u': ch.noteOn(0, 45, 100); break;
+            case 'n': ch.noteOn(0, 46, 100); break;
+            case 'b': ch.noteOn(0, 47, 100); break;
+            case 'v': ch.noteOn(0, 48, 100); break;
+            case 'x': ch.noteOn(0, 49, 100); break;
+            case 'g': ch.noteOn(0, 51, 100); break;
+            case 'h': ch.noteOn(0, 52, 100); break;
+            case 'q': ch.noteOn(0, 54, 100); break;
+            case 'w': ch.noteOn(0, 55, 100); break;
+            case 'e': ch.noteOn(0, 56, 100); break;
+            case 'o': ch.noteOn(0, 59, 100); break;
+            case 'f': ch.noteOn(0, 60, 100); break;
+            case '[': ch.noteOn(0, 61, 100); break;
+            case ']': ch.noteOn(0, 62, 100); break;
+        }
+    
+        if (key >= '0' && key <= '9') {
+            change(keyCode - '0');
+        }
+    
+        switch (keyCode) {
+            case UP:
+            case LEFT:
+                change(whichVisual - 1);
+                break;
+            case DOWN:
+            case RIGHT:
+                change(whichVisual + 1);
+                break;
+        }
     }
 
     void showStats()

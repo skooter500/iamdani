@@ -19,6 +19,8 @@ public class IFCubes extends Art {
     }
     v.targetCqz = 1;
     v.cqz = 1;
+
+    
   }
   
   public IFCubes(IAMDANI v, int numCubes, float radius, float z, String filename)
