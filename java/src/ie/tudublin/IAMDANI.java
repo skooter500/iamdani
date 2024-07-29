@@ -277,7 +277,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
 
         bhu = 3;
-        bri = 56;
+        bri = 55;
 
         cqz = 1;
         targetCqz = 1;
@@ -318,6 +318,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
+        loadModels();
+        
         addArt(0, new Basic(this, "DANI.BAS"));
         addArt(0, new DANI(this, "captainb.txt"));
         addArt(0, new Nematode(this));
@@ -325,7 +327,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addArt(7, new Spirals(this));
         addArt(0, new FlippedWaveform(this));       
         addArt(0, new FlippedWaveform1(this));                       
-        loadModels();
         
         //addArt(0, new Models1(this, "msx1.obj", false, true));
         addArt(0, new AliensOnUranus(this));       
@@ -678,12 +679,22 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 | - | ENTER | MIDI Connect |
 | - | s | Toggle TRON/TROFF (exp variable) |
 | - | c | Toggle CTRON/CTROFF (exp variable) |
-| - | 0-9 | Change to visual 0-9 |
 | - | a | Set mode to Auto |
 | - | d | Set mode to AutoRandom |
 | - | z | Re-enter current art |
-| - | , | One Color |
-| - | . | Full Spectrum |
+| - | SHIFT + 000-999 | Change to visual number 000-999 |
+| - | 1 | Increase spe by 1 |
+| - | 2 | Decrease spe by 1 |
+| - | 3 | Increase targetSat by 5 (1-255) |
+| - | 4 | Decrease targetSat by 5 (1-255) |
+| - | 5 | Increase targetAld by 1 (0-50) |
+| - | 6 | Decrease targetAld by 1 (0-50) |
+| - | 7 | Increase bri by 1 (min 2, no upper bound) |
+| - | 8 | Decrease bri by 1 (min 2) |
+| - | 9 | Increase bhu (cycle through fonts) |
+| - | 0 | Decrease bhu (cycle through fonts) |
+
+Note: The dash (-) in the MIDI Note column indicates that the keypress is not directly tied to a MIDI note.
 
 */
 
@@ -826,10 +837,101 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     */
 
+    // public void keyPressed() {
+    //     keys[keyCode] = true;
+    
+    //     switch (key) {
+    //         case ENTER: midiConnect(); break;
+    //         case 's': 
+    //             exp = !exp;
+    //             println(exp ? "TRON" : "TROFF");
+    //             break;
+    //         case 'c':
+    //             exp = !exp;
+    //             println(exp ? "CTRON" : "CTROFF");
+    //             break;
+    //         case ' ': defaults(); break;
+    //         case 'a': 
+    //             println("AUTO");
+    //             mode = Modes.Auto;
+    //             break;
+    //         case 'd':
+    //             println("RAND");
+    //             mode = Modes.AutoRandom;
+    //             break;
+    //         case ',':
+    //             println("MONO");
+    //             // cqz = 1;
+    //             targetCqz = 1;
+    //             break;
+    //            case '.':
+    //             println("COLOR:" + cqz);
+    //             //cqz = 255;
+    //             targetCqz = min(255, targetCqz + 50);
+    //             break;
+    //         case 'p': takeScreenshot = true; break;
+    //         case 'z': art.enter(); break;
+    //         case 'y': ch.noteOn(0, 36, 100); break;
+    //         case 'i': ch.noteOn(0, 37, 100); break;
+    //         case 'j': ch.noteOn(0, 38, 100); break;
+    //         case 'k': ch.noteOn(0, 39, 100); break;
+    //         case 'l': ch.noteOn(0, 40, 100); break;
+    //         case 'm': ch.noteOn(0, 41, 100); break;
+    //         case 'r': ch.noteOn(0, 42, 100); break;
+    //         case 't': ch.noteOn(0, 44, 100); break;
+    //         case 'u': ch.noteOn(0, 45, 100); break;
+    //         case 'n': ch.noteOn(0, 46, 100); break;
+    //         case 'b': ch.noteOn(0, 47, 100); break;
+    //         case 'v': ch.noteOn(0, 48, 100); break;
+    //         case 'x': ch.noteOn(0, 49, 100); break;
+    //         case 'g': ch.noteOn(0, 51, 100); break;
+    //         case 'h': ch.noteOn(0, 52, 100); break;
+    //         case 'q': ch.noteOn(0, 54, 100); break;
+    //         case 'w': ch.noteOn(0, 55, 100); break;
+    //         case 'e': ch.noteOn(0, 56, 100); break;
+    //         case 'o': ch.noteOn(0, 59, 100); break;
+    //         case 'f': ch.noteOn(0, 60, 100); break;
+    //         case '[': ch.noteOn(0, 61, 100); break;
+    //         case ']': ch.noteOn(0, 62, 100); break;
+    //     }
+    
+    //     if (key >= '0' && key <= '9') {
+    //         change(keyCode - '0');
+    //     }
+    
+    //     switch (keyCode) {
+    //         case UP:
+    //         case LEFT:
+    //             change(whichVisual - 1);
+    //             break;
+    //         case DOWN:
+    //         case RIGHT:
+    //             change(whichVisual + 1);
+    //             break;
+    //     }
+    // }
+
     public void keyPressed() {
         keys[keyCode] = true;
     
+        // Visual selection with shift + 3 digits
+        if (keyCode == SHIFT) {
+            visualBuffer = "";
+            return;
+        }
+        
+        if (keys[SHIFT] && key >= '0' && key <= '9') {
+            visualBuffer += key;
+            if (visualBuffer.length() == 3) {
+                int visualNumber = Integer.parseInt(visualBuffer);
+                change(visualNumber);
+                visualBuffer = "";
+            }
+            return;
+        }
+    
         switch (key) {
+            // Existing key mappings
             case ENTER: midiConnect(); break;
             case 's': 
                 exp = !exp;
@@ -848,18 +950,56 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 println("RAND");
                 mode = Modes.AutoRandom;
                 break;
-            case ',':
-                println("CZQ: 1");
-                cqz = 1;
-                targetCqz = 1;
-                break;
-            case '.':
-                println("CZQ: 255");
-                cqz = 255;
-                targetCqz = 255;
-                break;
             case 'p': takeScreenshot = true; break;
             case 'z': art.enter(); break;
+    
+            // New key mappings for parameter adjustments
+            case '1': // Increase spe
+                targetSpe = constrain(targetSpe + 1, 0, Float.MAX_VALUE);
+                println("SPE: " + nf(targetSpe, 1, 2));
+                break;
+            case '2': // Decrease spe
+                targetSpe = constrain(targetSpe - 1, 0, Float.MAX_VALUE);
+                println("SPE: " + nf(targetSpe, 1, 2));
+                break;
+            case '3': // Increase targetSat
+                targetSat = constrain(targetSat + 5, 1, 255);
+                println("SAT: " + nf(targetSat, 1, 2));
+                break;
+            case '4': // Decrease targetSat
+                targetSat = constrain(targetSat - 5, 1, 255);
+                println("SAT: " + nf(targetSat, 1, 2));
+                break;
+            case '5': // Increase targetAld
+                targetAld = constrain(targetAld + 1, 0, 50);
+                println("ALD: " + nf(targetAld, 1, 2));
+                break;
+            case '6': // Decrease targetAld
+                targetAld = constrain(targetAld - 1, 0, 50);
+                println("ALD: " + nf(targetAld, 1, 2));
+                break;
+            case '7': // Increase bri
+                bri = constrain(bri + 5, 2, Float.MAX_VALUE);
+                println("BRI: " + nf(bri, 1, 2));
+                updateFont();
+                break;
+            case '8': // Decrease bri
+                bri = constrain(bri - 1, 2, Float.MAX_VALUE);
+                println("BRI: " + nf(bri, 1, 2));
+                updateFont();
+                break;
+            case '9': // Increase bhu
+                bhu = (bhu + 1) % matchingFiles.length;
+                println("BHU: " + bhu);
+                updateFont();
+                break;
+            case '0': // Decrease bhu
+                bhu = (bhu - 1 + matchingFiles.length) % matchingFiles.length;
+                println("BHU: " + bhu);
+                updateFont();
+                break;
+    
+            // Existing MIDI note mappings
             case 'y': ch.noteOn(0, 36, 100); break;
             case 'i': ch.noteOn(0, 37, 100); break;
             case 'j': ch.noteOn(0, 38, 100); break;
@@ -882,10 +1022,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             case 'f': ch.noteOn(0, 60, 100); break;
             case '[': ch.noteOn(0, 61, 100); break;
             case ']': ch.noteOn(0, 62, 100); break;
-        }
-    
-        if (key >= '0' && key <= '9') {
-            change(keyCode - '0');
+            case '\\': ch.noteOn(0, 63, 100); break;
         }
     
         switch (keyCode) {
@@ -898,6 +1035,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 change(whichVisual + 1);
                 break;
         }
+    }
+    
+    private String visualBuffer = "";
+    
+    private void updateFont() {
+        font = createFont("" + matchingFiles[bhu], bri);
+        textFont(font);
+        myTextarea.setFont(font);
     }
 
     void showStats()

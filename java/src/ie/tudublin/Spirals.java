@@ -38,7 +38,7 @@ public class Spirals extends Art {
         
         if (r >= 1000)
         {
-            enter();
+            newSpiral();;
         }
         
 
@@ -52,8 +52,8 @@ public class Spirals extends Art {
         // v.fill(255);
         // v.textSize(50);
     }
-    
-    public void enter()
+
+    public void newSpiral()
     {
         cx = v.width / 2;
         cy = v.height / 2;
@@ -64,8 +64,14 @@ public class Spirals extends Art {
         thetaInc = v.random(1, 5);
         dir = ((int) v.random(0, 2)) == 0 ? 1 : -1;
 
+    }
+    
+    public void enter()
+    {
+        
         v.cqz = 1;
         v.targetCqz = 1;
+        newSpiral();
     }
 
     public void exit()
