@@ -141,7 +141,7 @@ public class LauraSun extends Art
             // Draw foam outline
             p.noFill();
             p.stroke(255, 255, 255, 150); // white
-            p.strokeWeight(4);
+            p.strokeWeight(2);
        
             p.beginShape();
             p.curveVertex(0, p.height);// first control point of curve
@@ -217,7 +217,7 @@ public class LauraSun extends Art
                 p.stroke(p.lerpColor(c3, c4, (float) ((percentY - 0.5) * 2)));
             }
        
-            p.strokeWeight(p.random(2, 4)); // set a random stroke weight for each rain drop
+            // p.strokeWeight(p.random(2, 4)); // set a random stroke weight for each rain drop
             p.line(dropX[i], dropY[i], dropX[i], yPos); // draw the rain drop as a line
            
             dropY[i] += 10; // move the rain drop downwards

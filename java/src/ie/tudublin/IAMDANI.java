@@ -150,8 +150,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     ControllerHandler ch = null;
 
     public void midiConnect() {
-
-        
         try {
             MidiBus.list();
             int daniMidi = -1;
@@ -699,7 +697,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             return;
         }
         if (key == ' ') {
-
+            defaults();;
+            return;
         }
 
         if (key == 'a') {
@@ -1040,8 +1039,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     }
 
     String[] randomMessages = {
-            "I am DANI",
-            "I am alive",
+            "I am DANI I am alive",
             "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
             "I like spoonies spoonies",
@@ -1087,7 +1085,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             "Greetings human",
             "This is your MSX speaking",
             "color auto goto list run",
-            "Whatever your hand finds to do, do it with all your might"
+            "Whatever you find to do with your hands, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom"
     };
 
     public void startEase() {

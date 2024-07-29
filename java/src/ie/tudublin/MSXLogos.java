@@ -75,7 +75,7 @@ public class MSXLogos extends Art{
 
     public void enter()
     {
-        v.defaults();
+        // v.defaults();
         v.cqz = 1;        
     }
 
