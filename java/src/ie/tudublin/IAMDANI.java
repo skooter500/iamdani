@@ -317,6 +317,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
+        addArt(0, new FractalTree(this));
+        
         loadModels();
         
         addArt(0, new Basic(this, "DANI.BAS"));
