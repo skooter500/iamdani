@@ -912,6 +912,12 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
 
     public void keyPressed() {
         keys[keyCode] = true;
+
+
+        if (keyCode == SHIFT) {
+            visualBuffer = "";
+            return;
+        }
     
         // Visual selection with shift + 3 digits
         
@@ -926,10 +932,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
         }
         
         
-        // if (keyCode == SHIFT) {
-        //     visualBuffer = "";
-        //     return;
-        // }
+        
         
         
     
