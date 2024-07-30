@@ -10,7 +10,7 @@ public class FractalTree extends Art {
 
     public FractalTree(Visual v) {
         super(v);
-        this.initialLength = 200;
+        this.initialLength = 400;
         this.branchAngle = v.PI / 6; // 30 degrees
         this.branchRatio = 0.67f;
         this.maxDepth = 8;
@@ -19,29 +19,44 @@ public class FractalTree extends Art {
     }
 
     public void render(int elapsed) {
+        this.branchAngle = v.mul;
+        this.initialLength = 50 * v.bas;
         v.stroke(v.hueShift(100), v.sat, 255, v.alp);
         v.strokeWeight(2);
 
         v.pushMatrix();
-        v.translate(v.width / 2, v.height);
+        v.translate(v.width *.333f, v.height);
+        branch(initialLength, maxDepth);
+        v.popMatrix();
+        v.pushMatrix();
+        v.translate(v.width * .66666f, v.height);
         branch(initialLength, maxDepth);
         v.popMatrix();
     }
 
     private void branch(float length, int depth) {
+        float n = v.noise(v.millis() / 5000.0f);        
         if (depth == 0) return;
 
         v.stroke(v.hueShift(v.map(depth, 0, maxDepth, hueStart, hueEnd)), 255, 255, v.alp);
 
         v.line(0, 0, 0, -length);
         v.translate(0, -length);
-
+        v.rotateX(v.pit * n);
+        v.rotateY(v.yaw * n);
+        v.rotateZ(v.rol * n);
         v.pushMatrix();
+        v.rotateX(v.pit * n);
+        v.rotateY(v.yaw * n);
+        v.rotateZ(v.rol * n);
         v.rotate(branchAngle);
         branch(length * branchRatio, depth - 1);
         v.popMatrix();
 
         v.pushMatrix();
+        v.rotateX(v.pit * n);
+        v.rotateY(v.yaw * n);
+        v.rotateZ(v.rol * n);
         v.rotate(-branchAngle);
         branch(length * branchRatio, depth - 1);
         v.popMatrix();

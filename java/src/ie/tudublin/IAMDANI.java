@@ -264,6 +264,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void setup() {
 
+
+        
+
         targetAld = 10;
         targetHue = 57;
         targetSat = 255;
@@ -420,6 +423,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                 .setVisible(true);
         ;
 
+        whichVisual = 9;
+        art = arts.get(whichVisual);
         art.enter();
     }
 
@@ -502,9 +507,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetPit = 0f;
         targetYaw = 0f;
         
-        targetBas = bas = startBas = 3.6f;
-        targetAlp = alp = startAlp = 10;
-        targetMul = mul = startMul = 20.0f;
+        targetBas = startBas = 3.6f;
+        targetAlp = startAlp = 10;
+        targetMul = startMul = 20.0f;
 
         targetAld = ald = startAld = 10;
         targetHue = hue = startHue = 57;
@@ -636,6 +641,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void keyReleased() {
         keys[keyCode] = false;
+        if (keyCode == SHIFT)
+        {
+            visualBuffer = "";
+        }
     }
 
     public boolean checkKey(int k)
@@ -698,233 +707,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 Note: The dash (-) in the MIDI Note column indicates that the keypress is not directly tied to a MIDI note.
 
 */
-
-
-
-    /*
     public void keyPressed() {
-
+        
         keys[keyCode] = true;
 
-        if (key == ENTER) {
-            midiConnect();
-            return;
-        }
-
-        if (key == 's') {
-            exp = !exp;
-            if (exp) {
-                println("TRON");
-                return;
-            } else {
-
-                println("TROFF");
-                return;
-            }
-        }
-        if (key == 'c') {
-            exp = !exp;
-            if (exp) {
-                println("CTRON");
-            } else {
-                println("CTROFF");
-            }
-        }
-
-        if (key >= '0' && key <= '9') {
-            int newVisual = keyCode - '0';
-            change(newVisual);
-        }
-
-        if (keyCode == UP) {
-            change(whichVisual - 1);
-            return;
-        }
-        if (keyCode == DOWN) {
-            change(whichVisual + 1);
-            return;
-        }
-        if (keyCode == LEFT) {
-            change(whichVisual - 1);
-            return;
-        }
-        if (keyCode == RIGHT) {
-            change(whichVisual + 1);
-            return;
-        }
-        if (key == ' ') {
-            defaults();;
-            return;
-        }
-
-        if (key == 'a') {
-            println("AUTO");
-            mode = Modes.Auto;
-        }
-
-        if (key == 'd') {
-            println("RAND");  
-            mode = Modes.AutoRandom;
-        }
-
-        if (key == 'c') {
-            println("CTRL");
-            mode = Modes.Ctrl;
-        }
-
-        if (key == 'p') {
-            takeScreenshot = true;
-        }
-
-        if (key == 'f')
-        {
-            ch.noteOn(0, 60, 100);
-        }
-
-        if (key == ' ')
-        {
-            ch.noteOn(0, 53, 100);
-        }
-
-        if (key == 'z')
-        {
-            art.enter();
-        }
-
-        if (key == 'q')
-        {
-            ch.noteOn(0, 54, 100);
-        }
-
-        if (key == 'w')
-        {
-            ch.noteOn(0, 55, 100);
-        }
-
-        if (key == 'e')
-        {
-            ch.noteOn(0, 56, 100);
-        }
-
-        if (key == 'r')
-        {
-            ch.noteOn(0, 42, 100);
-        }
-
-        if (key == 't')
-        {
-            ch.noteOn(0, 44, 100);
-        }
-
-        if (key == 'y')
-        {
-            ch.noteOn(0, 36, 100);
-        }
-
-        if (key == 'u')
-        {
-            ch.noteOn(0, 45, 100);
-        }
-
-        if (key == 'i')
-        {
-            ch.noteOn(0, 37, 100);
-        }
-        
-
-        //54, 55, 56, 42, 44, 36, 45, 37
-
-    }
-
-    */
-
-    // public void keyPressed() {
-    //     keys[keyCode] = true;
-    
-    //     switch (key) {
-    //         case ENTER: midiConnect(); break;
-    //         case 's': 
-    //             exp = !exp;
-    //             println(exp ? "TRON" : "TROFF");
-    //             break;
-    //         case 'c':
-    //             exp = !exp;
-    //             println(exp ? "CTRON" : "CTROFF");
-    //             break;
-    //         case ' ': defaults(); break;
-    //         case 'a': 
-    //             println("AUTO");
-    //             mode = Modes.Auto;
-    //             break;
-    //         case 'd':
-    //             println("RAND");
-    //             mode = Modes.AutoRandom;
-    //             break;
-    //         case ',':
-    //             println("MONO");
-    //             // cqz = 1;
-    //             targetCqz = 1;
-    //             break;
-    //            case '.':
-    //             println("COLOR:" + cqz);
-    //             //cqz = 255;
-    //             targetCqz = min(255, targetCqz + 50);
-    //             break;
-    //         case 'p': takeScreenshot = true; break;
-    //         case 'z': art.enter(); break;
-    //         case 'y': ch.noteOn(0, 36, 100); break;
-    //         case 'i': ch.noteOn(0, 37, 100); break;
-    //         case 'j': ch.noteOn(0, 38, 100); break;
-    //         case 'k': ch.noteOn(0, 39, 100); break;
-    //         case 'l': ch.noteOn(0, 40, 100); break;
-    //         case 'm': ch.noteOn(0, 41, 100); break;
-    //         case 'r': ch.noteOn(0, 42, 100); break;
-    //         case 't': ch.noteOn(0, 44, 100); break;
-    //         case 'u': ch.noteOn(0, 45, 100); break;
-    //         case 'n': ch.noteOn(0, 46, 100); break;
-    //         case 'b': ch.noteOn(0, 47, 100); break;
-    //         case 'v': ch.noteOn(0, 48, 100); break;
-    //         case 'x': ch.noteOn(0, 49, 100); break;
-    //         case 'g': ch.noteOn(0, 51, 100); break;
-    //         case 'h': ch.noteOn(0, 52, 100); break;
-    //         case 'q': ch.noteOn(0, 54, 100); break;
-    //         case 'w': ch.noteOn(0, 55, 100); break;
-    //         case 'e': ch.noteOn(0, 56, 100); break;
-    //         case 'o': ch.noteOn(0, 59, 100); break;
-    //         case 'f': ch.noteOn(0, 60, 100); break;
-    //         case '[': ch.noteOn(0, 61, 100); break;
-    //         case ']': ch.noteOn(0, 62, 100); break;
-    //     }
-    
-    //     if (key >= '0' && key <= '9') {
-    //         change(keyCode - '0');
-    //     }
-    
-    //     switch (keyCode) {
-    //         case UP:
-    //         case LEFT:
-    //             change(whichVisual - 1);
-    //             break;
-    //         case DOWN:
-    //         case RIGHT:
-    //             change(whichVisual + 1);
-    //             break;
-    //     }
-    // }
-
-    public void keyPressed() {
-        keys[keyCode] = true;
-
-
-        if (keyCode == SHIFT) {
-            visualBuffer = "";
-            return;
-        }
-    
-        // Visual selection with shift + 3 digits
-        
-        if (keys[SHIFT] && key >= '0' && key <= '9') {
-            visualBuffer += key;
+        //Visual selection with shift + 3 digits
+        if (keys[SHIFT] && keyCode >= 48 && keyCode <= 57) {
+            visualBuffer += "" + (keyCode - 48);
             if (visualBuffer.length() == 3) {
                 int visualNumber = Integer.parseInt(visualBuffer);
                 change(visualNumber);

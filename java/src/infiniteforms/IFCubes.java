@@ -14,13 +14,15 @@ public class IFCubes extends Art {
     float offs = v.random(0, 255);
     for(IFCube c:cubes)
     {
-      c.smoothedBoxSize = 200;
+      c.smoothedBoxSize = 0;
       c.colorOffset = offs;
     }
     v.targetCqz = 1;
     v.cqz = 1;
+    v.bas = v.targetBas;
+    v.cqz = 1;
+    v.targetCqz = 1;
 
-    
   }
   
   public IFCubes(IAMDANI v, int numCubes, float radius, float z, String filename)
@@ -43,8 +45,10 @@ public class IFCubes extends Art {
   public void render()
   {
     v.noFill();
-    v.lights();
+    //v.lights();
     v.camera(0, 0, -700, 0, 0, 0f, 0f, 0.001f, 0f);
+
+
     float col = v.hueShift((colorOffset));        
         
     v.stroke(col, 255, 255);
@@ -60,9 +64,9 @@ public class IFCubes extends Art {
     {
       c.render();       
     }    
-    v.camera(v.width/2.0f, v.height/2.0f, -1500, v.width/2.0f, v.height/2.0f, 0f, 0f, 0.001f, 0f);
     v.popMatrix();
     theta+=0.01f * v.spe;
+    v.camera(v.width/2.0f, (v.height/2.0f) - 5000, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0, 0, 1, 0);
     
   }
 }

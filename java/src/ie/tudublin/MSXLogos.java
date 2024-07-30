@@ -100,8 +100,13 @@ public class MSXLogos extends Art{
 
     @Override
     public void render() {
+
+        
         float halfW = v.width;
         float halfH = v.height;
+
+        //v.camera(v.width/2.0f, (v.height/2.0f) - 5000, (v.height/2.0f) / v.tan(v.PI*30.0f / 180.0f), v.width/2.0f, v.height/2.0f, 0, 0, 1, 0);
+
         
         if (models.size() < numLogos && spawnCounter == 0)
         {
@@ -114,12 +119,14 @@ public class MSXLogos extends Art{
 
         v.lights();
         v.strokeWeight(2);
-
+        
         v.translate(v.width / 2, v.height / 2, -2000);
         for (MSXModel model:models)
         {
             model.render();
         }
+
+        
     }
     
 }
