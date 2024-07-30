@@ -333,7 +333,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addArt(0, new FlippedWaveform1(this));                       
         
         //addArt(0, new Models1(this, "msx1.obj", false, true));
-        addArt(0, new AliensOnUranus(this));       
+        // addArt(0, new AliensOnUranus(this));       
         
         
         
@@ -507,9 +507,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetPit = 0f;
         targetYaw = 0f;
         
-        targetBas = startBas = 3.6f;
-        targetAlp = startAlp = 10;
-        targetMul = startMul = 20.0f;
+        targetBas = bas = startBas = 3.6f;
+        targetAlp = alp = startAlp = 10;
+        targetMul = mul = startMul = 20.0f;
 
         targetAld = ald = startAld = 10;
         targetHue = hue = startHue = 57;
@@ -606,7 +606,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         art = arts.get(whichVisual);
         art.enter();
-        println("bload \"" + arts.get(whichVisual).getClass().getSimpleName().toLowerCase() + ".art\"");
+        println("bload \"" + art.getClass().getSimpleName().toLowerCase() + ".art\"" + " " + art.toString());
         println("ok");
         println("run");
     }
