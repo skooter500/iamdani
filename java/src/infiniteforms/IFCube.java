@@ -10,7 +10,7 @@ public class IFCube
   
   float smoothedBoxSize = 0;
   float angle = 0;
-  float weight = 1;
+  float weight = 2;
   float size = 50;
   
   boolean useAmplitude = true;
@@ -23,7 +23,9 @@ public class IFCube
     this.v = v;
     position = new PVector(x, y, z);
     this.filename = filename;
-    s = Model.loadModel(filename, v);
+    //s = Model.loadModel(filename, v);
+    s = v.loadShape(filename);
+    s.disableStyle();
   }
 
   float colorOffset = 0;
@@ -32,6 +34,7 @@ public class IFCube
   {
     v.pushMatrix();
     v.strokeWeight(2);    
+    v.noFill();
     float col = v.hueShift((colorOffset + v.getAmplitude() * 255));        
     v.stroke(col, 255, 255, v.alp);
     v.translate(position.x, position.y, position.z);       

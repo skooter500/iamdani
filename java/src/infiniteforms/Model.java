@@ -32,6 +32,7 @@ public class Model {
       s = v.loadShape(fileName);
       shapes.put(fileName, s);
     }
+    s.disableStyle();
     return s;
   }
 
