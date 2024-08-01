@@ -73,7 +73,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public ControlType controlType = ControlType.Rotate; 
 
-    float con = 1.0f;
+    public float con = 0.8f;
 
     public void settings() {
         fullScreen(P3D, 2);
@@ -269,13 +269,15 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         
 
-        targetAld = 10;
-        targetHue = 57;
-        targetSat = 255;
-        targetAlp = 40;
         
         loadFonts();
         defaults();
+        //targetAld = 2;
+        targetHue = random(0, 255);
+        targetCCo = random(0, 255);
+        //targetSat = 255;
+        //targetAlp = 40;
+
 
         sat = 255;   
         //
@@ -515,6 +517,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetAlp = 10;
         targetMul = 20.0f;
         targetAld = 3;
+        targetHue = random(0, 255);
+        targetCCo = random(0, 255);
+        
         startEase();
 
         //targetHue = hue = startHue = 57;
@@ -875,12 +880,13 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
         stats.put("BAS", bas);
         stats.put("MUL", mul);
         stats.put("BRI", bri);
+        stats.put("NOC", con * 100.0f);
         stats.put("BHU", new Float(bhu));
 
         float rh = lineHeight;
 
         float h = rh * stats.size();
-        float y = height - h + 20;
+        float y = height - h;
 
         textFont(font);
         
@@ -896,12 +902,12 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
                 
                 int thisFrame = frameCount % 60;
                 fill(thisFrame < 30 ? pingpong(
-                    cco + 100, 0, 255, 0, 255) : pingpong(cco - 100, 0, 255, 0, 255), 255, 255, alp * 2);
+                    cco + 100, 0, 255, 0, 255) : pingpong(cco - 100, 0, 255, 0, 255), 255, 255, alp * con);
                 ff = abs(ff);
             }
             else
             {
-                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp * 2);                        
+                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp * con);                        
             }
             text(nf(ff, 4, 0), x + 125, y);
 

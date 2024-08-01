@@ -69,6 +69,16 @@ public class MoveMusicHandler implements ControllerHandler{
             
     }
 
+    if (number == 92)
+    {
+        
+        v.con = v.map((float) value, 0.0f, 127.0f,0, 1);
+        if (v.exp)
+        v.println("CON " + v.nf(v.con, 3, 2));
+
+
+    }
+
     if (number == 79) {
         v.bri = v.map((float) value, 0.0f, 127.0f,1.0f, 100);
         if (v.exp)
