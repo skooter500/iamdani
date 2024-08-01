@@ -5,6 +5,13 @@ import processing.data.IntList;
 
 public class C_Head extends Art {
 
+    public void enter()
+    {
+        triangleCount = 0;
+        headHueStart = (int) v.random(256);
+    }
+
+    int headHueStart = 0;
     int triangleNum = 383;
     int headRandomSpawn = 1; // set to 0 for no random spawn effect
 
@@ -399,10 +406,10 @@ public class C_Head extends Art {
     public void render()
     {
 
-        headHue = (int) v.hueShift(180);
+        headHue = (int) v.hueShift(headHueStart);
         eyeZoom = v.map(v.spe, 1, 4.14f, -0.1f, -3.14f);
         render(true, true);
-        Nod = v.getSmoothedAmplitude();
+        Nod = v.pow(v.getSmoothedAmplitude(), 2.0f);
     }
 
     public float Nod = 0;
@@ -439,10 +446,10 @@ void drawTriangles(float headX, float headY, float Nod){// -  -  -  -  -  -  -  
     
     int tO = triangleOrder.get(I); // uses the shuffled order in spawning the triangles in
     
-    v.fill(headHue,TRI[3][tO]*2.5f,  TRI[4][tO] *(2.5f) );  // fills the triangles
+    v.fill(headHue,TRI[3][tO]*2.5f,  TRI[4][tO] *(2.5f) , v.alp);  // fills the triangles
     
     if(headFill == false){v.noFill();}  
-    v.stroke(headHue,  TRI[3][tO]*2.5f,  TRI[4][tO] *(1+(1.5f*(1-headWireframe))) );  // decides colours and strokes, wireframe is changed on main page
+    v.stroke(headHue,  TRI[3][tO]*2.5f,  TRI[4][tO] *(1+(1.5f*(1-headWireframe))) , v.alp);  // decides colours and strokes, wireframe is changed on main page
 
     aY = ( PT[1][int2f(TRI[0][tO])]  -  (12 - PT[2][int2f(TRI[0][tO])] ) * (Nod * nodDistance) )  * headScale + headY ; // sets the Y value, then adds (12 - Zlayer) * (beat based variable * nod distance)
     bY = ( PT[1][int2f(TRI[1][tO])]  -  (12 - PT[2][int2f(TRI[1][tO])] ) * (Nod * nodDistance) )  * headScale + headY ; // nod distance is changed at the start of main page for  customisability.
@@ -475,7 +482,7 @@ if(zoomIn == true){
             );
     }
             
-    v.fill(255,0,255);       
+    v.fill(255,0,255, v.alp);       
   //  circle(PT[0][100] * headScale + headX, (PT[1][100]-(12-PT[2][100])*(Nod * nodDistance))*headScale+headY, 20);       // this is just a circle for reference when building eyezoom       
             
 } // end of for loop -------------------------------------------------------------------------------------------
@@ -504,7 +511,7 @@ if(zoomIn == true){
 
     void drawPoints(float headX, float headY) {
         v.noStroke();
-        v.fill(200, 200, 200);
+        v.fill(200, 200, 200, v.alp);
         for (I = 0; I < 213; I++) {
             v.circle(PT[0][I] * headScale + headX,
                     (PT[1][I] * headScale + headY) + (14 - PT[2][I]) * (beatTimer * nodDistance), 10);

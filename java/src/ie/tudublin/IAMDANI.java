@@ -73,8 +73,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public ControlType controlType = ControlType.Rotate; 
 
+    float con = 1.0f;
+
     public void settings() {
-        fullScreen(P3D, 1);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -320,12 +322,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
+        addArt(0, new Basic(this, "DANI.BAS"));        
         addArt(0, new C_Head(this, 1,  0.7f,  1.f,  -1.5f,  1,  true,  180));
         addArt(0, new FractalTree(this));
         
         loadModels();
         
-        addArt(0, new Basic(this, "DANI.BAS"));
         addArt(0, new DANI(this, "captainb.txt"));
         addArt(0, new Nematode(this));
         addArt(7, new Terrain(this)); 
@@ -504,21 +506,23 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public void defaults() {
         println("DEF");
         
+        
         targetRol =  0f;
         targetPit = 0f;
         targetYaw = 0f;
         
-        targetBas = bas = startBas = 3.6f;
-        targetAlp = alp = startAlp = 10;
-        targetMul = mul = startMul = 20.0f;
+        targetBas = 3.6f;
+        targetAlp = 10;
+        targetMul = 20.0f;
+        targetAld = 3;
+        startEase();
 
-        targetAld = ald = startAld = 10;
-        targetHue = hue = startHue = 57;
-        targetSat = sat = startSat = 255;
-        targetAlp = alp = startAlp = 40;
+        //targetHue = hue = startHue = 57;
+        //targetSat = sat = startSat = 255;
+        // /targetAlp = alp = startAlp = 40;
 
     
-        startEase();
+        
 
     }
 
@@ -1033,7 +1037,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
                         .setVisible(true)
                         .setFont(font)
                         .setLineHeight(lineHeight)
-                        .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp));
+                        .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp * con));
 
             } else {
                 consoleSize = 0;
@@ -1158,7 +1162,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
         startEuler[0] = yaw;
         startEuler[1] = pit;
         startEuler[2] = rol;
-        //from.setFromEuler(startEuler);
+        //from.setFromEuler(startEuler);f
         from = new Quaternion();
         from.rotateByEuler(yaw, pit, rol);
         from.normalize();

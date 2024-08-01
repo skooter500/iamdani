@@ -379,7 +379,7 @@ public class MoveMusicHandler implements ControllerHandler{
 
         if (pitch == 54)
         {
-            v.targetAld = 5;
+            v.targetAld = 2;
             v.println("DAL: " + v.targetAld);
             return;
         }
