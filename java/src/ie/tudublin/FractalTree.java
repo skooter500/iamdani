@@ -46,9 +46,9 @@ public class FractalTree extends Art {
         v.rotateY(v.yaw * n);
         v.rotateZ(v.rol * n);
         v.pushMatrix();
-        v.rotateX(v.pit * n);
-        v.rotateY(v.yaw * n);
-        v.rotateZ(v.rol * n);
+        v.rotateX(v.pit * - n);
+        v.rotateY(v.yaw * - n);
+        v.rotateZ(v.rol * - n);
         v.rotate(branchAngle);
         branch(length * branchRatio, depth - 1);
         v.popMatrix();

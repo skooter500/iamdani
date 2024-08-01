@@ -394,17 +394,27 @@ public class C_Head extends Art {
 
     }
 
+    public float hh;
+
     public void render()
     {
+
+        headHue = (int) v.hueShift(180);
+        eyeZoom = v.map(v.spe, 1, 4.14f, -0.1f, -3.14f);
         render(true, true);
+        Nod = v.getSmoothedAmplitude();
     }
+
+    public float Nod = 0;
 
     void render(boolean rando, boolean zoom) {
 
-        drawTriangles(450, 50, v.abs(beatTimer - beatTimeMin / 2) * 2); // draws the head based on the settings given
+        drawTriangles(450, 50, Nod); // draws the head based on the settings given
         if (isHeadComplete == true) {
             playMusic();
         }
+
+
 
         if (rando) {
             colourRandomiser = true;
@@ -456,6 +466,9 @@ if(zoomIn == true){
         bX < v.width && bX > 0 && aY < v.height && aY > 0 &&
         cX < v.width && cX > 0 && aY < v.height && aY > 0     )
     {
+    v.rotateX(v.pit);
+    v.rotateY(v.yaw);
+    v.rotateZ(v.rol);
     v.triangle(  aX,  aY,             //point A (x,y)  draws triangles, scales and translates based off values inputted at main terminal
                bX,  bY,             //point B (x,y)
                cX,  cY              //point C (x,y)      
