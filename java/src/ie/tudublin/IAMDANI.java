@@ -320,7 +320,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
-        addArt(0, new C_Head(this));
+        addArt(0, new C_Head(this, 1,  0.7f,  0.f,  -1.5f,  1,  true,  180));
         addArt(0, new FractalTree(this));
         
         loadModels();

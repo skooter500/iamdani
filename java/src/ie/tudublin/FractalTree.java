@@ -29,8 +29,8 @@ public class FractalTree extends Art {
         branch(initialLength, maxDepth);
         v.popMatrix();
         v.pushMatrix();
-        v.translate(v.width * .66666f, v.height);
-        branch(initialLength, maxDepth);
+        v.translate(v.width * .66666f, 0);
+        branch(- initialLength, maxDepth);
         v.popMatrix();
     }
 
