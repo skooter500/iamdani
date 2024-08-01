@@ -389,6 +389,16 @@ public class C_Head extends Art {
         return (int) f;
     }
 
+    void playMusic()
+    {
+
+    }
+
+    public void render()
+    {
+        render(true, true);
+    }
+
     void render(boolean rando, boolean zoom) {
 
         drawTriangles(450, 50, v.abs(beatTimer - beatTimeMin / 2) * 2); // draws the head based on the settings given
