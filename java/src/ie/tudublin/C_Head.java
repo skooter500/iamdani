@@ -352,7 +352,7 @@ public class C_Head extends Art {
     };
 
     // when referencing these matrices it should work like this, for a B value of
-    // point A of triangle I: PT[ R ][ int2f( TRI[ A ][ I ] ) ]
+    // point A of v.triangle I: PT[ R ][ int2f( TRI[ A ][ I ] ) ]
     // where b is between 0 and 2 (0 for x value, 1 for y value and 2 for z value)
     // and A is between 0 and 2, one value for each vertice
 
@@ -408,9 +408,9 @@ public class C_Head extends Art {
 
 void drawTriangles(float headX, float headY, float Nod){// -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -  -  -  -  -  -  -  -  -  -  -  - start of void
 
-  if(isBeat == true && colourRandomiser == true){headHue = int2f(random(0,255));} // this randomizes the colour of the head, if the value is true
+  if(isBeat == true && colourRandomiser == true){headHue = int2f(v.random(0,255));} // this randomizes the colour of the head, if the value is true
   
-  strokeWeight(wireSize);      
+  v.strokeWeight(wireSize);      
   if(headRandomSpawn == 0){triangleCount = TRI[0].length;} // decides if the number of present triangles starts at zero or maximum
   
   
@@ -419,50 +419,50 @@ void drawTriangles(float headX, float headY, float Nod){// -  -  -  -  -  -  -  
     
     int tO = triangleOrder.get(I); // uses the shuffled order in spawning the triangles in
     
-    fill(headHue,TRI[3][tO]*2.5,  TRI[4][tO] *(2.5) );  // fills the triangles
+    v.fill(headHue,TRI[3][tO]*2.5f,  TRI[4][tO] *(2.5f) );  // fills the triangles
     
-    if(headFill == false){noFill();}  
-    stroke(headHue,  TRI[3][tO]*2.5,  TRI[4][tO] *(1+(1.5*(1-headWireframe))) );  // decides colours and strokes, wireframe is changed on main page
+    if(headFill == false){v.noFill();}  
+    v.stroke(headHue,  TRI[3][tO]*2.5f,  TRI[4][tO] *(1+(1.5f*(1-headWireframe))) );  // decides colours and strokes, wireframe is changed on main page
 
     aY = ( PT[1][int2f(TRI[0][tO])]  -  (12 - PT[2][int2f(TRI[0][tO])] ) * (Nod * nodDistance) )  * headScale + headY ; // sets the Y value, then adds (12 - Zlayer) * (beat based variable * nod distance)
     bY = ( PT[1][int2f(TRI[1][tO])]  -  (12 - PT[2][int2f(TRI[1][tO])] ) * (Nod * nodDistance) )  * headScale + headY ; // nod distance is changed at the start of main page for  customisability.
     cY = ( PT[1][int2f(TRI[2][tO])]  -  (12 - PT[2][int2f(TRI[2][tO])] ) * (Nod * nodDistance) )  * headScale + headY ;
     
-    aX =  PT[0][int2f(TRI[0][tO])]   * headScale + headX; // x values of the triangle points
+    aX =  PT[0][int2f(TRI[0][tO])]   * headScale + headX; // x values of the v.triangle points
     bX =  PT[0][int2f(TRI[1][tO])]   * headScale + headX;
     cX =  PT[0][int2f(TRI[2][tO])]   * headScale + headX;
 
 if(zoomIn == true){
-    aX = lerp(aX,PT[0][zoomPoint] * headScale + headX,eyeZoom); //-------------------------------------------from here
-    bX = lerp(bX,PT[0][zoomPoint] * headScale + headX,eyeZoom);
-    cX = lerp(cX,PT[0][zoomPoint] * headScale + headX,eyeZoom);
+    aX = v.lerp(aX,PT[0][zoomPoint] * headScale + headX,eyeZoom); //-------------------------------------------from here
+    bX = v.lerp(bX,PT[0][zoomPoint] * headScale + headX,eyeZoom);
+    cX = v.lerp(cX,PT[0][zoomPoint] * headScale + headX,eyeZoom);
   
-    aY = lerp(aY,(PT[1][zoomPoint]-(12-PT[2][zoomPoint])*(Nod * nodDistance))*headScale+headY,eyeZoom)  ;
-    bY = lerp(bY,(PT[1][zoomPoint]-(12-PT[2][zoomPoint])*(Nod * nodDistance))*headScale+headY,eyeZoom)  ;
-    cY = lerp(cY,(PT[1][zoomPoint]-(12-PT[2][zoomPoint])*(Nod * nodDistance))*headScale+headY,eyeZoom)  ; // -----------to here adds the zoom effect to zoom into the eye, comment it to turn it off
+    aY = v.lerp(aY,(PT[1][zoomPoint]-(12-PT[2][zoomPoint])*(Nod * nodDistance))*headScale+headY,eyeZoom)  ;
+    bY = v.lerp(bY,(PT[1][zoomPoint]-(12-PT[2][zoomPoint])*(Nod * nodDistance))*headScale+headY,eyeZoom)  ;
+    cY = v.lerp(cY,(PT[1][zoomPoint]-(12-PT[2][zoomPoint])*(Nod * nodDistance))*headScale+headY,eyeZoom)  ; // -----------to here adds the zoom effect to zoom into the eye, comment it to turn it off
 }
 
-    if( aX < width && aX > 0 && aY < height && aY > 0 &&
-        bX < width && bX > 0 && aY < height && aY > 0 &&
-        cX < width && cX > 0 && aY < height && aY > 0     )
+    if( aX < v.width && aX > 0 && aY < v.height && aY > 0 &&
+        bX < v.width && bX > 0 && aY < v.height && aY > 0 &&
+        cX < v.width && cX > 0 && aY < v.height && aY > 0     )
     {
-    triangle(  aX,  aY,             //point A (x,y)  draws triangles, scales and translates based off values inputted at main terminal
+    v.triangle(  aX,  aY,             //point A (x,y)  draws triangles, scales and translates based off values inputted at main terminal
                bX,  bY,             //point B (x,y)
                cX,  cY              //point C (x,y)      
             );
     }
             
-    fill(255,0,255);       
+    v.fill(255,0,255);       
   //  circle(PT[0][100] * headScale + headX, (PT[1][100]-(12-PT[2][100])*(Nod * nodDistance))*headScale+headY, 20);       // this is just a circle for reference when building eyezoom       
             
 } // end of for loop -------------------------------------------------------------------------------------------
 
   if(zoomIn == true){  
-    eyeZoom = eyeZoom * 1.05; // exponentially zooms in on the eye
+    eyeZoom = eyeZoom * 1.05f; // exponentially zooms in on the eye
   }
 
 
-    if(triangleCount < triangleNum){triangleCount += 3;  triangleCount = constrain(triangleCount,0,triangleNum);} // this is used in spawning in the triangles 1 by 1
+    if(triangleCount < triangleNum){triangleCount += 3;  triangleCount = v.constrain(triangleCount,0,triangleNum);} // this is used in spawning in the triangles 1 by 1
     
     if(triangleCount == triangleNum){isHeadComplete = true;} // specifies that the head has been finished
     
@@ -477,45 +477,47 @@ if(zoomIn == true){
         triangleOrder.shuffle(); // randomises the order of the values
     }
 
+    int I;
+
     void drawPoints(float headX, float headY) {
-        noStroke();
-        fill(200, 200, 200);
+        v.noStroke();
+        v.fill(200, 200, 200);
         for (I = 0; I < 213; I++) {
-            circle(PT[0][I] * headScale + headX,
+            v.circle(PT[0][I] * headScale + headX,
                     (PT[1][I] * headScale + headY) + (14 - PT[2][I]) * (beatTimer * nodDistance), 10);
         }
     }
 
-    float dY = 0.1;
+    float dY = 0.1f;
     float[] Xvel = new float[TRI[0].length];
     float[] Yvel = new float[TRI[0].length];
     float[] PXvel = new float[PT[0].length];
 
     int Shatter() {
         float headY = 50;
-        translate(500, 0);
+        v.translate(500, 0);
         boolean fin = true;
         for (int i = 0; i < TRI[0].length; i++) {
             // fill(hue, TRI[3][i], TRI[4][i]);
             // stroke(hue, TRI[3][i], TRI[4][i]*2);
-            // triangle(PT[0][(int)TRI[0][i]], PT[1][(int)TRI[0][i]], PT[0][(int)TRI[1][i]],
+            // v.triangle(PT[0][(int)TRI[0][i]], PT[1][(int)TRI[0][i]], PT[0][(int)TRI[1][i]],
             // PT[1][(int)TRI[1][i]], PT[0][(int)TRI[2][i]], PT[1][(int)TRI[2][i]]);
-            PT[0][(int) TRI[0][i]] = lerp(PT[0][(int) TRI[0][i]], PT[0][(int) TRI[0][i]] + Xvel[i], 0.8);// , 0-500,
+            PT[0][(int) TRI[0][i]] = v.lerp(PT[0][(int) TRI[0][i]], PT[0][(int) TRI[0][i]] + Xvel[i], 0.8f);// , 0-500,
                                                                                                          // (width-500+1)*headScale);
-            PT[0][(int) TRI[1][i]] = lerp(PT[0][(int) TRI[1][i]], PT[0][(int) TRI[1][i]] + Xvel[i], 0.8);// , 0-500,
+            PT[0][(int) TRI[1][i]] = v.lerp(PT[0][(int) TRI[1][i]], PT[0][(int) TRI[1][i]] + Xvel[i], 0.8f);// , 0-500,
                                                                                                          // (width-500+1)*headScale);
-            PT[0][(int) TRI[2][i]] = lerp(PT[0][(int) TRI[2][i]], PT[0][(int) TRI[2][i]] + Xvel[i], 0.8);// , 0-500,
+            PT[0][(int) TRI[2][i]] = v.lerp(PT[0][(int) TRI[2][i]], PT[0][(int) TRI[2][i]] + Xvel[i], 0.8f);// , 0-500,
                                                                                                          // (width-500+1)*headScale);
-            PT[1][(int) TRI[0][i]] = lerp(PT[1][(int) TRI[0][i]], PT[1][(int) TRI[0][i]] + Yvel[i], 0.8);// , 0,
+            PT[1][(int) TRI[0][i]] = v.lerp(PT[1][(int) TRI[0][i]], PT[1][(int) TRI[0][i]] + Yvel[i], 0.8f);// , 0,
                                                                                                          // (height+1)*headScale);
-            PT[1][(int) TRI[1][i]] = lerp(PT[1][(int) TRI[1][i]], PT[1][(int) TRI[1][i]] + Yvel[i], 0.8);// , 0,
+            PT[1][(int) TRI[1][i]] = v.lerp(PT[1][(int) TRI[1][i]], PT[1][(int) TRI[1][i]] + Yvel[i], 0.8f);// , 0,
                                                                                                          // (height+1)*headScale);
-            PT[1][(int) TRI[2][i]] = lerp(PT[1][(int) TRI[2][i]], PT[1][(int) TRI[2][i]] + Yvel[i], 0.8);// , 0,
+            PT[1][(int) TRI[2][i]] = v.lerp(PT[1][(int) TRI[2][i]], PT[1][(int) TRI[2][i]] + Yvel[i], 0.8f);// , 0,
                                                                                                          // (height+1)*headScale);
             Yvel[i] += dY;
-            if (PT[1][(int) TRI[0][i]] * headScale + headY <= height
-                    || PT[1][(int) TRI[1][i]] * headScale + headY <= height
-                    || PT[1][(int) TRI[2][i]] * headScale + headY <= height) {
+            if (PT[1][(int) TRI[0][i]] * headScale + headY <= v.height
+                    || PT[1][(int) TRI[1][i]] * headScale + headY <= v.height
+                    || PT[1][(int) TRI[2][i]] * headScale + headY <= v.height) {
                 fin = false;
             }
         }
