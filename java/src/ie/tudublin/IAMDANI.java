@@ -64,7 +64,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public Ease.TYPE type = Ease.TYPE.EASE_IN_OUT;
 
-    public float duration = 8.f;
+    public float duration = 5f;
     public float t = 1000;
 
     public PFont font;  
@@ -73,7 +73,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public ControlType controlType = ControlType.Rotate; 
 
-    public float con = 0.1f;
+    public float con = 0.5f;
 
     public void settings() {
         fullScreen(P3D, 2);
@@ -1003,17 +1003,17 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             {
                 yaw = lerp(yaw, targetYaw, 0.1f);
                 pit = lerp(pit, targetPit, 0.1f);
-                rol = lerp(rol, targetRol, 0.1f);
-                
-                cco = targetCCo;
-                spe = lerp(spe, targetSpe, 0.1f);
-                // ald = lerp(ald, targetAld, 0.01f);
-                alp = lerp(alp, targetAlp, 0.01f);
-                bas = lerp(bas, targetBas, 0.1f);
-                mul = lerp(mul, targetMul, 0.1f);
-                hue = lerp(hue, targetHue, 0.1f);
-                cqz = lerp(cqz, targetCqz, 0.1f);
+                rol = lerp(rol, targetRol, 0.1f);                                
             }
+
+            cco = targetCCo;
+            spe = lerp(spe, targetSpe, 0.1f);
+            // ald = lerp(ald, targetAld, 0.01f);
+            alp = lerp(alp, targetAlp, 0.01f);
+            bas = lerp(bas, targetBas, 0.1f);
+            mul = lerp(mul, targetMul, 0.1f);
+            hue = lerp(hue, targetHue, 0.1f);
+            cqz = lerp(cqz, targetCqz, 0.1f);
                 
             ald = lerp(ald, targetAld, 0.01f);
             
