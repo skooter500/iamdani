@@ -73,7 +73,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public ControlType controlType = ControlType.Rotate; 
 
-    public float con = 0.5f;
+    public float con = 5f;
 
     public void settings() {
         fullScreen(P3D, 2);
@@ -271,13 +271,12 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         loadFonts();
         defaults();
-        //targetAld = 2;
+        targetAld = 4;
         targetHue = random(0, 255);
         targetCCo = random(0, 255);
         //targetSat = 255;
         //targetAlp = 40;
-        targetAld = 5;
-
+        
 
         sat = 255;   
         //
@@ -419,7 +418,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         myTextarea = cp5.addTextarea("txt")
                 .setPosition(40, 40)
                 .setSize(10, (int) 360)
-                .setColor(color(0, 0, 255, alp))
+                .setColor(color(0, 0, 255, con))
                 .setFont(font)
                 .setLineHeight(lineHeight)
                 .hideScrollbar()
@@ -879,7 +878,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
         stats.put("BAS", bas);
         stats.put("MUL", mul);
         stats.put("BRI", bri);
-        stats.put("NOC", con * 100.0f);
+        stats.put("NOC", con);
         stats.put("BHU", new Float(bhu));
 
         float rh = lineHeight;
@@ -901,12 +900,12 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
                 
                 int thisFrame = frameCount % 60;
                 fill(thisFrame < 30 ? pingpong(
-                    cco + 100, 0, 255, 0, 255) : pingpong(cco - 100, 0, 255, 0, 255), 255, 255, alp * con);
+                    cco + 100, 0, 255, 0, 255) : pingpong(cco - 100, 0, 255, 0, 255), 255, 255, con);
                 ff = abs(ff);
             }
             else
             {
-                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, alp * con);                        
+                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, con);                        
             }
             text(nf(ff, 4, 0), x + 125, y);
 
@@ -1042,7 +1041,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
                         .setVisible(true)
                         .setFont(font)
                         .setLineHeight(lineHeight)
-                        .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, alp * con));
+                        .setColor(color(pingpong(cco, 0, 255, 0, 255), 255, 255, con));
 
             } else {
                 consoleSize = 0;
