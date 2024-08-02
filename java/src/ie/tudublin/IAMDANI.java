@@ -60,20 +60,20 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     float camDistance = 0.5f;
     float strokeWeight = 1;
 
-    public Ease.EASE ease = Ease.EASE.QUINTIC;
+    public Ease.EASE ease = Ease.EASE.EXPONENTIAL;
 
     public Ease.TYPE type = Ease.TYPE.EASE_IN_OUT;
 
-    public float duration = 1.5f;
+    public float duration = 8.f;
     public float t = 1000;
 
-    public PFont font;
+    public PFont font;  
 
     public enum ControlType {Move, Rotate};
 
     public ControlType controlType = ControlType.Rotate; 
 
-    public float con = 0.8f;
+    public float con = 0.1f;
 
     public void settings() {
         fullScreen(P3D, 2);
@@ -93,7 +93,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public StringBuilder console = new StringBuilder();
 
-    public Art art = new Splash(this);
+    public Art art;;
 
     public enum Modes {
         Ctrl, Auto, AutoRandom
@@ -266,7 +266,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void setup() {
 
-
         
 
         
@@ -277,6 +276,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetCCo = random(0, 255);
         //targetSat = 255;
         //targetAlp = 40;
+        targetAld = 5;
 
 
         sat = 255;   
@@ -327,15 +327,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addArt(0, new Basic(this, "DANI.BAS"));        
         addArt(0, new C_Head(this, 1,  0.7f,  1.f,  -1.5f,  1,  true,  180));
         addArt(0, new FractalTree(this));
+        addArt(0, new FlippedWaveform(this));       
         
         loadModels();
-        
+        addArt(0, new FlippedWaveform1(this));                               
         addArt(0, new DANI(this, "captainb.txt"));
         addArt(0, new Nematode(this));
         addArt(7, new Terrain(this)); 
         addArt(7, new Spirals(this));
-        addArt(0, new FlippedWaveform(this));       
-        addArt(0, new FlippedWaveform1(this));                       
         
         //addArt(0, new Models1(this, "msx1.obj", false, true));
         // addArt(0, new AliensOnUranus(this));       
@@ -429,7 +428,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         ;
 
         whichVisual = 0;
-        art = arts.get(whichVisual);
+        art = new Splash(this);
         art.enter();
     }
 
@@ -514,11 +513,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetYaw = 0f;
         
         targetBas = 3.6f;
-        targetAlp = 10;
+        //targetAlp = 20;
         targetMul = 20.0f;
-        targetAld = 3;
-        targetHue = random(0, 255);
-        targetCCo = random(0, 255);
+        
+        //targetHue = random(0, 255);
+        //targetCCo = random(0, 255);
         
         startEase();
 
@@ -862,7 +861,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
         stats.put("IDX", (float) whichVisual);        
         stats.put("AMP", getSmoothedAmplitude());
         stats.put("ALD", ald);
-        stats.put("RAW", raw * 10.0f);
+        //stats.put("RAW", raw * 10.0f);
         stats.put("ALP", alp);
         stats.put("YAW", degrees(yaw));
         stats.put("TGY", degrees(targetYaw));
@@ -886,7 +885,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
         float rh = lineHeight;
 
         float h = rh * stats.size();
-        float y = height - h;
+        float y = height - h + 30;
 
         textFont(font);
         
@@ -985,13 +984,13 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
                 yaw = euler[0];
                 pit = euler[1];
                 rol = euler[2];
-                cco = Ease.Map2(t, 0, duration, startCCo, targetCCo, ease, type);
+                //cco = Ease.Map2(t, 0, duration, startCCo, targetCCo, ease, type);
                 spe = Ease.Map2(t, 0, duration, startSpe, targetSpe, ease, type);
-                hue = Ease.Map2(t, 0, duration, startHue, targetHue, ease, type);
-                alp = Ease.Map2(t, 0, duration, startAlp, targetAlp, ease, type);
-                ald = Ease.Map2(t, 0, duration, startAld, targetAld, ease, type);
-                mul = Ease.Map2(t, 0, duration, startMul, targetMul, ease, type);
-                bas = Ease.Map2(t, 0, duration, startBas, targetBas, ease, type);
+                //hue = Ease.Map2(t, 0, duration, startHue, targetHue, ease, type);
+                //alp = Ease.Map2(t, 0, duration, startAlp, targetAlp, ease, type);
+                //ald = Ease.Map2(t, 0, duration, startAld, targetAld, ease, type);
+                //mul = Ease.Map2(t, 0, duration, startMul, targetMul, ease, type);
+                //bas = Ease.Map2(t, 0, duration, startBas, targetBas, ease, type);
 
                 // 
                 if (t == duration)

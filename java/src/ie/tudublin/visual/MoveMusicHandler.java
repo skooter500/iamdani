@@ -389,7 +389,7 @@ public class MoveMusicHandler implements ControllerHandler{
 
         if (pitch == 54)
         {
-            v.targetAld = 2;
+            v.targetAld = 4;
             v.println("DAL: " + v.targetAld);
             return;
         }
@@ -475,6 +475,8 @@ public class MoveMusicHandler implements ControllerHandler{
             v.targetYaw = v.QUARTER_PI * (int) v.random(-4,3);
             v.targetPit = v.QUARTER_PI * (int) v.random(-4,3);
             v.targetRol = v.QUARTER_PI * (int) v.random(-2,2);
+            v.targetCCo = v.cco;
+            v.targetHue = v.hue;
             v.startEase();
 
             //v.targetRol = - v.HALF_PI;
