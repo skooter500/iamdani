@@ -157,7 +157,7 @@ public class MoveMusicHandler implements ControllerHandler{
     float rotSpeed = 0.01f;
 
     if (number == 71) {
-        v.targetCqz = v.map((float) value, 0.0f, 127.0f,-v.PI, v.PI);
+        v.targetCqz = v.map((float) value, 0.0f, 127.0f,1, 255);
         if (v.exp)
         v.println("cqz " + v.nf(v.targetCqz, 3, 2));
     }
@@ -495,6 +495,18 @@ public class MoveMusicHandler implements ControllerHandler{
         if (pitch == 62)
         {
             v.duration = 0.0f;
+        }
+
+        if (pitch == 64)
+        {
+            v.con = v.max(v.con - 2, 2);
+            v.println("NOD: " + v.con);
+        }
+
+        if (pitch == 65)
+        {
+            v.con = v.min(v.con + 2, 255);
+            v.println("NOD: " + v.con);
         }
 
         /*

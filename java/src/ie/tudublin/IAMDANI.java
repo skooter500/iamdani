@@ -730,7 +730,10 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             return;
         }
         
-        
+        if (keys[SHIFT] && keyCode == 'Q')
+        {
+            
+        }
         
         
         
