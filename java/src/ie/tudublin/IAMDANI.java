@@ -73,7 +73,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public ControlType controlType = ControlType.Rotate; 
 
-    public float con = 5f;
+    public float con = 100f;
 
     public void settings() {
         fullScreen(P3D, 2);
@@ -271,11 +271,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         loadFonts();
         defaults();
-        targetAld = 4;
+        targetAld = 5;
         targetHue = random(0, 255);
         targetCCo = random(0, 255);
         //targetSat = 255;
-        //targetAlp = 40;
+        targetAlp = 30;
         
 
         sat = 255;   
@@ -327,11 +327,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addArt(0, new C_Head(this, 1,  0.7f,  1.f,  -1.5f,  1,  true,  180));
         addArt(0, new FractalTree(this));
         addArt(0, new FlippedWaveform(this));       
-        
+        addArt(0, new DANI(this, "captainb.txt"));
+        addArt(0, new DANI(this, "shakespere.txt"));
+        addArt(0, new Nematode(this));        
         loadModels();
         addArt(0, new FlippedWaveform1(this));                               
-        addArt(0, new DANI(this, "captainb.txt"));
-        addArt(0, new Nematode(this));
         addArt(7, new Terrain(this)); 
         addArt(7, new Spirals(this));
         
@@ -676,7 +676,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 | 42 | r | Increase bass (SAB) by 2.0 |
 | 43 | p | Take screenshot |
 | 44 | t | Shift hue clockwise |
-| 45 | u | Shift CCo (possibly color complement) clockwise |
+| 45 | u | Shift CCo (possibly color complement) clockwise |77
 | 46 | n | Increase yaw by QUARTER_PI |
 | 47 | b | Increase pitch by QUARTER_PI |
 | 48 | v | Increase roll by QUARTER_PI |
@@ -699,17 +699,17 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 | - | c | Toggle CTRON/CTROFF (exp variable) |
 | - | a | Set mode to Auto |
 | - | d | Set mode to AutoRandom |
-| - | z | Re-enter current art |
+| - | z | Re-enter current art |))
 | - | SHIFT + 000-999 | Change to visual number 000-999 |
 | - | 1 | Increase spe by 1 |
 | - | 2 | Decrease spe by 1 |
 | - | 3 | Increase targetSat by 5 (1-255) |
 | - | 4 | Decrease targetSat by 5 (1-255) |
-| - | 5 | Increase targetAld by 1 (0-50) |
+| - | 5 | Increase target by 1 (0-50) |
 | - | 6 | Decrease targetAld by 1 (0-50) |
 | - | 7 | Increase bri by 1 (min 2, no upper bound) |
 | - | 8 | Decrease bri by 1 (min 2) |
-| - | 9 | Increase bhu (cycle through fonts) |
+| - | 9 | Increase bhu (cycle through fonts) |p
 | - | 0 | Decrease bhu (cycle through fonts) |
 
 Note: The dash (-) in the MIDI Note column indicates that the keypress is not directly tied to a MIDI note.
@@ -898,8 +898,8 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             if (ff < 0)
             {
                 
-                int thisFrame = frameCount % 60;
-                fill(thisFrame < 30 ? pingpong(
+                int thisFrame = frameCount % 120;
+                fill(thisFrame < 60 ? pingpong(
                     cco + 100, 0, 255, 0, 255) : pingpong(cco - 100, 0, 255, 0, 255), 255, 255, con);
                 ff = abs(ff);
             }

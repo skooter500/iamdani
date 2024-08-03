@@ -72,7 +72,7 @@ public class MoveMusicHandler implements ControllerHandler{
     if (number == 92)
     {
         
-        v.con = v.map((float) value, 0.0f, 127.0f,0, 1);
+        v.con = v.map((float) value, 0.0f, 127.0f,0, 255);
         if (v.exp)
         v.println("CON " + v.nf(v.con, 3, 2));
 
@@ -388,8 +388,8 @@ public class MoveMusicHandler implements ControllerHandler{
         }
 
         if (pitch == 54)
-        {
-            v.targetAld = 4;
+         {
+            v.targetAld = 5;
             v.println("DAL: " + v.targetAld);
             return;
         }
