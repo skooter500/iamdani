@@ -73,7 +73,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public ControlType controlType = ControlType.Rotate; 
 
-    public float con = 100f;
+    public float con = 50f;
 
     public void settings() {
         fullScreen(P3D, 2);
@@ -732,7 +732,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
         
         if (keys[SHIFT] && keyCode == 'Q')
         {
-            
+
         }
         
         

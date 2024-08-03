@@ -68,6 +68,10 @@ i.am.dani celebrates the 40th birthday of MSX. Inspired by DANI, a chatbot from 
 ## Contributors:
 
 - Bryan Duggan
+- Kate Johnston
+- Rhys MacGregor-Mason
+- Thomas Grumley
+- Alan Turing
 - Jia Zhang
 - Manar Saighi
 - Laura Wei

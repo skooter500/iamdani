@@ -499,13 +499,13 @@ public class MoveMusicHandler implements ControllerHandler{
 
         if (pitch == 64)
         {
-            v.con = v.max(v.con - 2, 2);
+            v.con = v.max(v.con - 5, 5);
             v.println("NOD: " + v.con);
         }
 
         if (pitch == 65)
         {
-            v.con = v.min(v.con + 2, 255);
+            v.con = v.min(v.con + 5, 255);
             v.println("NOD: " + v.con);
         }
 
