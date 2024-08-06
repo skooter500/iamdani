@@ -425,7 +425,7 @@ public class MoveMusicHandler implements ControllerHandler{
         
         if (pitch == 56)
         {
-            v.targetBas -= 2f;
+            v.targetBas = v.max(0, v.targetBas - 2);
             v.println("SAB: " + v.targetBas);
             return;
         }
@@ -445,7 +445,7 @@ public class MoveMusicHandler implements ControllerHandler{
 
         if (pitch == 51) {
             v.showConsole = !v.showConsole;
-            v.println("CON:" + v.showConsole);
+            v.println("NOC:" + v.showConsole);
             v.consoleSize = 0;
             if (!v.showConsole) {
                 v.myTextarea.setVisible(v.showConsole);
