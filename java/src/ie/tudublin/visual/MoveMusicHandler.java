@@ -459,6 +459,18 @@ public class MoveMusicHandler implements ControllerHandler{
             v.println("Control Type: " + v.controlType); 
         }
 
+        if (pitch == 66)
+        {
+            v.targetCqz = 1;
+            v.println("ZQC: " + v.targetCqz);
+        }
+
+        if (pitch == 67)
+        {
+            v.targetCqz = 255;
+            v.println("ZQC: " + v.targetCqz);
+        }
+
         // Receive a noteOn
         // SPecial codes
 

@@ -694,6 +694,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 | 61 | [ | Cycle through easing types |
 | 62 | ] | Set duration to 0.0 |
 | 63 | \ | Cycle through control types |
+| 64 | Q | CQZ = 1 |
+| 65 | W | CQZ = 255 |
+
 | - | ENTER | MIDI Connect |
 | - | s | Toggle TRON/TROFF (exp variable) |
 | - | c | Toggle CTRON/CTROFF (exp variable) |
@@ -729,11 +732,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             }
             return;
         }
-        
-        if (keys[SHIFT] && keyCode == 'Q')
-        {
-
-        }
+    
         
         
         
@@ -808,6 +807,10 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
                 break;
     
             // Existing MIDI note mappings
+            case 'Q': ch.noteOn(0, 64, 100); break;
+            case 'W': ch.noteOn(0, 65, 100); break;
+            case 'E': ch.noteOn(0, 66, 100); break;
+            case 'R': ch.noteOn(0, 67, 100); break;
             case 'y': ch.noteOn(0, 36, 100); break;
             case 'i': ch.noteOn(0, 37, 100); break;
             case 'j': ch.noteOn(0, 38, 100); break;
