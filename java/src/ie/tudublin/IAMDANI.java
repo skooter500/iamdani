@@ -120,9 +120,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public static void println(String o) {
         instance.console.append(o + "\n");
         int len = instance.console.length();
-        if (len > 2000) {
-            instance.console = new StringBuilder(instance.console.subSequence(len - 2000, len));
-        }
+        // if (len > 100) {
+        //     instance.console = new StringBuilder(instance.console.subSequence(len - 10, len));
+        // }
         if (instance.myTextarea != null) {
             instance.myTextarea.setText(instance.console.toString());
             instance.myTextarea.scroll(1.0f);
