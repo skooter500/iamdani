@@ -64,7 +64,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public Ease.TYPE type = Ease.TYPE.EASE_IN_OUT;
 
-    public float duration = 5f;
+    public float duration = 2f;
     public float t = 1000;
 
     public PFont font;  
@@ -73,10 +73,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public ControlType controlType = ControlType.Rotate; 
 
-    public float con = 50f;
+    public float con;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 3);
         //size(1000, 1000, P3D);
     }
 
@@ -271,13 +271,13 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         loadFonts();
         defaults();
-        targetAld = 30;
         targetHue = random(0, 255);
         targetCCo = random(0, 255);
         //targetSat = 255;
         targetAlp = 255;
+        con = 255;
+        targetAld = 30;
         
-
         sat = 255;   
         //
 
@@ -514,7 +514,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         targetBas = 3.6f;
         //targetAlp = 20;
-        targetMul = 20.0f;
+        targetMul = 1.0f;
         
         //targetHue = random(0, 255);
         //targetCCo = random(0, 255);
@@ -907,12 +907,12 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
                 
                 int thisFrame = frameCount % 120;
                 fill(thisFrame < 60 ? pingpong(
-                    cco + 100, 0, 255, 0, 255) : pingpong(cco - 100, 0, 255, 0, 255), 255, 255, con);
+                    cco + 64, 0, 255, 0, 255) : pingpong(cco - 64, 0, 255, 0, 255), 255, 255, con);
                 ff = abs(ff);
             }
             else
             {
-                fill(pingpong(cco + 200, 0, 255, 0, 255), 255, 255, con);                        
+                fill(pingpong(cco + 128, 0, 255, 0, 255), 255, 255, con);                        
             }
             text(nf(ff, 4, 0), x + 125, y);
 
@@ -1163,7 +1163,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "Greetings human",
             "This is your MSX speaking",
             "color auto goto list run",
-            "Whatever your hand finds to do, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom"
+            "Whatever you find to do with your hand, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom"
     };
 
     public void startEase() {
