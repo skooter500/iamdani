@@ -271,11 +271,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         loadFonts();
         defaults();
-        targetAld = 5;
+        targetAld = 30;
         targetHue = random(0, 255);
         targetCCo = random(0, 255);
         //targetSat = 255;
-        targetAlp = 30;
+        targetAlp = 255;
         
 
         sat = 255;   
@@ -323,49 +323,23 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
+        addArt(7, new Terrain(this));         
+        addArt(0, new FlippedWaveform(this));               
         addArt(0, new Basic(this, "DANI.BAS"));        
         addArt(0, new C_Head(this, 1,  0.7f,  1.f,  -1.5f,  1,  true,  180));
         addArt(0, new FractalTree(this));
-        addArt(0, new FlippedWaveform(this));       
-        addArt(0, new DANI(this, "captainb.txt"));
+        addArt(0, new FlippedWaveform1(this));                               
+        addArt(7, new Spirals(this));
+        addArt(1, new Life(this, 2, 280, 100));
+        addArt(4, new BasakEllipse(this));        
         addArt(0, new DANI(this, "shakespere.txt"));
         addArt(0, new Nematode(this));        
-        loadModels();
-        addArt(0, new FlippedWaveform1(this));                               
-        addArt(7, new Terrain(this)); 
-        addArt(7, new Spirals(this));
-        
-        //addArt(0, new Models1(this, "msx1.obj", false, true));
-        // addArt(0, new AliensOnUranus(this));       
-        
-        
-        
-        // groups.add(g);
-        
-        
-        GrainneHead v = new GrainneHead(this, "msx.obj");
-        v.scale_factor = 100;
-        // addVision(5, v);
-
-
-        addArt(1, new Life(this, 2, 280, 100));
-        addArt(1, new Life(this, 3, 10000, 200));
-        addArt(1, new Life(this, 0, 1000, 100));
-        addArt(1, new Life(this, 1, 1000, 100));
-        // addVision(1, new Life(this, 4, 10000, 100));
-
-        addArt(2, new infiniteforms.Cube(this));
-        //addArt(2, new Models1(this, "msx1.obj", false, true));
-
-
-        
+        addArt(7, new Bloom(this));
         addArt(3, new AllBalls(this));    
         addArt(3,new EllaVisual(this));    
         addArt(3, new Cubesquared2(this));        
         addArt(3, new Spiral(this));
-        addArt(3, new Cubes(this));
-        
-        addArt(4, new BasakEllipse(this));
+        addArt(3, new Cubes(this));        
         addArt(4, new paris(this));
         addArt(4, new LauraSun(this));
         addArt(4, new Mena(this));
@@ -377,6 +351,37 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addArt(0, new Particles(this));
         addArt(0, new SarahVisual(this));
         
+        
+        
+        addArt(7, new Bands(this, 300, 0, 0, 0));
+        
+        loadModels();
+        
+        //addArt(0, new Models1(this, "msx1.obj", false, true));
+        // addArt(0, new AliensOnUranus(this));       
+        
+        
+        
+        // groups.add(g);
+        
+        
+        // GrainneHead v = new GrainneHead(this, "msx.obj");
+        // v.scale_factor = 100;
+        // // addVision(5, v);
+
+        //addArt(2, new Models1(this, "msx1.obj", false, true));
+
+
+        addArt(0, new DANI(this, "captainb.txt"));
+        
+        addArt(1, new Life(this, 3, 10000, 200));
+        addArt(1, new Life(this, 0, 1000, 100));
+        addArt(1, new Life(this, 1, 1000, 100));
+        // addVision(1, new Life(this, 4, 10000, 100));
+
+        addArt(2, new infiniteforms.Cube(this));
+        
+        
 
         // YM2413
         // addVision(6, new Models1(this, "phoenix.obj", false, true));
@@ -387,10 +392,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         // addArt(7, new Airish(this));
 
-        addArt(7, new Bloom(this));
-        
-        
-        addArt(7, new Bands(this, 300, 0, 0, 0));
         //addArt(7, new JenniferVisuals(this));
 
         // addVision(new Life(this, 1, 1000));
