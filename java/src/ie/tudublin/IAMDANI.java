@@ -102,14 +102,14 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public Modes mode = Modes.Ctrl;
 
     public void hueShift(boolean upOrDown) {
-        float dist = 42;
+        float dist = cg;
         targetHue += upOrDown ? dist : -dist;
 
         println("HUE " + targetHue);
     }
 
     public void hueShiftCCo(boolean upOrDown) {
-        float dist = 42;
+        float dist = cg;
         targetCCo += upOrDown ? dist : -dist;
         println("CCO " + targetCCo);
 
@@ -264,15 +264,15 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public float targetCqz = 1;
 
-    public void setup() {
+    float cg = 42;
 
-        
+    public void setup() {
 
         
         loadFonts();
         defaults();
         targetHue = random(0, 255);
-        targetCCo = random(0, 255);
+        targetCCo = targetHue + cg;
         //targetSat = 255;
         targetAlp = 255;
         con = 255;
@@ -907,12 +907,12 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
                 
                 int thisFrame = frameCount % 120;
                 fill(thisFrame < 60 ? pingpong(
-                    cco + 64, 0, 255, 0, 255) : pingpong(cco - 64, 0, 255, 0, 255), 255, 255, con);
+                    cco + cg, 0, 255, 0, 255) : pingpong(cco - cg, 0, 255, 0, 255), 255, 255, con);
                 ff = abs(ff);
             }
             else
             {
-                fill(pingpong(cco + 128, 0, 255, 0, 255), 255, 255, con);                        
+                fill(pingpong(cco + (cg * 4), 0, 255, 0, 255), 255, 255, con);                        
             }
             text(nf(ff, 4, 0), x + 125, y);
 
@@ -1156,14 +1156,17 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "We have the technology",
             "better stronger faster",
             "Speak now or forever hold your peace",
+            "We thought of life by analogy with a journey, a pilgrimage, which had a serious purpose at the end, and the thing was to get to that end, success or whatever it is, maybe heaven after you’re dead. But we missed the point the whole way along. It was a musical thing and you were supposed to sing or to dance while the music was being played",
             "Would you like our conversation to be recored on printer (Y/N)",
             "Turn on tune in, and drop out",
             "God is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings human",
+            "Something and nothing are two sides of the same coin.  The positive and the negative; the something and the nothing go together",
             "This is your MSX speaking",
             "color auto goto list run",
-            "Whatever you find to do with your hand, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom"
+            "Whatever you find to do with your hand, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom",
+            "What you are basically, deep deep down, far far in, is simply the fabric and structure of existence itself"
     };
 
     public void startEase() {
