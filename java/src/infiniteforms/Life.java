@@ -379,7 +379,7 @@ public class Life extends Art
             float newC = v.hueShift(board[row][col]);
             v.fill(newC, 255, 255, v.alp);
             v.strokeWeight(1);
-            v.stroke(v.hueShift(90), 255, 255, v.alp);
+            v.stroke(v.hueShift(90), 255, 255, 255);
             // v.fill(v.hueShift(newC),(255+v.frameCount)%255,(255+v.frameCount)%255, v.alp);
                 
             // v.stroke(v.hueShift(newC + 127), 255, 255, v.alp);

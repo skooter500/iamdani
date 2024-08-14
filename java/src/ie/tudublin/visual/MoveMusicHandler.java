@@ -49,23 +49,26 @@ public class MoveMusicHandler implements ControllerHandler{
         v.println("EUH " + v.nf(v.targetHue, 3, 2));
     }
     if (number == 73) {
-        v.bhu = (int) v.map((float) value, 0.0f, 127.0f,0.0f, v.matchingFiles.length - 1);
-
-        if (v.bhu < 0)
+        int b = (int) v.map((float) value, 0.0f, 127.0f,0.0f, v.matchingFiles.length - 1);
+        if (b != v.bhu)
         {
-            v.bhu = v.matchingFiles.length;
-        } 
-        v.bhu = v.bhu % v.matchingFiles.length;
-        String fnt = "" + v.matchingFiles[(int)v.bhu];
-        v.font = v.createFont("" + fnt, v.bri);
-        v.textFont(v.font);
-        v.myTextarea.setFont(v.font);
+            v.bhu = b;
+            if (v.bhu < 0)
+            {
+                v.bhu = v.matchingFiles.length;
+            } 
+            v.bhu = v.bhu % v.matchingFiles.length;
+            String fnt = "" + v.matchingFiles[(int)v.bhu];
+            v.font = v.createFont("" + fnt, v.bri);
+            v.textFont(v.font);
+            v.myTextarea.setFont(v.font);
 
-        if (v.exp)
-        v.println("BHU " + v.nf(v.bhu, 3, 2));
+            if (v.exp)
+            v.println("BHU " + v.nf(v.bhu, 3, 2));
 
-        v.println("FNT: " + fnt);
-        v.println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
+            v.println("FNT: " + fnt);
+            v.println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
+        }
             
     }
 

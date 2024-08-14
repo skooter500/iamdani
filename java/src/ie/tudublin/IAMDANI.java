@@ -290,7 +290,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         loadFonts();
         defaults();
         targetHue = -365;
-        targetCCo = 105;
+        targetCCo = 105; 
         //targetSat = 255;
         targetAlp = 255;
         con = 255;
@@ -300,7 +300,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //
 
         bhu = 4;
-        bri = 50;
+        bri = 56;
 
         cqz = 255;
         targetCqz = 1;
