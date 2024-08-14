@@ -102,19 +102,37 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public Modes mode = Modes.Ctrl;
 
     public void hueShift(boolean upOrDown) {
-        float dist = cg;
+        float dist = cg *.5f;
         targetHue += upOrDown ? dist : -dist;
-
+        targetCCo += upOrDown ? dist : -dist;
         println("HUE " + targetHue);
     }
 
     public void hueShiftCCo(boolean upOrDown) {
-        float dist = cg;
+        float dist = cg *.5f;
         targetCCo += upOrDown ? dist : -dist;
         println("CCO " + targetCCo);
 
-        //q.sl
+        //q.sl9
     }
+
+    public static String shiftString(String input, int shift) {
+        StringBuilder result = new StringBuilder();
+        
+        for (char c : input.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                char shiftedChar = (char) (((c - base + shift) % 26 + 26) % 26 + base);
+                result.append(shiftedChar);
+            } else {
+                result.append(c);
+            }
+        }
+        
+        return result.toString();
+    }
+
+    public static int sst = 0;
 
 
     public static void println(String o) {
@@ -124,7 +142,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //     instance.console = new StringBuilder(instance.console.subSequence(len - 10, len));
         // }
         if (instance.myTextarea != null) {
-            instance.myTextarea.setText(instance.console.toString());
+            instance.myTextarea.setText(shiftString(instance.console.toString(), sst));
             instance.myTextarea.scroll(1.0f);
         }
         System.out.println(o);
@@ -159,19 +177,19 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             if (daniMidi == -1) {
                 for (int i = 0; i < MidiBus.availableInputs().length; i++) {
                     String curr = MidiBus.availableInputs()[i];
-                    if (curr.equals("LPD8 mk2")) {
-                        daniMidi = i;
-                        ch = new AKAIControllerHandler(this);
-                        println("Joy detected: " + curr);
-                        break;
-                    }
-                    if (curr.equals("Arturia BeatStep")) {
-                        daniMidi = i;
-                        ch = new BEATSStepControllerhandler(this);
-                        println("Joy detected: " + curr);
-                        break;
-                    }
-                    if (curr.equals("MoveMusic")) {
+                    // if (curr.equals("LPD8 mk2")) {
+                    //     daniMidi = i;
+                    //     ch = new AKAIControllerHandler(this);
+                    //     println("Joy detected: " + curr);
+                    //     break;
+                    // }
+                    // if (curr.equals("Arturia BeatStep")) {
+                    //     daniMidi = i;
+                    //     ch = new MoveMusicHandler(this);
+                    //     println("Joy detected: " + curr);
+                    //     break;
+                    // }
+                    if (curr.equals("iamdani")) {
                         daniMidi = i;
                         ch = new MoveMusicHandler(this);
                         println("Joy detected: " + curr);
@@ -192,7 +210,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             }
         } catch (Exception e) {
             targetAld = 5;
-            targetHue = 47;
+            targetHue = -78;
             
             loadFonts();
             defaults();
@@ -264,15 +282,15 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public float targetCqz = 1;
 
-    float cg = 42;
+    float cg = 18;
 
     public void setup() {
 
         
         loadFonts();
         defaults();
-        targetHue = random(0, 255);
-        targetCCo = targetHue + cg;
+        targetHue = -365;
+        targetCCo = 105;
         //targetSat = 255;
         targetAlp = 255;
         con = 255;
@@ -281,10 +299,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         sat = 255;   
         //
 
-        bhu = 3;
-        bri = 55;
+        bhu = 4;
+        bri = 50;
 
-        cqz = 1;
+        cqz = 255;
         targetCqz = 1;
         font = createFont("" + matchingFiles[bhu], bri);
         textFont(font);
@@ -668,16 +686,18 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     /*
     | MIDI Note | Keypress | Action |
 |-----------|----------|--------|
+| 45 | | Random Rotation |
+| 37 | | Rotate Back to base |
 | 36 | y | Shift hue counter-clockwise |
-| 37 | i | Shift CCo (possibly color complement) counter-clockwise |
+|  | i | Shift CCo (possibly color complement) counter-clockwise |
 | 38 | j | Decrease yaw by QUARTER_PI |
 | 39 | k | Decrease pitch by QUARTER_PI |
 | 40 | l | Decrease roll by QUARTER_PI |
 | 41 | m | Decrease cue value |
-| 42 | r | Increase bass (SAB) by 2.0 |
+| 50 | r | Increase bass (SAB) by 2.0 |
 | 43 | p | Take screenshot |
 | 44 | t | Shift hue clockwise |
-| 45 | u | Shift CCo (possibly color complement) clockwise |77
+|    | u | Shift CCo (possibly color complement) clockwise |77
 | 46 | n | Increase yaw by QUARTER_PI |
 | 47 | b | Increase pitch by QUARTER_PI |
 | 48 | v | Increase roll by QUARTER_PI |
@@ -818,7 +838,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             case 'k': ch.noteOn(0, 39, 100); break;
             case 'l': ch.noteOn(0, 40, 100); break;
             case 'm': ch.noteOn(0, 41, 100); break;
-            case 'r': ch.noteOn(0, 42, 100); break;
+            case 'r': ch.noteOn(0, 50, 100); break;
             case 't': ch.noteOn(0, 44, 100); break;
             case 'u': ch.noteOn(0, 45, 100); break;
             case 'n': ch.noteOn(0, 46, 100); break;
@@ -827,7 +847,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             case 'x': ch.noteOn(0, 49, 100); break;
             case 'g': ch.noteOn(0, 51, 100); break;
             case 'h': ch.noteOn(0, 52, 100); break;
-            case 'q': ch.noteOn(0, 54, 100); break;
+            case 'q': ch.noteOn(0, 54, 100); break; 
             case 'w': ch.noteOn(0, 55, 100); break;
             case 'e': ch.noteOn(0, 56, 100); break;
             case 'o': ch.noteOn(0, 59, 100); break;
@@ -907,12 +927,12 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
                 
                 int thisFrame = frameCount % 120;
                 fill(thisFrame < 60 ? pingpong(
-                    cco + cg, 0, 255, 0, 255) : pingpong(cco - cg, 0, 255, 0, 255), 255, 255, con);
+                    cco + cg * 2, 0, 255, 0, 255) : pingpong(cco - cg * 2, 0, 255, 0, 255), 255, 255, con);
                 ff = abs(ff);
             }
             else
             {
-                fill(pingpong(cco + (cg * 4), 0, 255, 0, 255), 255, 255, con);                        
+                fill(pingpong(cco + (cg * 10f), 0, 255, 0, 255), 255, 255, con);                        
             }
             text(nf(ff, 4, 0), x + 125, y);
 
@@ -1159,7 +1179,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "We thought of life by analogy with a journey, a pilgrimage, which had a serious purpose at the end, and the thing was to get to that end, success or whatever it is, maybe heaven after you’re dead. But we missed the point the whole way along. It was a musical thing and you were supposed to sing or to dance while the music was being played",
             "Would you like our conversation to be recored on printer (Y/N)",
             "Turn on tune in, and drop out",
-            "God is playing hide and seek within us",
+            "Iamdani is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings human",
             "Something and nothing are two sides of the same coin.  The positive and the negative; the something and the nothing go together",

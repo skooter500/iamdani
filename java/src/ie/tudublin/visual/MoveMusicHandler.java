@@ -282,6 +282,7 @@ public class MoveMusicHandler implements ControllerHandler{
 
         if (pitch == 36)
         {
+
             v.hueShift(false);
             return;
         }
@@ -396,7 +397,7 @@ public class MoveMusicHandler implements ControllerHandler{
 
         if (pitch== 55)
         {
-            v.targetAld = 1;
+            v.targetAld = 0;
             v.println("DAL: " + v.targetAld);
             return;
         }
@@ -430,7 +431,7 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 42)
+        if (pitch == 50)
         {
             v.targetBas += 2f;
             v.println("SAB: " + v.targetBas);
@@ -444,10 +445,12 @@ public class MoveMusicHandler implements ControllerHandler{
         }
 
         if (pitch == 51) {
+            v.instance.console = new StringBuilder();
             v.showConsole = !v.showConsole;
             v.println("NOC:" + v.showConsole);
             v.consoleSize = 0;
             if (!v.showConsole) {
+                
                 v.myTextarea.setVisible(v.showConsole);
             }
             return;
