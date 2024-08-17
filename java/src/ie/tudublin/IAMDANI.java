@@ -1186,6 +1186,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "Something and nothing are two sides of the same coin.  The positive and the negative; the something and the nothing go together",
             "This is your MSX speaking",
             "color auto goto list run",
+            "Do not fear mistakes. There are none.",
             "Whatever you find to do with your hand, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom",
             "What you are basically, deep deep down, far far in, is simply the fabric and structure of existence itself"
     };
