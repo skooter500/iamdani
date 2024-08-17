@@ -76,7 +76,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float con;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 1);
         //size(1000, 1000, P3D);
     }
 
@@ -484,8 +484,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             if (fn.contains("IFCUBE"))
             {
                 addArt(2, new IFCubes(this, 3, 150, -600, fn));
-                addArt(2, new IFCubes(this, 4, 250, -600, fn));                
-                addArt(2, new IFCubes(this, 7, 350, -600, fn));
+                addArt(2, new IFCubes(this, 9, 250, -600, fn));                
+                addArt(2, new IFCubes(this, 21, 450, -600, fn));
+                addArt(2, new IFCubes(this, 30, 450, -600, fn));
             }
         }
         /*addArt(6, new Models1(this, "skooter500.obj", false, true));

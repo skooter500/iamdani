@@ -47,7 +47,7 @@ public class IFCube
     v.strokeWeight(weight);
     if (useAmplitude)
     {
-      float amp = 1.0f;
+      float amp = v.bas * 0.5f;
       float boxSize = size + (amp * 100); 
       smoothedBoxSize = v.lerp(smoothedBoxSize, boxSize, 0.1f);      
       v.rotateX(-v.HALF_PI);

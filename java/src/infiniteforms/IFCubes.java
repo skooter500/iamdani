@@ -16,15 +16,7 @@ public class IFCubes extends Art {
   public void enter()
   {
 
-    cubes = new IFCube[numCubes];
-    
-    for(int i = 0 ; i < numCubes ; i ++)
-    {
-      float theta = v.map(i, 0, numCubes, v.HALF_PI, v.TWO_PI + v.HALF_PI);
-      float x = v.sin(theta) * radius;
-      float y = - v.cos(theta) * radius;
-      cubes[i] = new IFCube(v, x, y, 0.0f, filename);        
-    }
+   
     
     float offs = v.random(0, 255);
     for(IFCube c:cubes)
@@ -52,6 +44,16 @@ public class IFCubes extends Art {
     this.filename = filename;
     this.radius = radius;
     this.numCubes = numCubes;
+
+    cubes = new IFCube[numCubes];
+    
+    for(int i = 0 ; i < numCubes ; i ++)
+    {
+      float theta = v.map(i, 0, numCubes, v.HALF_PI, v.TWO_PI + v.HALF_PI);
+      float x = v.sin(theta) * radius;
+      float y = - v.cos(theta) * radius;
+      cubes[i] = new IFCube(v, x, y, 0.0f, filename);        
+    }
   }
   
   float theta = 0;
