@@ -38,7 +38,7 @@ public class MoveMusicHandler implements ControllerHandler{
     }
 
     if (number == 114) {
-        v.targetMul = v.map((float) value, 0.0f, 127.0f,0.0f, 100.0f);
+        v.targetMul = v.map((float) value, 0.0f, 127.0f,0.0f, 1.0f);
         if (v.exp)
         v.println("LUM " + v.nf(v.targetMul, 3, 2));
     }
@@ -283,12 +283,12 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 36)
-        {
+        // if (pitch == 36)
+        // {
 
-            v.hueShift(false);
-            return;
-        }
+        //     // v.hueShift(false);
+        //     return;
+        // }
 
         if (pitch == 45)
         {
@@ -385,7 +385,7 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 52)
+        if (pitch == 42)
         {
             v.change(v.cue);
             return;
@@ -415,7 +415,7 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 41)
+        if (pitch == 36)
         {
             v.cue = (v.cue - 1);
             if (v.cue < 0)
@@ -571,11 +571,7 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 42) {
-            if (v.exp) v.println("RST");
-            v.visions.get(v.whichVisual).enter();
-            return;
-        }
+        
 
         if (pitch == 50) {
 
