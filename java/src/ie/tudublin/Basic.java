@@ -112,6 +112,7 @@ public class Basic extends Art {
     int reset = 0;
     int toPass = 100;
 
+    float offs = 0;
 	public void render()     
     {
         
@@ -120,7 +121,8 @@ public class Basic extends Art {
     
         v.textAlign(v.LEFT, v.CENTER);
 
-        float c = v.hueShift(f);
+        float c = v.hueShift(f + offs);
+        offs += v.spe;
 
         v.fill(c, 255, 255, v.alp);
         float cx = v.width;
@@ -161,7 +163,7 @@ public class Basic extends Art {
                 }
             }       
         }  
-        int interV = v.max(1, (int) (11 - (v.spe * 10)));
+        int interV =  1 ; //v.max(1, (int) (11 - (v.spe * 10)));
         if (v.frameCount % interV == 0)
         {
             try

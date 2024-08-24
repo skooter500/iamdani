@@ -369,6 +369,8 @@ public class Life extends Art
 
   int salp = 0;
 
+  float offs = 0;
+
   void drawBoard()
   {
     
@@ -376,7 +378,7 @@ public class Life extends Art
       for (int col = 0; col < boardWidth; col ++) {
         if (board[row][col] != -1)
         {
-            float newC = v.hueShift(board[row][col]);
+            float newC = v.hueShift(board[row][col] + offs);
             v.fill(newC, 255, 255, v.alp);
             v.strokeWeight(1);
             v.stroke(v.hueShift(90), 255, 255, 255);
@@ -393,6 +395,7 @@ public class Life extends Art
         }
       }
     }
+    offs += v.spe;    
   }
   
 
@@ -410,7 +413,7 @@ public class Life extends Art
     
     float toPass = v.map(v.spe, 0, 3.58f, 2.0f, 0.2f);  
     ellapsed += v.timeDelta;
-    if (ellapsed > toPass)
+    if (ellapsed > 0)
     {
       updateBoard();
       ellapsed = 0;

@@ -34,7 +34,7 @@ public class Terrain extends Art {
 
         float yoff = flying;
         //float a = (v.getSmoothedAmplitude() * (v.map(v.mul, 0, 100, 0, 1)  + v.bas)) * 200;
-        float a = 200 * v.getSmoothedAmplitude();
+        float a = 400 + (200  * v.getSmoothedAmplitude());
         for (int y = 0; y < rows; y++) {
             float xoff = 0;
             for (int x = 0; x < cols; x++) {
@@ -64,5 +64,6 @@ public class Terrain extends Art {
             }
             v.endShape();
         }
+        offs += v.spe * 10.0f;
     }
 }

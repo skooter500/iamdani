@@ -35,6 +35,8 @@ public class DANI extends Art {
 
     }
 
+    float offs = 0;
+
     public void enter()
     {
         sonnet = writeSonnet();
@@ -233,7 +235,7 @@ public class DANI extends Art {
 
         float c = v.hueShift(f);
 
-        v.fill(c, 255, 255, v.alp);
+        v.fill(c + offs, 255, 255, v.alp);
         float cx = v.width;
         float cy = v.height / 2;
 
@@ -269,7 +271,7 @@ public class DANI extends Art {
                 }
             }       
         }  
-        int interV = v.max(1, (int) (11 - (v.spe * 5)));
+        int interV = 1;
         if (v.frameCount % interV == 0)
         {
             try
@@ -297,5 +299,6 @@ public class DANI extends Art {
                 sonnet = writeSonnet();
             }
         }
+        offs += v.spe;
 	}
 }

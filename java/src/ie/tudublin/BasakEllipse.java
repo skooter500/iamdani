@@ -15,6 +15,8 @@ public class BasakEllipse extends Art {
         v.targetCqz = 1;
     }
 
+    float offs = 0;
+
     
 
     public BasakEllipse(Visual v) {
@@ -73,7 +75,7 @@ public class BasakEllipse extends Art {
              
     
                 
-                v.stroke(v.hueShift(rad), 255, 255, v.alp);
+                v.stroke(v.hueShift(rad + offs), 255, 255, v.alp);
                 
                 v.line(x * PApplet.sin(PApplet.radians(angle)), 0, 0, y);
                 v.ellipse(smoothedEllipseSize * PApplet.sin(PApplet.radians(angle)), 0, 5, 5);
@@ -82,7 +84,7 @@ public class BasakEllipse extends Art {
     
                 v.pushMatrix();
                 v.rotate(-PApplet.radians(angle));
-                v.stroke(v.hueShift(rad), 255, 255, v.alp);                
+                v.stroke(v.hueShift(rad + offs), 255, 255, v.alp);
                 v.ellipse(smoothedEllipseSize* PApplet.sin(PApplet.radians(angle)), y, 5, 5);
                 v.popMatrix();
     
@@ -101,7 +103,7 @@ public class BasakEllipse extends Art {
                 
                 v.rotate(PApplet.radians(angle));
                
-                v.stroke(v.hueShift(rad), 255, 255, v.alp);
+                v.stroke(v.hueShift(rad + offs), 255, 255, v.alp);
                 
                 float triangleBaseX = x + 48; 
                 float triangleBaseY = y; 
@@ -112,6 +114,8 @@ public class BasakEllipse extends Art {
                 v.popMatrix();
     
                 v.popMatrix();
+
+                offs += v.spe;
     
               
             }

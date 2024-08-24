@@ -295,6 +295,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetAlp = 255;
         con = 255;
         targetAld = 30;
+
+        
+        
         
         sat = 255;   
         //
@@ -343,10 +346,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         addArt(7, new Terrain(this));         
         addArt(0, new FlippedWaveform(this));               
+        addArt(0, new FlippedWaveform1(this));                               
+        
         addArt(0, new Basic(this, "DANI.BAS"));        
         addArt(0, new C_Head(this, 1,  0.7f,  1.f,  -1.5f,  1,  true,  180));
         addArt(0, new FractalTree(this));
-        addArt(0, new FlippedWaveform1(this));                               
         addArt(7, new Spirals(this));
         addArt(1, new Life(this, 2, 280, 100));
         addArt(4, new BasakEllipse(this));        
@@ -446,6 +450,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         ;
 
         whichVisual = 0;
+
+
+        targetBas = 0.0f;
+        //targetAlp = 20;
+        targetMul = 0.1f;
         art = new Splash(this);
         art.enter();
     }
@@ -530,10 +539,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         targetRol =  0f;
         targetPit = 0f;
         targetYaw = 0f;
-        
-        targetBas = 3.6f;
-        //targetAlp = 20;
-        targetMul = 1.0f;
         
         //targetHue = random(0, 255);
         //targetCCo = random(0, 255);
