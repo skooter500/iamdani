@@ -76,7 +76,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float con;
 
     public void settings() {
-        fullScreen(P3D, 1);
+        fullScreen(P3D, 3);
         //size(1000, 1000, P3D);
     }
 
@@ -302,7 +302,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         sat = 255;   
         //
 
-        bhu = 4;
+        bhu = 0;
         bri = 56;
 
         cqz = 255;
