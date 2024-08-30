@@ -38,7 +38,7 @@ public class MoveMusicHandler implements ControllerHandler{
     }
 
     if (number == 114) {
-        v.targetMul = v.map((float) value, 0.0f, 127.0f,0.0f, 1.0f);
+        v.targetMul = v.map((float) value, 0.0f, 127.0f,0.0f, 2.0f);
         if (v.exp)
         v.println("LUM " + v.nf(v.targetMul, 3, 2));
     }
@@ -83,7 +83,7 @@ public class MoveMusicHandler implements ControllerHandler{
     }
 
     if (number == 79) {
-        v.bri = v.map((float) value, 0.0f, 127.0f,1.0f, 100);
+        v.bri = (int) v.map((float) value, 0.0f, 127.0f,1.0f, 100);
         if (v.exp)
         v.println("v.bri " + v.nf(v.bri, 3, 2));
 
@@ -92,7 +92,8 @@ public class MoveMusicHandler implements ControllerHandler{
         
 
         v.font = v.createFont(fnt, v.bri);
-        v.textFont(v.font);
+        v.textFont(v.font, v.bri);
+
         v.myTextarea.setFont(v.font);
         v.println("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run");
         
@@ -168,14 +169,14 @@ public class MoveMusicHandler implements ControllerHandler{
     if (number == 77) {
         v.targetYaw = v.map((float) value, 0.0f, 127.0f,-v.PI, v.PI);        
         if (v.exp)
-        v.println("WAY " + v.nf(v.targetYaw, 3, 2));
+        v.println("WAY " + v.nf(v.degrees(v.targetYaw), 4, 0));
     }
 
     if (number == 93) {
         v.targetRol = v.map((float) value, 0.0f, 127.0f,-v.PI, v.PI);
         v.targetRol = v.wrapAngle(v.targetRol);
         if (v.exp)
-        v.println("LOR " + v.nf(v.targetRol, 3, 2));
+        v.println("LOR " + v.nf(v.degrees(v.targetRol), 4, 0));
     }
 
     if (number == 90)
@@ -193,10 +194,10 @@ public class MoveMusicHandler implements ControllerHandler{
     }
 
     if (number == 17) {
-        v.targetPit = v.map((float) value, 0.0f, 127.0f,0.0f, v.TWO_PI);
+        v.targetPit = v.map((float) value, 0.0f, 127.0f,-v.PI, v.PI);
         v.targetPit = v.wrapAngle(v.targetPit);
         if (v.exp)
-            v.println("TIP " + v.nf(v.targetPit, 3, 2));
+            v.println("TIP " + v.nf(v.degrees(v.targetPit), 4, 0));
     }
     // int newVisual = whichVisual;
     // if (clockWise)

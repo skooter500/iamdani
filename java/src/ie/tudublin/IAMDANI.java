@@ -138,9 +138,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public static void println(String o) {
         instance.console.append(o + "\n");
         int len = instance.console.length();
-        // if (len > 100) {
-        //     instance.console = new StringBuilder(instance.console.subSequence(len - 10, len));
-        // }
+        if (len > 5000) {
+            instance.console = new StringBuilder(instance.console.subSequence(len - 1000, len));
+            println("Trunc");
+        }
         if (instance.myTextarea != null) {
             instance.myTextarea.setText(shiftString(instance.console.toString(), sst));
             instance.myTextarea.scroll(1.0f);
@@ -1045,13 +1046,14 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             cco = targetCCo;
             spe = lerp(spe, targetSpe, 0.1f);
             // ald = lerp(ald, targetAld, 0.01f);
-            alp = lerp(alp, targetAlp, 0.01f);
+            //alp = lerp(alp, targetAlp, 0.01f);
+            alp = targetAlp;
             bas = lerp(bas, targetBas, 0.1f);
             mul = lerp(mul, targetMul, 0.1f);
-            hue = lerp(hue, targetHue, 0.1f);
-            cqz = lerp(cqz, targetCqz, 0.1f);
+            hue = targetHue;
+            cqz = targetCqz;
                 
-            ald = lerp(ald, targetAld, 0.01f);
+            ald = targetAld;
             
 
             /*yaw = lerp(yaw, targetYaw, 0.05f);
@@ -1113,6 +1115,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             }
             if (takeScreenshot) {
                 takeScreenshot();
+                println("PCX");
                 takeScreenshot = false;
             }
 

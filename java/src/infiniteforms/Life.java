@@ -410,7 +410,7 @@ public class Life extends Art
     
     float toPass = v.map(v.spe, 0, 3.58f, 2.0f, 0.2f);  
     ellapsed += v.timeDelta;
-    if (ellapsed > toPass)
+    if (ellapsed > 0)
     {
       updateBoard();
       ellapsed = 0;
@@ -421,7 +421,7 @@ public class Life extends Art
 
     if (generation == generationMax)
     {
-      enter();
+      // enter();
     }
   }
 
