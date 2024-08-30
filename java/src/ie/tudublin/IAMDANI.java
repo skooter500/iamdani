@@ -41,11 +41,11 @@ import processing.core.PShapeSVG.Font;
 import themidibus.*; //Import the library
 
 
-
 public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public ArrayList<Art> arts = new ArrayList<Art>();
 
+    
     Quaternion from = new Quaternion();
     Quaternion to = new Quaternion();
 
@@ -76,7 +76,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float con;
 
     public void settings() {
-        fullScreen(P3D, 3);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -299,6 +299,10 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         
         
+
+
+
+
         sat = 255;   
         //
 
@@ -494,8 +498,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             {
                 addArt(2, new IFCubes(this, 3, 150, -600, fn));
                 addArt(2, new IFCubes(this, 9, 250, -600, fn));                
-                addArt(2, new IFCubes(this, 21, 450, -600, fn));
-                addArt(2, new IFCubes(this, 30, 450, -600, fn));
+                addArt(2, new IFCubes(this, 12, 450, -600, fn));
+                
             }
         }
         /*addArt(6, new Models1(this, "skooter500.obj", false, true));
@@ -1128,6 +1132,9 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             int now = millis();
             timeDelta = (now - last) / 1000.0f;
             last = now;
+
+            offs += timeDelta * 10.0f;
+            targetCCo += timeDelta * 10.0f;
     }
 
     public void hueShift() {

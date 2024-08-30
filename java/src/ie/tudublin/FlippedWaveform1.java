@@ -21,7 +21,7 @@ public class FlippedWaveform1 extends Art {
 
         float sample = v.smoothedBuffer[i * 4] * v.width * v.getSmoothedAmplitude() * 10.0f;    
         
-        v.stroke(v.hueShift(v.map(i, 0, bs, 0, 255) + offs), 255, 255, v.alp);
+        v.stroke(v.hueShift(v.map(i, 0, bs, 0, 255)), 255, 255, v.alp);
         
         float x = (int) v.map(i , 0, bs, v.halfWidth - v.halfDrawable, v.halfWidth + v.halfDrawable);
         float y = (int) v.map(i, 0, bs, 0, v.height);
@@ -37,13 +37,10 @@ public class FlippedWaveform1 extends Art {
         v.circle(v.width / 2 + (sample + (r / 2)), y, r);
         
         }
-
-        offs += v.spe;
         
 
     }
 
-    float offs;
     
     public void enter()
     {

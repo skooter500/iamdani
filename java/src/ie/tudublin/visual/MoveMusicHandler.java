@@ -83,7 +83,7 @@ public class MoveMusicHandler implements ControllerHandler{
     }
 
     if (number == 79) {
-        v.bri = v.map((float) value, 0.0f, 127.0f,1.0f, 500);
+        v.bri = v.map((float) value, 0.0f, 127.0f,1.0f, 100);
         if (v.exp)
         v.println("v.bri " + v.nf(v.bri, 3, 2));
 
@@ -415,17 +415,17 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        // if (pitch == 36)
-        // {
-        //     v.cue = (v.cue - 1);
-        //     if (v.cue < 0)
-        //     {
-        //         v.cue = v.arts.size() - 1;
-        //     }
-        //     v.println("CUE: " + v.cue);
-        //     v.println("CUE ART: " + v.arts.get(v.cue).getClass().getSimpleName().toLowerCase() + ".art\"");
-        //     return;
-        // }    
+        if (pitch == 41)
+        {
+            v.cue = (v.cue - 1);
+            if (v.cue < 0)
+            {
+                v.cue = v.arts.size() - 1;
+            }
+            v.println("CUE: " + v.cue);
+            v.println("CUE ART: " + v.arts.get(v.cue).getClass().getSimpleName().toLowerCase() + ".art\"");
+            return;
+        }    
         
         if (pitch == 56)
         {
