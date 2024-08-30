@@ -498,8 +498,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             {
                 addArt(2, new IFCubes(this, 3, 150, -600, fn));
                 addArt(2, new IFCubes(this, 9, 250, -600, fn));                
-                addArt(2, new IFCubes(this, 21, 450, -600, fn));
-                addArt(2, new IFCubes(this, 30, 450, -600, fn));
+                addArt(2, new IFCubes(this, 12, 450, -600, fn));
+                
             }
         }
         /*addArt(6, new Models1(this, "skooter500.obj", false, true));
