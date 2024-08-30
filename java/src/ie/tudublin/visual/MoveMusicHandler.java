@@ -415,7 +415,7 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 36)
+        if (pitch == 41)
         {
             v.cue = (v.cue - 1);
             if (v.cue < 0)
@@ -441,7 +441,7 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 53)
+        if (pitch == 36)
         {
             v.defaults();
             return;

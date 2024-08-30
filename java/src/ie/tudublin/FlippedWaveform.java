@@ -7,6 +7,7 @@ public class FlippedWaveform extends Art {
         //TODO Auto-generated constructor stub
     }
 
+    
     public void render(int ellapsed)
     { 
         v.rotateX(v.pit);
@@ -45,8 +46,7 @@ public class FlippedWaveform extends Art {
     
     public void enter()
     {
-        v.cqz = 1;
-        v.targetCqz = 1;
+        
     }
 
     public void exit()

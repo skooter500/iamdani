@@ -10,30 +10,19 @@ public class FlippedWaveform1 extends Art {
 
     public void render(int ellapsed)
     { 
-        float off = 10;
         float bs = v.ab.size()/10;
         float offset = 0;
         v.strokeWeight(2);
         for (int i = 0; i < bs; i ++)
         {
-        float sample = v.smoothedBuffer[i * 4] * v.halfH * v.getSmoothedAmplitude() * 5.0f;
-        v.stroke(v.map(i, 0, bs, 0, 255), 255, 255, v.alp);
         //line(i, halfH + sample, i, halfH - sample); 
 
         //v.smoothedBuffer[i] = v.lerp(v.smoothedBuffer[i], v.smoothedBuffer[i], 0.01f);
 
-        sample = v.smoothedBuffer[i * (int) off] * v.width * v.mul *.03f;    
-        if (i < v.smoothedBuffer.length/4)
-        {
-            float c = v.map((i+offset) % bs, 0, bs / 2, 0, 127) % 255; 
-            v.stroke(v.hueShift(c), 255, 255, v.alp);
-        }
-        else
-        {
-            float c = v.map((v.abs(i-offset)) % bs, bs, v.smoothedBuffer.length/2, 255, 128);         
-            v.stroke(v.hueShift(c), 255, 255, v.alp);
-        }
-        //offset += lerpedAverage * 0.01f;
+        float sample = v.smoothedBuffer[i * 4] * v.width * v.getSmoothedAmplitude() * 10.0f;    
+        
+        v.stroke(v.hueShift(v.map(i, 0, bs, 0, 255)), 255, 255, v.alp);
+        
         float x = (int) v.map(i , 0, bs, v.halfWidth - v.halfDrawable, v.halfWidth + v.halfDrawable);
         float y = (int) v.map(i, 0, bs, 0, v.height);
         v.rotateX(v.pit * 0.5f);
@@ -48,7 +37,10 @@ public class FlippedWaveform1 extends Art {
         v.circle(v.width / 2 + (sample + (r / 2)), y, r);
         
         }
+        
+
     }
+
     
     public void enter()
     {

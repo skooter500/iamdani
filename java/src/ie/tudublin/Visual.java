@@ -253,11 +253,14 @@ public abstract class Visual extends PApplet
 	public FFT getFFT() {
 		return fft;
 	}
+
+	public float offs = 0;
+
 	
     public float hueShift(float f) {
 		//float g = (floor(f / cqz) * cqz);
 		//float g = (floor(f / cqz) * cqz) + hue;
-        return pingpong(map(f, 0, 255, 0, cqz) + hue, 0, 255, 0, 255);
+        return pingpong(map(f, 0, 255, 0, cqz) + hue + offs, 0, 255, 0, 255);
     }
 }
 
