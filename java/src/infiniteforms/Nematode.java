@@ -49,14 +49,12 @@ public class Nematode extends Art
     v.targetCqz = 50; 
   }
 
-  float offs = 0 ;
-
   
   int reset = 0;
   
   public void enter()
   {
-    c1 = v.random(0, 256) + offs;
+    c1 = v.random(0, 256);
     c2 = c1 + 127;
     length = (int) v.random(1, 5); 
     limbs = (int) v.random(0, 2);

@@ -18,11 +18,10 @@ public class FractalTree extends Art {
         this.hueEnd = 120;
     }
 
-    float offs = 0;
     public void render(int elapsed) {
         this.branchAngle = v.mul;
-        this.initialLength = 100 + (100 * v.bas);
-        v.stroke(v.hueShift(offs), v.sat, 255, v.alp);
+        this.initialLength = 100 * v.bas;
+        v.stroke(v.hueShift(100), v.sat, 255, v.alp);
         v.strokeWeight(2);
 
         v.pushMatrix();
@@ -33,9 +32,6 @@ public class FractalTree extends Art {
         v.translate(v.width * .66666f, v.height);
         branch(initialLength, maxDepth, false);
         v.popMatrix();
-
-        offs += v.spe;
-    
     }
 
     private void branch(float length, int depth, boolean flip) {

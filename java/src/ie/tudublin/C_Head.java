@@ -409,7 +409,7 @@ public class C_Head extends Art {
         headHue = (int) v.hueShift(headHueStart);
         eyeZoom = v.map(v.spe, 1, 4.14f, -0.1f, -3.14f);
         render(true, true);
-        Nod = v.getSmoothedAmplitude() * 100.0f;
+        Nod = v.pow(v.getSmoothedAmplitude(), 2.0f);
     }
 
     public float Nod = 0;

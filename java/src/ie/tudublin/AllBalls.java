@@ -21,9 +21,8 @@ public class AllBalls extends Art {
 
     public void enter()
     {
-        v.cqz = 255;
-        v.targetCqz = 255;
-        v.targetAld = 0;
+        v.cqz = 1;
+        v.targetCqz = 1;
     }
     
 

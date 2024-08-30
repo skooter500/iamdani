@@ -283,12 +283,12 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        // if (pitch == 36)
-        // {
+        if (pitch == 36)
+        {
 
-        //     // v.hueShift(false);
-        //     return;
-        // }
+            // v.hueShift(false);
+            return;
+        }
 
         if (pitch == 45)
         {
@@ -302,88 +302,88 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 46)
-        {
-            v.targetYaw += v.QUARTER_PI;
+        // if (pitch == 46)
+        // {
+        //     v.targetYaw += v.QUARTER_PI;
 
-            if (v.checkKey(v.SHIFT) )
-            {
-                v.yaw = v.targetYaw;
-            }
-            v.println("WAY: " + v.nf(v.degrees(v.targetYaw), 3, 0));
-            v.startEase();
-            return;
-        }
+        //     if (v.checkKey(v.SHIFT) )
+        //     {
+        //         v.yaw = v.targetYaw;
+        //     }
+        //     v.println("WAY: " + v.nf(v.degrees(v.targetYaw), 3, 0));
+        //     v.startEase();
+        //     return;
+        // }
 
-        if (pitch == 47)
-        {
-            v.targetPit += v.QUARTER_PI;
+        // if (pitch == 47)
+        // {
+        //     v.targetPit += v.QUARTER_PI;
 
-            if (v.checkKey(v.SHIFT) )
-            {
-                v.pit = v.targetPit;
-            }
+        //     if (v.checkKey(v.SHIFT) )
+        //     {
+        //         v.pit = v.targetPit;
+        //     }
 
-            v.println("TIP: " + v.nf(v.degrees(v.targetPit), 3, 0));
-            v.startEase();
-            return;
-        }
+        //     v.println("TIP: " + v.nf(v.degrees(v.targetPit), 3, 0));
+        //     v.startEase();
+        //     return;
+        // }
 
-        if (pitch == 48)
-        {
-            v.targetRol += v.QUARTER_PI;
+        // if (pitch == 48)
+        // {
+        //     v.targetRol += v.QUARTER_PI;
 
-            if (v.checkKey(v.SHIFT) )
-            {
-                v.rol = v.targetRol;
-            }
-            v.startEase();
-            v.println("LOR: " + v.nf(v.degrees(v.targetRol), 3, 0));
-            return;
-        }
+        //     if (v.checkKey(v.SHIFT) )
+        //     {
+        //         v.rol = v.targetRol;
+        //     }
+        //     v.startEase();
+        //     v.println("LOR: " + v.nf(v.degrees(v.targetRol), 3, 0));
+        //     return;
+        // }
 
-        if (pitch ==38)
-        {
-            v.targetYaw -= v.QUARTER_PI;
+        // if (pitch ==38)
+        // {
+        //     v.targetYaw -= v.QUARTER_PI;
 
-            if (v.checkKey(v.SHIFT) )
-            {
-                v.yaw = v.targetYaw;
-                v.println("shift");
-            }
-            v.startEase();
-            v.println("WAY: " + v.nf(v.degrees(v.targetYaw), 3, 0));
-            return;
-        }
+        //     if (v.checkKey(v.SHIFT) )
+        //     {
+        //         v.yaw = v.targetYaw;
+        //         v.println("shift");
+        //     }
+        //     v.startEase();
+        //     v.println("WAY: " + v.nf(v.degrees(v.targetYaw), 3, 0));
+        //     return;
+        // }
 
 
-        if (pitch == 39)
-        {
-            v.targetPit -= v.QUARTER_PI;
-            v.t = 0;
-            v.startEase();
-            if (v.checkKey(v.SHIFT) )
-            {
-                v.pit = v.targetPit;
-            }
+        // if (pitch == 39)
+        // {
+        //     v.targetPit -= v.QUARTER_PI;
+        //     v.t = 0;
+        //     v.startEase();
+        //     if (v.checkKey(v.SHIFT) )
+        //     {
+        //         v.pit = v.targetPit;
+        //     }
 
-            v.println("TIP: " + v.nf(v.degrees(v.targetPit), 3, 0));
-            return;
-        }
+        //     v.println("TIP: " + v.nf(v.degrees(v.targetPit), 3, 0));
+        //     return;
+        // }
 
-        if (pitch == 40)
-        {
-            v.targetRol -= v.QUARTER_PI;
-            v.startEase();
+        // if (pitch == 40)
+        // {
+        //     v.targetRol -= v.QUARTER_PI;
+        //     v.startEase();
         
-            if (v.checkKey(v.SHIFT) )
-            {
-                v.rol = v.targetRol;
-            }
+        //     if (v.checkKey(v.SHIFT) )
+        //     {
+        //         v.rol = v.targetRol;
+        //     }
 
-            v.println("LOR: " + v.nf(v.degrees(v.targetRol), 3, 0));
-            return;
-        }
+        //     v.println("LOR: " + v.nf(v.degrees(v.targetRol), 3, 0));
+        //     return;
+        // }
 
         if (pitch == 42)
         {
@@ -441,7 +441,7 @@ public class MoveMusicHandler implements ControllerHandler{
             return;
         }
 
-        if (pitch == 36)
+        if (pitch == 38)
         {
             v.defaults();
             return;
@@ -488,7 +488,7 @@ public class MoveMusicHandler implements ControllerHandler{
 
         */
 
-        if (pitch == 60)
+        if (pitch == 46)
         {            
             v.targetYaw = v.QUARTER_PI * (int) v.random(-4,3);
             v.targetPit = v.QUARTER_PI * (int) v.random(-4,3);
