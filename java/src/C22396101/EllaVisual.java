@@ -112,9 +112,9 @@ public class EllaVisual extends Art {
             v.beginShape();
             for (int j = 0; j < 6; j++) {
                 float angle = j * angleStep;
-                v.rotateX(v.pit * 0.1f);
-                    v.rotateY(v.yaw * 0.1f);
-                    v.rotateZ(v.rol * 0.1f);
+                v.rotateX(v.pit * 0.01f);
+                    v.rotateY(v.yaw * 0.01f);
+                    v.rotateZ(v.rol * 0.01f);
                 
                 float hx = x + PApplet.cos(angle) * size;
                 float hy = y + PApplet.sin(angle) * size;

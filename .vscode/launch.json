@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "EllaVisual",
+            "request": "launch",
+            "mainClass": "C22396101.EllaVisual",
+            "projectName": "java"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
             "mainClass": "ie.tudublin.Main",

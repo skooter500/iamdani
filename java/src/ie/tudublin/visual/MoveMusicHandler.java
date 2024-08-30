@@ -72,7 +72,7 @@ public class MoveMusicHandler implements ControllerHandler{
             
     }
 
-    if (number == 92)
+    if (number == 18)
     {
         
         v.con = v.map((float) value, 0.0f, 127.0f,0, 255);
@@ -178,7 +178,7 @@ public class MoveMusicHandler implements ControllerHandler{
         if (v.exp)
         v.println("LOR " + v.nf(v.degrees(v.targetRol), 4, 0));
     }
-
+ 
     if (number == 90)
     {
         v.duration = v.map((float) value, 0.0f, 127.0f, 0.0f, 10.0f);
@@ -190,7 +190,6 @@ public class MoveMusicHandler implements ControllerHandler{
         v.targetCCo = v.map((float) value, 0.0f, 127.0f,0.0f, 255);
         if (v.exp)
         v.println("OCC " + v.nf(v.targetCCo, 3, 2));
-
     }
 
     if (number == 17) {

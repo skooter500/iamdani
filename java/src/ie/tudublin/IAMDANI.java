@@ -64,7 +64,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public Ease.TYPE type = Ease.TYPE.EASE_IN_OUT;
 
-    public float duration = 2f;
+    public float duration = 1f;
     public float t = 1000;
 
     public PFont font;  
@@ -498,8 +498,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             if (fn.contains("IFCUBE"))
             {
                 addArt(2, new IFCubes(this, 3, 150, -600, fn));
-                addArt(2, new IFCubes(this, 9, 250, -600, fn));                
-                addArt(2, new IFCubes(this, 12, 450, -600, fn));
+                addArt(2, new IFCubes(this, 9, 250, -500, fn));                
+                addArt(2, new IFCubes(this, 12, 250, -500, fn));
                 
             }
         }
@@ -1044,12 +1044,12 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             }
 
             cco = targetCCo;
-            spe = lerp(spe, targetSpe, 0.1f);
+            spe = targetSpe;
             // ald = lerp(ald, targetAld, 0.01f);
             //alp = lerp(alp, targetAlp, 0.01f);
             alp = targetAlp;
-            bas = lerp(bas, targetBas, 0.1f);
-            mul = lerp(mul, targetMul, 0.1f);
+            bas = targetBas;
+            mul = targetMul;
             hue = targetHue;
             cqz = targetCqz;
                 
