@@ -1150,12 +1150,12 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
     }
 
     String[] randomMessages = {
-            "I am DANI. I am alive",
+            "I am DANI. I am alive!",
             "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
             "I like spoonies spoonies",
             "Dynamic Artificial Non-Intelligence",
-            "All Systems Operating within normal paramaters",
+            "All systems operating within normal paramaters",
             "Undefined line number",
             "Normalize huge mugs of tea",
             "OK",
@@ -1172,6 +1172,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "Division by zero",
             "Type mismatch",
             "Disk full",
+            "OK",
             "Input past end",
             "Missing operand",
             "Out of memory",

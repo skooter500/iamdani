@@ -286,7 +286,7 @@ public class MoveMusicHandler implements ControllerHandler{
         if (pitch == 36)
         {
 
-            // v.hueShift(false);
+             v.hueShift(false);
             return;
         }
 
