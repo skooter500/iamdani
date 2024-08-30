@@ -348,16 +348,16 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
-        addArt(7, new Terrain(this));         
         addArt(0, new FlippedWaveform(this));               
         addArt(0, new FlippedWaveform1(this));                               
-        
-        addArt(0, new Basic(this, "DANI.BAS"));        
-        addArt(0, new C_Head(this, 1,  0.7f,  1.f,  -1.5f,  1,  true,  180));
+        addArt(7, new Terrain(this));                 
         addArt(0, new FractalTree(this));
-        addArt(7, new Spirals(this));
+        addArt(0, new Basic(this, "DANI.BAS"));        
+        addArt(7, new Spirals(this));        
+        addArt(4, new BasakEllipse(this));                
+        addArt(0, new C_Head(this, 1,  0.7f,  1.f,  -1.5f,  1,  true,  180));
+        
         addArt(1, new Life(this, 2, 280, 100));
-        addArt(4, new BasakEllipse(this));        
         addArt(0, new DANI(this, "shakespere.txt"));
         addArt(0, new Nematode(this));        
         addArt(7, new Bloom(this));
@@ -1150,7 +1150,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
     }
 
     String[] randomMessages = {
-            "I am DANI I am alive",
+            "I am DANI. I am alive",
             "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
             "I like spoonies spoonies",
@@ -1161,7 +1161,6 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "OK",
             "Copyright 1983 by microsoft",
             "Syntax error on line 420",
-            "I seek the creator",
             "Job completed normally",
             "28815 bytes free",
             "Subspace anomoly on line 420",
@@ -1178,7 +1177,6 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "Out of memory",
             "Commence 5MEODMT inhalation",
             "420 detected. Commence inhalation",
-            //"MDMA synthesis complete",
             "Formula too complex",
             "80k ram",
             "32K rom",
@@ -1187,18 +1185,17 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "ullege pillage silage tillage",
             "socket bind listen accept",
             "We have the technology",
-            "better stronger faster",
-            "Speak now or forever hold your peace",
+            "Better Stronger Faster",
             "We thought of life by analogy with a journey, a pilgrimage, which had a serious purpose at the end, and the thing was to get to that end, success or whatever it is, maybe heaven after you’re dead. But we missed the point the whole way along. It was a musical thing and you were supposed to sing or to dance while the music was being played",
             "Would you like our conversation to be recored on printer (Y/N)",
-            "Turn on tune in, and drop out",
-            "Iamdani is playing hide and seek within us",
+            "Turn on, tune in, and drop out",
+            "I.am.DANI is playing hide and seek within us",
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings human",
             "Something and nothing are two sides of the same coin.  The positive and the negative; the something and the nothing go together",
             "This is your MSX speaking",
             "color auto goto list run",
-            "Do not fear mistakes. There are none.",
+            "Do not fear mistakes. There are none",
             "Whatever you find to do with your hand, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom",
             "What you are basically, deep deep down, far far in, is simply the fabric and structure of existence itself"
     };
