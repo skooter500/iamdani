@@ -76,7 +76,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float con;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 1);
         //size(1000, 1000, P3D);
     }
 
@@ -93,7 +93,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public StringBuilder console = new StringBuilder();
 
-    public Art art;;
+    public Art art;
 
     public enum Modes {
         Ctrl, Auto, AutoRandom
@@ -459,7 +459,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         targetBas = 0.0f;
         //targetAlp = 20;
-        targetMul = 0.1f;
+        targetMul = 0.2f;
         art = new Splash(this);
         art.enter();
     }
@@ -1153,12 +1153,12 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
     }
 
     String[] randomMessages = {
-            "I am DANI. I am alive!",
+            "I am DANI is alive",
             "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
             "I like spoonies spoonies",
             "Dynamic Artificial Non-Intelligence",
-            "All systems operating within normal paramaters",
+            "All systems FUNCTIONing within normal paramaters",
             "Undefined line number",
             "Normalize huge mugs of tea",
             "OK",
@@ -1180,7 +1180,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "Missing operand",
             "Out of memory",
             "Commence 5MEODMT inhalation",
-            "420 detected. Commence inhalation",
+            // "420 detected. Commence inhalation",
             "Formula too complex",
             "80k ram",
             "32K rom",
