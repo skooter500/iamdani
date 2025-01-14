@@ -4,7 +4,7 @@
             "type": "java",
             "name": "EllaVisual",
             "request": "launch",
-            "mainClass": "C22396101.EllaVisual",
+            "mainClass": "ie.tudublin.Main",
             "projectName": "java"
         },
         {

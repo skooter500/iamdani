@@ -76,7 +76,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float con;
 
     public void settings() {
-        fullScreen(P3D, 1);
+        fullScreen(P3D, 2);
         //size(1000, 1000, P3D);
     }
 
@@ -349,6 +349,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         //addVision(0, new circles(this));
 
+        loadModels();
+        
         addArt(0, new FlippedWaveform(this));               
         addArt(0, new FlippedWaveform1(this));                               
         addArt(7, new Terrain(this));                 
@@ -382,7 +384,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         addArt(7, new Bands(this, 300, 0, 0, 0));
         
-        loadModels();
         
         //addArt(0, new Models1(this, "msx1.obj", false, true));
         // addArt(0, new AliensOnUranus(this));       
@@ -498,8 +499,8 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             if (fn.contains("IFCUBE"))
             {
                 addArt(2, new IFCubes(this, 3, 150, -600, fn));
-                addArt(2, new IFCubes(this, 9, 250, -500, fn));                
-                addArt(2, new IFCubes(this, 12, 250, -500, fn));
+                addArt(2, new IFCubes(this, 9, 500, -500, fn));                
+                addArt(2, new IFCubes(this, 12, 600, -1000, fn));
                 
             }
         }
@@ -1153,7 +1154,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
     }
 
     String[] randomMessages = {
-            "I am DANI is alive",
+            "I am alive",
             "The Metaverse that can be named is not the Metaverse",
             "Nice to meet you",
             "I like spoonies spoonies",
@@ -1164,7 +1165,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "OK",
             "Copyright 1983 by microsoft",
             "Syntax error on line 420",
-            "Job completed normally",
+            "Job completed",
             "28815 bytes free",
             "Subspace anomoly on line 420",
             "We can rebuild them",
@@ -1181,15 +1182,15 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "Out of memory",
             "Commence 5MEODMT inhalation",
             // "420 detected. Commence inhalation",
-            "Formula too complex",
+            "String Formula too complex",
             "80k ram",
             "32K rom",
             "Universal Serial Bus",
             "Verb Noun",
-            "ullege pillage silage tillage",
+            "Ullege, Pillage, Silage, Tillage",
             "socket bind listen accept",
             "We have the technology",
-            "Better Stronger Faster",
+            "Better, Stronger, Faster",
             "We thought of life by analogy with a journey, a pilgrimage, which had a serious purpose at the end, and the thing was to get to that end, success or whatever it is, maybe heaven after you’re dead. But we missed the point the whole way along. It was a musical thing and you were supposed to sing or to dance while the music was being played",
             "Would you like our conversation to be recored on printer (Y/N)",
             "Turn on, tune in, and drop out",
@@ -1197,6 +1198,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do",
             "Greetings human",
             "Something and nothing are two sides of the same coin.  The positive and the negative; the something and the nothing go together",
+            "All forms and being are simply variations on a single theme: we are all in fact one being doing the same thing in as many different ways as possible",
             "This is your MSX speaking",
             "color auto goto list run",
             "Do not fear mistakes. There are none",
