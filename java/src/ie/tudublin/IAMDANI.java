@@ -77,7 +77,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
     public void settings() {
         fullScreen(P3D, 2);
-        //size(1000, 1000, P3D);
+        //size(500, 500, P3D);
     }
 
     public boolean[] keys = new boolean[2048];
@@ -190,7 +190,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
                     //     println("Joy detected: " + curr);
                     //     break;
                     // }
-                    if (curr.equals("iamdani")) {
+                    if (curr.contains("BeatStep")) {
                         daniMidi = i;
                         ch = new MoveMusicHandler(this);
                         println("Joy detected: " + curr);
