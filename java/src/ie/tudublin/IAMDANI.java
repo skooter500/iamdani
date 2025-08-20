@@ -76,10 +76,11 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float con;
 
     public void settings() {
-        fullScreen(P3D, 2);
+        fullScreen(P3D, 3);
         //size(500, 500, P3D);
     }
-
+    // 1080
+// 1920
     public boolean[] keys = new boolean[2048];
 
     
