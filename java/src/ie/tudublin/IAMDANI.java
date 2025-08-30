@@ -28,6 +28,7 @@ import ie.tudublin.visual.MovementArt;
 import infiniteforms.City;
 import infiniteforms.IFCubes;
 import infiniteforms.Life;
+import infiniteforms.Model;
 import infiniteforms.Models1;
 import infiniteforms.Nematode;
 import infiniteforms.Terrain;
@@ -351,7 +352,6 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         //addVision(0, new circles(this));
 
         loadModels();
-        
         addArt(0, new FlippedWaveform(this));               
         addArt(0, new FlippedWaveform1(this));                               
         addArt(7, new Terrain(this));                 
@@ -361,7 +361,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addArt(4, new BasakEllipse(this));                
         addArt(0, new C_Head(this, 1,  0.7f,  1.f,  -1.5f,  1,  true,  180));
         
-        addArt(1, new Life(this, 2, 280, 100));
+        addArt(1, new Life(this, 2, 200, 100));
         addArt(0, new DANI(this, "shakespere.txt"));
         addArt(0, new Nematode(this));        
         addArt(7, new Bloom(this));
@@ -373,7 +373,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         addArt(4, new paris(this));
         addArt(4, new LauraSun(this));
         addArt(4, new Mena(this));
-        addArt(4, new ManarBrain(this));
+
 
 
         //addArt(5, new MSXLogos(this, "msx.obj"));
@@ -385,6 +385,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         
         addArt(7, new Bands(this, 300, 0, 0, 0));
         
+        addArt(4, new ManarBrain(this));
         
         //addArt(0, new Models1(this, "msx1.obj", false, true));
         // addArt(0, new AliensOnUranus(this));       
@@ -403,9 +404,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         addArt(0, new DANI(this, "captainb.txt"));
         
-        addArt(1, new Life(this, 3, 10000, 200));
-        addArt(1, new Life(this, 0, 1000, 100));
-        addArt(1, new Life(this, 1, 1000, 100));
+        addArt(1, new Life(this, 3, 200, 200));
+        addArt(1, new Life(this, 0, 200, 100));
+        addArt(1, new Life(this, 1, 200, 100));
         // addVision(1, new Life(this, 4, 10000, 100));
 
         addArt(2, new infiniteforms.Cube(this));
@@ -500,9 +501,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             if (fn.contains("IFCUBE"))
             {
                 addArt(2, new IFCubes(this, 3, 150, -600, fn));
-                addArt(2, new IFCubes(this, 9, 500, -500, fn));                
-                addArt(2, new IFCubes(this, 12, 600, -1000, fn));
-                
+                addArt(2, new IFCubes(this, 9, 500, -500, fn));                                
             }
         }
         /*addArt(6, new Models1(this, "skooter500.obj", false, true));
