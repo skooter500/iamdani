@@ -77,7 +77,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
     public float con;
 
     public void settings() {
-        fullScreen(P3D, 3);
+        fullScreen(P3D, 2);
         //size(500, 500, P3D);
     }
     // 1080
@@ -180,19 +180,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
             if (daniMidi == -1) {
                 for (int i = 0; i < MidiBus.availableInputs().length; i++) {
                     String curr = MidiBus.availableInputs()[i];
-                    // if (curr.equals("LPD8 mk2")) {
-                    //     daniMidi = i;
-                    //     ch = new AKAIControllerHandler(this);
-                    //     println("Joy detected: " + curr);
-                    //     break;
-                    // }
-                    // if (curr.equals("Arturia BeatStep")) {
-                    //     daniMidi = i;
-                    //     ch = new MoveMusicHandler(this);
-                    //     println("Joy detected: " + curr);
-                    //     break;
-                    // }
-                    if (curr.contains("BeatStep")) {
+                    if (curr.startsWith("BeatStep")) {
                         daniMidi = i;
                         ch = new MoveMusicHandler(this);
                         println("Joy detected: " + curr);
@@ -201,6 +189,9 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
                 }
             }
+
+            
+            ch = new MoveMusicHandler(this);
 
             if (daniMidi == -1) {
                 println("Joy not detected");
@@ -432,7 +423,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
 
         // visuals.add(new Models1(this, "thc molecule.obj"));
 
-        // Collections.shuffle(visions);
+        Collections.shuffle(arts);
         defaults();
 
         colorMode(RGB);
@@ -447,14 +438,7 @@ public class IAMDANI extends ie.tudublin.visual.Visual implements MidiListener {
         // }
 
         myTextarea = cp5.addTextarea("txt")
-                .setPosition(40, 40)
-                .setSize(10, (int) 360)
-                .setColor(color(0, 0, 255, con))
-                .setFont(font)
-                .setLineHeight(lineHeight)
-                .hideScrollbar()
-                .setText(console.toString())
-                .setVisible(true);
+                .setVisible(false);
         ;
 
         whichVisual = 0;
@@ -1180,7 +1164,7 @@ Note: The dash (-) in the MIDI Note column indicates that the keypress is not di
             "Input past end",
             "Missing operand",
             "Out of memory",
-            "Commence 5MEODMT inhalation",
+            //"Commence 5MEODMT inhalation",
             // "420 detected. Commence inhalation",
             "String Formula too complex",
             "80k ram",

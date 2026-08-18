@@ -5,7 +5,7 @@ import processing.core.PFont;
 public class Splash extends Art
 {
     int t = 0;
-    int duration = 1    ;
+    int duration = 5000;
 
     PFont font;
 
@@ -36,6 +36,7 @@ public class Splash extends Art
 
     public void render()
     {
+        // v.println("Splash Screen");
         v.pushStyle();
         v.textFont(font);
         int d = v.millis() - t;
